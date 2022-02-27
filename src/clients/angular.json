@@ -1,0 +1,7 @@
+{
+  "version": 2,
+  "projects": {
+    "review-notification-app": "apps/review-notification-app",
+    "review-notification-app-e2e": "apps/review-notification-app-e2e"
+  }
+}
