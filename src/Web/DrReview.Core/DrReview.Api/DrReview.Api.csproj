@@ -29,4 +29,8 @@
 		<ProjectReference Include="../Modules/ScheduleNotifications/IntegrationEvents/DrReview.Modules.ScheduleNotifications.IntegrationEvents.csproj" />
 	</ItemGroup>
 
+	<ItemGroup>
+		<ProjectReference Include="../Common/DrReview.Common.csproj" />
+	</ItemGroup>
+
 </Project>
