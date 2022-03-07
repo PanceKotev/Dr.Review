@@ -22,4 +22,11 @@
 		<ProjectReference Include="../Modules/Review/IntegrationEvents/DrReview.Modules.Review.IntegrationEvents.csproj" />
 	</ItemGroup>
 
+	<ItemGroup Label="ScheduleNotifications Module">
+		<ProjectReference Include="../Modules/ScheduleNotifications/Application/DrReview.Modules.ScheduleNotifications.Application.csproj" />
+		<ProjectReference Include="../Modules/ScheduleNotifications/Domain/DrReview.Modules.ScheduleNotifications.Domain.csproj" />
+		<ProjectReference Include="../Modules/ScheduleNotifications/Infrastructure/DrReview.Modules.ScheduleNotifications.Infrastructure.csproj" />
+		<ProjectReference Include="../Modules/ScheduleNotifications/IntegrationEvents/DrReview.Modules.ScheduleNotifications.IntegrationEvents.csproj" />
+	</ItemGroup>
+
 </Project>

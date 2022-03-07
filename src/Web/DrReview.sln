@@ -18,8 +18,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Review", "Review", "{14B335
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ScheduleNotifications", "ScheduleNotifications", "{A8348ACE-9ADE-466E-B651-9ABC6E4DCD8A}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UserAccess", "UserAccess", "{8768FB3A-3DDD-49C5-BD28-3A6CFA09D2D8}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application", "{0DA207D1-AD0B-416F-9B39-DB9DDC2ACD4E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{1C92782E-CC6F-470E-9EAA-B55CA688366C}"
@@ -36,23 +34,23 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastru
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "IntegrationEvents", "IntegrationEvents", "{C3E8B392-82EB-4B10-ADFB-4CF09BB35F9E}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application", "{8AD04554-33A5-4B39-915E-3978534460BF}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{2B383F15-3D43-47CB-A34A-449424193F23}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{2C20DDAC-436C-4D57-BCA3-31A1E315ED75}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "IntegrationEvents", "IntegrationEvents", "{85F6B19D-84CA-43F7-9C68-0FFC8E35CE44}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{45E10D4F-A160-4943-8279-17AC2B1CCBD0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DrReview.Modules.Review.Application", "DrReview.Core\Modules\Review\Application\DrReview.Modules.Review.Application.csproj", "{4D9E1EF2-4F1A-43E6-BFE5-3016AE611FC0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DrReview.Modules.Review.Application", "DrReview.Core\Modules\Review\Application\DrReview.Modules.Review.Application.csproj", "{4D9E1EF2-4F1A-43E6-BFE5-3016AE611FC0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DrReview.Modules.Review.Domain", "DrReview.Core\Modules\Review\Domain\DrReview.Modules.Review.Domain.csproj", "{8689AD82-9526-454F-8F90-EDCD78F9C314}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DrReview.Modules.Review.Domain", "DrReview.Core\Modules\Review\Domain\DrReview.Modules.Review.Domain.csproj", "{8689AD82-9526-454F-8F90-EDCD78F9C314}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DrReview.Modules.Review.Infrastructure", "DrReview.Core\Modules\Review\Infrastructure\DrReview.Modules.Review.Infrastructure.csproj", "{B427F525-B347-43EE-942B-56002D64DDE1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DrReview.Modules.Review.Infrastructure", "DrReview.Core\Modules\Review\Infrastructure\DrReview.Modules.Review.Infrastructure.csproj", "{B427F525-B347-43EE-942B-56002D64DDE1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DrReview.Modules.Review.IntegrationEvents", "DrReview.Core\Modules\Review\IntegrationEvents\DrReview.Modules.Review.IntegrationEvents.csproj", "{2E97CB9D-5814-4467-A729-295BAB631714}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DrReview.Modules.Review.IntegrationEvents", "DrReview.Core\Modules\Review\IntegrationEvents\DrReview.Modules.Review.IntegrationEvents.csproj", "{2E97CB9D-5814-4467-A729-295BAB631714}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DrReview.Modules.ScheduleNotifications.Application", "DrReview.Core\Modules\ScheduleNotifications\Application\DrReview.Modules.ScheduleNotifications.Application.csproj", "{2920E094-7CB3-414F-AC37-EAE30A102B3A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DrReview.Modules.ScheduleNotifications.Domain", "DrReview.Core\Modules\ScheduleNotifications\Domain\DrReview.Modules.ScheduleNotifications.Domain.csproj", "{0412756C-E9B8-40AF-A639-1D131E386594}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DrReview.Modules.ScheduleNotifications.Infrastructure", "DrReview.Core\Modules\ScheduleNotifications\Infrastructure\DrReview.Modules.ScheduleNotifications.Infrastructure.csproj", "{91979577-03B6-4D6B-890B-164504F0C47D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DrReview.Modules.ScheduleNotifications.IntegrationEvents", "DrReview.Core\Modules\ScheduleNotifications\IntegrationEvents\DrReview.Modules.ScheduleNotifications.IntegrationEvents.csproj", "{49D89A27-B50D-4407-9D62-FDED58814A5E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -80,6 +78,22 @@ Global
 		{2E97CB9D-5814-4467-A729-295BAB631714}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2E97CB9D-5814-4467-A729-295BAB631714}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2E97CB9D-5814-4467-A729-295BAB631714}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2920E094-7CB3-414F-AC37-EAE30A102B3A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2920E094-7CB3-414F-AC37-EAE30A102B3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2920E094-7CB3-414F-AC37-EAE30A102B3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2920E094-7CB3-414F-AC37-EAE30A102B3A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0412756C-E9B8-40AF-A639-1D131E386594}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0412756C-E9B8-40AF-A639-1D131E386594}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0412756C-E9B8-40AF-A639-1D131E386594}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0412756C-E9B8-40AF-A639-1D131E386594}.Release|Any CPU.Build.0 = Release|Any CPU
+		{91979577-03B6-4D6B-890B-164504F0C47D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{91979577-03B6-4D6B-890B-164504F0C47D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{91979577-03B6-4D6B-890B-164504F0C47D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{91979577-03B6-4D6B-890B-164504F0C47D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{49D89A27-B50D-4407-9D62-FDED58814A5E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{49D89A27-B50D-4407-9D62-FDED58814A5E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{49D89A27-B50D-4407-9D62-FDED58814A5E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{49D89A27-B50D-4407-9D62-FDED58814A5E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -89,7 +103,6 @@ Global
 		{40FEE468-AB49-46A1-AB1D-85EAD78D2656} = {AD685D1A-6459-44BB-95D1-FC01AC08FD03}
 		{14B33548-D04A-40FC-983A-CC9B1FB614AA} = {40FEE468-AB49-46A1-AB1D-85EAD78D2656}
 		{A8348ACE-9ADE-466E-B651-9ABC6E4DCD8A} = {40FEE468-AB49-46A1-AB1D-85EAD78D2656}
-		{8768FB3A-3DDD-49C5-BD28-3A6CFA09D2D8} = {40FEE468-AB49-46A1-AB1D-85EAD78D2656}
 		{0DA207D1-AD0B-416F-9B39-DB9DDC2ACD4E} = {14B33548-D04A-40FC-983A-CC9B1FB614AA}
 		{1C92782E-CC6F-470E-9EAA-B55CA688366C} = {14B33548-D04A-40FC-983A-CC9B1FB614AA}
 		{E5752702-5C88-419B-A1C7-845D5BE9A936} = {14B33548-D04A-40FC-983A-CC9B1FB614AA}
@@ -98,15 +111,15 @@ Global
 		{AE125256-DF34-4063-8D6A-B6765234A4BA} = {A8348ACE-9ADE-466E-B651-9ABC6E4DCD8A}
 		{C2DEE197-2433-44A2-A128-2EC2C3B96C37} = {A8348ACE-9ADE-466E-B651-9ABC6E4DCD8A}
 		{C3E8B392-82EB-4B10-ADFB-4CF09BB35F9E} = {A8348ACE-9ADE-466E-B651-9ABC6E4DCD8A}
-		{8AD04554-33A5-4B39-915E-3978534460BF} = {8768FB3A-3DDD-49C5-BD28-3A6CFA09D2D8}
-		{2B383F15-3D43-47CB-A34A-449424193F23} = {8768FB3A-3DDD-49C5-BD28-3A6CFA09D2D8}
-		{2C20DDAC-436C-4D57-BCA3-31A1E315ED75} = {8768FB3A-3DDD-49C5-BD28-3A6CFA09D2D8}
-		{85F6B19D-84CA-43F7-9C68-0FFC8E35CE44} = {8768FB3A-3DDD-49C5-BD28-3A6CFA09D2D8}
 		{45E10D4F-A160-4943-8279-17AC2B1CCBD0} = {AD685D1A-6459-44BB-95D1-FC01AC08FD03}
 		{4D9E1EF2-4F1A-43E6-BFE5-3016AE611FC0} = {0DA207D1-AD0B-416F-9B39-DB9DDC2ACD4E}
 		{8689AD82-9526-454F-8F90-EDCD78F9C314} = {1C92782E-CC6F-470E-9EAA-B55CA688366C}
 		{B427F525-B347-43EE-942B-56002D64DDE1} = {E5752702-5C88-419B-A1C7-845D5BE9A936}
 		{2E97CB9D-5814-4467-A729-295BAB631714} = {9B34A5DD-1C98-49C9-97E3-56DC6B901FBE}
+		{2920E094-7CB3-414F-AC37-EAE30A102B3A} = {5FBDDBCC-8AB9-4818-B461-ECB332E48601}
+		{0412756C-E9B8-40AF-A639-1D131E386594} = {AE125256-DF34-4063-8D6A-B6765234A4BA}
+		{91979577-03B6-4D6B-890B-164504F0C47D} = {C2DEE197-2433-44A2-A128-2EC2C3B96C37}
+		{49D89A27-B50D-4407-9D62-FDED58814A5E} = {C3E8B392-82EB-4B10-ADFB-4CF09BB35F9E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F59AD7F4-E29D-4092-A5D6-A6AD19DF97E4}
