@@ -1,4 +1,5 @@
-# Rules in this file were initially inferred by Visual Studio IntelliCode from the E:\sources\repos\Dr.Review\src\Web codebase based on best match to current usage at 27.2.2022
+# Rules in this file were initially inferred by Visual Studio IntelliCode from the E:\sources\repos\Dr.Review\src\Web codebase based on best match to current usage at 10.3.2022
+# There already existed an .editorconfig file in this directory. Copy rules from this .editorconfig.inferred file to the existing .editorconfig file as desired to have them take effect at this location.
 # You can modify the rules from these initially generated values to suit your own policies
 # You can learn more about editorconfig here: https://docs.microsoft.com/en-us/visualstudio/ide/editorconfig-code-style-settings-reference
 [*.cs]
@@ -70,4 +71,3 @@ csharp_preferred_modifier_order = public,private,readonly,static:suggestion
 dotnet_style_qualification_for_field = false:suggestion
 #prefer properties not to be prefaced with this. or Me. in Visual Basic
 dotnet_style_qualification_for_property = false:suggestion
-SA1633:NONE
