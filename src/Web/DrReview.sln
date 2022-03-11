@@ -55,11 +55,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DrReview.Modules.ScheduleNo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DrReview.Common", "DrReview.Core\Common\DrReview.Common.csproj", "{ED07E6CC-994B-4D22-B345-949B7AC7AF50}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DrReview.Contracts", "DrReview.Core\DrReview.Contracts\DrReview.Contracts.csproj", "{65824E3C-AEEF-49A6-B409-3EC6E64B8385}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DrReview.Contracts", "DrReview.Core\DrReview.Contracts\DrReview.Contracts.csproj", "{65824E3C-AEEF-49A6-B409-3EC6E64B8385}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Databases", "Databases", "{3AFEB5C6-CDAD-4735-A007-B32C05F6E5C9}"
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "DrReview.Hangfire.Database", "..\Databases\DrReview.Hangfire.Database\DrReview.Hangfire.Database.sqlproj", "{FE2C8C2D-D7F4-439D-BF24-74E0A73E6C12}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{2AA9CFE4-6FFB-460B-8CE3-05198CA50FEC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -117,6 +119,10 @@ Global
 		{FE2C8C2D-D7F4-439D-BF24-74E0A73E6C12}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FE2C8C2D-D7F4-439D-BF24-74E0A73E6C12}.Release|Any CPU.Build.0 = Release|Any CPU
 		{FE2C8C2D-D7F4-439D-BF24-74E0A73E6C12}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{2AA9CFE4-6FFB-460B-8CE3-05198CA50FEC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2AA9CFE4-6FFB-460B-8CE3-05198CA50FEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2AA9CFE4-6FFB-460B-8CE3-05198CA50FEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2AA9CFE4-6FFB-460B-8CE3-05198CA50FEC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
