@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using System.Data.SqlClient;
 
 namespace DrReview.Api.Controllers
 {
@@ -28,6 +29,18 @@ namespace DrReview.Api.Controllers
                 Summary = Summaries[Random.Shared.Next(Summaries.Length)]
             })
             .ToArray();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> TestDatabaseConnectionAsync([FromBody] string connectionString)
+        {
+            using (var conn = new SqlConnection(connectionString))
+            {
+                await conn.OpenAsync();
+
+            }
+
+            return await Task.FromResult(Ok());
         }
     }
 }

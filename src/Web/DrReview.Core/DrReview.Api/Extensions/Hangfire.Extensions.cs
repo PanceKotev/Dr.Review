@@ -52,7 +52,7 @@ namespace DrReview.Api.Extensions
                 }
             };
 
-            app.UseHangfireDashboard();
+            app.UseHangfireDashboard("/hangfire", options);
 
             return app;
         }

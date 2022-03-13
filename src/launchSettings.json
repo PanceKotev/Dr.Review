@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "Docker Compose": {
+      "commandName": "DockerCompose",
+      "commandVersion": "1.0",
+      "serviceActions": {
+        "drreview.api": "StartWithoutDebugging",
+        "drreview_hangfire_db": "StartWithoutDebugging"
+      }
+    }
+  }
+}
