@@ -3,17 +3,18 @@
 FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
 WORKDIR /app
 EXPOSE 443
+EXPOSE 80
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
-COPY ["DrReview.Core/DrReview.Api/DrReview.Api.csproj", "DrReview.Core/DrReview.Api/"]
+COPY . .
+
 RUN dotnet restore "DrReview.Core/DrReview.Api/DrReview.Api.csproj"
 COPY . .
-WORKDIR "/src/DrReview.Core/DrReview.Api"
-RUN dotnet build "DrReview.Api.csproj" -c Release -o /app/build
+RUN dotnet build "DrReview.Core/DrReview.Api/DrReview.Api.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "DrReview.Api.csproj" -c Release -o /app/publish
+RUN dotnet publish "DrReview.Core/DrReview.Api/DrReview.Api.csproj" -c Release -o /app/publish
 
 FROM base AS final
 WORKDIR /app

@@ -1,0 +1,14 @@
+{
+  "profiles": {
+    "Docker Compose": {
+      "commandName": "DockerCompose",
+      "composeLaunchAction": "None",
+      "composeLaunchServiceName": "drreview.api",
+      "commandVersion": "1.0",
+      "serviceActions": {
+        "drreview.api": "StartDebugging",
+        "drreview_hangfire_db": "StartWithoutDebugging"
+      }
+    }
+  }
+}
