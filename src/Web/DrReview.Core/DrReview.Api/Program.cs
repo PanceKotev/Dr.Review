@@ -1,5 +1,4 @@
 using DrReview.Api.Extensions;
-using Hangfire;
 
 WebApplicationBuilder? builder = WebApplication.CreateBuilder(args);
 

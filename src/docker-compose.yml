@@ -18,6 +18,8 @@ services:
   drreview_hangfire_db:
       container_name: drreview_hangfire_db
       hostname: hangfire_db
+      volumes:
+        - mssql-server-hangfire-data:/var/opt/mssql/data
       networks:
         - mynet
       build:
@@ -32,3 +34,5 @@ services:
 networks:
   mynet:
     driver: bridge
+volumes:
+  mssql-server-hangfire-data:

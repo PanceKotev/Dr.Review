@@ -38,7 +38,7 @@ csharp_style_expression_bodied_constructors = false:suggestion
 csharp_style_expression_bodied_methods = false:suggestion
 #prefer expression-bodied members for properties
 csharp_style_expression_bodied_properties = true:suggestion
-
+IDE0065=none
 #Style - Expression-level  preferences
 
 #prefer objects to be initialized using object initializers when possible
@@ -72,8 +72,9 @@ dotnet_style_qualification_for_field = false:suggestion
 dotnet_style_qualification_for_property = false:suggestion
 csharp_using_directive_placement = inside_namespace:error
 dotnet_diagnostic.SA1633.severity = silent
+dotnet_diagnostic.SA1101.severity = none
+dotnet_diagnostic.SA1309.severity = none
 csharp_indent_labels = one_less_than_current
-csharp_using_directive_placement = outside_namespace:error
 csharp_prefer_simple_using_statement = true:error
 csharp_prefer_braces = true:silent
 csharp_style_namespace_declarations = block_scoped:silent
