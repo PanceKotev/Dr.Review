@@ -64,4 +64,13 @@
   <ItemGroup>
     <None Include="DrReview.Database.publish.xml" />
   </ItemGroup>
+  <ItemGroup>
+    <Build Include="Doctor\Doctor.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <PostDeploy Include="Scripts\Script.PostDeployment.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <PreDeploy Include="Scripts\Script.PreDeployment.sql" />
+  </ItemGroup>
 </Project>

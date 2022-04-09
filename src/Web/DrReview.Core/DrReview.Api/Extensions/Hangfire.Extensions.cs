@@ -4,7 +4,7 @@ using global::Hangfire;
 using global::Hangfire.Dashboard.BasicAuthorization;
 using global::Hangfire.SqlServer;
 
-public static partial class Hangfire
+public static partial class Extensions
 {
     public static IServiceCollection AddHangfireConfiguration(this IServiceCollection services, IConfiguration configuration)
     {

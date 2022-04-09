@@ -37,4 +37,5 @@ networks:
   mynet:
     driver: bridge
 volumes:
+  app-files:
   mssql-server-data:

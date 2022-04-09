@@ -4,11 +4,11 @@ WebApplicationBuilder? builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllers();
-builder.Services.AddHangfireConfiguration(builder.Configuration);
 
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddHangfireConfiguration(builder.Configuration)
+                .RegisterMojTerminHttpClient(builder.Configuration)
+                .AddEndpointsApiExplorer()
+                .AddSwaggerGen();
 
 WebApplication? app = builder.Build();
 
