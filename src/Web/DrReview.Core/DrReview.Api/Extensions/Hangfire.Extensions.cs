@@ -1,5 +1,6 @@
 ﻿namespace DrReview.Api.Extensions;
 
+using DrReview.Api.RecurringJobs.Services;
 using global::Hangfire;
 using global::Hangfire.Dashboard.BasicAuthorization;
 using global::Hangfire.SqlServer;
@@ -24,6 +25,8 @@ public static partial class Extensions
        }));
 
         services.AddHangfireServer();
+
+        services.AddScoped<IBackgroundJobClient>(sp => new BackgroundJobClient(JobStorage.Current));
 
         return services;
     }
@@ -53,6 +56,8 @@ public static partial class Extensions
         };
 
         app.UseHangfireDashboard("/hangfire", options);
+
+        RecurringJobService.StartRecurringBackgroundJobs();
 
         return app;
     }

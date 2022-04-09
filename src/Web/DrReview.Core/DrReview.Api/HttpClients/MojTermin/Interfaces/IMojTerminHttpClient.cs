@@ -1,4 +1,4 @@
-﻿namespace DrReview.Common.HttpClients.MojTermin.Interfaces
+﻿namespace DrReview.Api.HttpClients.MojTermin.Interfaces
 {
     using System;
     using System.Collections.Generic;
@@ -6,7 +6,8 @@
     using System.Text;
     using System.Threading.Tasks;
 
-    internal interface IMojTerminHttpClient
+    public interface IMojTerminHttpClient
     {
+        Task<HttpResponseMessage> GetDoctorsAsync()
     }
 }

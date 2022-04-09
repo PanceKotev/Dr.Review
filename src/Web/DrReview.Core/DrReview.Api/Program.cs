@@ -1,4 +1,5 @@
 using DrReview.Api.Extensions;
+using DrReview.Api.RecurringJobs.Services;
 
 WebApplicationBuilder? builder = WebApplication.CreateBuilder(args);
 
@@ -6,7 +7,8 @@ WebApplicationBuilder? builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 
 builder.Services.AddHangfireConfiguration(builder.Configuration)
-                .RegisterMojTerminHttpClient(builder.Configuration)
+                .AddMojTerminHttpClient(builder.Configuration)
+                .AddProjectServices(builder.Configuration)
                 .AddEndpointsApiExplorer()
                 .AddSwaggerGen();
 
