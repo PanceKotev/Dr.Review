@@ -2,11 +2,9 @@
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <IncludeCompositeObjects>True</IncludeCompositeObjects>
-    <TargetDatabaseName>DrReview.Hangfire.Database</TargetDatabaseName>
-    <DeployScriptFileName>DrReview.Hangfire.Database.sql</DeployScriptFileName>
+    <TargetDatabaseName>DrReview.Database</TargetDatabaseName>
+    <DeployScriptFileName>DrReview.Database.sql</DeployScriptFileName>
     <TargetConnectionString>Data Source=127.0.0.1,1440;Persist Security Info=True;User ID=sa;Pooling=False;MultipleActiveResultSets=False;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False</TargetConnectionString>
-    <BlockOnPossibleDataLoss>True</BlockOnPossibleDataLoss>
-    <IgnoreColumnOrder>True</IgnoreColumnOrder>
     <ProfileVersionNumber>1</ProfileVersionNumber>
   </PropertyGroup>
 </Project>
