@@ -1,0 +1,43 @@
+version: '3.4'
+
+services:
+  drreview.api.dev:
+    build:
+      context: ./Web
+      dockerfile: Dev.Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:5000
+    volumes:
+      - type: bind
+        source: ./Web
+        target: /app
+    networks:
+      - mynet
+    command: sleep infinity
+    ports:
+      - "4300:5000"
+    depends_on:
+      - drreview_dbs
+  drreview_dbs:
+      container_name: drreview_dbs
+      hostname: drreview_dbs
+      volumes:
+        - mssql-server-data:/var/opt/mssql/data
+      networks:
+        - mynet
+      build:
+        context: ./Databases
+        args: 
+          - HFDBNAME=DrReview.Hangfire.Database
+          - HFSAPASSWORD=Password!123
+          - DBNAME=DrReview.Database
+          - SAPASSWORD=Password!123
+        dockerfile: Databases.Dockerfile
+      ports:
+        - "1440:1433" 
+networks:
+  mynet:
+    driver: bridge
+volumes:
+  mssql-server-data:

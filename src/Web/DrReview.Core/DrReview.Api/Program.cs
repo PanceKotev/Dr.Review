@@ -4,9 +4,11 @@ using DrReview.Api.RecurringJobs.Services;
 WebApplicationBuilder? builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
 builder.Services.AddControllers();
 
-builder.Services.AddHangfireConfiguration(builder.Configuration)
+builder.Services.AddAuthorization()
+                .AddHangfireConfiguration(builder.Configuration)
                 .AddMojTerminHttpClient(builder.Configuration)
                 .AddProjectServices(builder.Configuration)
                 .AddEndpointsApiExplorer()
@@ -21,7 +23,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+// Test
 
 app.UseAuthorization();
 

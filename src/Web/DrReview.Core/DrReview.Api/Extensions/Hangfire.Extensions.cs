@@ -1,5 +1,6 @@
 ﻿namespace DrReview.Api.Extensions;
 
+using DrReview.Api.Filters;
 using DrReview.Api.RecurringJobs.Services;
 using global::Hangfire;
 using global::Hangfire.Dashboard.BasicAuthorization;
@@ -33,26 +34,28 @@ public static partial class Extensions
 
     public static IApplicationBuilder UseHangfireConfiguration(this IApplicationBuilder app)
     {
-        var filter = new BasicAuthAuthorizationFilter(
-            new BasicAuthAuthorizationFilterOptions
-            {
-                LoginCaseSensitive = true,
-                Users = new BasicAuthAuthorizationUser[]
-                {
-                        new BasicAuthAuthorizationUser
-                        {
-                            Login = "admin",
-                            PasswordClear = "password"
-                        }
-                }
-            });
+        //var filter = new BasicAuthAuthorizationFilter(
+        //    new BasicAuthAuthorizationFilterOptions
+        //    {
+        //        LoginCaseSensitive = true,
+        //        Users = new BasicAuthAuthorizationUser[]
+        //        {
+        //                new BasicAuthAuthorizationUser
+        //                {
+        //                    Login = "admin",
+        //                    PasswordClear = "password"
+        //                }
+        //        }
+        //    });
 
         var options = new DashboardOptions
         {
             Authorization = new[]
             {
-                    filter
-            }
+                    new HangfireAuthorizationFilter()
+            },
+            DashboardTitle = "DrReview Hangfire",
+            IgnoreAntiforgeryToken = true
         };
 
         app.UseHangfireDashboard("/hangfire", options);

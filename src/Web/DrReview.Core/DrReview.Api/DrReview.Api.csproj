@@ -30,30 +30,42 @@
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
-		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
-	</ItemGroup>
+		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />]
 
 
-	<ItemGroup Label="Review Module">
-		<ProjectReference Include="../Modules/Review/Application/DrReview.Modules.Review.Application.csproj" />
-		<ProjectReference Include="../Modules/Review/Domain/DrReview.Modules.Review.Domain.csproj" />
-		<ProjectReference Include="../Modules/Review/Infrastructure/DrReview.Modules.Review.Infrastructure.csproj" />
-		<ProjectReference Include="../Modules/Review/IntegrationEvents/DrReview.Modules.Review.IntegrationEvents.csproj" />
-	</ItemGroup>
 
-	<ItemGroup Label="ScheduleNotifications Module">
-		<ProjectReference Include="../Modules/ScheduleNotifications/Application/DrReview.Modules.ScheduleNotifications.Application.csproj" />
-		<ProjectReference Include="../Modules/ScheduleNotifications/Domain/DrReview.Modules.ScheduleNotifications.Domain.csproj" />
-		<ProjectReference Include="../Modules/ScheduleNotifications/Infrastructure/DrReview.Modules.ScheduleNotifications.Infrastructure.csproj" />
-		<ProjectReference Include="../Modules/ScheduleNotifications/IntegrationEvents/DrReview.Modules.ScheduleNotifications.IntegrationEvents.csproj" />
-	</ItemGroup>
 
-	<ItemGroup>
-		<ProjectReference Include="../Common/DrReview.Common.csproj" />
-	</ItemGroup>
 
-	<ItemGroup>
-		<PreBuildEvent Include="dotnet format "></PreBuildEvent>
-	</ItemGroup>
 
-</Project>
+		<ItemGroup Label="Review Module">
+			<ProjectReference Include="../Modules/Review/Application/DrReview.Modules.Review.Application.csproj" />
+			<ProjectReference Include="../Modules/Review/Domain/DrReview.Modules.Review.Domain.csproj" />
+			<ProjectReference Include="../Modules/Review/Infrastructure/DrReview.Modules.Review.Infrastructure.csproj" />
+			<ProjectReference Include="../Modules/Review/IntegrationEvents/DrReview.Modules.Review.IntegrationEvents.csproj" />
+		</ItemGroup>
+
+		<ItemGroup Label="ScheduleNotifications Module">
+			<ProjectReference Include="../Modules/ScheduleNotifications/Application/DrReview.Modules.ScheduleNotifications.Application.csproj" />
+			<ProjectReference Include="../Modules/ScheduleNotifications/Domain/DrReview.Modules.ScheduleNotifications.Domain.csproj" />
+			<ProjectReference Include="../Modules/ScheduleNotifications/Infrastructure/DrReview.Modules.ScheduleNotifications.Infrastructure.csproj" />
+			<ProjectReference Include="../Modules/ScheduleNotifications/IntegrationEvents/DrReview.Modules.ScheduleNotifications.IntegrationEvents.csproj" />
+		</ItemGroup>
+
+		<ItemGroup>
+			<ProjectReference Include="../Common/DrReview.Common.csproj" />
+		</ItemGroup>
+
+		<ItemGroup>
+			<PreBuildEvent Include="dotnet format "></PreBuildEvent>
+		</ItemGroup>
+
+		<ItemGroup>
+			<Content Update="appsettings.Development.json">
+				<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+			</Content>
+			<Content Update="appsettings.json">
+				<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+			</Content>
+		</ItemGroup>
+
+	</Project>
