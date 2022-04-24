@@ -11,6 +11,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
 		.editorconfig.inferred = .editorconfig.inferred
+		..\Databases\Databases.Dockerfile = ..\Databases\Databases.Dockerfile
+		Dev.Dockerfile = Dev.Dockerfile
 		Dockerfile = Dockerfile
 	EndProjectSection
 EndProject
@@ -63,6 +65,8 @@ EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "DrReview.Hangfire.Database", "..\Databases\DrReview.Hangfire.Database\DrReview.Hangfire.Database.sqlproj", "{FE2C8C2D-D7F4-439D-BF24-74E0A73E6C12}"
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "..\docker-compose.dcproj", "{2AA9CFE4-6FFB-460B-8CE3-05198CA50FEC}"
+EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "DrReview.Database", "..\Databases\DrReview.Database\DrReview.Database.sqlproj", "{1166DEED-8AA7-4BF2-9CF8-D00FA49D6AF9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -124,6 +128,12 @@ Global
 		{2AA9CFE4-6FFB-460B-8CE3-05198CA50FEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2AA9CFE4-6FFB-460B-8CE3-05198CA50FEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2AA9CFE4-6FFB-460B-8CE3-05198CA50FEC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1166DEED-8AA7-4BF2-9CF8-D00FA49D6AF9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1166DEED-8AA7-4BF2-9CF8-D00FA49D6AF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1166DEED-8AA7-4BF2-9CF8-D00FA49D6AF9}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{1166DEED-8AA7-4BF2-9CF8-D00FA49D6AF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1166DEED-8AA7-4BF2-9CF8-D00FA49D6AF9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1166DEED-8AA7-4BF2-9CF8-D00FA49D6AF9}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -153,6 +163,7 @@ Global
 		{ED07E6CC-994B-4D22-B345-949B7AC7AF50} = {45E10D4F-A160-4943-8279-17AC2B1CCBD0}
 		{65824E3C-AEEF-49A6-B409-3EC6E64B8385} = {AD685D1A-6459-44BB-95D1-FC01AC08FD03}
 		{FE2C8C2D-D7F4-439D-BF24-74E0A73E6C12} = {3AFEB5C6-CDAD-4735-A007-B32C05F6E5C9}
+		{1166DEED-8AA7-4BF2-9CF8-D00FA49D6AF9} = {3AFEB5C6-CDAD-4735-A007-B32C05F6E5C9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F59AD7F4-E29D-4092-A5D6-A6AD19DF97E4}

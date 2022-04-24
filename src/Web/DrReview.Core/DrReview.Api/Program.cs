@@ -3,12 +3,15 @@ using DrReview.Api.Extensions;
 WebApplicationBuilder? builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllers();
-builder.Services.AddHangfireConfiguration(builder.Configuration);
 
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddControllers();
+
+builder.Services.AddAuthorization()
+                .AddHangfireConfiguration(builder.Configuration)
+                .AddMojTerminHttpClient(builder.Configuration)
+                .AddProjectServices(builder.Configuration)
+                .AddEndpointsApiExplorer()
+                .AddSwaggerGen();
 
 WebApplication? app = builder.Build();
 
@@ -19,7 +22,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+// Test
 
 app.UseAuthorization();
 

@@ -32,7 +32,7 @@
       },
       "sslPort": 44360,
       "httpPort": 44300,
-      "useSSL": true
+      "useSSL": false
     }
   }
 }

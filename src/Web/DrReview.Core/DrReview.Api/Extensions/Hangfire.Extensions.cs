@@ -1,10 +1,11 @@
 ﻿namespace DrReview.Api.Extensions;
 
+using DrReview.Api.Filters;
+using DrReview.Api.RecurringJobs.Services;
 using global::Hangfire;
-using global::Hangfire.Dashboard.BasicAuthorization;
 using global::Hangfire.SqlServer;
 
-public static partial class Hangfire
+public static partial class Extensions
 {
     public static IServiceCollection AddHangfireConfiguration(this IServiceCollection services, IConfiguration configuration)
     {
@@ -25,34 +26,27 @@ public static partial class Hangfire
 
         services.AddHangfireServer();
 
+        services.AddScoped<IBackgroundJobClient>(sp => new BackgroundJobClient(JobStorage.Current));
+
         return services;
     }
 
     public static IApplicationBuilder UseHangfireConfiguration(this IApplicationBuilder app)
     {
-        var filter = new BasicAuthAuthorizationFilter(
-            new BasicAuthAuthorizationFilterOptions
-            {
-                LoginCaseSensitive = true,
-                Users = new BasicAuthAuthorizationUser[]
-                {
-                        new BasicAuthAuthorizationUser
-                        {
-                            Login = "admin",
-                            PasswordClear = "password"
-                        }
-                }
-            });
 
-        var options = new DashboardOptions
+        DashboardOptions options = new DashboardOptions
         {
             Authorization = new[]
             {
-                    filter
-            }
+                    new DrReviewHangfireAuthorizationFilter()
+            },
+            DashboardTitle = "DrReview Hangfire",
+            IgnoreAntiforgeryToken = true
         };
 
         app.UseHangfireDashboard("/hangfire", options);
+
+        RecurringJobService.StartRecurringBackgroundJobs();
 
         return app;
     }
