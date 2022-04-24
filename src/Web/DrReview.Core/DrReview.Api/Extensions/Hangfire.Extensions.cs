@@ -3,7 +3,6 @@
 using DrReview.Api.Filters;
 using DrReview.Api.RecurringJobs.Services;
 using global::Hangfire;
-using global::Hangfire.Dashboard.BasicAuthorization;
 using global::Hangfire.SqlServer;
 
 public static partial class Extensions
@@ -34,25 +33,12 @@ public static partial class Extensions
 
     public static IApplicationBuilder UseHangfireConfiguration(this IApplicationBuilder app)
     {
-        //var filter = new BasicAuthAuthorizationFilter(
-        //    new BasicAuthAuthorizationFilterOptions
-        //    {
-        //        LoginCaseSensitive = true,
-        //        Users = new BasicAuthAuthorizationUser[]
-        //        {
-        //                new BasicAuthAuthorizationUser
-        //                {
-        //                    Login = "admin",
-        //                    PasswordClear = "password"
-        //                }
-        //        }
-        //    });
 
-        var options = new DashboardOptions
+        DashboardOptions options = new DashboardOptions
         {
             Authorization = new[]
             {
-                    new HangfireAuthorizationFilter()
+                    new DrReviewHangfireAuthorizationFilter()
             },
             DashboardTitle = "DrReview Hangfire",
             IgnoreAntiforgeryToken = true

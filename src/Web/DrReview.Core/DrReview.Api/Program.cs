@@ -1,5 +1,4 @@
 using DrReview.Api.Extensions;
-using DrReview.Api.RecurringJobs.Services;
 
 WebApplicationBuilder? builder = WebApplication.CreateBuilder(args);
 
