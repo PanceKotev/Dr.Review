@@ -12,9 +12,9 @@
             _mojTerminHttpClient = mojTerminHttpClient;
         }
 
-        public Task MigrateDoctorDataAsync()
+        public async Task MigrateDoctorDataAsync()
         {
-            return Task.CompletedTask;
+            var res = await _mojTerminHttpClient.GetDoctorsAsync();
         }
     }
 }
