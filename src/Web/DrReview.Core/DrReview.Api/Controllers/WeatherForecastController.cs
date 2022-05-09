@@ -1,6 +1,7 @@
 namespace DrReview.Api.Controllers;
 
 using System.Data.SqlClient;
+using DrReview.Api.HttpClients.MojTermin.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 [ApiController]
@@ -14,9 +15,14 @@ public class WeatherForecastController : ControllerBase
 
     private readonly ILogger<WeatherForecastController> _logger;
 
-    public WeatherForecastController(ILogger<WeatherForecastController> logger)
+    private readonly IMojTerminHttpClient _mojTerminHttpClient;
+
+    public WeatherForecastController(
+        ILogger<WeatherForecastController> logger,
+        IMojTerminHttpClient mojTerminHttpClient)
     {
         _logger = logger;
+        _mojTerminHttpClient = mojTerminHttpClient;
     }
 
     [HttpGet(Name = "GetWeatherForecast")]
@@ -31,14 +37,12 @@ public class WeatherForecastController : ControllerBase
         .ToArray();
     }
 
-    [HttpPost]
-    public async Task<IActionResult> TestDatabaseConnectionAsync([FromBody] string connectionString)
+    [HttpPost(Name = "PostDoctors")]
+    public IActionResult PostDoctors([FromBody] long[] institutionIds)
     {
-        using (var conn = new SqlConnection(connectionString))
-        {
-            await conn.OpenAsync();
-        }
+        _mojTerminHttpClient.GetDoctorsInInstitutions(institutionIds);
 
-        return await Task.FromResult(Ok());
+        return Ok();
     }
+
 }

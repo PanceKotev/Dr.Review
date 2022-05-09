@@ -1,6 +1,6 @@
 ﻿CREATE TABLE [dbo].[Doctor]
   (
-     [ID]           BIGINT                      NOT NULL IDENTITY PRIMARY KEY,
+     [ID]           BIGINT                      NOT NULL PRIMARY KEY,
      [Uid]          UNIQUEIDENTIFIER            NOT NULL UNIQUE,
      [DeletedOn]    SMALLDATETIME               NULL,
      [ModifiedOn]   SMALLDATETIME               NOT NULL DEFAULT GETUTCDATE(),
