@@ -1,7 +1,7 @@
 ﻿namespace DrReview.Api.HttpClients.MojTermin.Interfaces
 {
-    using DrReview.Api.HttpClients.MojTermin.Contracts;
     using System.Threading.Tasks;
+    using DrReview.Contracts.ExternalApi.MojTermin.Responses;
 
     public interface IMojTerminHttpClient
     {

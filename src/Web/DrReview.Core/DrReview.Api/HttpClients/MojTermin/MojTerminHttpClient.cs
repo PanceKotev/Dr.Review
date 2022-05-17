@@ -1,10 +1,9 @@
 ﻿namespace DrReview.Api.HttpClients.MojTermin
 {
     using System.Threading.Tasks;
-    using DrReview.Api.HttpClients.MojTermin.Contracts;
     using DrReview.Api.HttpClients.MojTermin.Interfaces;
     using DrReview.Common.Results;
-    using Newtonsoft.Json.Linq;
+    using DrReview.Contracts.ExternalApi.MojTermin.Responses;
 
     public class MojTerminHttpClient : IMojTerminHttpClient
     {

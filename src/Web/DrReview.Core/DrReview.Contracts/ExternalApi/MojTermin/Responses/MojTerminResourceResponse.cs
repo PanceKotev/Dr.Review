@@ -1,4 +1,4 @@
-﻿namespace DrReview.Api.HttpClients.MojTermin.Contracts
+﻿namespace DrReview.Contracts.ExternalApi.MojTermin.Responses
 {
     public class MojTerminResourceResponse
     {
