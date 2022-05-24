@@ -26,8 +26,6 @@
 
             List<long> institutionIds = doctors.Select(x => x.Id).ToList();
 
-            string joinedIds = string.Join('\n', institutionIds.Select(x => x.ToString()).ToArray());
-
             return institutionIds;
         }
 
@@ -57,24 +55,21 @@
 
             var returnedDoctors = convertTasks.Select(x => x.Result).ToList();
 
-            var allDoctors = returnedDoctors.SelectMany(x => x.Sections.First(x => x.Type == "doctor").Items).ToList();
+            var allDoctors = new List<DoctorResponse>();
+
+            foreach(InstitutionResponse result in returnedDoctors)
+            {
+                SectionResponse doctorSection = result.Sections.First(s => s.Type == "doctor");
+
+                doctorSection.Items.ForEach(x => {
+                    x.InstitutionFK = x.Id;
+                    x.Institution = result;
+                });
+
+                allDoctors.AddRange(doctorSection.Items);
+            }
 
             return allDoctors;
         }
-
-        private async Task<Result> HandleResponse(HttpResponseMessage response)
-        {
-            if (response.IsSuccessStatusCode)
-            {
-
-            }
-
-
-            return Result.Invalid("no");
-        }
-
-
-
-
     }
 }

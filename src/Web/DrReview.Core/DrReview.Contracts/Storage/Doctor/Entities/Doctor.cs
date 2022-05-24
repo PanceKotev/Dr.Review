@@ -1,9 +1,10 @@
 ﻿namespace DrReview.Contracts.Storage.Doctor.Entities
 {
-    using DrReview.Contracts.ExternalApi.MojTermin.Responses;
     using System;
+    using DrReview.Contracts.ExternalApi.MojTermin.Responses;
+    using DrReview.Contracts.Storage.Common;
 
-    public class Doctor
+    public class Doctor : BaseEntity
     {
         public Doctor(
             long id,
@@ -12,36 +13,25 @@
             DateTime modifiedOn,
             string firstName,
             string lastName,
-            string occupation,
-            long ordinationFK)
+            long specializationFK,
+            long institutionFK)
+            : base(id, uid, deletedOn, modifiedOn)
         {
-            Id = id;
-            Uid = uid;
-            DeletedOn = deletedOn;
-            ModifiedOn = modifiedOn;
             FirstName = firstName;
             LastName = lastName;
-            Occupation = occupation;
-            OrdinationFK = ordinationFK;
+            SpecializationFK = specializationFK;
+            InstitutionFK = institutionFK;
         }
-
-        public long Id { get; init; }
-
-        public Guid Uid { get; init; }
-
-        public DateTime? DeletedOn { get; init; }
-
-        public DateTime ModifiedOn { get; init; }
 
         public string FirstName { get; init; }
 
         public string LastName { get; init; }
 
-        public string Occupation { get; init; }
+        public long SpecializationFK { get; init; }
 
-        public long OrdinationFK { get; init; }
+        public long InstitutionFK { get; init; }
 
-        public static Doctor FromResponse(DoctorResponse response, long ordinationId)
+        public static Doctor FromResponse(DoctorResponse response, long specializationFK)
         {
             string[] nameSplitUp = response.Name.Split(' ', StringSplitOptions.RemoveEmptyEntries);
 
@@ -52,8 +42,8 @@
                     modifiedOn: DateTime.UtcNow,
                     firstName: nameSplitUp[0],
                     lastName: nameSplitUp[1],
-                    occupation: response.Group,
-                    ordinationFK: ordinationId);
+                    specializationFK: specializationFK,
+                    institutionFK: response.InstitutionFK);
         }
     }
 }

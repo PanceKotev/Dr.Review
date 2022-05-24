@@ -1,6 +1,4 @@
 namespace DrReview.Api.Controllers;
-
-using System.Data.SqlClient;
 using DrReview.Api.HttpClients.MojTermin.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,7 +9,7 @@ public class WeatherForecastController : ControllerBase
     private static readonly string[] Summaries = new[]
     {
         "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-        };
+    };
 
     private readonly ILogger<WeatherForecastController> _logger;
 
@@ -44,5 +42,4 @@ public class WeatherForecastController : ControllerBase
 
         return Ok();
     }
-
 }
