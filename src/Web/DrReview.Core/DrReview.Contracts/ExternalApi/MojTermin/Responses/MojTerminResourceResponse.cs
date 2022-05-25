@@ -10,6 +10,8 @@
 
         public long Id { get; set; }
 
+        public long LocationId { get; set; } = 0L;
+
         public List<MojTerminResourceResponse> Subsections { get; set; } = new List<MojTerminResourceResponse>();
     }
 }

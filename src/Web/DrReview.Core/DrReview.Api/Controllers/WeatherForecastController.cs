@@ -34,12 +34,4 @@ public class WeatherForecastController : ControllerBase
         })
         .ToArray();
     }
-
-    [HttpPost(Name = "PostDoctors")]
-    public IActionResult PostDoctors([FromBody] long[] institutionIds)
-    {
-        _mojTerminHttpClient.GetDoctorsInInstitutions(institutionIds);
-
-        return Ok();
-    }
 }

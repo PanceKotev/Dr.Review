@@ -5,8 +5,10 @@
 
     public interface IMojTerminHttpClient
     {
-        Task<List<long>> GetInstitutionsAsync();
+        Task<Dictionary<long, long>> GetInstitutionsAsync();
 
-        List<DoctorResponse> GetDoctorsInInstitutions(long[] institutionsIds);
+        List<DoctorResponse> GetDoctorsInInstitutions(Dictionary<long, long> instiutionLocationMap);
+
+        Task<List<LocationResponse>> GetLocationsAsync();
     }
 }

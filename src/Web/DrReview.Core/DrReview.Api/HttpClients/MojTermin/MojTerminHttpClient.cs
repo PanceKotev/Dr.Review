@@ -1,6 +1,7 @@
 ﻿namespace DrReview.Api.HttpClients.MojTermin
 {
     using System.Threading.Tasks;
+    using System.Reflection;
     using DrReview.Api.HttpClients.MojTermin.Interfaces;
     using DrReview.Common.Results;
     using DrReview.Contracts.ExternalApi.MojTermin.Responses;
@@ -15,23 +16,50 @@
             _httpClient = httpClient;
         }
 
-        public async Task<List<long>> GetInstitutionsAsync()
+        public async Task<Dictionary<long, long>> GetInstitutionsAsync()
         {
             string path = "pp/side_navigation";
             HttpResponseMessage res = await _httpClient.GetAsync(path);
 
             MojTerminResourceResponse responseResult = (await res.Content.ReadFromJsonAsync<MojTerminResourceResponse[]>())![2];
 
-            List<MojTerminResourceResponse> doctors = responseResult.Subsections.SelectMany(d => d.Subsections).ToList();
+            List<MojTerminResourceResponse> institutions = responseResult.Subsections.SelectMany(d => d.Subsections).ToList();
 
-            List<long> institutionIds = doctors.Select(x => x.Id).ToList();
+            Dictionary<long, long> institutionLocationIdsMap = new Dictionary<long, long>();
 
-            return institutionIds;
+            institutions.ForEach(d =>
+            {
+                if (!institutionLocationIdsMap.ContainsKey(d.Id))
+                {
+                    institutionLocationIdsMap[d.Id] = d.LocationId;
+                }
+            });
+
+            return institutionLocationIdsMap;
         }
 
-        public List<DoctorResponse> GetDoctorsInInstitutions(long[] institutionsIds)
+        public async Task<List<LocationResponse>> GetLocationsAsync()
+        {
+            string path = "pp/locations";
+
+            HttpResponseMessage res = await _httpClient.GetAsync(path);
+
+            dynamic responseResult = await res.Content.ReadFromJsonAsync<dynamic>();
+
+            if (responseResult is null)
+            {
+                throw new ArgumentException("Cannot convert locations");
+            }
+
+
+            return new List<LocationResponse>();
+        }
+
+        public List<DoctorResponse> GetDoctorsInInstitutions(Dictionary<long, long> institutionIdLocationMap)
         {
             string path = "pp/institutions/";
+
+            long[] institutionsIds = institutionIdLocationMap.Keys.ToArray();
 
             Task<HttpResponseMessage>[] tasks = new Task<HttpResponseMessage>[institutionsIds.Length];
 
@@ -53,15 +81,18 @@
 
             Task.WaitAll(convertTasks);
 
-            var returnedDoctors = convertTasks.Select(x => x.Result).ToList();
+            List<InstitutionResponse> institutionResults = convertTasks.Select(x => x.Result!).ToList();
 
-            var allDoctors = new List<DoctorResponse>();
+            List<DoctorResponse> allDoctors = new List<DoctorResponse>();
 
-            foreach(InstitutionResponse result in returnedDoctors)
+            foreach (InstitutionResponse result in institutionResults)
             {
+                result.LocationId = institutionIdLocationMap[result.Id];
+
                 SectionResponse doctorSection = result.Sections.First(s => s.Type == "doctor");
 
-                doctorSection.Items.ForEach(x => {
+                doctorSection.Items.ForEach(x => 
+                {
                     x.InstitutionFK = x.Id;
                     x.Institution = result;
                 });
