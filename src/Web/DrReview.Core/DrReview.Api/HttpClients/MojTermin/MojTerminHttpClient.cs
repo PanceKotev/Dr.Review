@@ -5,6 +5,8 @@
     using DrReview.Api.HttpClients.MojTermin.Interfaces;
     using DrReview.Common.Results;
     using DrReview.Contracts.ExternalApi.MojTermin.Responses;
+    using System.Text;
+    using System.Text.Json;
 
     public class MojTerminHttpClient : IMojTerminHttpClient
     {
@@ -44,7 +46,7 @@
 
             HttpResponseMessage res = await _httpClient.GetAsync(path);
 
-            dynamic responseResult = await res.Content.ReadFromJsonAsync<dynamic>();
+            Dictionary<int, LocationResponse> responseResult = await res.Content.ReadFromJsonAsync<Dictionary<int, LocationResponse>>();
 
             if (responseResult is null)
             {
@@ -52,7 +54,7 @@
             }
 
 
-            return new List<LocationResponse>();
+            return responseResult.Values.ToList();
         }
 
         public List<DoctorResponse> GetDoctorsInInstitutions(Dictionary<long, long> institutionIdLocationMap)
@@ -89,11 +91,12 @@
             {
                 result.LocationId = institutionIdLocationMap[result.Id];
 
+
                 SectionResponse doctorSection = result.Sections.First(s => s.Type == "doctor");
 
                 doctorSection.Items.ForEach(x => 
                 {
-                    x.InstitutionFK = x.Id;
+                    x.InstitutionFK = result.Id;
                     x.Institution = result;
                 });
 

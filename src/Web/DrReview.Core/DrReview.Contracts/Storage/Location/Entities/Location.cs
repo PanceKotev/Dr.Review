@@ -28,8 +28,8 @@
                 deletedOn: null,
                 modifiedOn: DateTime.UtcNow,
                 name: response.Name,
-                longitude: 0,
-                latitude: 0);
+                longitude: response.Coordinates.Longitude,
+                latitude: response.Coordinates.Latitude);
         }
     }
 }
