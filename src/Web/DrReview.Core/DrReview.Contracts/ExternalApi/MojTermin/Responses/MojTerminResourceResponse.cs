@@ -1,5 +1,6 @@
 ﻿namespace DrReview.Contracts.ExternalApi.MojTermin.Responses
 {
+#nullable disable
     public class MojTerminResourceResponse
     {
         public string Name { get; set; }
@@ -14,4 +15,5 @@
 
         public List<MojTerminResourceResponse> Subsections { get; set; } = new List<MojTerminResourceResponse>();
     }
+#nullable enable
 }

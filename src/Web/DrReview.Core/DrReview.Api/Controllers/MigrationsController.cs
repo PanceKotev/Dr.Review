@@ -6,19 +6,27 @@
 
     [Route("api/[controller]")]
     [ApiController]
-    public class LocationController : BaseController
+    public class MigrationsController : BaseController
     {
         private readonly IDoctorMigrationService _migrationService;
 
-        public LocationController(IDoctorMigrationService migrationService)
+        public MigrationsController(IDoctorMigrationService migrationService)
         {
             _migrationService = migrationService;
         }
 
-        [HttpGet("UpdateLocations")]
+        [HttpPost("UpdateLocations")]
         public async Task<IActionResult> MigrateLocationsAsync()
         {
             await _migrationService.PopulateLocationsAsync();
+
+            return Ok();
+        }
+
+        [HttpPost("MigrateDoctors")]
+        public async Task<IActionResult> MigrateDoctorsAsync()
+        {
+            await _migrationService.MigrateDoctorDataAsync();
 
             return Ok();
         }

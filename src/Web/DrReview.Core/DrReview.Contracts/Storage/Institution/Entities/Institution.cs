@@ -27,6 +27,5 @@
                 name: response.Name,
                 locationFK: response.LocationId);
         }
-
     }
 }

@@ -62,9 +62,7 @@
 
                 Specialization[] specializations = doctorResponses.Select(x => Specialization.FromName(x.Group)).ToArray();
 
-                Institution[] institutions = doctorResponses.Select(x => Institution.FromResponse(x.Institution)).ToArray();
-
-                IEnumerable<Institution> institutionsWithoutLocationIds = institutions.Where(i => i.LocationFK == 0);
+                Institution[] institutions = doctorResponses.Select(x => Institution.FromResponse(x.Institution!)).ToArray();
 
                 int totalSpecializations = specializations.Length;
 

@@ -1,5 +1,6 @@
 ﻿namespace DrReview.Contracts.ExternalApi.MojTermin.Responses
 {
+#nullable disable
     using System;
 
     public class LocationResponse
@@ -11,11 +12,11 @@
         public LocationCoordinatesResponse Coordinates { get; set; }
     }
 
-
     public class LocationCoordinatesResponse
     {
         public decimal Latitude { get; set; }
 
         public decimal Longitude { get; set; }
     }
+#nullable enable
 }

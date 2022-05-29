@@ -1,12 +1,8 @@
 ﻿namespace DrReview.Api.HttpClients.MojTermin
 {
     using System.Threading.Tasks;
-    using System.Reflection;
     using DrReview.Api.HttpClients.MojTermin.Interfaces;
-    using DrReview.Common.Results;
     using DrReview.Contracts.ExternalApi.MojTermin.Responses;
-    using System.Text;
-    using System.Text.Json;
 
     public class MojTerminHttpClient : IMojTerminHttpClient
     {
@@ -46,7 +42,7 @@
 
             HttpResponseMessage res = await _httpClient.GetAsync(path);
 
-            Dictionary<int, LocationResponse> responseResult = await res.Content.ReadFromJsonAsync<Dictionary<int, LocationResponse>>();
+            Dictionary<int, LocationResponse>? responseResult = await res.Content.ReadFromJsonAsync<Dictionary<int, LocationResponse>>();
 
             if (responseResult is null)
             {
