@@ -1,10 +1,14 @@
 ﻿namespace DrReview.Api.Controllers
 {
     using DrReview.Api.Services.Interfaces;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.Identity.Web;
+    using Microsoft.Identity.Web.Resource;
 
     [Route("api/[controller]")]
+    [RequiredScope("https://drreview.onmicrosoft.com/drreview_api/drreview.read")]
     [ApiController]
     public class MigrationsController : BaseController
     {
@@ -28,6 +32,13 @@
         {
             await _migrationService.MigrateDoctorDataAsync();
 
+            return Ok();
+        }
+
+        [HttpGet("TestAuth")]
+        [Authorize]
+        public IActionResult TestAuthentication()
+        {
             return Ok();
         }
     }
