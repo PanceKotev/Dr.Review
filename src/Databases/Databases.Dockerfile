@@ -23,5 +23,5 @@ ENV SA_PASSWORD=$SAPASSWORD
 ENV HF_SA_PASSWORD=$HFSAPASSWORD
 
 RUN ( /opt/mssql/bin/sqlservr & ) | grep -q "Service Broker manager has started" \
-    && /opt/sqlpackage/sqlpackage /a:Publish /tsn:. /tdn:${HFDBNAME}} /tu:sa /tp:$HF_SA_PASSWORD /sf:/tmp/database/hangfire/DrReview.Hangfire.Database.dacpac \
+    && /opt/sqlpackage/sqlpackage /a:Publish /tsn:. /tdn:${HFDBNAME} /tu:sa /tp:$HF_SA_PASSWORD /sf:/tmp/database/hangfire/DrReview.Hangfire.Database.dacpac \
     && /opt/sqlpackage/sqlpackage /a:Publish /tsn:. /tdn:${DBNAME} /tu:sa /tp:$SA_PASSWORD /sf:/tmp/database/core/DrReview.Database.dacpac

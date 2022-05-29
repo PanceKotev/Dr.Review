@@ -60,12 +60,18 @@
     <Folder Include="Properties" />
     <Folder Include="Doctor" />
     <Folder Include="Scripts" />
+    <Folder Include="Location" />
+    <Folder Include="Specialization" />
+    <Folder Include="Institution" />
   </ItemGroup>
   <ItemGroup>
     <None Include="DrReview.Database.publish.xml" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Doctor\Doctor.sql" />
+    <Build Include="Location\Location.sql" />
+    <Build Include="Institution\Institution.sql" />
+    <Build Include="Specialization\Specialization.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Scripts\Script.PostDeployment.sql" />
