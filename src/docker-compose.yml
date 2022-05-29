@@ -1,0 +1,41 @@
+version: '3.4'
+
+services:
+  drreview.api:
+    build:
+      context: ./Web
+      dockerfile: Dockerfile
+    networks:
+      - mynet
+    ports:
+        - "4300:80"
+        - "4400:443"
+    depends_on:
+            - drreview_dbs
+    deploy:
+      restart_policy:
+        condition: on-failure
+  drreview_dbs:
+      container_name: drreview_dbs
+      hostname: drreview_dbs
+      volumes:
+        - mssql-server-data:/var/opt/mssql/data
+      networks:
+        - mynet
+      build:
+        context: ./Databases
+        args: 
+          - HFDBNAME=DrReview.Hangfire.Database
+          - HFSAPASSWORD=Password!123
+          - DBNAME=DrReview.Database
+          - SAPASSWORD=Password!123
+        dockerfile: Databases.Dockerfile
+      ports:
+        - "1440:1433" 
+
+networks:
+  mynet:
+    driver: bridge
+volumes:
+  app-files:
+  mssql-server-data:
