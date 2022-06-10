@@ -1,8 +1,7 @@
 {
   "projectType": "application",
-  "root": "apps/review-notification-app",
   "sourceRoot": "apps/review-notification-app/src",
-  "prefix": "rev",
+  "prefix": "clients",
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:browser",
@@ -76,8 +75,8 @@
       "executor": "@nrwl/linter:eslint",
       "options": {
         "lintFilePatterns": [
-          "apps/review-notification-app/src/**/*.ts",
-          "apps/review-notification-app/src/**/*.html"
+          "apps/review-notification-app/**/*.ts",
+          "apps/review-notification-app/**/*.html"
         ]
       }
     },
@@ -85,7 +84,7 @@
       "executor": "@nrwl/jest:jest",
       "outputs": ["coverage/apps/review-notification-app"],
       "options": {
-        "jestConfig": "apps/review-notification-app/jest.config.js",
+        "jestConfig": "apps/review-notification-app/jest.config.ts",
         "passWithNoTests": true
       }
     }
