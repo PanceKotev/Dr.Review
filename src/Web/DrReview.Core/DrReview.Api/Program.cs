@@ -21,6 +21,9 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwaggerDashboard(app.Configuration);
 }
+app.UseRouting();
+
+app.UseCors(builder.Configuration["CorsSettings:PolicyName"]);
 
 app.UseAuthentication();
 
