@@ -5,13 +5,15 @@ import { environment } from '../environments/environment';
 
 import { AppComponent } from './app.component';
 import { ReviewNotificationAppShellModule } from '@drreview/review-notification-app/shell';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [AppComponent],
   providers: [{ provide: APP_CONFIG, useValue: environment}],
   imports: [
     BrowserModule,
-    ReviewNotificationAppShellModule],
+    ReviewNotificationAppShellModule,
+    BrowserAnimationsModule],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
