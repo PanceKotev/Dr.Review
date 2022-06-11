@@ -3,6 +3,9 @@
   "version": 2,
   "projects": {
     "review-notification-app": "apps/review-notification-app",
-    "review-notification-app-e2e": "apps/review-notification-app-e2e"
+    "review-notification-app-e2e": "apps/review-notification-app-e2e",
+    "review-notification-app-shell": "libs/review-notification-app/shell",
+    "shared-data-access": "libs/shared/data-access",
+    "shared-utils-app-config": "libs/shared/utils/app-config"
   }
 }

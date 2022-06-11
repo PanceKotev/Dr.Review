@@ -1,6 +1,6 @@
 {
   "$schema": "./node_modules/nx/schemas/nx-schema.json",
-  "npmScope": "clients",
+  "npmScope": "drreview",
   "defaultProject": "review-notification-app",
   "affected": {
     "defaultBase": "master"

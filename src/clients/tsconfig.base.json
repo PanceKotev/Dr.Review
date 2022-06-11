@@ -14,7 +14,15 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@drreview/review-notification-app/shell": [
+        "libs/review-notification-app/shell/src/index.ts"
+      ],
+      "@drreview/shared/data-access": ["libs/shared/data-access/src/index.ts"],
+      "@drreview/shared/utils/app-config": [
+        "libs/shared/utils/app-config/src/index.ts"
+      ]
+    }
   },
   "exclude": ["node_modules", "tmp", "*.spec.ts", "*.po.ts"]
 }

@@ -12,9 +12,12 @@
     {
         private readonly IDoctorMigrationService _migrationService;
 
-        public MigrationsController(IDoctorMigrationService migrationService)
+        private readonly IConfiguration _configuration;
+
+        public MigrationsController(IDoctorMigrationService migrationService, IConfiguration configuration)
         {
             _migrationService = migrationService;
+            _configuration = configuration;
         }
 
         [HttpPost("UpdateLocations")]
@@ -38,6 +41,18 @@
         public IActionResult TestAuthentication()
         {
             return Ok();
+        }
+
+
+        [HttpGet]
+        [Route("random")]
+        public IActionResult TestRandom()
+        {
+            string allowedScopes = _configuration["CorsSettings:AllowedCorsOrigins"];
+            string policyName = _configuration["CorsSettings:PolicyName"];
+            var random = new Random();
+
+            return Ok(random.NextInt64());
         }
     }
 }
