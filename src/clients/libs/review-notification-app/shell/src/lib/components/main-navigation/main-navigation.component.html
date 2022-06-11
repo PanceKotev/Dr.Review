@@ -26,7 +26,15 @@
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
       <span>Review notifications</span>
+      <mat-slide-toggle
+        class="dark-theme-toggle"
+        color="secondary"
+        [checked]="initialDarkThemeValue"
+        (change)="toggleTheme()"
+      >
+        {{ initialDarkThemeValue ? 'Dark' : 'Light' }}
+      </mat-slide-toggle>
     </mat-toolbar>
-    <ng-content class="mat-app-background"></ng-content>
+    <ng-content></ng-content>
   </mat-sidenav-content>
 </mat-sidenav-container>
