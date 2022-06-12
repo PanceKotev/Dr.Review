@@ -15,26 +15,7 @@
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
-    <mat-toolbar color="primary">
-      <button
-        type="button"
-        aria-label="Toggle sidenav"
-        mat-icon-button
-        (click)="drawer.toggle()"
-        *ngIf="isHandset$ | async"
-      >
-        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
-      </button>
-      <span>Review notifications</span>
-      <mat-slide-toggle
-        class="dark-theme-toggle"
-        color="secondary"
-        [checked]="initialDarkThemeValue"
-        (change)="toggleTheme()"
-      >
-        {{ initialDarkThemeValue ? 'Dark' : 'Light' }}
-      </mat-slide-toggle>
-    </mat-toolbar>
+    <drreview-topbar (drawerToggled)="drawer.toggle()"></drreview-topbar>
     <ng-content></ng-content>
   </mat-sidenav-content>
 </mat-sidenav-container>

@@ -2,6 +2,7 @@
 // Custom Theming for Angular Material
 // For more information: https://material.angular.io/guide/theming
 @use '@angular/material' as mat;
+@import url('https://fonts.googleapis.com/css2?family=Encode+Sans:wght@100;300;600&display=swap');
 // Plus imports for other components in your app.
 
 // Include the common styles for Angular Material. We include this here so that you only
@@ -132,6 +133,10 @@ $review-notification-app-dark-accent: mat.define-palette($dark-secondary-palette
 // The warn palette is optional (defaults to red).
 $review-notification-app-dark-warn: mat.define-palette(mat.$red-palette);
 
+$review-notification-app-typography: mat.define-typography-config(
+  $font-family: 'Encode Sans'
+);
+
 // Create the theme object. A theme consists of configurations for individual
 // theming systems such as "color" or "typography".
 $review-notification-app-light-theme: mat.define-light-theme((
@@ -156,15 +161,13 @@ $review-notification-app-dark-theme: mat.define-dark-theme((
 
 $review-notification-app-light-theme: mat-set-background($review-notification-app-light-theme, #e1f4f9 );
 $review-notification-app-dark-theme: mat-set-background($review-notification-app-dark-theme, #0a171e );
-
+@include mat.all-component-typographies($review-notification-app-typography);
+@include mat.all-component-themes($review-notification-app-light-theme);
 
 .dark-theme {
-  @include mat.all-component-themes($review-notification-app-dark-theme);
+  @include mat.all-component-colors($review-notification-app-dark-theme);
 }
 
-.light-theme {
-  @include mat.all-component-themes($review-notification-app-light-theme);
-}
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { margin: 0; font-family: 'Encode Sans', sans-serif; }

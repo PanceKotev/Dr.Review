@@ -1,7 +1,3 @@
-<drreview-main-navigation
-  [ngClass]="{ 'dark-theme': isDarkTheme, 'light-theme': !isDarkTheme }"
-  [initialDarkThemeValue]="isDarkTheme"
-  (themeChanged)="toggleTheme()"
->
+<drreview-main-navigation [ngClass]="{ 'dark-theme': isDarkTheme }">
   <div class="main-content">main-layout works!</div>
 </drreview-main-navigation>

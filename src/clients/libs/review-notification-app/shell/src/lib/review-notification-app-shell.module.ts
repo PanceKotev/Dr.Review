@@ -10,6 +10,9 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { SharedUiThemesModule } from '@drreview/shared/ui/themes';
+import { ReviewNotificationAppNavigationModule } from '@drreview/review-notification-app/navigation';
+import { SharedServicesThemesModule } from '@drreview/shared/services/themes';
 
 @NgModule({
   imports: [
@@ -21,7 +24,10 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     MatSlideToggleModule,
     MatSidenavModule,
     MatIconModule,
-    MatListModule],
+    MatListModule,
+    SharedUiThemesModule,
+    SharedServicesThemesModule,
+    ReviewNotificationAppNavigationModule],
   declarations: [MainLayoutComponent, MainNavigationComponent],
   exports: [
     SharedDataAccessModule,

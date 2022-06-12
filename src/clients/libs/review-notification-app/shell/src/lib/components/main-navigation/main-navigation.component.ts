@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
@@ -10,12 +10,6 @@ import { map, shareReplay } from 'rxjs/operators';
 })
 export class MainNavigationComponent {
 
-  @Input()
-  public initialDarkThemeValue = false;
-
-  @Output()
-  public themeChanged= new EventEmitter();
-
   public isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
       map(result => result.matches),
@@ -23,9 +17,4 @@ export class MainNavigationComponent {
     );
 
   public constructor(private breakpointObserver: BreakpointObserver) {}
-
-
-  public toggleTheme(): void {
-    this.themeChanged.emit();
-  }
 }

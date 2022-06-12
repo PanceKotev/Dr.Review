@@ -1,3 +1,4 @@
+import { SharedServicesThemesModule } from '@drreview/shared/services/themes';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { APP_CONFIG } from '@drreview/shared/utils/app-config';
@@ -13,6 +14,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   imports: [
     BrowserModule,
     ReviewNotificationAppShellModule,
+    SharedServicesThemesModule,
     BrowserAnimationsModule],
   bootstrap: [AppComponent]
 })

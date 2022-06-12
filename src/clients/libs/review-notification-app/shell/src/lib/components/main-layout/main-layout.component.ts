@@ -1,7 +1,7 @@
 import { ApiService } from '@drreview/shared/data-access';
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { MediaMatcher } from '@angular/cdk/layout';
-import { BehaviorSubject, takeUntil } from 'rxjs';
+import { Subject, takeUntil } from 'rxjs';
+import { ThemesService } from '@drreview/shared/services/themes';
 
 @Component({
   selector: 'drreview-main-layout',
@@ -11,23 +11,32 @@ import { BehaviorSubject, takeUntil } from 'rxjs';
 export class MainLayoutComponent implements OnInit, OnDestroy {
   public isDarkTheme = false;
   public randomNumber = 0;
-  private readonly $destroying = new BehaviorSubject(false);
-
-  private readonly _preferredThemeQuery = "(prefers-color-scheme: dark)";
+  private readonly destroying$ = new Subject();
 
 
   public constructor(
     private apiService: ApiService,
-    private mediaMatcher: MediaMatcher) {
+    private themesService: ThemesService) {
 
   }
 
   public ngOnInit(): void {
 
-    this.isDarkTheme = this.mediaMatcher.matchMedia(this._preferredThemeQuery).matches;
+    this.themesService.isDarkTheme$.pipe(
+      takeUntil(this.destroying$)
+      )
+       .subscribe({
+         next: res => {
+           this.isDarkTheme = res;
+         },
+         error: err => {
+           console.error(err);
+         }
+       });
+
     this.apiService.get("migrations/random")
     .pipe(
-      takeUntil(this.$destroying)
+      takeUntil(this.destroying$)
       )
         .subscribe({
         next: res => {
@@ -42,11 +51,7 @@ export class MainLayoutComponent implements OnInit, OnDestroy {
       });
   }
   public ngOnDestroy(): void {
-    this.$destroying.next(true);
-    this.$destroying.complete();
-  }
-
-  public toggleTheme(): void {
-    this.isDarkTheme = !this.isDarkTheme;
+    this.destroying$.next(true);
+    this.destroying$.complete();
   }
 }
