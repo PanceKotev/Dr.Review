@@ -3,6 +3,7 @@
   "version": 2,
   "projects": {
     "review-notification-app": "apps/review-notification-app",
+    "review-notification-app-common-ui-routing-pages": "libs/review-notification-app/common/ui/routing-pages",
     "review-notification-app-e2e": "apps/review-notification-app-e2e",
     "review-notification-app-home-feature": "libs/review-notification-app/home/feature",
     "review-notification-app-navigation": "libs/review-notification-app/navigation",

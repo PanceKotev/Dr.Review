@@ -1,12 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'drreview-homepage',
   templateUrl: './homepage.component.html',
-  styleUrls: ['./homepage.component.scss'],
+  styleUrls: ['./homepage.component.scss']
 })
-export class HomepageComponent implements OnInit {
-  constructor() {}
-
-  ngOnInit(): void {}
+export class HomepageComponent {
 }

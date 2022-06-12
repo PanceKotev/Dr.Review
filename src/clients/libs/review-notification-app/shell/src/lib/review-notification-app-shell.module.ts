@@ -1,3 +1,4 @@
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { mainRoutes } from './routes';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -20,6 +21,7 @@ import { RouterModule } from '@angular/router';
   imports: [
     CommonModule,
     RouterModule.forRoot(mainRoutes),
+    BrowserAnimationsModule,
     SharedDataAccessModule,
     LayoutModule,
     MatToolbarModule,

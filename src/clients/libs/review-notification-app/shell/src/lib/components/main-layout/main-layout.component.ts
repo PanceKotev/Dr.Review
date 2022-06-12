@@ -2,11 +2,14 @@ import { ApiService } from '@drreview/shared/data-access';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subject, takeUntil } from 'rxjs';
 import { ThemesService } from '@drreview/shared/services/themes';
+import { transition, trigger, useAnimation } from '@angular/animations';
+import { scaleDownFromBottom } from 'ngx-router-animations';
 
 @Component({
   selector: 'drreview-main-layout',
   templateUrl: './main-layout.component.html',
-  styleUrls: ['./main-layout.component.scss']
+  styleUrls: ['./main-layout.component.scss'],
+  animations: [trigger('scaleDownFromBottom',  [ transition('* => *', useAnimation(scaleDownFromBottom))])]
 })
 export class MainLayoutComponent implements OnInit, OnDestroy {
   public isDarkTheme = false;
