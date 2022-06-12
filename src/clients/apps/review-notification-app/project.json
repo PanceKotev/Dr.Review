@@ -22,6 +22,9 @@
         "styles": [
           "apps/review-notification-app/src/styles.scss"
         ],
+        "stylePreprocessorOptions": {
+          "includePaths": ["apps/review-notification-app/src"]
+        },
         "scripts": []
       },
       "configurations": {

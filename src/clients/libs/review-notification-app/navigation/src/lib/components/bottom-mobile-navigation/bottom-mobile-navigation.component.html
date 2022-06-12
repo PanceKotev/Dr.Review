@@ -1,0 +1,37 @@
+<div class="wrapper-bottom-navigation custom-toolbar">
+  <div class="left-navigation">
+    <button
+      color="green"
+      mat-mini-fab
+      class="navigation-item"
+      routerLinkActive="active-navigation"
+      [routerLinkActiveOptions]="{ exact: true }"
+      routerLink="/notfound"
+    >
+      <mat-icon>home</mat-icon>
+    </button>
+  </div>
+  <div class="middle-navigation">
+    <button
+      mat-fab
+      routerLinkActive="active-navigation"
+      [routerLinkActiveOptions]="{ exact: true }"
+      class="cta-button mat-elevation-z12"
+      routerLink="/"
+    >
+      <mat-icon>search</mat-icon>
+    </button>
+  </div>
+  <div class="right-navigation">
+    <button
+      color="green"
+      mat-mini-fab
+      routerLinkActive="active-navigation"
+      [routerLinkActiveOptions]="{ exact: true }"
+      class="navigation-item"
+      routerLink="/error"
+    >
+      <mat-icon>menu</mat-icon>
+    </button>
+  </div>
+</div>

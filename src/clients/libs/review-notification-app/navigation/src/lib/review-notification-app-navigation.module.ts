@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { TopbarComponent } from './components/topbar/topbar.component';
 import { MatIconModule } from '@angular/material/icon';
 import { SharedUiThemesModule } from '@drreview/shared/ui/themes';
+import { BottomMobileNavigationComponent } from './components/bottom-mobile-navigation/bottom-mobile-navigation.component';
 
 @NgModule({
   imports: [
@@ -16,7 +17,7 @@ import { SharedUiThemesModule } from '@drreview/shared/ui/themes';
     MatButtonModule,
     SharedUiThemesModule
   ],
-  declarations: [TopbarComponent],
-  exports: [TopbarComponent]
+  declarations: [TopbarComponent, BottomMobileNavigationComponent],
+  exports: [TopbarComponent, BottomMobileNavigationComponent]
 })
 export class ReviewNotificationAppNavigationModule {}

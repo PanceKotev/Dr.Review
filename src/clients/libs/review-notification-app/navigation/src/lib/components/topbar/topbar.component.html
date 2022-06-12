@@ -1,13 +1,4 @@
 <mat-toolbar color="primary" class="custom-toolbar">
-  <button
-    type="button"
-    aria-label="Toggle sidenav"
-    mat-icon-button
-    (click)="toggleDrawer()"
-    *ngIf="isHandset$ | async"
-  >
-    <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
-  </button>
   <mat-icon routerLink="/" class="app-logo">medication</mat-icon>
   <span routerLink="/" class="app-title">{{ appTitle }}</span>
   <drreview-theme-toggle class="theme-toggle"></drreview-theme-toggle>

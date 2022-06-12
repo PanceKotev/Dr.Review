@@ -168,6 +168,11 @@ $review-notification-app-dark-theme: mat-set-background($review-notification-app
   @include mat.all-component-colors($review-notification-app-dark-theme);
 }
 
+button.mat-button-base.mat-mini-fab, button.mat-button-base.mat-fab, button.mat-button-base.mat-icon-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
 html, body { height: 100%; }
 body { margin: 0; font-family: 'Encode Sans', sans-serif; }
