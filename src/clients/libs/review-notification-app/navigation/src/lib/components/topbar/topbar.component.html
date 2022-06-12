@@ -1,4 +1,4 @@
-<mat-toolbar color="primary">
+<mat-toolbar color="primary" class="custom-toolbar">
   <button
     type="button"
     aria-label="Toggle sidenav"
@@ -8,6 +8,7 @@
   >
     <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
   </button>
-  <span>Review notifications</span>
+  <mat-icon>medication</mat-icon>
+  <span class="app-title">{{ appTitle }}</span>
   <drreview-theme-toggle class="theme-toggle"></drreview-theme-toggle>
 </mat-toolbar>

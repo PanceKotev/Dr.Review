@@ -1,5 +1,5 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { map, Observable, shareReplay } from 'rxjs';
 
 @Component({
@@ -8,6 +8,9 @@ import { map, Observable, shareReplay } from 'rxjs';
   styleUrls: ['./topbar.component.scss']
 })
 export class TopbarComponent {
+
+  @Input()
+  public appTitle = "DrReview";
 
   @Output()
   public drawerToggled = new EventEmitter();

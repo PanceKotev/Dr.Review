@@ -1,3 +1,8 @@
-.main-content{
+.main-container{
+  height: calc(100% - 65px - 2rem);
   padding: 1rem;
+}
+
+:host ::ng-deep .dark-theme .custom-toolbar{
+  background: rgba(49, 79, 99, .2);
 }

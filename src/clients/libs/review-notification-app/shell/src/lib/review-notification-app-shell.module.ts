@@ -1,3 +1,4 @@
+import { mainRoutes } from './routes';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MainLayoutComponent } from './components/main-layout/main-layout.component';
@@ -13,10 +14,12 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { SharedUiThemesModule } from '@drreview/shared/ui/themes';
 import { ReviewNotificationAppNavigationModule } from '@drreview/review-notification-app/navigation';
 import { SharedServicesThemesModule } from '@drreview/shared/services/themes';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   imports: [
     CommonModule,
+    RouterModule.forRoot(mainRoutes),
     SharedDataAccessModule,
     LayoutModule,
     MatToolbarModule,
@@ -31,7 +34,8 @@ import { SharedServicesThemesModule } from '@drreview/shared/services/themes';
   declarations: [MainLayoutComponent, MainNavigationComponent],
   exports: [
     SharedDataAccessModule,
-    MainLayoutComponent
+    MainLayoutComponent,
+    RouterModule
     ]
 })
 export class ReviewNotificationAppShellModule {}
