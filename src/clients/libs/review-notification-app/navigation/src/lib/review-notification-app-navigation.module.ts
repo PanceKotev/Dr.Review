@@ -1,3 +1,4 @@
+import { RouterModule } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { NgModule } from '@angular/core';
@@ -10,6 +11,7 @@ import { SharedUiThemesModule } from '@drreview/shared/ui/themes';
   imports: [
     CommonModule,
     MatToolbarModule,
+    RouterModule,
     MatIconModule,
     MatButtonModule,
     SharedUiThemesModule
