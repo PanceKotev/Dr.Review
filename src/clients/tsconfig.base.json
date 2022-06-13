@@ -15,6 +15,12 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@drreview/review-notification-app/common/configuration/auth-config": [
+        "libs/review-notification-app/common/configuration/auth-config/src/index.ts"
+      ],
+      "@drreview/review-notification-app/common/services/auth": [
+        "libs/review-notification-app/common/services/auth/src/index.ts"
+      ],
       "@drreview/review-notification-app/common/ui/routing-pages": [
         "libs/review-notification-app/common/ui/routing-pages/src/index.ts"
       ],

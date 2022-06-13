@@ -24,7 +24,6 @@ export class MainLayoutComponent implements OnInit, OnDestroy {
   }
 
   public ngOnInit(): void {
-
     this.themesService.isDarkTheme$.pipe(
       takeUntil(this.destroying$)
       )

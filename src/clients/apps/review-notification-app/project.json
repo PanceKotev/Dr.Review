@@ -5,9 +5,7 @@
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:browser",
-      "outputs": [
-        "{options.outputPath}"
-      ],
+      "outputs": ["{options.outputPath}"],
       "options": {
         "outputPath": "dist/apps/review-notification-app",
         "index": "apps/review-notification-app/src/index.html",
@@ -19,9 +17,7 @@
           "apps/review-notification-app/src/favicon.ico",
           "apps/review-notification-app/src/assets"
         ],
-        "styles": [
-          "apps/review-notification-app/src/styles.scss"
-        ],
+        "styles": ["apps/review-notification-app/src/styles.scss"],
         "stylePreprocessorOptions": {
           "includePaths": ["apps/review-notification-app/src"]
         },
@@ -89,9 +85,7 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": [
-        "coverage/apps/review-notification-app"
-      ],
+      "outputs": ["coverage/apps/review-notification-app"],
       "options": {
         "jestConfig": "apps/review-notification-app/jest.config.ts",
         "passWithNoTests": true

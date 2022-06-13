@@ -1,3 +1,6 @@
+import { ReviewNotificationAppCommonServicesAuthModule } from '@drreview/review-notification-app/common/services/auth';
+import { ReviewNotificationAppCommonConfigurationAuthConfigModule }
+from '@drreview/review-notification-app/common/configuration/auth-config';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { mainRoutes } from './routes';
 import { NgModule } from '@angular/core';
@@ -22,6 +25,8 @@ import { RouterModule } from '@angular/router';
     CommonModule,
     RouterModule.forRoot(mainRoutes),
     BrowserAnimationsModule,
+    ReviewNotificationAppCommonConfigurationAuthConfigModule,
+    ReviewNotificationAppCommonServicesAuthModule,
     SharedDataAccessModule,
     LayoutModule,
     MatToolbarModule,
@@ -35,9 +40,12 @@ import { RouterModule } from '@angular/router';
     ReviewNotificationAppNavigationModule],
   declarations: [MainLayoutComponent, MainNavigationComponent],
   exports: [
+    ReviewNotificationAppCommonConfigurationAuthConfigModule,
+    ReviewNotificationAppCommonServicesAuthModule,
     SharedDataAccessModule,
     MainLayoutComponent,
     RouterModule
+
     ]
 })
 export class ReviewNotificationAppShellModule {}
