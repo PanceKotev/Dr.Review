@@ -1,6 +1,6 @@
 import { AuthService, CurrentUser } from '@drreview/review-notification-app/common/services/auth';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { map, Observable, shareReplay } from 'rxjs';
 
 @Component({
@@ -12,9 +12,6 @@ export class TopbarComponent {
 
   @Input()
   public appTitle = "DrReview";
-
-  @Output()
-  public drawerToggled = new EventEmitter();
 
 
   public get currentUser(): CurrentUser | null {
@@ -32,11 +29,6 @@ export class TopbarComponent {
     public constructor(
       private breakpointObserver: BreakpointObserver,
       private authService: AuthService){
-    }
-
-
-    public toggleDrawer(): void {
-      this.drawerToggled.emit();
     }
 
     public logIn(): void{
