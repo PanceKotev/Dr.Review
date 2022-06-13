@@ -1,4 +1,5 @@
 import {Route} from '@angular/router';
+import { MsalGuard } from '@azure/msal-angular';
 import { NotFoundComponent, ErrorPageComponent } from '@drreview/review-notification-app/common/ui/routing-pages';
 export const mainRoutes: Route[] = [
   {
@@ -8,6 +9,7 @@ export const mainRoutes: Route[] = [
   },
   {
     path: 'notfound',
+    canActivate: [MsalGuard],
     component: NotFoundComponent
   },
   {

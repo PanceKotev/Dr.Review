@@ -1,4 +1,3 @@
-import { ApiService } from '@drreview/shared/data-access';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subject, takeUntil } from 'rxjs';
 import { ThemesService } from '@drreview/shared/services/themes';
@@ -18,7 +17,6 @@ export class MainLayoutComponent implements OnInit, OnDestroy {
 
 
   public constructor(
-    private apiService: ApiService,
     private themesService: ThemesService) {
 
   }
@@ -35,22 +33,6 @@ export class MainLayoutComponent implements OnInit, OnDestroy {
            console.error(err);
          }
        });
-
-    this.apiService.get("migrations/random")
-    .pipe(
-      takeUntil(this.destroying$)
-      )
-        .subscribe({
-        next: res => {
-          console.log(res);
-        },
-        error: error => {
-          console.error("error", error);
-        },
-        complete: () => {
-
-        }
-      });
   }
   public ngOnDestroy(): void {
     this.destroying$.next(true);
