@@ -14,7 +14,34 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@drreview/review-notification-app/common/configuration/auth-config": [
+        "libs/review-notification-app/common/configuration/auth-config/src/index.ts"
+      ],
+      "@drreview/review-notification-app/common/services/auth": [
+        "libs/review-notification-app/common/services/auth/src/index.ts"
+      ],
+      "@drreview/review-notification-app/common/ui/routing-pages": [
+        "libs/review-notification-app/common/ui/routing-pages/src/index.ts"
+      ],
+      "@drreview/review-notification-app/home/feature": [
+        "libs/review-notification-app/home/feature/src/index.ts"
+      ],
+      "@drreview/review-notification-app/navigation": [
+        "libs/review-notification-app/navigation/src/index.ts"
+      ],
+      "@drreview/review-notification-app/shell": [
+        "libs/review-notification-app/shell/src/index.ts"
+      ],
+      "@drreview/shared/data-access": ["libs/shared/data-access/src/index.ts"],
+      "@drreview/shared/services/themes": [
+        "libs/shared/services/themes/src/index.ts"
+      ],
+      "@drreview/shared/ui/themes": ["libs/shared/ui/themes/src/index.ts"],
+      "@drreview/shared/utils/app-config": [
+        "libs/shared/utils/app-config/src/index.ts"
+      ]
+    }
   },
   "exclude": ["node_modules", "tmp", "*.spec.ts", "*.po.ts"]
 }

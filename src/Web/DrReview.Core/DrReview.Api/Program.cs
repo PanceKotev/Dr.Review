@@ -6,7 +6,8 @@ WebApplicationBuilder? builder = WebApplication.CreateBuilder(args);
 builder.Services.AddB2CAuthentication(builder.Configuration)
                 .AddControllers();
 
-builder.Services.AddAuthorization()
+builder.Services.RegisterCors(builder.Configuration)
+                 .AddAuthorization()
                 .AddHangfireConfiguration(builder.Configuration)
                 .AddMojTerminHttpClient(builder.Configuration)
                 .AddProjectServices(builder.Configuration)
@@ -20,6 +21,9 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwaggerDashboard(app.Configuration);
 }
+app.UseRouting();
+
+app.UseCors(builder.Configuration["CorsSettings:PolicyName"]);
 
 app.UseAuthentication();
 
