@@ -3,7 +3,16 @@ FROM mcr.microsoft.com/mssql/server:2019-latest AS final
 USER root
 EXPOSE 1443
 
-RUN apt-get update && apt-get install unzip -y
+RUN apt-get update && apt-get install -y gnupg2 && apt-get install unzip -y
+
+RUN export DEBIAN_FRONTEND=noninteractive && \
+    apt-get update && \
+    apt-get install -y curl  && \
+    curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add - && \
+    curl https://packages.microsoft.com/config/ubuntu/16.04/mssql-server-2019.list | tee /etc/apt/sources.list.d/mssql-server-2019.list && \
+    apt-get update
+
+RUN apt-get install -y mssql-server-fts 
 
 RUN wget -progress=bar:force -q -O sqlpackage.zip https://go.microsoft.com/fwlink/?linkid=2185670 \
     && unzip -qq sqlpackage.zip -d /opt/sqlpackage \

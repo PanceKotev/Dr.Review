@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'drreview-homepage',
@@ -6,4 +7,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./homepage.component.scss']
 })
 export class HomepageComponent {
+
+  public constructor(private fb: FormBuilder){
+
+  }
 }

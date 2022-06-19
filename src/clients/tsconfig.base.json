@@ -37,6 +37,7 @@
       "@drreview/shared/services/themes": [
         "libs/shared/services/themes/src/index.ts"
       ],
+      "@drreview/shared/ui/search": ["libs/shared/ui/search/src/index.ts"],
       "@drreview/shared/ui/themes": ["libs/shared/ui/themes/src/index.ts"],
       "@drreview/shared/utils/app-config": [
         "libs/shared/utils/app-config/src/index.ts"
