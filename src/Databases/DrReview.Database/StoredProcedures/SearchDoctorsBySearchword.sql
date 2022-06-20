@@ -4,10 +4,12 @@
 	@take int = 1000
 AS
 BEGIN
+
+declare @formatedsearchword nvarchar(420)='"'+@searchword+'*"'
 IF(@searchword <> '')
 BEGIN
 	SELECT * FROM [dbo].[Doctor] as D
-	WHERE CONTAINS(D.FullTextSearch, @searchword)
+	WHERE CONTAINS(D.FullTextSearch, @formatedsearchword)
 	AND D.DeletedOn IS NULL
 	ORDER BY D.ID DESC
 	OFFSET @skip ROWS

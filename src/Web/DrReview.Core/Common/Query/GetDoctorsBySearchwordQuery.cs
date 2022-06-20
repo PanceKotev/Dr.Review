@@ -50,8 +50,7 @@
             string procedure = "[dbo].[SearchDoctorsBySearchword]";
             List<Doctor> results = connection.Query<Doctor>(procedure, new { searchword = request.Searchword }, commandType: CommandType.StoredProcedure).ToList();
 
-            
-            if(results is null)
+            if (results is null)
             {
                 return Result.Invalid<List<SearchDoctorDto>>("Error");
             }

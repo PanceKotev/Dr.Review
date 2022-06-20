@@ -1,4 +1,9 @@
-<p>homepage works!</p>
-<mat-form-field>
-  <drreview-searchinput></drreview-searchinput>
-</mat-form-field>
+<drreview-search-location
+  [parentFormGroup]="formGroup"
+  [searchFormControlName]="searchFormName"
+  placeholder="Search doctors"
+  rounded
+  name="Search doctors"
+></drreview-search-location>
+
+{{ doctors | json }}
