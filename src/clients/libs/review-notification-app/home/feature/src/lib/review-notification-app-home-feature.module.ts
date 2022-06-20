@@ -1,3 +1,4 @@
+import { ReviewNotificationAppDoctorUiModule } from '@drreview/review-notification-app/doctor/ui';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { SharedUiSearchModule } from '@drreview/shared/ui/search';
 import { RouterModule } from '@angular/router';
@@ -11,7 +12,8 @@ import { homeRoutes } from './routes';
     CommonModule,
     RouterModule.forChild(homeRoutes),
     SharedUiSearchModule,
-    MatFormFieldModule],
+    MatFormFieldModule,
+    ReviewNotificationAppDoctorUiModule],
   declarations: [HomepageComponent],
   exports: [RouterModule]
 })

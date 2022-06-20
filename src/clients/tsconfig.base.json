@@ -24,6 +24,9 @@
       "@drreview/review-notification-app/common/ui/routing-pages": [
         "libs/review-notification-app/common/ui/routing-pages/src/index.ts"
       ],
+      "@drreview/review-notification-app/doctor/ui": [
+        "libs/review-notification-app/doctor/ui/src/index.ts"
+      ],
       "@drreview/review-notification-app/home/feature": [
         "libs/review-notification-app/home/feature/src/index.ts"
       ],

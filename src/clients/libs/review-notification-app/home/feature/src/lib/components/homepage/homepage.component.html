@@ -5,5 +5,10 @@
   rounded
   name="Search doctors"
 ></drreview-search-location>
-
-{{ doctors | json }}
+<div class="doctor-wrapper">
+  <drreview-doctor-card
+    class="doctor-card"
+    *ngFor="let doctor of doctors"
+    [doctor]="doctor"
+  ></drreview-doctor-card>
+</div>
