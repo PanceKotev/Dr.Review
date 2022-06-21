@@ -1,10 +1,11 @@
 
 .wrapper-bottom-navigation{
   display: grid;
-  height: 60px;
+  height: 65px;
   width: 100%;
   background-color: #0119b7;
-  position:sticky;
+  position:fixed;
+  bottom: 0;
   grid-template-columns: 2fr 1fr 2fr;
   border-top-left-radius: 1.5rem;
   border-top-right-radius: 1.5rem;
@@ -42,6 +43,12 @@
   width: 4rem;
   line-height: 4rem;
   height: 4rem;
+}
+
+.nav-icon{
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .active-navigation{

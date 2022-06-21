@@ -6,11 +6,11 @@
 }
 
 :host ::ng-deep .dark-theme .custom-toolbar{
-  background: rgba(49, 79, 99, .2);
+  background: #11222c;
 }
 
 @include handheldStyles(){
   .main-container{
-    height: calc(100% - 116px - 2rem);
+    height: calc(100% - 130px - 2rem);
   }
 }

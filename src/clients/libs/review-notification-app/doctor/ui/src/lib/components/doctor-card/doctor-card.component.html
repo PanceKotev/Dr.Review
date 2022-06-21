@@ -1,23 +1,21 @@
 <mat-card class="example-card">
   <mat-card-header>
-    <mat-icon mat-card-avatar>biotech</mat-icon>
+    <ngx-avatars
+      mat-card-avatar
+      [round]="true"
+      [size]="40"
+      [name]="doctorFullName"
+    ></ngx-avatars>
     <mat-card-title
       >{{ doctor.firstName }} {{ doctor.lastName }}</mat-card-title
     >
     <mat-card-subtitle>{{ doctor.specialization }}</mat-card-subtitle>
   </mat-card-header>
-  <img
-    mat-card-image
-    src="https://images.rawpixel.com/image_png_1000/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvbHIvdjg2OS13YW4tMTZfMS5wbmc.png"
-    alt="Photo of a doctor"
-  />
+  <img mat-card-image src="/assets/doctors.png" alt="Photo of a doctor" />
+
   <mat-card-content>
     <p>
       {{ doctor.institution }}
     </p>
   </mat-card-content>
-  <mat-card-actions>
-    <button mat-button>LIKE</button>
-    <button mat-button>SHARE</button>
-  </mat-card-actions>
 </mat-card>

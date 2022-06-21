@@ -9,4 +9,12 @@ import { Component, Input } from '@angular/core';
 export class DoctorCardComponent {
   @Input()
   public doctor!: SearchDoctorDto;
+
+  public get doctorFullName(): string{
+    if(!this.doctor){
+      return '';
+    }
+
+    return `${this.doctor.firstName} ${this.doctor.lastName}`;
+  }
 }
