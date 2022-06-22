@@ -2,7 +2,7 @@
 import { SearchDoctorDto, DoctorApiService } from '@drreview/shared/data-access';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { debounceTime, EMPTY, Subject, switchMap, takeUntil } from 'rxjs';
+import { debounceTime, Subject, switchMap, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'drreview-homepage',
@@ -25,13 +25,11 @@ export class HomepageComponent implements OnInit, OnDestroy {
   public ngOnInit(): void {
     this.formGroup.get(this.searchFormName)?.valueChanges.pipe(
       takeUntil(this.destroying$),
-      debounceTime(300),
+      debounceTime(500),
       switchMap((search: string) => {
-        if(search.length > 3){
-          return this.doctorsApi.searchDoctors(search);
-        }
+          const formattedString = search.length ? search : ' ';
 
-        return EMPTY;
+          return this.doctorsApi.searchDoctors(formattedString);
       })
     ).subscribe({
       next: results => {

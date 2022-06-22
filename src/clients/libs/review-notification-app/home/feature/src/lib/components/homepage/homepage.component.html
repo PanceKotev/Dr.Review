@@ -1,15 +1,17 @@
-<drreview-search-location
-  [parentFormGroup]="formGroup"
-  [searchFormControlName]="searchFormName"
-  placeholder="Search doctors"
-  class="search"
-  rounded
-  name="Search doctors"
-></drreview-search-location>
-<div class="doctor-wrapper">
-  <drreview-doctor-card
-    class="doctor-card"
-    *ngFor="let doctor of doctors"
-    [doctor]="doctor"
-  ></drreview-doctor-card>
+<div class="home">
+  <drreview-search-location
+    [parentFormGroup]="formGroup"
+    [searchFormControlName]="searchFormName"
+    placeholder="Search doctors"
+    class="search"
+    rounded
+    name="Search doctors"
+  ></drreview-search-location>
+  <div class="doctor-wrapper">
+    <drreview-doctor-card
+      class="doctor-card"
+      *ngFor="let doctor of doctors"
+      [doctor]="doctor"
+    ></drreview-doctor-card>
+  </div>
 </div>

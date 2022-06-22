@@ -3,6 +3,15 @@
 .main-container{
   height: calc(100% - 65px - 2rem);
   padding: 1rem;
+  overflow-x: hidden;
+  position: relative;
+
+}
+
+.illustration{
+  position: absolute;
+  top:-20%;
+  right: -10%;
 }
 
 :host ::ng-deep .dark-theme .custom-toolbar{

@@ -21,7 +21,7 @@
         [HttpGet]
         [Route("search")]
         [ProducesResponseType(typeof(Result<List<SearchDoctorDto>>), (int)HttpStatusCode.OK)]
-        public async Task<IActionResult> SearchDoctorsAsync([FromQuery][Required] string searchword)
+        public async Task<IActionResult> SearchDoctorsAsync([FromQuery]string? searchword)
         {
             GetDoctorsBySearchwordQuery query = new GetDoctorsBySearchwordQuery(searchword, 0, 1000);
 

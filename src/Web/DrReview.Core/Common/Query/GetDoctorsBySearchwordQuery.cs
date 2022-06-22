@@ -17,14 +17,14 @@
 
     public class GetDoctorsBySearchwordQuery : IQuery<Result<List<SearchDoctorDto>>>
     {
-        public GetDoctorsBySearchwordQuery(string searchword, int startPage, int offset)
+        public GetDoctorsBySearchwordQuery(string? searchword, int startPage, int offset)
         {
             Searchword = searchword;
             StartPage = startPage;
             Offset = offset;
         }
 
-        public string Searchword { get; init; }
+        public string? Searchword { get; init; }
 
         public int StartPage { get; init; }
 
@@ -42,13 +42,17 @@
 
         public async Task<Result<List<SearchDoctorDto>>> Handle(GetDoctorsBySearchwordQuery request, CancellationToken cancellationToken)
         {
+            if (string.IsNullOrEmpty(request.Searchword))
+            {
+                return Result.Ok<List<SearchDoctorDto>>(new());
+            }   
             string connectionString = _configuration.GetConnectionString("DatabaseConnection");
             using SqlConnection connection = new SqlConnection(connectionString);
 
             await connection.OpenAsync();
 
             string procedure = "[dbo].[SearchDoctorsBySearchword]";
-            List<Doctor> results = connection.Query<Doctor>(procedure, new { searchword = request.Searchword }, commandType: CommandType.StoredProcedure).ToList();
+            List<Doctor> results = connection.Query<Doctor>(procedure, new { searchword = request.Searchword.Trim() }, commandType: CommandType.StoredProcedure).ToList();
 
             if (results is null)
             {
