@@ -29,6 +29,7 @@
     "@azure/msal-browser": "^2.25.0",
     "@nrwl/angular": "14.2.4",
     "eslint-plugin-prettier": "^4.0.0",
+    "ngx-avatars": "^1.4.0",
     "ngx-router-animations": "^13.0.0",
     "rxjs": "~7.4.0",
     "tslib": "^2.0.0",

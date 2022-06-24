@@ -63,6 +63,7 @@
     <Folder Include="Location" />
     <Folder Include="Specialization" />
     <Folder Include="Institution" />
+    <Folder Include="StoredProcedures" />
   </ItemGroup>
   <ItemGroup>
     <None Include="DrReview.Database.publish.xml" />
@@ -72,6 +73,7 @@
     <Build Include="Location\Location.sql" />
     <Build Include="Institution\Institution.sql" />
     <Build Include="Specialization\Specialization.sql" />
+    <Build Include="StoredProcedures\SearchDoctorsBySearchword.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Scripts\Script.PostDeployment.sql" />

@@ -6865,6 +6865,14 @@ neo-async@^2.6.2:
   resolved "https://registry.yarnpkg.com/neo-async/-/neo-async-2.6.2.tgz#b4aafb93e3aeb2d8174ca53cf163ab7d7308305f"
   integrity sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==
 
+ngx-avatars@^1.4.0:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/ngx-avatars/-/ngx-avatars-1.4.0.tgz#83e6f6b54935498137cf946687860fff2501031f"
+  integrity sha512-v4MT5BoNybpTNwmLO7RPJT2uDHMvE+aOfZH3AEOefq+p8yOjapTCHQm4bfE1YXg8paQpns6+nu14LqGcK4FDPA==
+  dependencies:
+    ts-md5 "^1.2.11"
+    tslib "^2.4.0"
+
 ngx-router-animations@^13.0.0:
   version "13.0.0"
   resolved "https://registry.yarnpkg.com/ngx-router-animations/-/ngx-router-animations-13.0.0.tgz#33f1654d0762208646fd05feca27d094e0f68f91"
@@ -8914,6 +8922,11 @@ ts-loader@^9.2.6:
     micromatch "^4.0.0"
     semver "^7.3.4"
 
+ts-md5@^1.2.11:
+  version "1.2.11"
+  resolved "https://registry.yarnpkg.com/ts-md5/-/ts-md5-1.2.11.tgz#0bbdf884eecf7da3952fe8671a109d7e55d322c6"
+  integrity sha512-vAwy9rEuRE6a8xa1MavIVkLFyyU0ydk4CLMFA5vOVccmQKLOuGb/BHm3oEN7XHf2FoqS+z0pSvhaad/ombd1Vg==
+
 ts-node@~10.8.0:
   version "10.8.1"
   resolved "https://registry.yarnpkg.com/ts-node/-/ts-node-10.8.1.tgz#ea2bd3459011b52699d7e88daa55a45a1af4f066"
@@ -8952,7 +8965,7 @@ tsconfig-paths@^3.9.0:
     minimist "^1.2.6"
     strip-bom "^3.0.0"
 
-tslib@2.4.0, tslib@^2.0.0, tslib@^2.1.0, tslib@^2.3.0:
+tslib@2.4.0, tslib@^2.0.0, tslib@^2.1.0, tslib@^2.3.0, tslib@^2.4.0:
   version "2.4.0"
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.4.0.tgz#7cecaa7f073ce680a05847aa77be941098f36dc3"
   integrity sha512-d6xOpEDfsi2CZVlPQzGeux8XMwLT9hssAsaPYExaQMuYskwb+x1x7J371tWlbBdWHroy99KnVB6qIkUbs5X3UQ==

@@ -3,14 +3,29 @@
 .main-container{
   height: calc(100% - 65px - 2rem);
   padding: 1rem;
+  overflow-x: hidden;
+  position: relative;
+
+}
+
+.illustration{
+  position: absolute;
+  top:-20%;
+  right: -10%;
 }
 
 :host ::ng-deep .dark-theme .custom-toolbar{
-  background: rgba(49, 79, 99, .2);
+  background: #11222c;
 }
 
 @include handheldStyles(){
   .main-container{
-    height: calc(100% - 116px - 2rem);
+    height: calc(100% - 130px - 2rem);
+  }
+
+  .illustration{
+    width: 800px;
+    height: 500px;
+    top: 100px;
   }
 }

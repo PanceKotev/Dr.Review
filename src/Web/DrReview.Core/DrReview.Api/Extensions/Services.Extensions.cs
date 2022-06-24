@@ -3,6 +3,8 @@
     using DrReview.Api.HttpClients.MojTermin.Interfaces;
     using DrReview.Api.Services;
     using DrReview.Api.Services.Interfaces;
+    using DrReview.Common.Mediator;
+    using DrReview.Common.Mediator.Interfaces;
 
     public static partial class Extensions
     {
@@ -21,6 +23,7 @@
                            configuration.GetConnectionString("DatabaseConnection")!);
             });
 
+            services.AddScoped<IDrReviewMediatorService, DrReviewMediatorService>();
             return services;
         }
     }
