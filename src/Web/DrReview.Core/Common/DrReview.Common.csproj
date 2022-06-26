@@ -28,4 +28,9 @@
 		</PackageReference>
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="Auth\Scopes\" />
+	  <Folder Include="Auth\Service\" />
+	</ItemGroup>
+
 </Project>

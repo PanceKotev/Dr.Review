@@ -11,6 +11,7 @@ builder.Services.RegisterCors(builder.Configuration)
                 .AddHangfireConfiguration(builder.Configuration)
                 .AddMediator()
                 .AddMojTerminHttpClient(builder.Configuration)
+                .AddCurrentUser()
                 .AddProjectServices(builder.Configuration)
                 .AddEndpointsApiExplorer()
                 .AddSwagger(builder.Configuration);

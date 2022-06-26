@@ -2,6 +2,7 @@
 {
     using System.ComponentModel.DataAnnotations;
     using System.Net;
+    using DrReview.Common.Auth.Interface;
     using DrReview.Common.Dtos.Doctor;
     using DrReview.Common.Mediator.Interfaces;
     using DrReview.Common.Query;
@@ -13,9 +14,12 @@
     {
         private readonly IDrReviewMediatorService _mediator;
 
-        public DoctorsController(IDrReviewMediatorService mediator)
+        private readonly ICurrentUser _currentUser;
+
+        public DoctorsController(IDrReviewMediatorService mediator, ICurrentUser currentUser)
         {
             _mediator = mediator;
+            _currentUser = currentUser;
         }
 
         [HttpGet]
