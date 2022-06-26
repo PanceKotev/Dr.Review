@@ -16,7 +16,7 @@ export class AppComponent implements OnInit, OnDestroy{
   }
 
   public ngOnInit(): void {
-    this.authService.initializeAuth().then();
+    this.authService.initializeAuth();
   }
   public ngOnDestroy(): void {
     this.authService.ngOnDestroy();

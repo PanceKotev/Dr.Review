@@ -24,9 +24,9 @@ export class AuthService implements OnDestroy {
     this.isIframe = window !== window.parent && !window.opener;
   }
 
-  public async initializeAuth(): Promise<void> {
+  public initializeAuth(): void {
 
-    await this.msalService.instance.handleRedirectPromise();
+    this.msalService.instance.handleRedirectPromise().then();
     this.msalService.instance.enableAccountStorageEvents();
     this.msalBroadcastService.msalSubject$
       .pipe(
@@ -57,6 +57,19 @@ export class AuthService implements OnDestroy {
       .subscribe(() => {
         this.checkAndSetActiveAccount();
       });
+
+      this.msalBroadcastService.msalSubject$.pipe(
+        filter(v => v.eventType === EventType.LOGIN_SUCCESS),
+        takeUntil(this._destroying$)
+      )
+        .subscribe({
+          next : v =>{
+            console.log("Success", {...v});
+          },
+          error: err => {
+            console.log(err);
+          }
+        });
   }
 
   public checkAndSetActiveAccount(): void {
