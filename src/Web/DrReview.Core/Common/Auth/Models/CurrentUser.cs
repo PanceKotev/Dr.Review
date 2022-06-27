@@ -48,7 +48,7 @@
 
             if (!Guid.TryParse(GetFromClaims(claimsPrincipal, _scopeUid), out Guid uid))
             {
-                throw new InvalidDataException("Invalid scope uid");
+                throw new InvalidDataException("Invalid user uid");
             }
 
             string firstName = GetFromClaims(claimsPrincipal, _scopeFirstName);
