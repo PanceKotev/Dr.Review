@@ -1,6 +1,7 @@
 ﻿namespace DrReview.Api.Extensions
 {
     using DrReview.Common.Query;
+    using DrReview.Modules.User.Application.Commands.User;
     using MediatR;
 
     public static partial class Extensions
@@ -9,7 +10,8 @@
         {
             services.AddMediatR(
                 typeof(Program),
-                typeof(GetDoctorsBySearchwordQueryHandler));
+                typeof(GetDoctorsBySearchwordQueryHandler),
+                typeof(CreateUserCommandHandler));
             return services;
         }
     }

@@ -12,6 +12,8 @@
 
     public abstract class BaseUnitOfWork : IDisposable
     {
+        protected readonly DbContext DatabaseContext;
+
         private readonly EntityState[] _trackedEntityStates = new[]
         {
             EntityState.Deleted,
@@ -19,15 +21,13 @@
             EntityState.Added
         };
 
-        private readonly DbContext _databaseContext;
-
         private readonly IDrReviewMediatorService _mediatorService;
 
         private bool _disposedValue;
 
         protected BaseUnitOfWork(DbContext databaseContext, IDrReviewMediatorService mediatorService)
         {
-            _databaseContext = databaseContext;
+            this.DatabaseContext = databaseContext;
             _mediatorService = mediatorService;
         }
 
@@ -57,7 +57,7 @@
             {
                 if (disposing)
                 {
-                    _databaseContext.Dispose();
+                    DatabaseContext.Dispose();
                 }
 
                 _disposedValue = true;
@@ -70,11 +70,11 @@
         /// <returns>Nothing.</returns>
         private async Task SetModifiedPropertiesAndDispatchDomainEventsAsync()
         {
-            IEnumerable<EntityEntry<BaseEntity>> trackedEntities = _databaseContext.ChangeTracker.Entries<BaseEntity>().ToList();
+            IEnumerable<EntityEntry<BaseEntity>> trackedEntities = DatabaseContext.ChangeTracker.Entries<BaseEntity>().ToList();
 
             DateTime dateNow = DateTime.UtcNow;
 
-            bool hasChanges = _databaseContext.ChangeTracker.HasChanges();
+            bool hasChanges = DatabaseContext.ChangeTracker.HasChanges();
 
             foreach (EntityEntry<BaseEntity> changedEntity in trackedEntities)
             {
@@ -93,7 +93,7 @@
                 changedEntity.Entity.ClearDomainEvents();
             }
 
-            await _databaseContext.SaveChangesAsync();
+            await DatabaseContext.SaveChangesAsync();
         }
 
         /// <summary>
@@ -101,7 +101,7 @@
         /// </summary>
         private void PublishIntegrationEvents()
         {
-            IEnumerable<AggregateRoot> aggregateRoots = _databaseContext.ChangeTracker.Entries<AggregateRoot>()
+            IEnumerable<AggregateRoot> aggregateRoots = DatabaseContext.ChangeTracker.Entries<AggregateRoot>()
                                                                                                .Where(x => x.Entity.IntegrationEvents != null
                                                                                                         && x.Entity.IntegrationEvents.Any())
                                                                                                .Select(x => x.Entity);

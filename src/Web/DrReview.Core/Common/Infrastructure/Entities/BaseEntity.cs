@@ -3,6 +3,7 @@ namespace DrReview.Common.Infrastructure.Entities
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations.Schema;
     using DrReview.Common.Mediator.Contracts;
 
     public abstract class BaseEntity
@@ -19,7 +20,7 @@ namespace DrReview.Common.Infrastructure.Entities
             Suid = suid;
             DeletedOn = deletedOn;
             ModifiedOn = modifiedOn;
-            DomainEvents = domainEvents.ToList();
+            DomainEvents = domainEvents is null ? new () : domainEvents.ToList();
         }
 
         public long Id { get; init; }
@@ -32,6 +33,7 @@ namespace DrReview.Common.Infrastructure.Entities
 
         public DateTime ModifiedOn { get; set; }
 
+        [NotMapped]
         public List<DomainEvent> DomainEvents { get; init; }
 
         public void AddDomainEvent(DomainEvent domainEvent)

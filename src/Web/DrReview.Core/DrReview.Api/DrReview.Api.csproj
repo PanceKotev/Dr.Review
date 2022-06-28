@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
 	<PropertyGroup>
 		<TargetFramework>net6.0</TargetFramework>
@@ -16,6 +16,8 @@
 		<PackageReference Include="Hangfire.Core" Version="1.7.28" />
 		<PackageReference Include="Hangfire.Dashboard.BasicAuthorization" Version="1.0.2" />
 		<PackageReference Include="Hangfire.SqlServer" Version="1.7.28" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.6" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.6" />
 		<PackageReference Include="Microsoft.Extensions.Configuration" Version="6.0.1" />
 		<PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="6.0.0" />
 		<PackageReference Include="Microsoft.Identity.Web" Version="1.24.1" />
@@ -61,6 +63,10 @@
 	<ItemGroup>
 		<ProjectReference Include="../Common/DrReview.Common.csproj" />
 		<ProjectReference Include="../DrReview.Contracts/DrReview.Contracts.csproj" />
+		<ProjectReference Include="..\Modules\User\Application\DrReview.Modules.User.Application.csproj" />
+		<ProjectReference Include="..\Modules\User\Domain\DrReview.Modules.User.Domain.csproj" />
+		<ProjectReference Include="..\Modules\User\Infrastructure\DrReview.Modules.User.Infrastructure.csproj" />
+		<ProjectReference Include="..\Modules\User\IntegrationEvents\DrReview.Modules.User.IntegrationEvents.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>

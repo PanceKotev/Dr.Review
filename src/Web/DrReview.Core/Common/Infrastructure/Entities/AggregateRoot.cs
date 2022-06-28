@@ -4,6 +4,7 @@ namespace DrReview.Common.Infrastructure.Entities
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations.Schema;
     using DrReview.Common.Mediator.Contracts;
 
     public abstract class AggregateRoot : BaseEntity
@@ -14,12 +15,13 @@ namespace DrReview.Common.Infrastructure.Entities
             IntegrationEvents = new List<IPublishNotification>();
         }
 
-        protected AggregateRoot(long id, Guid uid, string suid, DateTime? deletedOn, DateTime createdOn, ICollection<DomainEvent> domainEvents, ICollection<IPublishNotification> integrationEvents)
-            : base(id, uid, suid, deletedOn, createdOn, domainEvents)
+        protected AggregateRoot(long id, Guid uid, string suid, DateTime? deletedOn, DateTime modifiedOn, ICollection<DomainEvent> domainEvents, ICollection<IPublishNotification> integrationEvents)
+            : base(id, uid, suid, deletedOn, modifiedOn, domainEvents)
         {
-            IntegrationEvents = integrationEvents.ToList();
+            IntegrationEvents = integrationEvents is null ? new () : integrationEvents.ToList();
         }
 
+        [NotMapped]
         public List<IPublishNotification> IntegrationEvents { get; init; }
 
         public void AddIntegrationEvent(IPublishNotification integrationEvent)

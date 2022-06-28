@@ -43,7 +43,6 @@
             return Ok();
         }
 
-
         [HttpGet]
         [Route("random")]
         public IActionResult TestRandom()

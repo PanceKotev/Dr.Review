@@ -44,7 +44,7 @@
 
             string email;
 
-            email = new MailAddress(GetFromClaims(claimsPrincipal, _scopeEmail)).ToString();
+            email = string.IsNullOrEmpty(GetFromClaims(claimsPrincipal, _scopeEmail)) ? string.Empty : new MailAddress(GetFromClaims(claimsPrincipal, _scopeEmail)).ToString();
 
             if (!Guid.TryParse(GetFromClaims(claimsPrincipal, _scopeUid), out Guid uid))
             {
