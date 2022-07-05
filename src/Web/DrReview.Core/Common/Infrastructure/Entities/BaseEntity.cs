@@ -13,14 +13,14 @@ namespace DrReview.Common.Infrastructure.Entities
             DomainEvents = new List<DomainEvent>();
         }
 
-        protected BaseEntity(long id, Guid uid, string suid, DateTime? deletedOn, DateTime modifiedOn, ICollection<DomainEvent> domainEvents)
+        protected BaseEntity(long id, Guid uid, string suid, DateTime? deletedOn, DateTime modifiedOn)
         {
             Id = id;
             Uid = uid;
             Suid = suid;
             DeletedOn = deletedOn;
             ModifiedOn = modifiedOn;
-            DomainEvents = domainEvents is null ? new () : domainEvents.ToList();
+            DomainEvents = new ();
         }
 
         public long Id { get; init; }

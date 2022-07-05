@@ -15,10 +15,10 @@ namespace DrReview.Common.Infrastructure.Entities
             IntegrationEvents = new List<IPublishNotification>();
         }
 
-        protected AggregateRoot(long id, Guid uid, string suid, DateTime? deletedOn, DateTime modifiedOn, ICollection<DomainEvent> domainEvents, ICollection<IPublishNotification> integrationEvents)
-            : base(id, uid, suid, deletedOn, modifiedOn, domainEvents)
+        protected AggregateRoot(long id, Guid uid, string suid, DateTime? deletedOn, DateTime modifiedOn)
+            : base(id, uid, suid, deletedOn, modifiedOn)
         {
-            IntegrationEvents = integrationEvents is null ? new () : integrationEvents.ToList();
+            IntegrationEvents = new();
         }
 
         [NotMapped]

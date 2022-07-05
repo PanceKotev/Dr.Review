@@ -21,9 +21,7 @@
                     modifiedOn: DateTime.UtcNow,
                     firstName: firstName,
                     lastName: lastName,
-                    emailAddress: emailAddress,
-                    domainEvents: new List<DomainEvent>(),
-                    integrationEvents: new List<IPublishNotification>());
+                    emailAddress: emailAddress);
 
             return Result.Ok(user);
         }

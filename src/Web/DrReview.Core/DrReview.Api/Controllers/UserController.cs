@@ -1,5 +1,6 @@
 ﻿namespace DrReview.Api.Controllers
 {
+    using DrReview.Common.Auth.Interface;
     using DrReview.Common.Mediator.Interfaces;
     using DrReview.Modules.User.Application.Commands.User;
     using Microsoft.AspNetCore.Authorization;
@@ -12,9 +13,12 @@
     {
         private readonly IDrReviewMediatorService _mediatorService;
 
-        public UserController(IDrReviewMediatorService mediatorService)
+        private readonly ICurrentUser _currentUser;
+
+        public UserController(IDrReviewMediatorService mediatorService, ICurrentUser currentUser)
         {
             _mediatorService = mediatorService;
+            _currentUser = currentUser;
         }
 
         [Route("create")]
@@ -22,7 +26,7 @@
         [Authorize]
         public async Task<IActionResult> CreateUserAsync()
         {
-            await _mediatorService.SendAsync(new CreateUserCommand());
+            await _mediatorService.SendAsync(new CreateUserIfNotExistsCommand());
 
             return Ok();
         }

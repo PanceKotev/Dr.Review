@@ -16,6 +16,7 @@
 
         public virtual void Configure(EntityTypeBuilder<TEntity> builder)
         {
+            builder.Property(x => x.Id).HasColumnName("ID");
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Uid).IsRequired();
             builder.Property(x => x.Suid).IsRequired();
@@ -23,6 +24,8 @@
             builder.Property(x => x.ModifiedOn).IsRequired();
 
             builder.HasQueryFilter(c => c.DeletedOn == null);
+
+            builder.ToTable(typeof(TEntity).Name);
         }
     }
 }

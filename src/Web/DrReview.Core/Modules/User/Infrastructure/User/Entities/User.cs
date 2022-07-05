@@ -7,8 +7,8 @@
 
     public partial class User : AggregateRoot
     {
-        private User(long id, Guid uid, string suid, DateTime? deletedOn, DateTime modifiedOn, string firstName, string lastName, string emailAddress, ICollection<DomainEvent> domainEvents, ICollection<IPublishNotification> integrationEvents) 
-            : base(id, uid, suid, deletedOn, modifiedOn, domainEvents, integrationEvents)
+        private User(long id, Guid uid, string suid, DateTime? deletedOn, DateTime modifiedOn, string firstName, string lastName, string emailAddress) 
+            : base(id, uid, suid, deletedOn, modifiedOn)
         {
             FirstName = firstName;
             LastName = lastName;

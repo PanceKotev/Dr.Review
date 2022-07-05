@@ -11,7 +11,7 @@
             services.AddMediatR(
                 typeof(Program),
                 typeof(GetDoctorsBySearchwordQueryHandler),
-                typeof(CreateUserCommandHandler));
+                typeof(CreateUserIfNotExistsHandler));
             return services;
         }
     }

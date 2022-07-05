@@ -8,26 +8,26 @@
     using DrReview.Modules.User.Infrastructure.Common.UnitOfWork.Interfaces;
     using DrReview.Modules.User.Infrastructure.User.Entities;
 
-    public class CreateUserCommand : ICommand<Result>
+    public class CreateUserIfNotExistsCommand : ICommand<Result<EmptyValue>>
     {
-        public CreateUserCommand()
+        public CreateUserIfNotExistsCommand()
         {
         }
     }
 
-    public class CreateUserCommandHandler : ICommandHandler<CreateUserCommand, Result>
+    public class CreateUserIfNotExistsHandler : ICommandHandler<CreateUserIfNotExistsCommand, Result<EmptyValue>>
     {
         private readonly IUserUnitOfWork _unitOfWork;
 
         private readonly ICurrentUser _currentUser;
 
-        public CreateUserCommandHandler(IUserUnitOfWork unitOfWork, ICurrentUser currentUser)
+        public CreateUserIfNotExistsHandler(IUserUnitOfWork unitOfWork, ICurrentUser currentUser)
         {
             _unitOfWork = unitOfWork;
             _currentUser = currentUser;
         }
 
-        public async Task<Result> Handle(CreateUserCommand request, CancellationToken cancellationToken)
+        public async Task<Result<EmptyValue>> Handle(CreateUserIfNotExistsCommand request, CancellationToken cancellationToken)
         {
             User? user = await _unitOfWork.Users.GetUserByUidAsync(_currentUser.Uid);
 
@@ -42,7 +42,7 @@
 
             await _unitOfWork.SaveAsync();
 
-            return Result.Ok();
+            return Result.Ok<EmptyValue>(new EmptyValue());
 
         }
     }

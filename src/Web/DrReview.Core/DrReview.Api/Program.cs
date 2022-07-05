@@ -7,8 +7,10 @@ builder.Services.AddB2CAuthentication(builder.Configuration)
                 .AddControllers();
 
 builder.Services.RegisterCors(builder.Configuration)
-                 .AddAuthorization()
+                .AddAuthorization()
                 .AddHangfireConfiguration(builder.Configuration)
+                .AddDatabase(builder.Configuration)
+                .AddUnitOfWork()
                 .AddMediator()
                 .AddMojTerminHttpClient(builder.Configuration)
                 .AddCurrentUser()

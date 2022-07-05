@@ -20,7 +20,7 @@
 
         public async Task<User?> GetUserByUidAsync(Guid uid)
         {
-            return await Query().FirstAsync(x => x.Uid == uid);
+            return await Query().FirstOrDefaultAsync(x => x.Uid == uid);
         }
 
         public void AddUser(User user)
