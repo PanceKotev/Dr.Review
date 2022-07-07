@@ -25,9 +25,19 @@
         [HttpGet]
         [Route("search")]
         [ProducesResponseType(typeof(Result<List<SearchDoctorDto>>), (int)HttpStatusCode.OK)]
-        public async Task<IActionResult> SearchDoctorsAsync([FromQuery]string? searchword)
+        public async Task<IActionResult> SearchDoctorsAsync([FromQuery] string? searchword)
         {
             GetDoctorsBySearchwordQuery query = new GetDoctorsBySearchwordQuery(searchword, 0, 1000);
+
+            return OkOrError(await _mediator.SendAsync(query));
+        }
+
+        [HttpGet]
+        [Route("{doctorSuid}")]
+        [ProducesResponseType(typeof(Result<List<GetDoctorDetailsDto>>), (int)HttpStatusCode.OK)]
+        public async Task<IActionResult> GetDoctorAsync([FromRoute] string doctorSuid)
+        {
+            GetDoctorDetailsQuery query = new GetDoctorDetailsQuery(doctorSuid);
 
             return OkOrError(await _mediator.SendAsync(query));
         }
