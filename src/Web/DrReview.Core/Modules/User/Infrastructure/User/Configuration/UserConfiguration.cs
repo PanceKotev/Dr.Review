@@ -1,6 +1,7 @@
 ﻿namespace DrReview.Modules.User.Infrastructure.User.Configuration
 {
     using DrReview.Common.Infrastructure.Configurations;
+    using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
     public class UserConfiguration : BaseEntityConfiguration<Entities.User>
@@ -17,7 +18,7 @@
             builder.Property(x => x.LastName).HasMaxLength(200).IsRequired();
             builder.Property(x => x.EmailAddress).HasMaxLength(200).IsRequired(false);
 
-
+            builder.ToTable(nameof(Entities.User));
         }
     }
 }
