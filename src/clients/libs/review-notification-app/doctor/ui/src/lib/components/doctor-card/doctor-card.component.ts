@@ -1,5 +1,6 @@
 import { SearchDoctorDto } from '@drreview/shared/data-access';
 import { Component, Input } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'drreview-doctor-card',
@@ -7,6 +8,11 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./doctor-card.component.scss']
 })
 export class DoctorCardComponent {
+
+  public constructor(private router: Router){
+
+  }
+
   @Input()
   public doctor!: SearchDoctorDto;
 
@@ -16,5 +22,9 @@ export class DoctorCardComponent {
     }
 
     return `${this.doctor.firstName} ${this.doctor.lastName}`;
+  }
+
+  public goToDetails() : void{
+    this.router.navigateByUrl(`/doctors/${this.doctor.suid}`);
   }
 }

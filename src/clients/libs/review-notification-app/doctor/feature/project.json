@@ -1,0 +1,25 @@
+{
+  "projectType": "library",
+  "sourceRoot": "libs/review-notification-app/doctor/feature/src",
+  "prefix": "drreview",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/review-notification-app/doctor/feature"],
+      "options": {
+        "jestConfig": "libs/review-notification-app/doctor/feature/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/review-notification-app/doctor/feature/**/*.ts",
+          "libs/review-notification-app/doctor/feature/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}

@@ -6,6 +6,8 @@
     "review-notification-app-common-configuration-auth-config": "libs/review-notification-app/common/configuration/auth-config",
     "review-notification-app-common-services-auth": "libs/review-notification-app/common/services/auth",
     "review-notification-app-common-ui-routing-pages": "libs/review-notification-app/common/ui/routing-pages",
+    "review-notification-app-doctor-data-access": "libs/review-notification-app/doctor/data-access",
+    "review-notification-app-doctor-feature": "libs/review-notification-app/doctor/feature",
     "review-notification-app-doctor-ui": "libs/review-notification-app/doctor/ui",
     "review-notification-app-e2e": "apps/review-notification-app-e2e",
     "review-notification-app-home-feature": "libs/review-notification-app/home/feature",

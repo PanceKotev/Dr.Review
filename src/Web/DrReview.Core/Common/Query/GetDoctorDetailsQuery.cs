@@ -1,8 +1,6 @@
 ﻿namespace DrReview.Common.Query
 {
-    using System.Collections.Generic;
     using System.Data.SqlClient;
-    using System.Linq;
     using System.Threading;
     using System.Threading.Tasks;
     using Dapper;
@@ -11,7 +9,7 @@
     using DrReview.Common.Results;
     using Microsoft.Extensions.Configuration;
 
-    public class GetDoctorDetailsQuery : IQuery<Result<List<GetDoctorDetailsDto>>>
+    public class GetDoctorDetailsQuery : IQuery<Result<GetDoctorDetailsDto>>
     {
         public GetDoctorDetailsQuery(string suid)
         {
@@ -21,7 +19,7 @@
         public string Suid { get; }
     }
 
-    public class GetDoctorDetailsQueryHandler : IQueryHandler<GetDoctorDetailsQuery, Result<List<GetDoctorDetailsDto>>>
+    public class GetDoctorDetailsQueryHandler : IQueryHandler<GetDoctorDetailsQuery, Result<GetDoctorDetailsDto>>
     {
         private readonly IConfiguration _configuration;
 
@@ -30,7 +28,7 @@
             _configuration = configuration;
         }
 
-        public async Task<Result<List<GetDoctorDetailsDto>>> Handle(GetDoctorDetailsQuery request, CancellationToken cancellationToken)
+        public async Task<Result<GetDoctorDetailsDto>> Handle(GetDoctorDetailsQuery request, CancellationToken cancellationToken)
         {
             string connectionString = _configuration.GetConnectionString("DatabaseConnection");
 
@@ -44,11 +42,16 @@
                                      " INNER JOIN [dbo].[Specialization] AS S ON S.ID = D.SpecializationFK" +
                                      " WHERE D.Suid = @Suid AND D.DeletedOn IS NULL";
 
-            IEnumerable<GetDoctorDetailsDto> results = await connection.QueryAsync<GetDoctorDetailsDto>(queryForDoctors, new { Suid = request.Suid });
+            GetDoctorDetailsDto? result = await connection.QueryFirstOrDefaultAsync<GetDoctorDetailsDto>(queryForDoctors, new { Suid = request.Suid });
+
+            if (result is null)
+            {
+                return Result.NotFound<GetDoctorDetailsDto>("Doctor with that suid not found");
+            }
 
             await connection.CloseAsync();
 
-            return Result.Ok(results.ToList());
+            return Result.Ok(result);
         }
     }
 }
