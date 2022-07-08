@@ -1,0 +1,19 @@
+<mat-card *ngIf="doctor">
+  <mat-card-title
+    >Details for {{ doctor.firstName }} {{ doctor.lastName }}</mat-card-title
+  >
+  <mat-card-content>
+    <div class="field">
+      <div>Location</div>
+      <div>{{ doctor.location }}</div>
+    </div>
+    <div class="field">
+      <div>Specialization</div>
+      <div>{{ doctor.specialization }}</div>
+    </div>
+    <div class="field">
+      <div>Instiution</div>
+      <div>{{ doctor.institution }}</div>
+    </div>
+  </mat-card-content>
+</mat-card>

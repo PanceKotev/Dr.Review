@@ -6,7 +6,7 @@
       [size]="40"
       [name]="doctorFullName"
     ></ngx-avatars>
-    <mat-card-title
+    <mat-card-title (click)="goToDetails()"
       >{{ doctor.firstName }} {{ doctor.lastName }}</mat-card-title
     >
     <mat-card-subtitle>{{ doctor.specialization }}</mat-card-subtitle>

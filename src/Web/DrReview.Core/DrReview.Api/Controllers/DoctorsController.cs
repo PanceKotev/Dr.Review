@@ -34,7 +34,7 @@
 
         [HttpGet]
         [Route("{doctorSuid}")]
-        [ProducesResponseType(typeof(Result<List<GetDoctorDetailsDto>>), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(Result<GetDoctorDetailsDto>), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> GetDoctorAsync([FromRoute] string doctorSuid)
         {
             GetDoctorDetailsQuery query = new GetDoctorDetailsQuery(doctorSuid);
