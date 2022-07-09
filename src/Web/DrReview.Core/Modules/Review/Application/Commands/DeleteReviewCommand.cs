@@ -2,7 +2,6 @@
 {
     using System.Threading;
     using System.Threading.Tasks;
-    using DrReview.Common.Auth.Interface;
     using DrReview.Common.Mediator.Contracts;
     using DrReview.Common.Results;
     using DrReview.Modules.Review.Infrastructure.Common.Contexts;
@@ -26,13 +25,10 @@
 
         private readonly ReviewReadOnlyDatabaseContext _readonlyContext;
 
-        private readonly ICurrentUser _currentUser;
-
-        public DeleteReviewCommandHandler(IReviewUnitOfWork unitOfWork, ReviewReadOnlyDatabaseContext readonlyContext, ICurrentUser currentUser)
+        public DeleteReviewCommandHandler(IReviewUnitOfWork unitOfWork, ReviewReadOnlyDatabaseContext readonlyContext)
         {
             _unitOfWork = unitOfWork;
             _readonlyContext = readonlyContext;
-            _currentUser = currentUser;
         }
 
         public async Task<Result<EmptyValue>> Handle(DeleteReviewCommand request, CancellationToken cancellationToken)

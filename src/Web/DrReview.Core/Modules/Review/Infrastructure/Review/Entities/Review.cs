@@ -31,8 +31,8 @@
 
         public virtual Reviewee? Reviewee { get; init; }
 
-        public string? Comment { get; init; }
+        public string? Comment { get; private set; }
 
-        public decimal Score { get; init; }
+        public decimal Score { get; private set; }
     }
 }

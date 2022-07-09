@@ -54,5 +54,17 @@
         {
             return OkOrError(await _mediator.SendAsync(new DeleteReviewCommand(reviewSuid: reviewSuid)));
         }
+
+        [HttpPut]
+        [Authorize]
+        [RequiredScope(new[] { "drreview.read", "drreview.write" })]
+        [ProducesResponseType(typeof(Result<EmptyValue>), (int)HttpStatusCode.OK)]
+        public async Task<IActionResult> UpdateReviewAsync([FromBody] UpdateReviewRequest request)
+        {
+            return OkOrError(await _mediator.SendAsync(new UpdateReviewCommand(
+                                                                               reviewSuid: request.ReviewSuid,
+                                                                               comment: request.Comment,
+                                                                               score: request.Score)));
+        }
     }
 }
