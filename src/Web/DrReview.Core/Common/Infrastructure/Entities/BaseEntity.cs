@@ -29,7 +29,7 @@ namespace DrReview.Common.Infrastructure.Entities
 
         public string Suid { get; init; }
 
-        public DateTime? DeletedOn { get; init; }
+        public DateTime? DeletedOn { get; protected set; }
 
         public DateTime ModifiedOn { get; set; }
 

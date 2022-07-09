@@ -5,10 +5,8 @@
 
     public interface IReviewUnitOfWork
     {
-        public Task SaveAsync();
-
-        public void Dispose();
-
         public IReviewRepository Reviews { get; }
+
+        public Task SaveAsync();
     }
 }

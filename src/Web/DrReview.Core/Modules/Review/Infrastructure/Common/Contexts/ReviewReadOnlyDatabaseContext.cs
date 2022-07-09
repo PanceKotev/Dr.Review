@@ -14,7 +14,7 @@ namespace DrReview.Modules.Review.Infrastructure.Common.Contexts
         {
         }
 
-        public virtual DbSet<Review.Entities.Reviewee> Reviewers { get; set; }
+        public virtual DbSet<Review.Entities.Reviewer> Reviewers { get; set; }
 
         public virtual DbSet<Review.Entities.Reviewee> Reviewees { get; set; }
 
