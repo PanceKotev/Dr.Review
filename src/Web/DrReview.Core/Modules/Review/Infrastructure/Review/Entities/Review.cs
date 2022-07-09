@@ -1,21 +1,21 @@
 ﻿namespace DrReview.Modules.Review.Infrastructure.Review.Entities
 {
     using System;
+    using CSharpVitamins;
     using DrReview.Common.Infrastructure.Entities;
 
-    public class Review : AggregateRoot
+    public partial class Review : AggregateRoot
     {
         public Review(
             long id,
             Guid uid,
-            string suid,
             DateTime? deletedOn,
             DateTime modifiedOn,
             long reviewerFK,
             long revieweeFK,
             string? comment,
             decimal score)
-            : base(id, uid, suid, deletedOn, modifiedOn)
+            : base(id, uid, new ShortGuid(uid), deletedOn, modifiedOn)
         {
             ReviewerFK = reviewerFK;
             RevieweeFK = revieweeFK;

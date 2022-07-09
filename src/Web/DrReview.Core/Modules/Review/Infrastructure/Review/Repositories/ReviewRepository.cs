@@ -22,5 +22,15 @@
                                 .Include(x => x.Reviewer)
                                 .ToListAsync();
         }
+
+        public void InsertReview(Entities.Review review)
+        {
+            Insert(review);
+        }
+
+        public void UpdateReview(Entities.Review review)
+        {
+            AttachOrUpdate(review, EntityState.Modified);
+        }
     }
 }

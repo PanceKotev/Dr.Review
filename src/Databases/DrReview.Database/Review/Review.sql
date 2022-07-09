@@ -13,7 +13,8 @@
 	 CONSTRAINT [UK_Review_Suid_DeletedOn] UNIQUE([Suid], [DeletedOn]),
 	 CONSTRAINT [FK_Review_Reviewer] FOREIGN KEY([ReviewerFK]) REFERENCES [dbo].[User] ([ID]),
 	 CONSTRAINT [FK_Review_Reviewee] FOREIGN KEY([RevieweeFK]) REFERENCES [dbo].[Doctor] ([ID]),
-	 CONSTRAINT [Review_Valid_Score] CHECK([Score] >= 0 AND [Score]<=5 AND [Score]%0.5=0)
+	 CONSTRAINT [Review_Valid_Score] CHECK([Score] >= 0 AND [Score]<=5 AND [Score]%0.5=0),
+	 CONSTRAINT [Review_One_Per_Reviewee_Review] UNIQUE([ReviewerFK], [RevieweeFK], [DeletedOn])
   ) 
   GO CREATE NONCLUSTERED INDEX [Review_DeletedOn_Uid] 
 	ON [dbo].[Review] ([Uid],[DeletedOn])

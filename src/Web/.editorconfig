@@ -160,6 +160,8 @@ dotnet_diagnostic.SA1413.severity = silent
 dotnet_diagnostic.SA1200.severity = warning
 dotnet_diagnostic.SA1402.severity = silent
 csharp_style_prefer_method_group_conversion = true:silent
+dotnet_diagnostic.SA1124.severity = silent
+dotnet_diagnostic.SA1123.severity = silent
 [*.{cs,vb}]
 dotnet_style_operator_placement_when_wrapping = beginning_of_line
 tab_width = 4

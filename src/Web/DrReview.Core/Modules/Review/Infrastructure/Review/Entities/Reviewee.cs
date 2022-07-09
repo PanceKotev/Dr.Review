@@ -19,6 +19,5 @@
         public string LastName { get; init; }
 
         public decimal ReviewScore { get; init; }
-
     }
 }
