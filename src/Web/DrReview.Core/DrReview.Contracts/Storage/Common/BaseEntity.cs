@@ -20,8 +20,8 @@
 
         public string Suid { get; init; }
 
-        public DateTime? DeletedOn { get; init; }
+        public DateTime? DeletedOn { get; protected set; }
 
-        public DateTime ModifiedOn { get; init; }
+        public DateTime ModifiedOn { get; protected set; }
     }
 }

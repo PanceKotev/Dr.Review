@@ -44,5 +44,15 @@
                                                                                comment: request.Comment,
                                                                                score: request.Score)));
         }
+
+        [HttpDelete]
+        [Route("{reviewSuid}")]
+        [Authorize]
+        [RequiredScope(new[] { "drreview.read", "drreview.write" })]
+        [ProducesResponseType(typeof(Result<EmptyValue>), (int)HttpStatusCode.OK)]
+        public async Task<IActionResult> DeleteReviewAsync([FromRoute] string reviewSuid)
+        {
+            return OkOrError(await _mediator.SendAsync(new DeleteReviewCommand(reviewSuid: reviewSuid)));
+        }
     }
 }

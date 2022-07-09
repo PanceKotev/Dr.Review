@@ -16,6 +16,8 @@
 
         public const string OneReviewPerReviewee = "ONE_REVIEW_PER_REVIEWEE";
 
+        public const string ReviewNotFound = "REVIEW_NOT_FOUND";
+
         #endregion
     }
 }

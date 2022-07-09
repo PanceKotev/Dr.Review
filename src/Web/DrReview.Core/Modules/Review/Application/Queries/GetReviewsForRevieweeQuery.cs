@@ -6,7 +6,7 @@
     using System.Text;
     using System.Threading.Tasks;
 
-    internal class GetReviewsForRevieweQuery
+    internal class GetReviewsForRevieweeQuery
     {
     }
 }
