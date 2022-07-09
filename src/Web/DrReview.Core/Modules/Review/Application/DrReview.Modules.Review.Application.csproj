@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+	<PackageReference Include="LinqKit.Microsoft.EntityFrameworkCore" Version="6.1.2" />
 	<PackageReference Include="Microsoft.VisualStudio.Threading.Analyzers" Version="17.1.46">
 	  <PrivateAssets>all</PrivateAssets>
 	  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -30,6 +31,7 @@
 	
   <ItemGroup>
 	<ProjectReference Include="..\..\..\Common\DrReview.Common.csproj" />
+	<ProjectReference Include="..\..\..\DrReview.Contracts\DrReview.Contracts.csproj" />
 	<ProjectReference Include="..\Infrastructure\DrReview.Modules.Review.Infrastructure.csproj" />
   </ItemGroup>
 

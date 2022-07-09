@@ -4,8 +4,10 @@
     using DrReview.Common.Mediator.Contracts;
     using DrReview.Common.Mediator.Interfaces;
     using DrReview.Common.Results;
+    using DrReview.Contracts.Dtos;
     using DrReview.Contracts.Requests;
     using DrReview.Modules.Review.Application.Commands;
+    using DrReview.Modules.Review.Application.Queries;
     using DrReview.Modules.Review.Infrastructure.Common.UnitOfWork.Interfaces;
     using DrReview.Modules.Review.Infrastructure.Review.Entities;
     using Microsoft.AspNetCore.Authorization;
@@ -26,11 +28,20 @@
         }
 
         [HttpGet]
-        [Route("{doctorId}")]
-        [ProducesResponseType(typeof(Result<List<Review>>), (int)HttpStatusCode.OK)]
-        public async Task<IActionResult> GetReviewsForDoctorAsync([FromRoute] long doctorId)
+        [Authorize]
+        [RequiredScope(new[] { "drreview.read", "drreview.write" })]
+        [ProducesResponseType(typeof(Result<List<GetReviewsDto>>), (int)HttpStatusCode.OK)]
+        public async Task<IActionResult> GetReviewsForDoctorAsync(
+                                                                [FromQuery] string? reviewerSuid,
+                                                                [FromQuery] string? revieweeSuid,
+                                                                [FromQuery] int startPage = 0,
+                                                                [FromQuery] int itemsPerPage = 50)
         {
-            return Ok(await _reviewUnitOfWork.Reviews.GetAllReviewsForRevieweeAsync(doctorId));
+            return OkOrError(await _mediator.SendAsync(new GetReviewsQuery(
+                                                                           startPage: startPage,
+                                                                           itemsPerPage: itemsPerPage,
+                                                                           revieweeSuid: revieweeSuid,
+                                                                           reviewerSuid: reviewerSuid)));
         }
 
         [HttpPost]
