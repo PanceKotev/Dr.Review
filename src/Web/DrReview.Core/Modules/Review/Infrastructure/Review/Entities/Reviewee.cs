@@ -6,7 +6,7 @@
 
     public class Reviewee : BaseEntity
     {
-        public Reviewee(long id, Guid uid, DateTime? deletedOn, DateTime modifiedOn, string firstName, string lastName, Decimal reviewScore)
+        public Reviewee(long id, Guid uid, DateTime? deletedOn, DateTime modifiedOn, string firstName, string lastName, decimal reviewScore)
             : base(id, uid, new ShortGuid(uid), deletedOn, modifiedOn)
         {
             FirstName = firstName;
@@ -18,7 +18,7 @@
 
         public string LastName { get; init; }
 
-        public Decimal ReviewScore { get; init; }
+        public decimal ReviewScore { get; init; }
 
     }
 }

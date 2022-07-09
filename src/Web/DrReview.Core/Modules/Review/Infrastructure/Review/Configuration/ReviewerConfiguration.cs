@@ -19,8 +19,7 @@
             builder.Property(x => x.LastName).HasMaxLength(200).IsRequired();
             builder.Property(x => x.Email).HasColumnName("EmailAddress").HasMaxLength(200).IsRequired(false);
 
-            builder.ToTable("User");
-
+            builder.ToTable("User", Schema);
         }
     }
 }

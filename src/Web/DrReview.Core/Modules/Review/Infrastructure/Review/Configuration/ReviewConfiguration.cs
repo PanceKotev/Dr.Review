@@ -2,7 +2,6 @@
 {
     using DrReview.Common.Infrastructure.Configurations;
     using DrReview.Modules.Review.Infrastructure.Review.Entities;
-    using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
     public class ReviewConfiguration : BaseEntityConfiguration<Entities.Review>
@@ -23,9 +22,6 @@
 
             builder.HasOne(x => x.Reviewee).WithMany().HasForeignKey(x => x.RevieweeFK);
             builder.HasOne(x => x.Reviewer).WithMany().HasForeignKey(x => x.ReviewerFK);
-
-            builder.ToTable(nameof(Review));
-
         }
     }
 }

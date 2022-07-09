@@ -14,7 +14,7 @@
             long reviewerFK,
             long revieweeFK,
             string? comment,
-            Decimal score)
+            decimal score)
             : base(id, uid, suid, deletedOn, modifiedOn)
         {
             ReviewerFK = reviewerFK;
@@ -25,14 +25,14 @@
 
         public long ReviewerFK { get; init; }
 
-        public Reviewer? Reviewer { get; init; }
+        public virtual Reviewer? Reviewer { get; init; }
 
         public long RevieweeFK { get; init; }
 
-        public Reviewee? Reviewee { get; init; }
+        public virtual Reviewee? Reviewee { get; init; }
 
         public string? Comment { get; init; }
 
-        public Decimal Score { get; init; }
+        public decimal Score { get; init; }
     }
 }

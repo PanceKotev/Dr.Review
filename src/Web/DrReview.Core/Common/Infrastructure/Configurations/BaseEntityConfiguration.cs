@@ -24,6 +24,8 @@
             builder.Property(x => x.ModifiedOn).IsRequired();
 
             builder.HasQueryFilter(c => c.DeletedOn == null);
+
+            builder.ToTable(typeof(TEntity).Name);
         }
     }
 }

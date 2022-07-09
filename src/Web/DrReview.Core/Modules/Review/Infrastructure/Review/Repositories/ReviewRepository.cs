@@ -18,8 +18,8 @@
         public async Task<List<Review>> GetAllReviewsForRevieweeAsync(long revieweeId)
         {
             return await Query().Where(r => r.RevieweeFK == revieweeId)
-                                .Include(x => x.Reviewer)
                                 .Include(x => x.Reviewee)
+                                .Include(x => x.Reviewer)
                                 .ToListAsync();
         }
     }

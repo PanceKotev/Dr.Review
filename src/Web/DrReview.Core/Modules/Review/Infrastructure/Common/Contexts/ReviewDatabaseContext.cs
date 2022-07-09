@@ -18,7 +18,8 @@ namespace DrReview.Modules.Review.Infrastructure.Common.Contexts
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-
+            modelBuilder.ApplyConfiguration(new ReviewerConfiguration(SchemaName));
+            modelBuilder.ApplyConfiguration(new RevieweeConfiguration(SchemaName));
             modelBuilder.ApplyConfiguration(new ReviewConfiguration(SchemaName));
         }
     }
