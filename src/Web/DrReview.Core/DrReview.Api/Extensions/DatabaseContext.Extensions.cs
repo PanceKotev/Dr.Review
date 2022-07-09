@@ -1,8 +1,7 @@
 ﻿namespace DrReview.Api.Extensions
 {
+    using DrReview.Modules.Review.Infrastructure.Common.Contexts;
     using DrReview.Modules.User.Infrastructure.Common.Contexts;
-    using DrReview.Modules.User.Infrastructure.Common.UnitOfWork;
-    using DrReview.Modules.User.Infrastructure.Common.UnitOfWork.Interfaces;
     using Microsoft.EntityFrameworkCore;
 
     public static partial class Extensions
@@ -23,7 +22,19 @@
                 .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTrackingWithIdentityResolution)
                 .LogTo(Console.WriteLine, LogLevel.Debug));
 
-            services.AddScoped<IUserUnitOfWork, UserUnitOfWork>();
+
+            services.AddDbContextPool<ReviewDatabaseContext>(options =>
+                options.UseSqlServer(
+                   configuration.GetConnectionString("DatabaseConnection"),
+                   x => x.EnableRetryOnFailure())
+                .LogTo(Console.WriteLine, LogLevel.Debug));
+
+            services.AddDbContextPool<ReviewReadOnlyDatabaseContext>(options =>
+                options.UseSqlServer(
+                    configuration.GetConnectionString("DatabaseReadonlyConnection"),
+                    x => x.EnableRetryOnFailure())
+                .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTrackingWithIdentityResolution)
+                .LogTo(Console.WriteLine, LogLevel.Debug));
 
             return services;
         }

@@ -10,10 +10,12 @@
 	 [SpecializationFK] BIGINT                      NOT NULL,
 	 [InstitutionFK]    BIGINT                      NOT NULL,
 	 [FullTextSearch]   NVARCHAR(2000)              NULL,
+	 [ReviewScore]		DECIMAL(3,2)				NOT NULL DEFAULT 0,
 	 CONSTRAINT [Doctor_Uid_DeletedOn] UNIQUE([Uid], [DeletedOn]),
 	 CONSTRAINT [Doctor_Suid_DeletedOn] UNIQUE([Suid], [DeletedOn]),
 	 CONSTRAINT [FK_Doctor_Specialization] FOREIGN KEY([SpecializationFK]) REFERENCES [dbo].[Specialization] ([ID]),
-	 CONSTRAINT [FK_Doctor_Institution] FOREIGN KEY([InstitutionFK]) REFERENCES [dbo].[Institution] ([ID])
+	 CONSTRAINT [FK_Doctor_Institution] FOREIGN KEY([InstitutionFK]) REFERENCES [dbo].[Institution] ([ID]),
+	 CONSTRAINT [Doctor_Valid_Review_Score] CHECK([ReviewScore] >= 0 AND [ReviewScore] <= 5)
 
   ) 
   GO CREATE NONCLUSTERED INDEX [Doctor_DeletedOn_Uid] 
