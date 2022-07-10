@@ -1,0 +1,66 @@
+<div *ngIf="isEditMode; else notEdit">
+  <quill-editor
+    class="quill-comment"
+    [preserveWhitespace]="true"
+    [(ngModel)]="comment"
+    (ngModelChange)="modelChanged()"
+    [maxLength]="1000"
+  >
+    <div quill-editor-toolbar>
+      <span class="ql-formats">
+        <select class="ql-size">
+          <option value="small"></option>
+          <option selected></option>
+          <option value="large"></option>
+          <option value="huge"></option>
+        </select>
+      </span>
+      <span class="ql-formats">
+        <button class="ql-bold"></button>
+        <button class="ql-italic"></button>
+        <button class="ql-underline"></button>
+        <button class="ql-strike"></button>
+      </span>
+      <span class="ql-formats">
+        <select class="ql-color"></select>
+        <select class="ql-background"></select>
+      </span>
+      <span class="ql-formats">
+        <button class="ql-list" value="ordered"></button>
+        <button class="ql-list" value="bullet"></button>
+        <select class="ql-align">
+          <option selected></option>
+          <option value="center"></option>
+          <option value="right"></option>
+          <option value="justify"></option>
+        </select>
+      </span>
+      <span class="ql-formats">
+        <button class="ql-link"></button>
+      </span>
+    </div>
+  </quill-editor>
+</div>
+
+<ng-template #notEdit>
+  <quill-view-html [content]="comment!" [sanitize]="true"> </quill-view-html>
+</ng-template>
+<div class="action-buttons">
+  <button
+    mat-raised-button
+    *ngIf="!isEditMode"
+    (click)="toggleEdit()"
+    color="accent"
+  >
+    Edit
+  </button>
+  <button mat-raised-button *ngIf="isEditMode" (click)="saveComment()">
+    Save
+  </button>
+  <button mat-raised-button *ngIf="isEditMode" (click)="cancelComment()">
+    Cancel
+  </button>
+  <button mat-raised-button *ngIf="isEditMode" (click)="resetComment()">
+    Reset
+  </button>
+</div>

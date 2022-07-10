@@ -15,6 +15,7 @@
     "review-notification-app-shell": "libs/review-notification-app/shell",
     "shared-data-access": "libs/shared/data-access",
     "shared-services-themes": "libs/shared/services/themes",
+    "shared-ui-review": "libs/shared/ui/review",
     "shared-ui-search": "libs/shared/ui/search",
     "shared-ui-themes": "libs/shared/ui/themes",
     "shared-utils-app-config": "libs/shared/utils/app-config"

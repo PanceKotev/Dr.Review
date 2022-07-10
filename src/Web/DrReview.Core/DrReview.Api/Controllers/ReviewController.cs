@@ -29,9 +29,9 @@
 
         [HttpGet]
         [Authorize]
-        [RequiredScope(new[] { "drreview.read", "drreview.write" })]
+        [RequiredScope("drreview.read")]
         [ProducesResponseType(typeof(Result<List<GetReviewsDto>>), (int)HttpStatusCode.OK)]
-        public async Task<IActionResult> GetReviewsForDoctorAsync(
+        public async Task<IActionResult> GetReviewsAsync(
                                                                 [FromQuery] string? reviewerSuid,
                                                                 [FromQuery] string? revieweeSuid,
                                                                 [FromQuery] int startPage = 0,

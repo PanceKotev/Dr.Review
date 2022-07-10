@@ -16,4 +16,8 @@
       <div>{{ doctor.institution }}</div>
     </div>
   </mat-card-content>
+  <drreview-comment
+    [comment]="comment"
+    (commentSave)="saveCommentClicked($event)"
+  ></drreview-comment>
 </mat-card>
