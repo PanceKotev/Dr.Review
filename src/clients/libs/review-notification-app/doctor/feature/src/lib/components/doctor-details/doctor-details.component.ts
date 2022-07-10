@@ -13,6 +13,10 @@ export class DoctorDetailsComponent implements OnInit, OnDestroy {
 
   public doctor: GetDoctorDetailsDto | undefined;
 
+  public rating = 0;
+
+  public ratingToSave = 0;
+
   public saveButtonClicked$ = new Subject();
 
   public comment: string | undefined;
@@ -58,7 +62,7 @@ export class DoctorDetailsComponent implements OnInit, OnDestroy {
 
         return this.reviewApi.addNewReview({
           revieweeSuid: this.doctor.suid,
-          score: 0,
+          score: this.ratingToSave,
           comment: this.commentToSave
           });
       })).subscribe({
@@ -71,9 +75,10 @@ export class DoctorDetailsComponent implements OnInit, OnDestroy {
       });
   }
 
-  public saveCommentClicked(comment: string | undefined): void {
+  public saveCommentClicked({comment, rating}: {comment: string | undefined, rating: number}): void {
     console.log(comment);
     this.commentToSave = comment;
+    this.ratingToSave = rating;
     this.saveButtonClicked$.next(true);
   }
 

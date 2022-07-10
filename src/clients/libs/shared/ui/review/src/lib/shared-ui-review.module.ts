@@ -1,3 +1,4 @@
+import { StarRatingModule } from 'angular-star-rating';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CommentComponent } from './components/comment/comment.component';
@@ -17,6 +18,7 @@ import { MatIconModule } from '@angular/material/icon';
     MatIconModule,
     MatFormFieldModule,
     MatInputModule,
+    StarRatingModule,
     QuillModule],
   declarations: [CommentComponent],
   exports: [CommentComponent]

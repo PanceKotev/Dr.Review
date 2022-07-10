@@ -14,6 +14,7 @@ import { ReviewNotificationAppNavigationModule } from '@drreview/review-notifica
 import { SharedServicesThemesModule } from '@drreview/shared/services/themes';
 import { RouterModule } from '@angular/router';
 import { QuillModule } from 'ngx-quill';
+import { StarRatingModule } from 'angular-star-rating';
 
 @NgModule({
   imports: [
@@ -21,6 +22,7 @@ import { QuillModule } from 'ngx-quill';
     RouterModule.forRoot(mainRoutes),
     BrowserAnimationsModule,
     QuillModule.forRoot({}),
+    StarRatingModule.forRoot(),
     ReviewNotificationAppCommonConfigurationAuthConfigModule,
     ReviewNotificationAppCommonServicesAuthModule,
     SharedDataAccessModule,
