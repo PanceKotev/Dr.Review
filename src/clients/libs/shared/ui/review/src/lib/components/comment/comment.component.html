@@ -46,13 +46,12 @@
   <quill-view-html [content]="comment!" [sanitize]="true"> </quill-view-html>
 </ng-template>
 
-<star-rating
-  [showHalfStars]="true"
-  [hoverEnabled]="true"
-  [rating]="rating"
-  (ratingChange)="this.rating = $event.rating"
+<drreview-rating
+  [value]="rating"
   [readOnly]="!isEditMode"
-></star-rating>
+  (ratingChanged)="this.rating = $event"
+>
+</drreview-rating>
 <div class="action-buttons">
   <button
     mat-raised-button

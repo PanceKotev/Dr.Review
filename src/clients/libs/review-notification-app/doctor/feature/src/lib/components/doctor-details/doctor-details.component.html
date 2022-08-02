@@ -1,19 +1,26 @@
 <mat-card *ngIf="doctor">
   <mat-card-title
-    >Details for {{ doctor.firstName }} {{ doctor.lastName }}</mat-card-title
+    >Детали за {{ doctor.firstName }} {{ doctor.lastName }}</mat-card-title
   >
   <mat-card-content>
-    <div class="field">
-      <div>Location</div>
-      <div>{{ doctor.location }}</div>
-    </div>
-    <div class="field">
-      <div>Specialization</div>
-      <div>{{ doctor.specialization }}</div>
-    </div>
-    <div class="field">
-      <div>Instiution</div>
-      <div>{{ doctor.institution }}</div>
+    <div class="details-content">
+      <div class="doctor-summary">
+        <drreview-summary></drreview-summary>
+      </div>
+      <div class="doctor-details">
+        <div class="field">
+          <div>Локација</div>
+          <div>{{ doctor.location }}</div>
+        </div>
+        <div class="field">
+          <div>Специјализација</div>
+          <div>{{ doctor.specialization }}</div>
+        </div>
+        <div class="field">
+          <div>Институција</div>
+          <div>{{ doctor.institution }}</div>
+        </div>
+      </div>
     </div>
   </mat-card-content>
   <drreview-comment

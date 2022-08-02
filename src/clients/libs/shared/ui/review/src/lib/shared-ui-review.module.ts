@@ -8,6 +8,11 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { ReviewComponent } from './components/review/review.component';
+import { SummaryComponent } from './components/summary/summary.component';
+import { RatingComponent } from './components/rating/rating.component';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { CurrentUserReviewComponent } from './components/current-user-review/current-user-review.component';
 
 @NgModule({
   imports: [
@@ -18,9 +23,17 @@ import { MatIconModule } from '@angular/material/icon';
     MatIconModule,
     MatFormFieldModule,
     MatInputModule,
+    MatProgressBarModule,
     StarRatingModule,
-    QuillModule],
-  declarations: [CommentComponent],
-  exports: [CommentComponent]
+    QuillModule
+  ],
+  declarations: [
+    CommentComponent,
+    ReviewComponent,
+    SummaryComponent,
+    RatingComponent,
+    CurrentUserReviewComponent
+  ],
+  exports: [CommentComponent, ReviewComponent, SummaryComponent]
 })
 export class SharedUiReviewModule {}

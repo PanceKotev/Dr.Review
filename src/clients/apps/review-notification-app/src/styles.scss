@@ -3,6 +3,12 @@
 // For more information: https://material.angular.io/guide/theming
 @use '@angular/material' as mat;
 @import '~quill/dist/quill.snow.css';
+
+$color-negative-rating: #ffcc00 !default;
+$color-ok-rating: #ffcc00 !default;
+$color-positive-rating: #ffcc00 !default;
+$color-default-rating: #ffcc00 !default;
+
 @import '~css-star-rating/scss/star-rating';
 
 @import url('https://fonts.googleapis.com/css2?family=Encode+Sans:wght@100;300;600&display=swap');
@@ -167,9 +173,24 @@ $review-notification-app-dark-theme: mat-set-background($review-notification-app
 @include mat.all-component-typographies($review-notification-app-typography);
 @include mat.all-component-themes($review-notification-app-light-theme);
 
-.dark-theme {
-  @include mat.all-component-colors($review-notification-app-dark-theme);
+
+:root {
+  --color-primary: #{mat.get-color-from-palette($review-notification-app-light-primary, default)};
+  --color-accent: #{mat.get-color-from-palette($review-notification-app-light-accent, default)};
+  --color-warn: #{mat.get-color-from-palette($review-notification-app-light-warn, default)};
 }
+
+.dark-theme {
+  $light-theme: false;
+
+  @include mat.all-component-colors($review-notification-app-dark-theme);
+
+  --color-primary: #{mat.get-color-from-palette($review-notification-app-dark-primary, default)};
+  --color-accent: #{mat.get-color-from-palette($review-notification-app-dark-accent, default)};
+  --color-warn: #{mat.get-color-from-palette($review-notification-app-dark-warn, default)};
+}
+
+
 
 button.mat-button-base.mat-mini-fab, button.mat-button-base.mat-fab, button.mat-button-base.mat-icon-button {
   display: flex;
@@ -179,3 +200,5 @@ button.mat-button-base.mat-mini-fab, button.mat-button-base.mat-fab, button.mat-
 
 html, body { height: 100%; }
 body { margin: 0; font-family: 'Encode Sans', sans-serif; }
+
+

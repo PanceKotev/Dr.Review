@@ -2,3 +2,42 @@
   display: grid;
   grid-template-columns: 0.3fr 0.7fr;
 }
+
+.details-content{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 1em;
+}
+
+.doctor-summary{
+  padding: 2em;
+}
+
+.doctor-details {
+  padding-top: calc(22px + 2rem + 2em);
+}
+
+@media only screen and (max-width:1023px){
+  .details-content {
+    grid-template-columns: 1fr;
+  }
+
+  .doctor-details{
+    padding: 2em;
+    padding-top: 0;
+
+  }
+
+  .field{
+    grid-template-columns: 1fr;
+    place-items: center;
+    text-align: center;
+    margin-bottom: 1em;
+
+    &>:first-child{
+      transform: scale(120%);
+      font-weight: 500;
+      font-style: italic;
+    }
+  }
+}

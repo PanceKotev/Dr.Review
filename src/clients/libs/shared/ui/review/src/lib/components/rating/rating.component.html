@@ -1,0 +1,8 @@
+<star-rating
+  [ngClass]="{ 'app-colors': useAppColors }"
+  [showHalfStars]="true"
+  [hoverEnabled]="true"
+  [rating]="value"
+  (ratingChange)="ratingChange($event)"
+  [readOnly]="readOnly"
+></star-rating>
