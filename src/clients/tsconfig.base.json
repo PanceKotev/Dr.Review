@@ -51,7 +51,12 @@
       "@drreview/shared/ui/themes": ["libs/shared/ui/themes/src/index.ts"],
       "@drreview/shared/utils/app-config": [
         "libs/shared/utils/app-config/src/index.ts"
-      ]
+      ],
+      "@drreview/shared/utils/pipes": ["libs/shared/utils/pipes/src/index.ts"],
+      "@drreview/shared/utils/pipes/rxjs": [
+        "libs/shared/utils/pipes/rxjs/src/index.ts"
+      ],
+      "@drreview/shared/utils/rxjs": ["libs/shared/utils/rxjs/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp", "*.spec.ts", "*.po.ts"]
