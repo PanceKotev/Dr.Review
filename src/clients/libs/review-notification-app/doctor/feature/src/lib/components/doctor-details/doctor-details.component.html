@@ -23,9 +23,18 @@
       </div>
     </div>
   </mat-card-content>
-  <drreview-comment
-    [comment]="comment"
+  <drreview-current-user-review
+    [comment]="comment!"
     [rating]="rating"
     (commentSave)="saveCommentClicked($event)"
-  ></drreview-comment>
+  >
+  </drreview-current-user-review>
+
+  <drreview-review
+    [createdBy]="'Me me'"
+    text="lorem iasdsad sad sa sad sad sa sa sad sa "
+    [givenRating]="3"
+    [numberOfLikes]="20"
+    [numberOfDislikes]="40"
+  ></drreview-review>
 </mat-card>

@@ -1,30 +1,34 @@
-<div *ngIf="isEditMode; else notEdit">
-  <drreview-current-user-review [comment]="comment!">
-  </drreview-current-user-review>
-</div>
+<drreview-current-user-review [comment]="comment!">
+</drreview-current-user-review>
 
-<ng-template #notEdit>
-  <quill-view-html [content]="comment!" [sanitize]="true"> </quill-view-html>
-</ng-template>
-<div class="action-buttons">
-  <button
-    mat-raised-button
-    *ngIf="!isEditMode"
-    (click)="toggleEdit()"
-    color="accent"
-  >
-    Едитирај
-  </button>
-  <button mat-raised-button *ngIf="isEditMode" (click)="saveComment()">
-    Зачувај
-  </button>
-  <button mat-raised-button *ngIf="isEditMode" (click)="cancelComment()">
-    Откажи
-  </button>
-  <button mat-raised-button *ngIf="isEditMode" (click)="resetComment()">
-    Ресетирај
-  </button>
-</div>
+<drreview-review
+  [createdBy]="'Me me'"
+  text="lorem iasdsad sad sa sad sad sa sa sad sa "
+  [givenRating]="3"
+  [numberOfLikes]="20"
+  [numberOfDislikes]="40"
+></drreview-review>
+<drreview-review
+  [createdBy]="'Me me'"
+  text="lorem iasdsad sad sa sad sad sa sa sad sa "
+  [givenRating]="3"
+  [numberOfLikes]="20"
+  [numberOfDislikes]="40"
+></drreview-review>
+<drreview-review
+  [createdBy]="'Me me'"
+  text="lorem iasdsad sad sa sad sad sa sa sad sa "
+  [givenRating]="3"
+  [numberOfLikes]="20"
+  [numberOfDislikes]="40"
+></drreview-review>
+<drreview-review
+  [createdBy]="'Me me'"
+  text="lorem iasdsad sad sa sad sad sa sa sad sa "
+  [givenRating]="3"
+  [numberOfLikes]="20"
+  [numberOfDislikes]="40"
+></drreview-review>
 <drreview-review
   [createdBy]="'Me me'"
   text="lorem iasdsad sad sa sad sad sa sa sad sa "

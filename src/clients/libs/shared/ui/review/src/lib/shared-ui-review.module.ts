@@ -38,6 +38,6 @@ import { AvatarModule } from 'ngx-avatars';
     RatingComponent,
     CurrentUserReviewComponent
   ],
-  exports: [CommentComponent, ReviewComponent, SummaryComponent]
+  exports: [CommentComponent, ReviewComponent, SummaryComponent, CurrentUserReviewComponent]
 })
 export class SharedUiReviewModule {}

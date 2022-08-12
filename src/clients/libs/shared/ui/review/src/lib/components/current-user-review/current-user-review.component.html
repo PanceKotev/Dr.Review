@@ -3,14 +3,19 @@
     <div class="label">
       <h2>Рејтинг</h2>
     </div>
-    <drreview-rating></drreview-rating>
+    <drreview-rating
+      [value]="rating"
+      [readOnly]="!isEditMode"
+    ></drreview-rating>
   </div>
   <div class="comment">
     <div class="label"><h2>Опис</h2></div>
     <quill-editor
+      *ngIf="isEditMode; else notEdit"
       class="quill-comment"
       [preserveWhitespace]="true"
       [(ngModel)]="comment"
+      (ngModelChange)="modelChanged()"
       placeholder="Внеси опис овде..."
       [maxLength]="1000"
     >
@@ -48,5 +53,31 @@
         </span>
       </div>
     </quill-editor>
+    <ng-template #notEdit>
+      <quill-view-html
+        class="readonly-quill"
+        [content]="comment ?? 'Немате оставено коментар...'"
+        [sanitize]="true"
+      ></quill-view-html>
+    </ng-template>
   </div>
+</div>
+<div class="action-buttons">
+  <button
+    mat-raised-button
+    *ngIf="!isEditMode"
+    color="accent"
+    (click)="toggleEdit()"
+  >
+    Едитирај
+  </button>
+  <button mat-raised-button *ngIf="isEditMode" (click)="saveComment()">
+    Зачувај
+  </button>
+  <button mat-raised-button *ngIf="isEditMode" (click)="cancelComment()">
+    Откажи
+  </button>
+  <button mat-raised-button *ngIf="isEditMode" (click)="resetComment()">
+    Ресетирај
+  </button>
 </div>

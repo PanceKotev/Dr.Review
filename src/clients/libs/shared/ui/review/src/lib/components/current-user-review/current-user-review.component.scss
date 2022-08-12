@@ -5,12 +5,11 @@
 }
 
 .label > h2 {
+  text-align: center;
   padding-left: 0;
 }
 :host::ng-deep .curr-rating {
   >:last-child{
-    display: flex;
-    align-self: flex-start;
      .star-container {
       margin-left: 0;
      }
@@ -53,4 +52,19 @@
 }
 ::ng-deep .dark-theme .ql-picker-options{
  background-color: transparent;
+}
+
+.action-buttons{
+  margin-top: 1em;
+  &>button{
+    margin-right: 0.5em;
+  }
+}
+
+.readonly-quill {
+  border: 1px solid;
+  display: block;
+  padding: 1.25em 0;
+  border-radius: 4px;
+  font-style: italic;
 }
