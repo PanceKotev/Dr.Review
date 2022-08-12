@@ -1,5 +1,5 @@
 <star-rating
-  [ngClass]="{ 'app-colors': useAppColors }"
+  [ngClass]="{ 'app-colors': useAppColors, editable: !readOnly }"
   [showHalfStars]="true"
   [hoverEnabled]="true"
   [rating]="value"

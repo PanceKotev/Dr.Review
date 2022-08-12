@@ -52,6 +52,7 @@
       "@drreview/shared/utils/app-config": [
         "libs/shared/utils/app-config/src/index.ts"
       ],
+      "@drreview/shared/utils/date": ["libs/shared/utils/date/src/index.ts"],
       "@drreview/shared/utils/pipes": ["libs/shared/utils/pipes/src/index.ts"],
       "@drreview/shared/utils/pipes/rxjs": [
         "libs/shared/utils/pipes/rxjs/src/index.ts"

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'drreview-current-user-review',
@@ -6,4 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./current-user-review.component.scss']
 })
 export class CurrentUserReviewComponent {
+  @Input()
+  public comment = '';
+
 }

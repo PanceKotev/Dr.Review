@@ -1,1 +1,40 @@
-<p>review works!</p>
+<div class="review-container">
+  <div class="avatar-container">
+    <ngx-avatars [round]="true" [size]="50" [name]="createdBy"></ngx-avatars>
+  </div>
+  <div class="comment-container">
+    <div class="row">
+      <div class="d-flex">
+        <div class="name">{{ createdBy }}</div>
+        <div class="date-updated">{{ updatedOn | dFormat: 'lll' }}</div>
+      </div>
+      <div class="stars">
+        <drreview-rating
+          [value]="givenRating"
+          [readOnly]="true"
+        ></drreview-rating>
+      </div>
+    </div>
+    <div class="row">
+      <div class="comment">
+        <quill-view-html [content]="text" [sanitize]="true"> </quill-view-html>
+      </div>
+    </div>
+    <div class="row">
+      <div class="likes">
+        <div class="ratings">
+          <div class="icon-wrapper">
+            <mat-icon class="green-color">thumb_up</mat-icon>
+          </div>
+          <div class="vote-count">{{ numberOfLikes }}</div>
+        </div>
+        <div class="ratings">
+          <div class="icon-wrapper">
+            <mat-icon color="warn">thumb_down</mat-icon>
+          </div>
+          <div class="vote-count">{{ numberOfDislikes }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

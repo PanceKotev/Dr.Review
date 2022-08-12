@@ -3906,6 +3906,11 @@ dayjs@^1.10.4:
   resolved "https://registry.npmjs.org/dayjs/-/dayjs-1.11.3.tgz"
   integrity sha512-xxwlswWOlGhzgQ4TKzASQkUhqERI3egRNqgV4ScR8wlANA/A9tZ7miXa44vTTKEq5l7vWoL5G57bG3zA+Kow0A==
 
+dayjs@^1.11.5:
+  version "1.11.5"
+  resolved "https://registry.yarnpkg.com/dayjs/-/dayjs-1.11.5.tgz#00e8cc627f231f9499c19b38af49f56dc0ac5e93"
+  integrity sha512-CAdX5Q3YW3Gclyo5Vpqkgpj8fSdLQcRuzfX6mC6Phy0nfJ0eGYOeS7m4mt2plDWLAtA4TqTakvbboHvUxfe4iA==
+
 debug@2.6.9:
   version "2.6.9"
   resolved "https://registry.npmjs.org/debug/-/debug-2.6.9.tgz"
@@ -6936,7 +6941,7 @@ neo-async@^2.6.2:
 
 ngx-avatars@^1.4.0:
   version "1.4.0"
-  resolved "https://registry.npmjs.org/ngx-avatars/-/ngx-avatars-1.4.0.tgz"
+  resolved "https://registry.yarnpkg.com/ngx-avatars/-/ngx-avatars-1.4.0.tgz#83e6f6b54935498137cf946687860fff2501031f"
   integrity sha512-v4MT5BoNybpTNwmLO7RPJT2uDHMvE+aOfZH3AEOefq+p8yOjapTCHQm4bfE1YXg8paQpns6+nu14LqGcK4FDPA==
   dependencies:
     ts-md5 "^1.2.11"

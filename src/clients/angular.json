@@ -19,6 +19,7 @@
     "shared-ui-search": "libs/shared/ui/search",
     "shared-ui-themes": "libs/shared/ui/themes",
     "shared-utils-app-config": "libs/shared/utils/app-config",
+    "shared-utils-date": "libs/shared/utils/date",
     "shared-utils-pipes": "libs/shared/utils/pipes",
     "shared-utils-rxjs": "libs/shared/utils/rxjs"
   }

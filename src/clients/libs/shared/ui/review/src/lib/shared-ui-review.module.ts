@@ -1,3 +1,4 @@
+import { SharedUtilsDateModule } from '@drreview/shared/utils/date';
 import { StarRatingModule } from 'angular-star-rating';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -13,6 +14,7 @@ import { SummaryComponent } from './components/summary/summary.component';
 import { RatingComponent } from './components/rating/rating.component';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { CurrentUserReviewComponent } from './components/current-user-review/current-user-review.component';
+import { AvatarModule } from 'ngx-avatars';
 
 @NgModule({
   imports: [
@@ -24,6 +26,8 @@ import { CurrentUserReviewComponent } from './components/current-user-review/cur
     MatFormFieldModule,
     MatInputModule,
     MatProgressBarModule,
+    AvatarModule,
+    SharedUtilsDateModule,
     StarRatingModule,
     QuillModule
   ],

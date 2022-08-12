@@ -35,3 +35,7 @@
     color: var(--color-primary) !important;
   }
 }
+
+:host::ng-deep .editable .star-container .star{
+  cursor: pointer !important;
+}
