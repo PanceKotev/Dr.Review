@@ -66,6 +66,7 @@
     <Folder Include="StoredProcedures" />
     <Folder Include="User" />
     <Folder Include="Review" />
+    <Folder Include="Votes" />
   </ItemGroup>
   <ItemGroup>
     <None Include="DrReview.Database.publish.xml" />
@@ -78,6 +79,8 @@
     <Build Include="StoredProcedures\SearchDoctorsBySearchword.sql" />
     <Build Include="User\User.sql" />
     <Build Include="Review\Review.sql" />
+    <Build Include="Votes\Vote.sql" />
+    <Build Include="Votes\UpdateDownvotesUpvotes.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Scripts\Script.PostDeployment.sql" />

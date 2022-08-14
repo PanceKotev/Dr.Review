@@ -71,7 +71,12 @@
   >
     Едитирај
   </button>
-  <button mat-raised-button *ngIf="isEditMode" (click)="saveComment()">
+  <button
+    mat-raised-button
+    *ngIf="isEditMode"
+    (click)="saveComment()"
+    color="accent"
+  >
     Зачувај
   </button>
   <button mat-raised-button *ngIf="isEditMode" (click)="cancelComment()">
