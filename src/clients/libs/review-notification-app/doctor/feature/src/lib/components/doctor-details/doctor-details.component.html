@@ -30,11 +30,14 @@
   >
   </drreview-current-user-review>
 
-  <drreview-review
-    [createdBy]="'Me me'"
-    text="lorem iasdsad sad sa sad sad sa sa sad sa "
-    [givenRating]="3"
-    [numberOfLikes]="20"
-    [numberOfDislikes]="40"
-  ></drreview-review>
+  <div class="reviews">
+    <drreview-review
+      *ngFor="let review of doctorReviews"
+      [createdBy]="review.reviewerName"
+      [text]="review.comment ?? ''"
+      [givenRating]="review.score"
+      [numberOfLikes]="review.upvotes"
+      [numberOfDislikes]="review.downvotes"
+    ></drreview-review>
+  </div>
 </mat-card>

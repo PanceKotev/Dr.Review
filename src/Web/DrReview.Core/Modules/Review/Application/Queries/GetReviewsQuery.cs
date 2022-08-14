@@ -67,7 +67,9 @@
                                                                                  $@"{r.Reviewee!.FirstName} {r.Reviewee!.LastName}",
                                                                                  r.ModifiedOn,
                                                                                  r.Comment,
-                                                                                 r.Score))
+                                                                                 r.Score,
+                                                                                 r.Upvotes,
+                                                                                 r.Downvotes))
                                                   .ToListAsync();
 
             return Result.Ok(result);

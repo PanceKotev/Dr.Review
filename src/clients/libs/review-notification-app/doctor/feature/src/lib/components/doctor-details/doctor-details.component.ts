@@ -1,7 +1,5 @@
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
-
-import { Subject, takeUntil, switchMap, EMPTY } from 'rxjs';
-import { DoctorApiService, ReviewApiService, GetDoctorDetailsDto } from '@drreview/shared/data-access';
+import { Subject, takeUntil, switchMap, EMPTY, of } from 'rxjs';
+import { DoctorApiService, ReviewApiService, GetDoctorDetailsDto, GetReviewsDto } from '@drreview/shared/data-access';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
@@ -12,6 +10,10 @@ import { ActivatedRoute } from '@angular/router';
 export class DoctorDetailsComponent implements OnInit, OnDestroy {
 
   public doctor: GetDoctorDetailsDto | undefined;
+
+  public doctorReviews: GetReviewsDto[] = [];
+
+  public refreshReviews$ = new Subject<boolean>();
 
   public rating = 0;
 
@@ -46,12 +48,33 @@ export class DoctorDetailsComponent implements OnInit, OnDestroy {
       next: val => {
         console.log("doctor", val);
         this.doctor = val;
+        this.refreshReviews$.next(true);
+      },
+      error: err => {
+        console.error(err);
+        this.refreshReviews$.next(true);
+      }
+    });
+
+    this.refreshReviews$.pipe(
+      takeUntil(this.destroying$),
+      switchMap(() => {
+        console.log('refreshed');
+        if(!this.doctor?.suid){
+          return of([]);
+        }
+
+        return this.reviewApi.getReviewsForDoctor(this.doctor.suid, 'FRtJ-4ZPYkyh8d-fJGuXVg');
+      })
+    ).subscribe({
+      next: val => {
+        console.log("reviews", val);
+        this.doctorReviews = val;
       },
       error: err => {
         console.error(err);
       }
     });
-
 
     this.saveButtonClicked$.pipe(
       switchMap(() => {
@@ -68,6 +91,7 @@ export class DoctorDetailsComponent implements OnInit, OnDestroy {
       })).subscribe({
         next: res => {
           console.log("success", res);
+          this.refreshReviews$.next(true);
         },
         error: err => {
           console.error(err);

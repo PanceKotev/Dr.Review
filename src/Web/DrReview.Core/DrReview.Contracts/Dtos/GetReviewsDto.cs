@@ -4,7 +4,7 @@
 
     public class GetReviewsDto
     {
-        public GetReviewsDto(string suid, string reviewerName, string revieweeName, DateTime lastUpdatedOn, string? comment, decimal score)
+        public GetReviewsDto(string suid, string reviewerName, string revieweeName, DateTime lastUpdatedOn, string? comment, decimal score, long upvotes, long downvotes)
         {
             Suid = suid;
             ReviewerName = reviewerName;
@@ -12,6 +12,8 @@
             LastUpdatedOn = lastUpdatedOn;
             Comment = comment;
             Score = score;
+            Upvotes = upvotes;
+            Downvotes = downvotes;
         }
 
         public string Suid { get; init; }
@@ -25,5 +27,9 @@
         public string? Comment { get; init; }
 
         public decimal Score { get; init; }
+
+        public long Upvotes { get; init; }
+
+        public long Downvotes { get; init; }
     }
 }
