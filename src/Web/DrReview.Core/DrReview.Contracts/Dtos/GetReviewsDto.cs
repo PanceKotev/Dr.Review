@@ -4,7 +4,20 @@
 
     public class GetReviewsDto
     {
-        public GetReviewsDto(string suid, string reviewerName, string revieweeName, DateTime lastUpdatedOn, string? comment, decimal score, long upvotes, long downvotes)
+        public GetReviewsDto(List<GetReviewDto> reviews, GetReviewDto? currentUserReview)
+        {
+            Reviews = reviews;
+            CurrentUserReview = currentUserReview;
+        }
+
+        public List<GetReviewDto> Reviews { get; init; }
+
+        public GetReviewDto? CurrentUserReview { get; init; } = null;
+    }
+
+    public class GetReviewDto
+    {
+        public GetReviewDto(string suid, string reviewerName, string revieweeName, DateTime lastUpdatedOn, string? comment, decimal score, long upvotes, long downvotes)
         {
             Suid = suid;
             ReviewerName = reviewerName;

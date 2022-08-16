@@ -5,7 +5,11 @@
   <mat-card-content>
     <div class="details-content">
       <div class="doctor-summary">
-        <drreview-summary></drreview-summary>
+        <drreview-summary
+          *ngIf="doctorReviewSummary"
+          [summaryScore]="doctorReviewSummary.rating"
+          [starByCount]="doctorReviewSummary.reviewCountByStar"
+        ></drreview-summary>
       </div>
       <div class="doctor-details">
         <div class="field">
@@ -31,6 +35,16 @@
   </drreview-current-user-review>
 
   <div class="reviews">
+    <drreview-review
+      *ngIf="currentUserReview"
+      [createdBy]="currentUserReview.reviewerName"
+      [text]="currentUserReview.comment ?? ''"
+      [givenRating]="currentUserReview.score"
+      [numberOfLikes]="currentUserReview.upvotes"
+      [numberOfDislikes]="currentUserReview.downvotes"
+    >
+    </drreview-review>
+    Other comments
     <drreview-review
       *ngFor="let review of doctorReviews"
       [createdBy]="review.reviewerName"

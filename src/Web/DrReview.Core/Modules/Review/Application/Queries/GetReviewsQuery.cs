@@ -12,7 +12,7 @@
     using LinqKit;
     using Microsoft.EntityFrameworkCore;
 
-    public class GetReviewsQuery : IQuery<Result<List<GetReviewsDto>>>
+    public class GetReviewsQuery : IQuery<Result<GetReviewsDto>>
     {
         public GetReviewsQuery(int startPage, int itemsPerPage, string? revieweeSuid, string? reviewerSuid)
         {
@@ -26,7 +26,7 @@
         public GetReviewsFilter Filter { get; init; }
     }
 
-    public class GetReviewsQueryHandler : IQueryHandler<GetReviewsQuery, Result<List<GetReviewsDto>>>
+    public class GetReviewsQueryHandler : IQueryHandler<GetReviewsQuery, Result<GetReviewsDto>>
     {
         private readonly ReviewReadOnlyDatabaseContext _readonlyDatabaseContext;
 
@@ -38,14 +38,9 @@
             _currentUser = currentUser;
         }
 
-        public async Task<Result<List<GetReviewsDto>>> Handle(GetReviewsQuery request, CancellationToken cancellationToken)
+        public async Task<Result<GetReviewsDto>> Handle(GetReviewsQuery request, CancellationToken cancellationToken)
         {
             ExpressionStarter<Review>? predicate = PredicateBuilder.New<Review>(true);
-
-            if (!string.IsNullOrEmpty(request.Filter.ReviewerSuid))
-            {
-                predicate.And(r => r.Reviewer != null && r.Reviewer.Suid == request.Filter.ReviewerSuid);
-            }
 
             if (!string.IsNullOrEmpty(request.Filter.RevieweeSuid))
             {
@@ -54,23 +49,50 @@
 
             int skipNumberOfPages = request.Filter.StartPage * request.Filter.ItemsPerPage;
 
-            List<GetReviewsDto> result = await _readonlyDatabaseContext.Reviews
+            List<Review> fromSqlResult = await _readonlyDatabaseContext.Reviews
                                                   .Include(r => r.Reviewer)
                                                   .Include(r => r.Reviewee)
                                                   .Where(predicate)
                                                   .OrderBy(r => r.Reviewer!.Suid == _currentUser.Suid)
                                                   .Skip(skipNumberOfPages)
                                                   .Take(request.Filter.ItemsPerPage)
-                                                  .Select(r => new GetReviewsDto(
-                                                                                 r.Suid,
-                                                                                 $@"{r.Reviewer!.FirstName} {r.Reviewer!.LastName}",
-                                                                                 $@"{r.Reviewee!.FirstName} {r.Reviewee!.LastName}",
-                                                                                 r.ModifiedOn,
-                                                                                 r.Comment,
-                                                                                 r.Score,
-                                                                                 r.Upvotes,
-                                                                                 r.Downvotes))
                                                   .ToListAsync();
+
+            List<GetReviewDto> reviews = new List<GetReviewDto>();
+
+            GetReviewDto? reviewFromCurrentUser = null;
+
+            fromSqlResult.ForEach(r =>
+            {
+                if (r.Reviewer!.Uid == _currentUser.Uid)
+                {
+                    reviewFromCurrentUser = new GetReviewDto(
+                                                            r.Suid,
+                                                            $@"{r.Reviewer!.FirstName} {r.Reviewer!.LastName}",
+                                                            $@"{r.Reviewee!.FirstName} {r.Reviewee!.LastName}",
+                                                            r.ModifiedOn,
+                                                            r.Comment,
+                                                            r.Score,
+                                                            r.Upvotes,
+                                                            r.Downvotes);
+                }
+                else
+                {
+                    reviews.Add(new GetReviewDto(
+                                                r.Suid,
+                                                $@"{r.Reviewer!.FirstName} {r.Reviewer!.LastName}",
+                                                $@"{r.Reviewee!.FirstName} {r.Reviewee!.LastName}",
+                                                r.ModifiedOn,
+                                                r.Comment,
+                                                r.Score,
+                                                r.Upvotes,
+                                                r.Downvotes));
+                }
+            });
+
+            GetReviewsDto result = new GetReviewsDto(
+                                                     reviews: reviews,
+                                                     currentUserReview: reviewFromCurrentUser);
 
             return Result.Ok(result);
         }

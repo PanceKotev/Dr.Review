@@ -1,5 +1,6 @@
-import { Subject, takeUntil, switchMap, EMPTY, of } from 'rxjs';
-import { DoctorApiService, ReviewApiService, GetDoctorDetailsDto, GetReviewsDto } from '@drreview/shared/data-access';
+import { Subject, takeUntil, switchMap, EMPTY, of, combineLatest } from 'rxjs';
+import { DoctorApiService,
+   ReviewApiService, GetDoctorDetailsDto, GetReviewDto, GetReviewSummaryDto, GetReviewsDto } from '@drreview/shared/data-access';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
@@ -11,7 +12,11 @@ export class DoctorDetailsComponent implements OnInit, OnDestroy {
 
   public doctor: GetDoctorDetailsDto | undefined;
 
-  public doctorReviews: GetReviewsDto[] = [];
+  public doctorReviews: GetReviewDto[] = [];
+
+  public doctorReviewSummary: GetReviewSummaryDto | undefined;
+
+  public currentUserReview: GetReviewDto | undefined;
 
   public refreshReviews$ = new Subject<boolean>();
 
@@ -61,18 +66,38 @@ export class DoctorDetailsComponent implements OnInit, OnDestroy {
       switchMap(() => {
         console.log('refreshed');
         if(!this.doctor?.suid){
-          return of([]);
+          return combineLatest([of({
+            reviews: [],
+            currentUserReview: undefined
+          }),
+          of({
+            rating: 0,
+            reviewCountByStar: {
+              1: 0,
+              2: 0,
+              3: 0,
+              4: 0,
+              5: 0
+            }})]);
         }
 
-        return this.reviewApi.getReviewsForDoctor(this.doctor.suid, 'FRtJ-4ZPYkyh8d-fJGuXVg');
+        return combineLatest([
+                              this.reviewApi.getReviewsForDoctor(this.doctor.suid, 'FRtJ-4ZPYkyh8d-fJGuXVg'),
+                              this.reviewApi.getReviewSummaryForDoctor(this.doctor.suid)]);
       })
     ).subscribe({
-      next: val => {
-        console.log("reviews", val);
-        this.doctorReviews = val;
+      next: ([reviews, summary] : [GetReviewsDto, GetReviewSummaryDto]) => {
+        console.log("reviews", reviews);
+        this.doctorReviews = reviews.reviews;
+        this.currentUserReview = reviews.currentUserReview;
+        this.doctorReviewSummary = summary;
+        console.log(summary);
       },
       error: err => {
         console.error(err);
+      },
+      complete: () => {
+
       }
     });
 
