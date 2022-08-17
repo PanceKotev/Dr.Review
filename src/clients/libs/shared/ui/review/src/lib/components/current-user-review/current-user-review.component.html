@@ -4,7 +4,8 @@
       <h2>Рејтинг</h2>
     </div>
     <drreview-rating
-      [value]="rating"
+      [(ngModel)]="rating"
+      (ngModelChange)="modelChanged($event)"
       [readOnly]="!isEditMode"
     ></drreview-rating>
   </div>
@@ -15,7 +16,7 @@
       class="quill-comment"
       [preserveWhitespace]="true"
       [(ngModel)]="comment"
-      (ngModelChange)="modelChanged()"
+      (ngModelChange)="modelChanged($event)"
       placeholder="Внеси опис овде..."
       [maxLength]="1000"
     >

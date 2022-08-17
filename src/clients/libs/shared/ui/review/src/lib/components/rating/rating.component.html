@@ -3,6 +3,6 @@
   [showHalfStars]="true"
   [hoverEnabled]="true"
   [rating]="value"
-  (ratingChange)="ratingChange($event)"
+  (ratingChange)="onChange($event.rating)"
   [readOnly]="readOnly"
 ></star-rating>

@@ -28,6 +28,7 @@
     </div>
   </mat-card-content>
   <drreview-current-user-review
+    *ngIf="!currentUserReview"
     [comment]="comment!"
     [rating]="rating"
     (commentSave)="saveCommentClicked($event)"

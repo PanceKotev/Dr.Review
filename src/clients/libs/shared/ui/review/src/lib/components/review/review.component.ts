@@ -28,6 +28,14 @@ export class ReviewComponent {
   @Input()
   public previousVote: boolean | undefined;
 
+  @Input()
+  public isEditable = true;
+
+  public isInEditMode = false;
+
+  @Output()
+  public textChanged = new EventEmitter<string | undefined>();
+
   @Output()
   public reviewVotedOn = new EventEmitter<boolean | undefined>();
 
@@ -35,5 +43,27 @@ export class ReviewComponent {
   public voteOnReview(upvoted: boolean): void {
     const castVote = upvoted === this.previousVote ? undefined : upvoted;
     this.reviewVotedOn.emit(castVote);
+  }
+
+  public modelChanged(): void {
+    console.log(this.text);
+
+  }
+
+  public toggleEditMode(): void {
+    if(this.isEditable){
+      this.isInEditMode = !this.isInEditMode;
+    }
+  }
+
+  public saveChanges(): void {
+    this.textChanged.emit(this.text);
+    console.log('changed');
+    this.isInEditMode = false;
+  }
+
+  public resetChanges(): void {
+    this.isInEditMode = false;
+
   }
 }

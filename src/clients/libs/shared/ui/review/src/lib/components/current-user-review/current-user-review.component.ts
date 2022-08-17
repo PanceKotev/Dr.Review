@@ -12,9 +12,15 @@ export class CurrentUserReviewComponent implements OnInit{
   public isEditMode = false;
 
   @Input()
-  public rating = 0;
+  public set rating(val: number | null | undefined) {
+    this._rating = val ?? 0;
+  }
 
-  public initialRating = 0;
+  public get rating(): number {
+    return this._rating;
+  }
+
+  private _rating!: number;
 
   public initialComment: string | undefined;
 
@@ -24,8 +30,10 @@ export class CurrentUserReviewComponent implements OnInit{
   public ngOnInit(): void {
     this.initialComment = this.comment;
   }
-  public modelChanged(): void{
-    console.log(this.comment);
+  public modelChanged(value: number): void{
+    console.log('Comment Value', this.comment);
+    console.log(value);
+
   }
 
   public toggleEdit() : void{
@@ -34,19 +42,16 @@ export class CurrentUserReviewComponent implements OnInit{
 
   public saveComment() : void{
     this.initialComment = this.comment;
-    this.initialRating = this.rating;
-    this.commentSave.emit({comment: this.comment, rating: this.rating});
+    this.commentSave.emit({comment: this.comment, rating: this.rating ?? 0});
     this.isEditMode = !this.isEditMode;
   }
 
   public cancelComment() : void{
     this.comment = this.initialComment;
-    this.rating = this.initialRating;
     this.isEditMode = !this.isEditMode;
   }
 
   public resetComment() : void{
     this.comment = this.initialComment;
-    this.rating = this.initialRating;
   }
 }

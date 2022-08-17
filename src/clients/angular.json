@@ -20,6 +20,7 @@
     "shared-ui-themes": "libs/shared/ui/themes",
     "shared-utils-app-config": "libs/shared/utils/app-config",
     "shared-utils-date": "libs/shared/utils/date",
+    "shared-utils-form": "libs/shared/utils/form",
     "shared-utils-pipes": "libs/shared/utils/pipes",
     "shared-utils-rxjs": "libs/shared/utils/rxjs"
   }

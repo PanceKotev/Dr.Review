@@ -33,7 +33,6 @@
     }
 
     .comment{
-      padding-bottom: 0.5em;
       padding-top: 0.2em;
 
 
@@ -58,6 +57,7 @@
   text-align: center;
   .icon-wrapper{
     margin-right: 0.25em;
+    display: flex;
   }
 
   .votes-count{
@@ -75,4 +75,26 @@
 
 .voted-on{
   color:white !important;
+}
+
+.edit-btn{
+  display: none !important;
+}
+
+.review-container:hover  .edit-btn {
+  display: flex !important;
+}
+
+.actions{
+  display: flex;
+  min-height: 40px;
+  justify-content:space-between ;
+}
+
+.buttons.permanent-editable {
+  display: flex !important;
+}
+
+.edit-mode-buttons{
+  display: flex;
 }

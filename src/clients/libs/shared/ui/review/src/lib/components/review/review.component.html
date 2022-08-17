@@ -10,17 +10,21 @@
       </div>
       <div class="stars">
         <drreview-rating
-          [value]="givenRating"
-          [readOnly]="true"
+          [(ngModel)]="givenRating"
+          [readOnly]="!isInEditMode"
         ></drreview-rating>
       </div>
     </div>
     <div class="row">
       <div class="comment">
-        <quill-view-html [content]="text" [sanitize]="true"> </quill-view-html>
+        <drreview-comment
+          [(ngModel)]="text"
+          (ngModelChange)="modelChanged()"
+          [isEditable]="isInEditMode"
+        ></drreview-comment>
       </div>
     </div>
-    <div class="row">
+    <div class="row actions">
       <div class="likes">
         <div class="ratings">
           <div class="icon-wrapper">
@@ -44,6 +48,35 @@
             >
           </div>
           <div class="vote-count">{{ numberOfDislikes }}</div>
+        </div>
+      </div>
+      <div
+        class="buttons"
+        [class.permanent-editable]="isInEditMode"
+        *ngIf="isEditable"
+      >
+        <button
+          mat-icon-button
+          class="edit-btn"
+          *ngIf="!isInEditMode"
+          (click)="toggleEditMode()"
+        >
+          <mat-icon>edit</mat-icon>
+        </button>
+        <div class="edit-mode-buttons">
+          <button mat-icon-button *ngIf="isInEditMode" (click)="saveChanges()">
+            <mat-icon>save</mat-icon>
+          </button>
+          <button
+            mat-icon-button
+            *ngIf="isInEditMode"
+            (click)="toggleEditMode()"
+          >
+            <mat-icon>cancel</mat-icon>
+          </button>
+          <button mat-icon-button *ngIf="isInEditMode" (click)="resetChanges()">
+            <mat-icon>replay</mat-icon>
+          </button>
         </div>
       </div>
     </div>

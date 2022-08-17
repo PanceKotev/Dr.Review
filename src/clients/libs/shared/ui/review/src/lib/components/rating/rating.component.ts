@@ -1,28 +1,22 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
-import { RatingChangeEvent } from 'angular-star-rating';
+import { ChangeDetectionStrategy, Component, forwardRef, Input } from '@angular/core';
+import { NG_VALUE_ACCESSOR } from '@angular/forms';
+import { BaseControlValueAccessor } from '@drreview/shared/utils/form';
 
 @Component({
   selector: 'drreview-rating',
   templateUrl: './rating.component.html',
   styleUrls: ['./rating.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [{ provide: NG_VALUE_ACCESSOR, useExisting: forwardRef(() => RatingComponent), multi: true }]
 })
-export class RatingComponent {
+export class RatingComponent extends BaseControlValueAccessor<number> {
 
   @Input()
-  public value = 0.0;
+  public override value = 0.0;
 
   @Input()
   public readOnly = false;
 
   @Input()
   public useAppColors = false;
-
-  @Output()
-  public ratingChanged = new EventEmitter<number>();
-
-  public ratingChange(value: RatingChangeEvent): void {
-    this.value = value.rating;
-    this.ratingChanged.emit(this.value);
-  }
 }
