@@ -15,12 +15,6 @@ namespace DrReview.Modules.Review.Infrastructure.Common.Contexts
 
         public virtual DbSet<Review.Entities.Review> Reviews { get; set; }
 
-        public virtual DbSet<Review.Entities.Reviewee> Reviewees { get; set; }
-
-        public virtual DbSet<Review.Entities.Reviewer> Reviewers { get; set; }
-
-        public virtual DbSet<Review.Entities.Vote> Votes { get; set; }
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -28,7 +22,6 @@ namespace DrReview.Modules.Review.Infrastructure.Common.Contexts
             modelBuilder.ApplyConfiguration(new RevieweeConfiguration(SchemaName));
             modelBuilder.ApplyConfiguration(new ReviewConfiguration(SchemaName));
             modelBuilder.ApplyConfiguration(new VoteConfiguration(SchemaName));
-
         }
     }
 }

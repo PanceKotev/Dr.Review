@@ -64,13 +64,14 @@
                                   upvote: request.Vote,
                                   reviewerFK: reviewer.Id,
                                   reviewFK: review.Id);
+
+                _unitOfWork.Reviews.InsertVote(vote);
             }
             else
             {
                 vote.Update(request.Vote);
+                _unitOfWork.Reviews.UpdateVote(vote);
             }
-
-            _unitOfWork.Reviews.UpdateVote(vote);
 
             await _unitOfWork.SaveAsync();
 

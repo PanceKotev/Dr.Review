@@ -37,5 +37,10 @@
         {
             AttachOrUpdate<Entities.Vote>(vote, EntityState.Modified);
         }
+
+        public void InsertVote(Entities.Vote vote)
+        {
+            InsertOf<Entities.Vote>(vote);
+        }
     }
 }

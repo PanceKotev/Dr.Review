@@ -20,7 +20,7 @@ export interface GetReviewDto {
 
   readonly downvotes: number;
 
-  readonly alreadyVotedOnByUser: boolean;
+  readonly previousUserVote: boolean | undefined;
 }
 
 export interface GetReviewSummaryDto {

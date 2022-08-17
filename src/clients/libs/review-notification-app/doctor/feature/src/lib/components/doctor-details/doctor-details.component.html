@@ -42,6 +42,7 @@
       [givenRating]="currentUserReview.score"
       [numberOfLikes]="currentUserReview.upvotes"
       [numberOfDislikes]="currentUserReview.downvotes"
+      [previousVote]="currentUserReview.previousUserVote"
       (reviewVotedOn)="handleReviewVote(currentUserReview.suid, $event)"
     >
     </drreview-review>
@@ -53,6 +54,7 @@
       [givenRating]="review.score"
       [numberOfLikes]="review.upvotes"
       [numberOfDislikes]="review.downvotes"
+      [previousVote]="review.previousUserVote"
       (reviewVotedOn)="handleReviewVote(review.suid, $event)"
     ></drreview-review>
   </div>

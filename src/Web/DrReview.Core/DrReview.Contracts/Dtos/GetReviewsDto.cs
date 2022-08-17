@@ -26,7 +26,7 @@
             decimal score,
             long upvotes,
             long downvotes,
-            bool alreadyVotedOnByUser)
+            bool? previousUserVote)
         {
             Suid = suid;
             ReviewerName = reviewerName;
@@ -36,7 +36,7 @@
             Score = score;
             Upvotes = upvotes;
             Downvotes = downvotes;
-            AlreadyVotedOnByUser = alreadyVotedOnByUser;
+            PreviousUserVote = previousUserVote;
         }
 
         public string Suid { get; init; }
@@ -55,6 +55,6 @@
 
         public long Downvotes { get; init; }
 
-        public bool AlreadyVotedOnByUser { get; init; }
+        public bool? PreviousUserVote { get; init; }
     }
 }

@@ -59,6 +59,10 @@
   .icon-wrapper{
     margin-right: 0.25em;
   }
+
+  .votes-count{
+    max-width: 3em;
+  }
 }
 
 .green-color {
@@ -67,4 +71,8 @@
 
 .clickable {
   cursor: pointer;
+}
+
+.voted-on{
+  color:white !important;
 }

@@ -88,7 +88,7 @@
                                                             r.Score,
                                                             r.Upvotes,
                                                             r.Downvotes,
-                                                            votesByReviewId.ContainsKey(r.Id));
+                                                            votesByReviewId.ContainsKey(r.Id) ? votesByReviewId[r.Id].Upvoted : null);
                 }
                 else
                 {
@@ -101,7 +101,7 @@
                                                 r.Score,
                                                 r.Upvotes,
                                                 r.Downvotes,
-                                                votesByReviewId.ContainsKey(r.Id)));
+                                                votesByReviewId.ContainsKey(r.Id) ? votesByReviewId[r.Id].Upvoted : null));
                 }
             });
 

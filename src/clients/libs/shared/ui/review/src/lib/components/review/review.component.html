@@ -24,7 +24,10 @@
       <div class="likes">
         <div class="ratings">
           <div class="icon-wrapper">
-            <mat-icon class="green-color clickable" (click)="voteOnReview(true)"
+            <mat-icon
+              class="green-color clickable"
+              [class.voted-on]="previousVote === true"
+              (click)="voteOnReview(true)"
               >thumb_up</mat-icon
             >
           </div>
@@ -36,6 +39,7 @@
               color="warn"
               (click)="voteOnReview(false)"
               class="clickable"
+              [class.voted-on]="previousVote === false"
               >thumb_down</mat-icon
             >
           </div>
