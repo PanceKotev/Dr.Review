@@ -19,6 +19,8 @@ export interface GetReviewDto {
   readonly upvotes: number;
 
   readonly downvotes: number;
+
+  readonly alreadyVotedOnByUser: boolean;
 }
 
 export interface GetReviewSummaryDto {

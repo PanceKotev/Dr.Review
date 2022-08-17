@@ -6,7 +6,7 @@
 
     public partial class Vote : BaseEntity
     {
-        private Vote(long id, Guid uid, DateTime? deletedOn, DateTime modifiedOn, bool upvoted, long reviewerFK, long reviewFK)
+        private Vote(long id, Guid uid, DateTime? deletedOn, DateTime modifiedOn, bool? upvoted, long reviewerFK, long reviewFK)
             : base(id, uid, new ShortGuid(uid), deletedOn, modifiedOn)
         {
             Upvoted = upvoted;
@@ -14,9 +14,13 @@
             ReviewFK = reviewFK;
         }
 
-        public bool Upvoted { get; set; }
+        public bool? Upvoted { get; set; }
 
         public long ReviewerFK { get; init; }
+
+        public virtual Reviewer? Reviewer { get; set; }
+
+        public virtual Review? Review { get; set; }
 
         public long ReviewFK { get; init; }
     }

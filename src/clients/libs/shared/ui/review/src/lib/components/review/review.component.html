@@ -24,13 +24,20 @@
       <div class="likes">
         <div class="ratings">
           <div class="icon-wrapper">
-            <mat-icon class="green-color">thumb_up</mat-icon>
+            <mat-icon class="green-color clickable" (click)="voteOnReview(true)"
+              >thumb_up</mat-icon
+            >
           </div>
           <div class="vote-count">{{ numberOfLikes }}</div>
         </div>
         <div class="ratings">
           <div class="icon-wrapper">
-            <mat-icon color="warn">thumb_down</mat-icon>
+            <mat-icon
+              color="warn"
+              (click)="voteOnReview(false)"
+              class="clickable"
+              >thumb_down</mat-icon
+            >
           </div>
           <div class="vote-count">{{ numberOfDislikes }}</div>
         </div>

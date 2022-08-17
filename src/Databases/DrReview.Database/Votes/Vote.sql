@@ -7,7 +7,7 @@
 	 [ModifiedOn]       SMALLDATETIME               NOT NULL DEFAULT GETUTCDATE(),
 	 [ReviewerFK]		BIGINT						NOT NULL,
 	 [ReviewFK]			BIGINT						NOT NULL,
-	 [Upvoted]			BIT							NOT NULL,
+	 [Upvoted]			BIT							NULL,
 	 CONSTRAINT [UK_Vote_Uid_DeletedOn] UNIQUE([Uid], [DeletedOn]),
 	 CONSTRAINT [UK_Vote_Suid_DeletedOn] UNIQUE([Suid], [DeletedOn]),
 	 CONSTRAINT [FK_Vote_Reviewer] FOREIGN KEY([ReviewerFK]) REFERENCES [dbo].[User] ([ID]),

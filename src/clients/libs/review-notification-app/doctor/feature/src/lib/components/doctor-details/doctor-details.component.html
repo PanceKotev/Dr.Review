@@ -42,6 +42,7 @@
       [givenRating]="currentUserReview.score"
       [numberOfLikes]="currentUserReview.upvotes"
       [numberOfDislikes]="currentUserReview.downvotes"
+      (reviewVotedOn)="handleReviewVote(currentUserReview.suid, $event)"
     >
     </drreview-review>
     Other comments
@@ -52,6 +53,7 @@
       [givenRating]="review.score"
       [numberOfLikes]="review.upvotes"
       [numberOfDislikes]="review.downvotes"
+      (reviewVotedOn)="handleReviewVote(review.suid, $event)"
     ></drreview-review>
   </div>
 </mat-card>

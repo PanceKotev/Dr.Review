@@ -17,7 +17,16 @@
 
     public class GetReviewDto
     {
-        public GetReviewDto(string suid, string reviewerName, string revieweeName, DateTime lastUpdatedOn, string? comment, decimal score, long upvotes, long downvotes)
+        public GetReviewDto(
+            string suid,
+            string reviewerName,
+            string revieweeName,
+            DateTime lastUpdatedOn,
+            string? comment,
+            decimal score,
+            long upvotes,
+            long downvotes,
+            bool alreadyVotedOnByUser)
         {
             Suid = suid;
             ReviewerName = reviewerName;
@@ -27,6 +36,7 @@
             Score = score;
             Upvotes = upvotes;
             Downvotes = downvotes;
+            AlreadyVotedOnByUser = alreadyVotedOnByUser;
         }
 
         public string Suid { get; init; }
@@ -44,5 +54,7 @@
         public long Upvotes { get; init; }
 
         public long Downvotes { get; init; }
+
+        public bool AlreadyVotedOnByUser { get; init; }
     }
 }

@@ -86,5 +86,18 @@
                                                                                comment: request.Comment,
                                                                                score: request.Score)));
         }
+
+
+        [HttpPost]
+        [Authorize]
+        [Route("vote")]
+        [RequiredScope(new[] { "drreview.read", "drreview.write" })]
+        [ProducesResponseType(typeof(Result<EmptyValue>), (int)HttpStatusCode.OK)]
+        public async Task<IActionResult> VoteOnReviewAsync([FromBody] VoteOnReviewRequest request)
+        {
+            return OkOrError(await _mediator.SendAsync(new VoteOnReviewCommand(
+                                                                               reviewSuid: request.ReviewSuid,
+                                                                               vote: request.Vote)));
+        }
     }
 }

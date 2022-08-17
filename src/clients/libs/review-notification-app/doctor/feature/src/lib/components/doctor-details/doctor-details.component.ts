@@ -1,6 +1,8 @@
 import { Subject, takeUntil, switchMap, EMPTY, of, combineLatest } from 'rxjs';
 import { DoctorApiService,
-   ReviewApiService, GetDoctorDetailsDto, GetReviewDto, GetReviewSummaryDto, GetReviewsDto } from '@drreview/shared/data-access';
+   ReviewApiService,
+   GetDoctorDetailsDto,
+   GetReviewDto, GetReviewSummaryDto, GetReviewsDto, VoteOnReviewRequest } from '@drreview/shared/data-access';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
@@ -34,6 +36,10 @@ export class DoctorDetailsComponent implements OnInit, OnDestroy {
 
   private destroying$ = new Subject();
 
+  private voteOnReview$ = new Subject();
+
+  private voteOnReviewRequest: VoteOnReviewRequest | undefined;
+
   public constructor(
     private doctorsApi: DoctorApiService,
     private reviewApi: ReviewApiService,
@@ -60,6 +66,16 @@ export class DoctorDetailsComponent implements OnInit, OnDestroy {
         this.refreshReviews$.next(true);
       }
     });
+    this.voteOnReview$.pipe(
+      takeUntil(this.destroying$),
+      switchMap(() => {
+        if(!this.voteOnReviewRequest){
+          return of(null);
+        }
+
+        return this.reviewApi.voteOnReview(this.voteOnReviewRequest);
+      })
+    ).subscribe(() => this.refreshReviews$.next(true));
 
     this.refreshReviews$.pipe(
       takeUntil(this.destroying$),
@@ -129,6 +145,15 @@ export class DoctorDetailsComponent implements OnInit, OnDestroy {
     this.commentToSave = comment;
     this.ratingToSave = rating;
     this.saveButtonClicked$.next(true);
+  }
+
+  public handleReviewVote(reviewSuid: string, vote: boolean | undefined) : void {
+    this.voteOnReviewRequest = {
+      reviewSuid: reviewSuid,
+      vote: vote
+    };
+
+    this.voteOnReview$.next(true);
   }
 
   public ngOnDestroy(): void {

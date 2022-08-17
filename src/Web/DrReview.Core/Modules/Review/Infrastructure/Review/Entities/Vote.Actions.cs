@@ -4,7 +4,7 @@
 
     public partial class Vote
     {
-        public Result Update(bool upvoted)
+        public Result Update(bool? upvoted)
         {
             Upvoted = upvoted;
 

@@ -6,7 +6,6 @@
     using DrReview.Common.Mediator.Contracts;
     using DrReview.Common.Results;
     using DrReview.Contracts.Dtos;
-    using DrReview.Contracts.Enums;
     using DrReview.Modules.Review.Infrastructure.Common.Contexts;
     using DrReview.Modules.Review.Infrastructure.Review.Entities;
     using Microsoft.EntityFrameworkCore;

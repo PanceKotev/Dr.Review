@@ -32,5 +32,10 @@
         {
             AttachOrUpdate(review, EntityState.Modified);
         }
+
+        public void UpdateVote(Entities.Vote vote)
+        {
+            AttachOrUpdate<Entities.Vote>(vote, EntityState.Modified);
+        }
     }
 }

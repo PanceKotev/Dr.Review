@@ -1,7 +1,6 @@
 ﻿namespace DrReview.Contracts.Dtos
 {
     using System.Collections.Generic;
-    using DrReview.Contracts.Enums;
 
     public class GetReviewSummaryDto
     {

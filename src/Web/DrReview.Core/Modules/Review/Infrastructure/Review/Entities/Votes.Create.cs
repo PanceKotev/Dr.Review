@@ -7,7 +7,7 @@
     public partial class Vote
     {
         public static Result<Vote> Create(
-                                         bool upvote,
+                                         bool? upvote,
                                          long reviewerFK,
                                          long reviewFK)
         {

@@ -17,6 +17,9 @@
 
             builder.Property(x => x.Upvoted);
 
+            builder.HasOne(x => x.Review).WithOne().HasForeignKey<Entities.Vote>(v => v.ReviewFK);
+            builder.HasOne(x => x.Reviewer).WithOne().HasForeignKey<Entities.Vote>(v => v.ReviewerFK);
+
             builder.ToTable("Vote", Schema);
         }
     }

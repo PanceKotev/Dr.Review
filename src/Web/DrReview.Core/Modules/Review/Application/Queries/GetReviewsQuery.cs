@@ -40,6 +40,13 @@
 
         public async Task<Result<GetReviewsDto>> Handle(GetReviewsQuery request, CancellationToken cancellationToken)
         {
+            Reviewer? reviewer = await _readonlyDatabaseContext.Reviewers.FirstOrDefaultAsync(r => r.Uid == _currentUser.Uid);
+
+            if (reviewer is null)
+            {
+                return Result.NotFound<GetReviewsDto>(ResultCodes.UserNotFound);
+            }
+
             ExpressionStarter<Review>? predicate = PredicateBuilder.New<Review>(true);
 
             if (!string.IsNullOrEmpty(request.Filter.RevieweeSuid))
@@ -58,6 +65,12 @@
                                                   .Take(request.Filter.ItemsPerPage)
                                                   .ToListAsync();
 
+            List<long> reviewIds = fromSqlResult.Select(r => r.Id).ToList();
+
+            Dictionary<long, Vote> votesByReviewId = await _readonlyDatabaseContext.Votes
+                                                  .Where(v => v.ReviewerFK == reviewer.Id && reviewIds.Contains(v.ReviewFK))
+                                                  .ToDictionaryAsync(v => v.ReviewFK);
+
             List<GetReviewDto> reviews = new List<GetReviewDto>();
 
             GetReviewDto? reviewFromCurrentUser = null;
@@ -74,7 +87,8 @@
                                                             r.Comment,
                                                             r.Score,
                                                             r.Upvotes,
-                                                            r.Downvotes);
+                                                            r.Downvotes,
+                                                            votesByReviewId.ContainsKey(r.Id));
                 }
                 else
                 {
@@ -86,7 +100,8 @@
                                                 r.Comment,
                                                 r.Score,
                                                 r.Upvotes,
-                                                r.Downvotes));
+                                                r.Downvotes,
+                                                votesByReviewId.ContainsKey(r.Id)));
                 }
             });
 

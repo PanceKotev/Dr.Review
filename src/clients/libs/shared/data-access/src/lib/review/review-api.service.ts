@@ -1,6 +1,6 @@
 import { ApiService } from './../base/api.service';
 import { Injectable } from '@angular/core';
-import { CreateReviewRequest, GetReviewsDto, GetReviewSummaryDto } from '../models/review';
+import { CreateReviewRequest, GetReviewsDto, GetReviewSummaryDto, VoteOnReviewRequest } from '../models/review';
 import { map, Observable } from 'rxjs';
 import { Result } from '../models/common/result';
 
@@ -14,6 +14,10 @@ export class ReviewApiService {
 
   public addNewReview(request: CreateReviewRequest): Observable<Result<void>>{
     return this.apiService.post<Result<void>>("v1/reviews", request);
+  }
+
+  public voteOnReview(request: VoteOnReviewRequest): Observable<Result<void>>{
+    return this.apiService.post<Result<void>>("v1/reviews/vote", request);
   }
 
   public getReviewsForDoctor(revieweeSuid: string, userSuid: string): Observable<GetReviewsDto> {
