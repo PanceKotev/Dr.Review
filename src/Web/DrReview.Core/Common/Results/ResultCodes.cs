@@ -6,6 +6,8 @@
 
         public const string UserNotFound = "USER_NOT_FOUND";
 
+        public const string NoPermission = "NO_PERMISSION";
+
         #endregion
 
         #region Review

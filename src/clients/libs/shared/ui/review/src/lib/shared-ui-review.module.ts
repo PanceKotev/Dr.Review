@@ -13,7 +13,7 @@ import { ReviewComponent } from './components/review/review.component';
 import { SummaryComponent } from './components/summary/summary.component';
 import { RatingComponent } from './components/rating/rating.component';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { CurrentUserReviewComponent } from './components/current-user-review/current-user-review.component';
+import { CreateReviewComponent } from './components/create-review/create-review.component';
 import { AvatarModule } from 'ngx-avatars';
 
 @NgModule({
@@ -36,8 +36,8 @@ import { AvatarModule } from 'ngx-avatars';
     ReviewComponent,
     SummaryComponent,
     RatingComponent,
-    CurrentUserReviewComponent
+    CreateReviewComponent
   ],
-  exports: [CommentComponent, ReviewComponent, SummaryComponent, CurrentUserReviewComponent]
+  exports: [CommentComponent, ReviewComponent, SummaryComponent, CreateReviewComponent]
 })
 export class SharedUiReviewModule {}

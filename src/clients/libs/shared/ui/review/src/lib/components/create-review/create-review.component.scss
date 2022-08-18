@@ -56,12 +56,16 @@
 
 .action-buttons{
   margin-top: 1em;
-  &>button{
-    margin-right: 0.5em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .create-comment-button {
+    width: 150px;
   }
 }
 
-.readonly-quill {
+:host ::ng-deep drreview-comment .readonly-quill {
   border: 1px solid;
   display: block;
   padding: 1.25em 0;

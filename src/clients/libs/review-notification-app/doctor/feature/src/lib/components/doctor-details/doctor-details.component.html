@@ -27,15 +27,16 @@
       </div>
     </div>
   </mat-card-content>
-  <drreview-current-user-review
-    *ngIf="!currentUserReview"
-    [comment]="comment!"
-    [rating]="rating"
-    (commentSave)="saveCommentClicked($event)"
-  >
-  </drreview-current-user-review>
+  <div class="new-comment-wrapper">
+    <drreview-create-review
+      *ngIf="!currentUserReview"
+      class="current-user-review"
+      (reviewCreate)="handleCreateReview($event)"
+    >
+    </drreview-create-review>
+  </div>
 
-  <div class="reviews">
+  <div class="reviews" *ngIf="currentUserReview || doctorReviews?.length">
     <drreview-review
       *ngIf="currentUserReview"
       [createdBy]="currentUserReview.reviewerName"
@@ -45,9 +46,11 @@
       [numberOfDislikes]="currentUserReview.downvotes"
       [previousVote]="currentUserReview.previousUserVote"
       (reviewVotedOn)="handleReviewVote(currentUserReview.suid, $event)"
+      (reviewChanged)="handleReviewChanged(currentUserReview.suid, $event)"
+      (deletedReview)="handleReviewDelete(currentUserReview.suid)"
+      [isEditable]="true"
     >
     </drreview-review>
-    Other comments
     <drreview-review
       *ngFor="let review of doctorReviews"
       [createdBy]="review.reviewerName"
@@ -57,6 +60,9 @@
       [numberOfDislikes]="review.downvotes"
       [previousVote]="review.previousUserVote"
       (reviewVotedOn)="handleReviewVote(review.suid, $event)"
+      (reviewChanged)="handleReviewChanged(review.suid, $event)"
+      (deletedReview)="handleReviewDelete(review.suid)"
+      [isEditable]="false"
     ></drreview-review>
   </div>
 </mat-card>

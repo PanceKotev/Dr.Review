@@ -1,6 +1,6 @@
 import { ApiService } from './../base/api.service';
 import { Injectable } from '@angular/core';
-import { CreateReviewRequest, GetReviewsDto, GetReviewSummaryDto, VoteOnReviewRequest } from '../models/review';
+import { CreateReviewRequest, GetReviewsDto, GetReviewSummaryDto, UpdateReviewRequest, VoteOnReviewRequest } from '../models/review';
 import { map, Observable } from 'rxjs';
 import { Result } from '../models/common/result';
 
@@ -28,5 +28,13 @@ export class ReviewApiService {
   public getReviewSummaryForDoctor(revieweeSuid: string) : Observable<GetReviewSummaryDto> {
     return this.apiService.get<Result<GetReviewSummaryDto>>(`v1/reviews/${revieweeSuid}/summary`)
                   .pipe(map((res: Result<GetReviewSummaryDto>) => res.value));
+  }
+
+  public updateReview(updateReview: UpdateReviewRequest): Observable<Result<void>>{
+    return this.apiService.put<Result<void>>("v1/reviews", updateReview);
+  }
+
+  public deleteReview(reviewSuid: string):  Observable<Result<void>>{
+    return this.apiService.delete<Result<void>>(`v1/reviews/${reviewSuid}`);
   }
 }

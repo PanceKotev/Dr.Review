@@ -19,7 +19,6 @@
       <div class="comment">
         <drreview-comment
           [(ngModel)]="text"
-          (ngModelChange)="modelChanged()"
           [isEditable]="isInEditMode"
         ></drreview-comment>
       </div>
@@ -50,32 +49,46 @@
           <div class="vote-count">{{ numberOfDislikes }}</div>
         </div>
       </div>
-      <div
-        class="buttons"
-        [class.permanent-editable]="isInEditMode"
-        *ngIf="isEditable"
-      >
-        <button
-          mat-icon-button
-          class="edit-btn"
-          *ngIf="!isInEditMode"
-          (click)="toggleEditMode()"
-        >
-          <mat-icon>edit</mat-icon>
-        </button>
-        <div class="edit-mode-buttons">
-          <button mat-icon-button *ngIf="isInEditMode" (click)="saveChanges()">
-            <mat-icon>save</mat-icon>
+      <div class="buttons">
+        <div class="hover-buttons" *ngIf="isEditable">
+          <button
+            mat-icon-button
+            class="edit-btn"
+            *ngIf="!isInEditMode"
+            (click)="toggleEditMode()"
+          >
+            <mat-icon>edit</mat-icon>
           </button>
           <button
             mat-icon-button
-            *ngIf="isInEditMode"
-            (click)="toggleEditMode()"
+            class="delete-btn"
+            color="warn"
+            *ngIf="!isInEditMode"
+            (click)="deleteReview()"
+          >
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+        <div class="edit-mode-buttons" *ngIf="isInEditMode">
+          <button mat-icon-button (click)="resetChanges()" title="Ресетирај">
+            <mat-icon>replay</mat-icon>
+          </button>
+          <button
+            mat-icon-button
+            (click)="cancelChanges()"
+            color="warn"
+            title="Откажи"
           >
             <mat-icon>cancel</mat-icon>
           </button>
-          <button mat-icon-button *ngIf="isInEditMode" (click)="resetChanges()">
-            <mat-icon>replay</mat-icon>
+
+          <button
+            mat-icon-button
+            (click)="saveChanges()"
+            color="accent"
+            title="Зачувај"
+          >
+            <mat-icon>save</mat-icon>
           </button>
         </div>
       </div>

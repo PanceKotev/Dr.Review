@@ -1,10 +1,12 @@
-import { Subject, takeUntil, switchMap, EMPTY, of, combineLatest } from 'rxjs';
+import { Subject, takeUntil, switchMap, combineLatest } from 'rxjs';
 import { DoctorApiService,
    ReviewApiService,
    GetDoctorDetailsDto,
-   GetReviewDto, GetReviewSummaryDto, GetReviewsDto, VoteOnReviewRequest } from '@drreview/shared/data-access';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+   GetReviewDto, GetReviewSummaryDto, GetReviewsDto, VoteOnReviewRequest, UpdateReviewRequest } from '@drreview/shared/data-access';
+import { Component, NgZone, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { ReviewChangedEvent } from '@drreview/shared/ui/review';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   templateUrl: './doctor-details.component.html',
@@ -22,27 +24,23 @@ export class DoctorDetailsComponent implements OnInit, OnDestroy {
 
   public refreshReviews$ = new Subject<boolean>();
 
-  public rating = 0;
+  public updateReview$ = new Subject<UpdateReviewRequest>();
 
-  public ratingToSave = 0;
+  public createNewReview$ = new Subject<ReviewChangedEvent>();
 
-  public saveButtonClicked$ = new Subject();
-
-  public comment: string | undefined;
-
-  public commentToSave: string | undefined;
+  public deleteReview$ = new Subject<string>();
 
   public doctorSuid: string;
 
   private destroying$ = new Subject();
 
-  private voteOnReview$ = new Subject();
-
-  private voteOnReviewRequest: VoteOnReviewRequest | undefined;
+  private voteOnReview$ = new Subject<VoteOnReviewRequest>();
 
   public constructor(
     private doctorsApi: DoctorApiService,
     private reviewApi: ReviewApiService,
+    private zone: NgZone,
+    private snackBar: MatSnackBar,
     private route: ActivatedRoute) {
       this.doctorSuid = this.route.snapshot.params['doctorSuid'];
   }
@@ -52,12 +50,16 @@ export class DoctorDetailsComponent implements OnInit, OnDestroy {
       return;
     }
 
+    this.setUpSubscriptions();
+  }
+
+  private setUpSubscriptions(): void {
+    // ---- Doctors ----
     this.doctorsApi.getDoctorDetails(this.doctorSuid).pipe(
       takeUntil(this.destroying$)
     )
     .subscribe({
       next: val => {
-        console.log("doctor", val);
         this.doctor = val;
         this.refreshReviews$.next(true);
       },
@@ -66,40 +68,16 @@ export class DoctorDetailsComponent implements OnInit, OnDestroy {
         this.refreshReviews$.next(true);
       }
     });
-    this.voteOnReview$.pipe(
-      takeUntil(this.destroying$),
-      switchMap(() => {
-        if(!this.voteOnReviewRequest){
-          return of(null);
-        }
 
-        return this.reviewApi.voteOnReview(this.voteOnReviewRequest);
-      })
-    ).subscribe(() => this.refreshReviews$.next(true));
+    // ---- Reviews ----
 
     this.refreshReviews$.pipe(
       takeUntil(this.destroying$),
       switchMap(() => {
-        console.log('refreshed');
-        if(!this.doctor?.suid){
-          return combineLatest([of({
-            reviews: [],
-            currentUserReview: undefined
-          }),
-          of({
-            rating: 0,
-            reviewCountByStar: {
-              1: 0,
-              2: 0,
-              3: 0,
-              4: 0,
-              5: 0
-            }})]);
-        }
 
         return combineLatest([
-                              this.reviewApi.getReviewsForDoctor(this.doctor.suid, 'FRtJ-4ZPYkyh8d-fJGuXVg'),
-                              this.reviewApi.getReviewSummaryForDoctor(this.doctor.suid)]);
+                              this.reviewApi.getReviewsForDoctor(this.doctorSuid, 'FRtJ-4ZPYkyh8d-fJGuXVg'),
+                              this.reviewApi.getReviewSummaryForDoctor(this.doctorSuid)]);
       })
     ).subscribe({
       next: ([reviews, summary] : [GetReviewsDto, GetReviewSummaryDto]) => {
@@ -117,43 +95,83 @@ export class DoctorDetailsComponent implements OnInit, OnDestroy {
       }
     });
 
-    this.saveButtonClicked$.pipe(
-      switchMap(() => {
-
-        if(!this.doctor){
-          return EMPTY;
-        }
+    this.createNewReview$.pipe(
+      switchMap((doctorCreateEvent) => {
 
         return this.reviewApi.addNewReview({
-          revieweeSuid: this.doctor.suid,
-          score: this.ratingToSave,
-          comment: this.commentToSave
+          revieweeSuid: this.doctorSuid,
+          score: doctorCreateEvent.rating,
+          comment:  doctorCreateEvent.comment
           });
       })).subscribe({
-        next: res => {
-          console.log("success", res);
+        next: () => {
           this.refreshReviews$.next(true);
         },
         error: err => {
           console.error(err);
         }
       });
+
+    this.updateReview$.pipe(
+      takeUntil(this.destroying$),
+      switchMap((updateReview) => {
+        return this.reviewApi.updateReview(updateReview);
+      })).subscribe({
+        next: () => {
+          this.zone.run(() => {
+            this.snackBar.open("Рецензијата е успешно променета", "Затвори");
+          });
+          this.refreshReviews$.next(true);
+        },
+        error: err => {
+          console.error(err);
+        }
+      });
+
+    this.deleteReview$.pipe(
+      takeUntil(this.destroying$),
+      switchMap((reviewSuid) => {
+
+        return this.reviewApi.deleteReview(reviewSuid);
+      })
+    ).subscribe({
+      next: () =>{
+        this.zone.run(() => {
+          this.snackBar.open("Рецензијата е успешно избришена",  "Затвори");
+        });
+
+        this.refreshReviews$.next(true);
+      },
+      error: err => {
+        console.error(err);
+      }});
+
+    this.voteOnReview$.pipe(
+      takeUntil(this.destroying$),
+      switchMap((voteRequest) => {
+
+        return this.reviewApi.voteOnReview(voteRequest);
+      })
+    ).subscribe(() => this.refreshReviews$.next(true));
+
+
   }
 
-  public saveCommentClicked({comment, rating}: {comment: string | undefined, rating: number}): void {
-    console.log(comment);
-    this.commentToSave = comment;
-    this.ratingToSave = rating;
-    this.saveButtonClicked$.next(true);
+  public handleCreateReview(event: ReviewChangedEvent): void {
+    this.createNewReview$.next(event);
   }
 
   public handleReviewVote(reviewSuid: string, vote: boolean | undefined) : void {
-    this.voteOnReviewRequest = {
-      reviewSuid: reviewSuid,
-      vote: vote
-    };
 
-    this.voteOnReview$.next(true);
+    this.voteOnReview$.next({reviewSuid, vote});
+  }
+
+  public handleReviewChanged(reviewSuid: string, event: ReviewChangedEvent): void {
+    this.updateReview$.next({reviewSuid: reviewSuid, score: event.rating, comment: event.comment});
+  }
+
+  public handleReviewDelete(reviewSuid: string): void {
+    this.deleteReview$.next(reviewSuid);
   }
 
   public ngOnDestroy(): void {

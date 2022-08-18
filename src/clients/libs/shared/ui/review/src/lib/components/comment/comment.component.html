@@ -3,6 +3,7 @@
   class="quill-comment"
   [preserveWhitespace]="true"
   [(ngModel)]="value"
+  (ngModelChange)="onChange($event)"
   placeholder="Внеси опис овде..."
   [maxLength]="1000"
 >
@@ -20,10 +21,6 @@
       <button class="ql-italic"></button>
       <button class="ql-underline"></button>
       <button class="ql-strike"></button>
-    </span>
-    <span class="ql-formats">
-      <select class="ql-color"></select>
-      <select class="ql-background"></select>
     </span>
     <span class="ql-formats">
       <button class="ql-list" value="ordered"></button>

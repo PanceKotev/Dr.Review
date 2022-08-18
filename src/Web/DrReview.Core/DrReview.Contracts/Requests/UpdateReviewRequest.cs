@@ -5,7 +5,7 @@ namespace DrReview.Contracts.Requests
     {
         public string ReviewSuid { get; set; }
 
-        public string Comment { get; set; }
+        public string? Comment { get; set; }
 
         public decimal Score { get; set; }
     }

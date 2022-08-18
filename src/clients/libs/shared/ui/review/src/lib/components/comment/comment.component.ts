@@ -14,7 +14,4 @@ export class CommentComponent extends BaseControlValueAccessor<string | undefine
 
   @Input()
   public isEditable = false;
-
-  @Input()
-  public comment: string | undefined;
 }

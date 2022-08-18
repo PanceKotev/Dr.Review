@@ -74,15 +74,18 @@
 }
 
 .voted-on{
-  color:white !important;
+  color:currentColor !important;
 }
 
-.edit-btn{
+.hover-buttons{
   display: none !important;
 }
 
-.review-container:hover  .edit-btn {
-  display: flex !important;
+.review-container:hover  {
+  .hover-buttons {
+    display: flex !important;
+
+  }
 }
 
 .actions{
@@ -91,10 +94,17 @@
   justify-content:space-between ;
 }
 
-.buttons.permanent-editable {
-  display: flex !important;
-}
-
 .edit-mode-buttons{
   display: flex;
+}
+
+
+:host::ng-deep .edit-mode-buttons {
+   .mat-icon-button .mat-icon{
+    --icon-size: 30px;
+    width: var(--icon-size);
+    height: var(--icon-size);
+    font-size: var(--icon-size);
+    line-height: var(--icon-size);
+  }
 }

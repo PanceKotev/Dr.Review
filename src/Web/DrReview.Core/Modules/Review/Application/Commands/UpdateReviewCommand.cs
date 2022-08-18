@@ -30,26 +30,37 @@
     {
         private readonly IReviewUnitOfWork _unitOfWork;
 
+        private readonly ICurrentUser _currentUser;
+
         private readonly ReviewReadOnlyDatabaseContext _readonlyContext;
 
-        public UpdateReviewCommandHandler(IReviewUnitOfWork unitOfWork, ReviewReadOnlyDatabaseContext readonlyContext)
+        public UpdateReviewCommandHandler(
+            IReviewUnitOfWork unitOfWork,
+            ReviewReadOnlyDatabaseContext readonlyContext,
+            ICurrentUser currentUser)
         {
             _unitOfWork = unitOfWork;
+            _currentUser = currentUser;
             _readonlyContext = readonlyContext;
         }
 
         public async Task<Result<EmptyValue>> Handle(UpdateReviewCommand request, CancellationToken cancellationToken)
         {
-            Review? review = await _readonlyContext.Reviews.FirstOrDefaultAsync(r => r.Suid == request.ReviewSuid);
+            Review? review = await _readonlyContext.Reviews.Include(r => r.Reviewer).FirstOrDefaultAsync(r => r.Suid == request.ReviewSuid);
 
             if (review is null)
             {
                 return Result.NotFound<EmptyValue>(ResultCodes.ReviewNotFound);
             }
 
+            if (review.Reviewer!.Uid != _currentUser.Uid)
+            {
+                return Result.Invalid<EmptyValue>(ResultCodes.NoPermission);
+            }
+
             review.Update(
-                          comment: request.Comment,
-                          score: request.Score);
+                        comment: request.Comment,
+                        score: request.Score);
 
             _unitOfWork.Reviews.UpdateReview(review);
 
