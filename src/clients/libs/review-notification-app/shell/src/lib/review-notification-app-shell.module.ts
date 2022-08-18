@@ -15,7 +15,7 @@ import { SharedServicesThemesModule } from '@drreview/shared/services/themes';
 import { RouterModule } from '@angular/router';
 import { QuillModule } from 'ngx-quill';
 import { StarRatingModule } from 'angular-star-rating';
-import { MatSnackBarConfig, MatSnackBarModule, MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material/snack-bar';
+import { SharedServicesSnackBarModule } from '@drreview/shared/services/snack-bar';
 
 @NgModule({
   imports: [
@@ -28,7 +28,7 @@ import { MatSnackBarConfig, MatSnackBarModule, MAT_SNACK_BAR_DEFAULT_OPTIONS } f
     ReviewNotificationAppCommonServicesAuthModule,
     SharedDataAccessModule,
     MatSidenavModule,
-    MatSnackBarModule,
+    SharedServicesSnackBarModule,
     SharedUiThemesModule,
     SharedServicesThemesModule,
     ReviewNotificationAppNavigationModule],
@@ -39,9 +39,6 @@ import { MatSnackBarConfig, MatSnackBarModule, MAT_SNACK_BAR_DEFAULT_OPTIONS } f
     SharedDataAccessModule,
     MainLayoutComponent,
     RouterModule
-    ],
-  providers: [
-    {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 1000}}
-  ]
+    ]
 })
 export class ReviewNotificationAppShellModule {}

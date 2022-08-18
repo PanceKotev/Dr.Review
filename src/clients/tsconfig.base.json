@@ -43,6 +43,9 @@
         "libs/review-notification-app/shell/src/index.ts"
       ],
       "@drreview/shared/data-access": ["libs/shared/data-access/src/index.ts"],
+      "@drreview/shared/services/snack-bar": [
+        "libs/shared/services/snack-bar/src/index.ts"
+      ],
       "@drreview/shared/services/themes": [
         "libs/shared/services/themes/src/index.ts"
       ],

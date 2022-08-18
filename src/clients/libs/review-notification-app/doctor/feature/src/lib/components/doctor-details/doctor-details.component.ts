@@ -6,7 +6,7 @@ import { DoctorApiService,
 import { Component, NgZone, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ReviewChangedEvent } from '@drreview/shared/ui/review';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { SnackBarService } from '@drreview/shared/services/snack-bar';
 
 @Component({
   templateUrl: './doctor-details.component.html',
@@ -40,7 +40,7 @@ export class DoctorDetailsComponent implements OnInit, OnDestroy {
     private doctorsApi: DoctorApiService,
     private reviewApi: ReviewApiService,
     private zone: NgZone,
-    private snackBar: MatSnackBar,
+    private snackBar: SnackBarService,
     private route: ActivatedRoute) {
       this.doctorSuid = this.route.snapshot.params['doctorSuid'];
   }
@@ -118,9 +118,7 @@ export class DoctorDetailsComponent implements OnInit, OnDestroy {
         return this.reviewApi.updateReview(updateReview);
       })).subscribe({
         next: () => {
-          this.zone.run(() => {
-            this.snackBar.open("Рецензијата е успешно променета", "Затвори");
-          });
+          this.snackBar.openInfo("Рецензијата е успешно променета");
           this.refreshReviews$.next(true);
         },
         error: err => {
@@ -136,9 +134,7 @@ export class DoctorDetailsComponent implements OnInit, OnDestroy {
       })
     ).subscribe({
       next: () =>{
-        this.zone.run(() => {
-          this.snackBar.open("Рецензијата е успешно избришена",  "Затвори");
-        });
+        this.snackBar.openInfo("Рецензијата е успешно избришена");
 
         this.refreshReviews$.next(true);
       },
