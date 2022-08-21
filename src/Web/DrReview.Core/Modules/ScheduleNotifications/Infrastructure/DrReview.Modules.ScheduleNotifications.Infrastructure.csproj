@@ -21,4 +21,13 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Common\UnitOfWork\" />
+    <Folder Include="ScheduleSubscriptions\Repositories\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Common\DrReview.Common.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -13,7 +13,7 @@
         {
             if (!reviewerFK.IsValidId() || !reviewFK.IsValidId())
             {
-                return Result.Invalid<Vote>("Invalid reivewer or review");
+                return Result.Invalid<Vote>(ResultCodes.InvalidEntityReference);
             }
 
             return Result.Ok(new Vote(
