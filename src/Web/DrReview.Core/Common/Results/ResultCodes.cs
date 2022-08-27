@@ -25,5 +25,13 @@
         public const string ReviewNotFound = "REVIEW_NOT_FOUND";
 
         #endregion
+
+        #region ScheduleSubscription
+
+        public const string ScheduleSubscriptionAlreadyExists = "SCHEDULE_SUBSCRIPTION_ALREADY_EXISTS";
+
+        public const string ScheduleSubscriptionNotFound = "SCHEDULE_SUBSCRIPTION_NOT_FOUND";
+
+        #endregion
     }
 }

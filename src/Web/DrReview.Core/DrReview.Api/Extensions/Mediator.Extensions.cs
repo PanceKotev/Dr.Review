@@ -2,6 +2,7 @@
 {
     using DrReview.Common.Query;
     using DrReview.Modules.Review.Application.Commands;
+    using DrReview.Modules.ScheduleNotifications.Application.Commands;
     using DrReview.Modules.User.Application.Commands.User;
     using MediatR;
 
@@ -13,6 +14,7 @@
                 typeof(Program),
                 typeof(GetDoctorsBySearchwordQueryHandler),
                 typeof(CreateReviewCommandHandler),
+                typeof(SubscribeToScheduleCommandHandler),
                 typeof(CreateUserIfNotExistsHandler));
 
             return services;

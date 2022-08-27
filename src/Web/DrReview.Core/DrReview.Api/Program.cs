@@ -1,10 +1,11 @@
+using DateOnlyTimeOnly.AspNet;
 using DrReview.Api.Extensions;
-
 WebApplicationBuilder? builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddB2CAuthentication(builder.Configuration)
-                .AddControllers();
+                .AddControllers(options => options.UseDateOnlyTimeOnlyStringConverters())
+                .AddJsonOptions(options => options.UseDateOnlyTimeOnlyStringConverters());
 
 builder.Services.RegisterCors(builder.Configuration)
                 .AddAuthorization()
