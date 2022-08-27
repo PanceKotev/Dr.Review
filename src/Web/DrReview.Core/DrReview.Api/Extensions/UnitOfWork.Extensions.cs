@@ -2,6 +2,8 @@
 {
     using DrReview.Modules.Review.Infrastructure.Common.UnitOfWork;
     using DrReview.Modules.Review.Infrastructure.Common.UnitOfWork.Interfaces;
+    using DrReview.Modules.ScheduleNotifications.Infrastructure.Common.UnitOfWork;
+    using DrReview.Modules.ScheduleNotifications.Infrastructure.Common.UnitOfWork.Interfaces;
     using DrReview.Modules.User.Infrastructure.Common.UnitOfWork;
     using DrReview.Modules.User.Infrastructure.Common.UnitOfWork.Interfaces;
 
@@ -11,6 +13,7 @@
         {
             services.AddScoped<IUserUnitOfWork, UserUnitOfWork>();
             services.AddScoped<IReviewUnitOfWork, ReviewUnitOfWork>();
+            services.AddScoped<IScheduleNotificationsUnitOfWork, ScheduleNotificationsUnitOfWork>();
 
             return services;
         }
