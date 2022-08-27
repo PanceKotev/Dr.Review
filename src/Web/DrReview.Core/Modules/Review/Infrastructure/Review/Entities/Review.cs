@@ -6,7 +6,7 @@
 
     public partial class Review : AggregateRoot
     {
-        public Review(
+        private Review(
             long id,
             Guid uid,
             DateTime? deletedOn,
@@ -14,13 +14,17 @@
             long reviewerFK,
             long revieweeFK,
             string? comment,
-            decimal score)
+            decimal score,
+            long upvotes,
+            long downvotes)
             : base(id, uid, new ShortGuid(uid), deletedOn, modifiedOn)
         {
             ReviewerFK = reviewerFK;
             RevieweeFK = revieweeFK;
             Comment = comment;
             Score = score;
+            Upvotes = upvotes;
+            Downvotes = downvotes;
         }
 
         public long ReviewerFK { get; init; }
@@ -34,5 +38,9 @@
         public string? Comment { get; private set; }
 
         public decimal Score { get; private set; }
+
+        public long Upvotes { get; init; }
+
+        public long Downvotes { get; init; }
     }
 }

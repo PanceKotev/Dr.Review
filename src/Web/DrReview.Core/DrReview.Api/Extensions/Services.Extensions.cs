@@ -13,14 +13,15 @@
         /// </summary>
         public static IServiceCollection AddProjectServices(this IServiceCollection services, IConfiguration configuration)
         {
-
             services.AddScoped<IDoctorMigrationService, DoctorMigrationService>(options =>
             {
                 IMojTerminHttpClient httpClient = options.GetRequiredService<IMojTerminHttpClient>();
 
+                string connectionString = configuration.GetConnectionString("DatabaseConnection");
+
                 return new DoctorMigrationService(
                            httpClient,
-                           configuration.GetConnectionString("DatabaseConnection")!);
+                           connectionString!);
             });
 
             services.AddScoped<IDrReviewMediatorService, DrReviewMediatorService>();

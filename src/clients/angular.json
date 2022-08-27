@@ -14,9 +14,15 @@
     "review-notification-app-navigation": "libs/review-notification-app/navigation",
     "review-notification-app-shell": "libs/review-notification-app/shell",
     "shared-data-access": "libs/shared/data-access",
+    "shared-services-snack-bar": "libs/shared/services/snack-bar",
     "shared-services-themes": "libs/shared/services/themes",
+    "shared-ui-review": "libs/shared/ui/review",
     "shared-ui-search": "libs/shared/ui/search",
     "shared-ui-themes": "libs/shared/ui/themes",
-    "shared-utils-app-config": "libs/shared/utils/app-config"
+    "shared-utils-app-config": "libs/shared/utils/app-config",
+    "shared-utils-date": "libs/shared/utils/date",
+    "shared-utils-form": "libs/shared/utils/form",
+    "shared-utils-pipes": "libs/shared/utils/pipes",
+    "shared-utils-rxjs": "libs/shared/utils/rxjs"
   }
 }

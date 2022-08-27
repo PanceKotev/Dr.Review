@@ -1,9 +1,6 @@
 <drreview-main-navigation [ngClass]="{ 'dark-theme': isDarkTheme }">
-  <div
-    [@scaleDownFromBottom]="o.isActivated ? o.activatedRoute : ''"
-    class="main-container mat-app-background"
-  >
+  <div class="main-container mat-app-background">
     <img class="illustration" src="/assets/doctor-illustration.svg" />
-    <router-outlet #o="outlet"></router-outlet>
+    <router-outlet></router-outlet>
   </div>
 </drreview-main-navigation>

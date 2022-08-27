@@ -20,6 +20,8 @@ namespace DrReview.Modules.Review.Infrastructure.Common.Contexts
 
         public virtual DbSet<Review.Entities.Review> Reviews { get; set; }
 
+        public virtual DbSet<Review.Entities.Vote> Votes { get; set; }
+
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
             throw new DbUpdateException("Cannot write to readonly database");
@@ -32,6 +34,7 @@ namespace DrReview.Modules.Review.Infrastructure.Common.Contexts
             modelBuilder.ApplyConfiguration(new ReviewerConfiguration(_schemaName));
             modelBuilder.ApplyConfiguration(new RevieweeConfiguration(_schemaName));
             modelBuilder.ApplyConfiguration(new ReviewConfiguration(_schemaName));
+            modelBuilder.ApplyConfiguration(new VoteConfiguration(_schemaName));
         }
     }
 }

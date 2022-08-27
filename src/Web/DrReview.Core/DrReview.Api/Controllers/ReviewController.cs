@@ -9,7 +9,6 @@
     using DrReview.Modules.Review.Application.Commands;
     using DrReview.Modules.Review.Application.Queries;
     using DrReview.Modules.Review.Infrastructure.Common.UnitOfWork.Interfaces;
-    using DrReview.Modules.Review.Infrastructure.Review.Entities;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Identity.Web.Resource;
@@ -29,9 +28,9 @@
 
         [HttpGet]
         [Authorize]
-        [RequiredScope(new[] { "drreview.read", "drreview.write" })]
+        [RequiredScope("drreview.read")]
         [ProducesResponseType(typeof(Result<List<GetReviewsDto>>), (int)HttpStatusCode.OK)]
-        public async Task<IActionResult> GetReviewsForDoctorAsync(
+        public async Task<IActionResult> GetReviewsAsync(
                                                                 [FromQuery] string? reviewerSuid,
                                                                 [FromQuery] string? revieweeSuid,
                                                                 [FromQuery] int startPage = 0,
@@ -56,6 +55,16 @@
                                                                                score: request.Score)));
         }
 
+        [HttpGet]
+        [Authorize]
+        [RequiredScope(new[] { "drreview.read", "drreview.write" })]
+        [Route("{revieweeSuid}/summary")]
+        [ProducesResponseType(typeof(Result<GetReviewSummaryDto>), (int)HttpStatusCode.OK)]
+        public async Task<IActionResult> GetReviewSummary([FromRoute] string revieweeSuid)
+        {
+            return OkOrError(await _mediator.SendAsync(new GetReviewSummaryQuery(revieweeSuid: revieweeSuid)));
+        }
+
         [HttpDelete]
         [Route("{reviewSuid}")]
         [Authorize]
@@ -76,6 +85,19 @@
                                                                                reviewSuid: request.ReviewSuid,
                                                                                comment: request.Comment,
                                                                                score: request.Score)));
+        }
+
+
+        [HttpPost]
+        [Authorize]
+        [Route("vote")]
+        [RequiredScope(new[] { "drreview.read", "drreview.write" })]
+        [ProducesResponseType(typeof(Result<EmptyValue>), (int)HttpStatusCode.OK)]
+        public async Task<IActionResult> VoteOnReviewAsync([FromBody] VoteOnReviewRequest request)
+        {
+            return OkOrError(await _mediator.SendAsync(new VoteOnReviewCommand(
+                                                                               reviewSuid: request.ReviewSuid,
+                                                                               vote: request.Vote)));
         }
     }
 }

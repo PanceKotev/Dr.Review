@@ -1,0 +1,41 @@
+
+
+:host::ng-deep .app-colors .rating.color-negative .star-container .star {
+  svg {
+    fill: var(--color-primary) !important;
+  }
+  i {
+    color: var(--color-primary) !important;
+  }
+}
+
+:host::ng-deep .app-colors .rating.color-ok .star-container .star {
+  svg {
+    fill: var(--color-primary) !important;
+  }
+  i {
+    color: var(--color-primary) !important;
+  }
+}
+
+:host::ng-deep .app-colors .rating.color-positive .star-container .star {
+  svg {
+    fill: var(--color-primary) !important;
+  }
+  i {
+    color: var(--color-primary) !important;
+  }
+}
+
+:host::ng-deep .app-colors .rating.color-default .star-container .star {
+  svg {
+    fill: var(--color-primary) !important;
+  }
+  i {
+    color: var(--color-primary) !important;
+  }
+}
+
+:host::ng-deep .editable .star-container .star{
+  cursor: pointer !important;
+}

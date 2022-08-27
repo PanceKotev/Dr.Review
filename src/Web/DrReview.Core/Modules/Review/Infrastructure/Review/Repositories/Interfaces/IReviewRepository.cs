@@ -9,5 +9,9 @@
         public void InsertReview(Entities.Review review);
 
         public void UpdateReview(Entities.Review review);
+
+        public void UpdateVote(Entities.Vote vote);
+
+        public void InsertVote(Entities.Vote vote);
     }
 }

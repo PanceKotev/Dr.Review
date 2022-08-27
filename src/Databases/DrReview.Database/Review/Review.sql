@@ -9,6 +9,8 @@
 	 [RevieweeFK]		BIGINT						NOT NULL,
 	 [Comment]			NVARCHAR(1000)				NULL,
 	 [Score]			DECIMAL(3,2)				NOT NULL DEFAULT 0,
+	 [Upvotes]			BIGINT						NOT NULL DEFAULT 0,
+	 [Downvotes]		BIGINT						NOT NULL DEFAULT 0,
 	 CONSTRAINT [UK_Review_Uid_DeletedOn] UNIQUE([Uid], [DeletedOn]),
 	 CONSTRAINT [UK_Review_Suid_DeletedOn] UNIQUE([Suid], [DeletedOn]),
 	 CONSTRAINT [FK_Review_Reviewer] FOREIGN KEY([ReviewerFK]) REFERENCES [dbo].[User] ([ID]),

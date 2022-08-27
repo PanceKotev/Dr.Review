@@ -21,6 +21,7 @@ namespace DrReview.Modules.Review.Infrastructure.Common.Contexts
             modelBuilder.ApplyConfiguration(new ReviewerConfiguration(SchemaName));
             modelBuilder.ApplyConfiguration(new RevieweeConfiguration(SchemaName));
             modelBuilder.ApplyConfiguration(new ReviewConfiguration(SchemaName));
+            modelBuilder.ApplyConfiguration(new VoteConfiguration(SchemaName));
         }
     }
 }

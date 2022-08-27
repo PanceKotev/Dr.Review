@@ -43,14 +43,25 @@
         "libs/review-notification-app/shell/src/index.ts"
       ],
       "@drreview/shared/data-access": ["libs/shared/data-access/src/index.ts"],
+      "@drreview/shared/services/snack-bar": [
+        "libs/shared/services/snack-bar/src/index.ts"
+      ],
       "@drreview/shared/services/themes": [
         "libs/shared/services/themes/src/index.ts"
       ],
+      "@drreview/shared/ui/review": ["libs/shared/ui/review/src/index.ts"],
       "@drreview/shared/ui/search": ["libs/shared/ui/search/src/index.ts"],
       "@drreview/shared/ui/themes": ["libs/shared/ui/themes/src/index.ts"],
       "@drreview/shared/utils/app-config": [
         "libs/shared/utils/app-config/src/index.ts"
-      ]
+      ],
+      "@drreview/shared/utils/date": ["libs/shared/utils/date/src/index.ts"],
+      "@drreview/shared/utils/form": ["libs/shared/utils/form/src/index.ts"],
+      "@drreview/shared/utils/pipes": ["libs/shared/utils/pipes/src/index.ts"],
+      "@drreview/shared/utils/pipes/rxjs": [
+        "libs/shared/utils/pipes/rxjs/src/index.ts"
+      ],
+      "@drreview/shared/utils/rxjs": ["libs/shared/utils/rxjs/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp", "*.spec.ts", "*.po.ts"]

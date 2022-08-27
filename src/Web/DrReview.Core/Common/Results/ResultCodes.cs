@@ -6,6 +6,12 @@
 
         public const string UserNotFound = "USER_NOT_FOUND";
 
+        public const string NoPermission = "NO_PERMISSION";
+
+        public const string InvalidEntityReference = "INVALID_ENTITY_REFERENCE";
+
+        public const string RangeDateFromBeforeToDate = "RANGE_DATE_FROM_BEFORE_TO_DATE";
+
         #endregion
 
         #region Review

@@ -26,7 +26,9 @@
                                           reviewerFK: reviewerFK,
                                           revieweeFK: revieweeFK,
                                           comment: trimmedComment,
-                                          score: score);
+                                          score: score,
+                                          upvotes: 0,
+                                          downvotes: 0);
 
             return Result.Ok(newReview);
         }
