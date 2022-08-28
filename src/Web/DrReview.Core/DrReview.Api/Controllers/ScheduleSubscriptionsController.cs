@@ -11,7 +11,6 @@
     using Microsoft.Identity.Web.Resource;
 
     [Route("api/v1/schedules")]
-    [ApiController]
     public class ScheduleSubscriptionsController : BaseController
     {
         private readonly IDrReviewMediatorService _mediator;

@@ -8,8 +8,10 @@ builder.Services.AddB2CAuthentication(builder.Configuration)
                 .AddJsonOptions(options => options.UseDateOnlyTimeOnlyStringConverters());
 
 builder.Services.RegisterCors(builder.Configuration)
+                .AddSettings(builder.Configuration)
                 .AddAuthorization()
                 .AddHangfireConfiguration(builder.Configuration)
+                .AddEmailClient()
                 .AddDatabase(builder.Configuration)
                 .AddUnitOfWork()
                 .AddMediator()
@@ -26,6 +28,7 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwaggerDashboard(app.Configuration);
 }
+
 app.UseRouting();
 
 app.UseCors(builder.Configuration["CorsSettings:PolicyName"]);

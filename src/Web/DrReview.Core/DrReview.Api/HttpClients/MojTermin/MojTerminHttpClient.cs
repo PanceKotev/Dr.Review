@@ -6,7 +6,6 @@
 
     public class MojTerminHttpClient : IMojTerminHttpClient
     {
-
         private readonly HttpClient _httpClient;
 
         public MojTerminHttpClient(HttpClient httpClient)
@@ -49,7 +48,6 @@
                 throw new ArgumentException("Cannot convert locations");
             }
 
-
             return responseResult.Values.ToList();
         }
 
@@ -87,10 +85,9 @@
             {
                 result.LocationId = institutionIdLocationMap[result.Id];
 
-
                 SectionResponse doctorSection = result.Sections.First(s => s.Type == "doctor");
 
-                doctorSection.Items.ForEach(x => 
+                doctorSection.Items.ForEach(x =>
                 {
                     x.InstitutionFK = result.Id;
                     x.Institution = result;

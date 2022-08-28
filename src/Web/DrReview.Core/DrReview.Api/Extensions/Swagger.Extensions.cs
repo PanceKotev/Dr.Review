@@ -1,7 +1,7 @@
 ﻿namespace DrReview.Api.Extensions
 {
-    using Microsoft.OpenApi.Models;
     using DateOnlyTimeOnly.AspNet;
+    using Microsoft.OpenApi.Models;
 
     public static partial class Extensions
     {

@@ -11,21 +11,21 @@
         {
             IActionResult? errorResponse = GetErrorResponse(result);
 
-            return errorResponse ?? base.Ok(result);
+            return errorResponse ?? Ok(result);
         }
 
         protected IActionResult OkOrError(ResultCommonLogic result)
         {
             IActionResult? errorResponse = GetErrorResponse(result);
 
-            return errorResponse ?? base.Ok(result);
+            return errorResponse ?? Ok(result);
         }
 
         protected IActionResult OkEmptyOrError<T>(Result<T> result)
         {
             IActionResult? errorResponse = GetErrorResponse(result);
 
-            return errorResponse ?? base.Ok(Result.Ok());
+            return errorResponse ?? Ok(Result.Ok());
         }
 
         private IActionResult? GetErrorResponse(ResultCommonLogic result)

@@ -8,7 +8,6 @@
     using DrReview.Contracts.Requests;
     using DrReview.Modules.Review.Application.Commands;
     using DrReview.Modules.Review.Application.Queries;
-    using DrReview.Modules.Review.Infrastructure.Common.UnitOfWork.Interfaces;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Identity.Web.Resource;
@@ -16,7 +15,6 @@
     [Route("api/v1/reviews")]
     public class ReviewController : BaseController
     {
-
         private readonly IDrReviewMediatorService _mediator;
 
         public ReviewController(IDrReviewMediatorService mediator)

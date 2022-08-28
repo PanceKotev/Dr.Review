@@ -25,6 +25,7 @@
             });
 
             services.AddScoped<IDrReviewMediatorService, DrReviewMediatorService>();
+            services.AddScoped<IEmailService, EmailService>();
             return services;
         }
     }

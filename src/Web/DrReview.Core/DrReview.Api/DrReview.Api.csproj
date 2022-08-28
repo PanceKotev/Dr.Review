@@ -8,12 +8,15 @@
 		<DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
 		<DockerfileContext>..\..</DockerfileContext>
 		<DockerComposeProjectPath>..\..\docker-compose.dcproj</DockerComposeProjectPath>
+		<PreserveCompilationContext>true</PreserveCompilationContext>
 	</PropertyGroup>
 
 	<ItemGroup>
 		<PackageReference Include="Dapper" Version="2.0.123" />
 		<PackageReference Include="DateOnlyTimeOnly.AspNet" Version="1.0.3" />
 		<PackageReference Include="DateOnlyTimeOnly.AspNet.Swashbuckle" Version="1.0.3" />
+		<PackageReference Include="FluentEmail.Razor" Version="3.0.2" />
+		<PackageReference Include="FluentEmail.SendGrid" Version="3.0.2" />
 		<PackageReference Include="Hangfire.AspNetCore" Version="1.7.31" />
 		<PackageReference Include="Hangfire.Core" Version="1.7.31" />
 		<PackageReference Include="Hangfire.Dashboard.BasicAuthorization" Version="1.0.2" />
@@ -81,6 +84,15 @@
 		</Content>
 		<Content Update="appsettings.json">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Update="Emails\Views\TestEmail.cshtml">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Update="Emails\Views\_Layout.cshtml">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Update="Emails\Views\_ViewStart.cshtml">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>
 	</ItemGroup>
 
