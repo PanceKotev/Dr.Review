@@ -86,7 +86,10 @@
 		<Content Update="appsettings.json">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>
-		<Content Update="Emails\Views\TestEmail.cshtml">
+		<Content Update="Emails\Views\TestEmail - Copy.cshtml">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Update="Emails\Views\ScheduleNotificationEmail.cshtml">
 		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>
 		<Content Update="Emails\Views\_Layout.cshtml">
@@ -99,6 +102,12 @@
 
 	<ItemGroup>
 		<Folder Include="HttpClients\MojTermin\Contracts\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Update="Emails\Assets\logo-dark.png">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
 	</ItemGroup>
 
 </Project>

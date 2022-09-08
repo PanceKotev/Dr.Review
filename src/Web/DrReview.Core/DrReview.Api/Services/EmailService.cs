@@ -16,6 +16,7 @@
 
         public async Task<SendResponse> SendEmailAsync(BaseEmailDto email)
         {
+
             SendResponse result = await _fluentEmail
                         .To(email.Recipient)
                         .Subject(email.Subject)

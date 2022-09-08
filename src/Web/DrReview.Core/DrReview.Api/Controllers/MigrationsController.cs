@@ -1,7 +1,7 @@
 ﻿namespace DrReview.Api.Controllers
 {
     using DrReview.Api.Services.Interfaces;
-    using DrReview.Contracts.Dtos.Emails;
+    using Hangfire;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Identity.Web.Resource;
 
@@ -15,11 +15,18 @@
 
         private readonly IEmailService _emailService;
 
-        public MigrationsController(IDoctorMigrationService migrationService, IConfiguration configuration, IEmailService emailService)
+        private readonly INotificationSchedulerService _notificationSchedulerService;
+
+        public MigrationsController(
+            IDoctorMigrationService migrationService,
+            IConfiguration configuration,
+            IEmailService emailService,
+            INotificationSchedulerService notificationSchedulerService)
         {
             _migrationService = migrationService;
             _configuration = configuration;
             _emailService = emailService;
+            _notificationSchedulerService = notificationSchedulerService;
         }
 
         [HttpPost("UpdateLocations")]
@@ -30,13 +37,10 @@
             return Ok();
         }
 
-        [HttpPost("SendEmail")]
-        public async Task<IActionResult> SendEmailAsync()
+        [HttpPost("SendEmail/notifications")]
+        public IActionResult SendEmailNotifications()
         {
-            await _emailService.SendEmailAsync(new TestEmail(
-                                    recipient: "avreinix@gmail.com",
-                                    subject: "Test Email",
-                                    testProperty: "TEEEEEEEEEEEEEEEEEST"));
+            BackgroundJob.Enqueue<INotificationSchedulerService>(x => x.SendScheduleNotificationsAsync());
 
             return Ok();
         }
