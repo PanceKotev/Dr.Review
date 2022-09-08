@@ -98,5 +98,23 @@
 
             return allDoctors;
         }
+
+        public async Task<List<TimeslotDoctorResponse>> GetTimeslotsForDoctorsAsync(List<long> doctorIds)
+        {
+            string path = "pp/resources/";
+
+            List<Task<TimeslotDoctorResponse>> timeslots = new ();
+
+            foreach (long doctorId in doctorIds)
+            {
+                timeslots.Add(_httpClient.GetFromJsonAsync<TimeslotDoctorResponse>($@"{path}{doctorId}/slots_availability")!);
+            }
+
+            List<TimeslotDoctorResponse> results = (await Task.WhenAll(timeslots)).ToList();
+
+            List<TimeslotDoctorResponse> filteredResults = results.Where(r => r.Timeslots.Any(t => t.Value.Any(y => y.IsAvailable && y.TimeslotType != TimeslotType.BUSY))).ToList();
+
+            return filteredResults;
+        }
     }
 }
