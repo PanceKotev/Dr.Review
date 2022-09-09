@@ -8,26 +8,32 @@
 		<DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
 		<DockerfileContext>..\..</DockerfileContext>
 		<DockerComposeProjectPath>..\..\docker-compose.dcproj</DockerComposeProjectPath>
+		<PreserveCompilationContext>true</PreserveCompilationContext>
+		<CopyRazorGenerateFilesToPublishDirectory>true</CopyRazorGenerateFilesToPublishDirectory>
 	</PropertyGroup>
 
 	<ItemGroup>
 		<PackageReference Include="Dapper" Version="2.0.123" />
-		<PackageReference Include="Hangfire.AspNetCore" Version="1.7.28" />
-		<PackageReference Include="Hangfire.Core" Version="1.7.28" />
+		<PackageReference Include="DateOnlyTimeOnly.AspNet" Version="1.0.3" />
+		<PackageReference Include="DateOnlyTimeOnly.AspNet.Swashbuckle" Version="1.0.3" />
+		<PackageReference Include="FluentEmail.Razor" Version="3.0.2" />
+		<PackageReference Include="FluentEmail.SendGrid" Version="3.0.2" />
+		<PackageReference Include="Hangfire.AspNetCore" Version="1.7.31" />
+		<PackageReference Include="Hangfire.Core" Version="1.7.31" />
 		<PackageReference Include="Hangfire.Dashboard.BasicAuthorization" Version="1.0.2" />
-		<PackageReference Include="Hangfire.SqlServer" Version="1.7.28" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.6" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.6" />
+		<PackageReference Include="Hangfire.SqlServer" Version="1.7.31" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.8" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.8" />
 		<PackageReference Include="Microsoft.Extensions.Configuration" Version="6.0.1" />
 		<PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="6.0.0" />
-		<PackageReference Include="Microsoft.Identity.Web" Version="1.24.1" />
-		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.14.0" />
-		<PackageReference Include="Microsoft.VisualStudio.Threading.Analyzers" Version="17.1.46">
+		<PackageReference Include="Microsoft.Identity.Web" Version="1.25.2" />
+		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.17.0" />
+		<PackageReference Include="Microsoft.VisualStudio.Threading.Analyzers" Version="17.3.44">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-		<PackageReference Include="SonarAnalyzer.CSharp" Version="8.36.1.44192">
+		<PackageReference Include="SonarAnalyzer.CSharp" Version="8.44.0.52574">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
@@ -35,8 +41,8 @@
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
-		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
-		<PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="6.3.1" />
+		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+		<PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="6.4.0" />
 		<PackageReference Include="Swashbuckle.Core" Version="5.6.0" />
 		<PackageReference Include="System.Collections.Specialized" Version="4.3.0" />
 	</ItemGroup>
@@ -80,10 +86,28 @@
 		<Content Update="appsettings.json">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>
+		<Content Update="Emails\Views\TestEmail - Copy.cshtml">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Update="Emails\Views\ScheduleNotificationEmail.cshtml">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Update="Emails\Views\_Layout.cshtml">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Update="Emails\Views\_ViewStart.cshtml">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
 	</ItemGroup>
 
 	<ItemGroup>
 		<Folder Include="HttpClients\MojTermin\Contracts\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Update="Emails\Assets\logo-dark.png">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
 	</ItemGroup>
 
 </Project>

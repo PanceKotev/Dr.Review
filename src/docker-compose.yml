@@ -5,6 +5,8 @@ services:
     build:
       context: ./Web
       dockerfile: Dockerfile
+    environment:
+     - DRREVIEW_SENDGRID_API_KEY=${DRREVIEW_SENDGRID_API_KEY}
     networks:
       - mynet
     ports:

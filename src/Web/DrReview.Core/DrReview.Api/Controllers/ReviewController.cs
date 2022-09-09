@@ -8,7 +8,6 @@
     using DrReview.Contracts.Requests;
     using DrReview.Modules.Review.Application.Commands;
     using DrReview.Modules.Review.Application.Queries;
-    using DrReview.Modules.Review.Infrastructure.Common.UnitOfWork.Interfaces;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Identity.Web.Resource;
@@ -16,13 +15,10 @@
     [Route("api/v1/reviews")]
     public class ReviewController : BaseController
     {
-        private readonly IReviewUnitOfWork _reviewUnitOfWork;
-
         private readonly IDrReviewMediatorService _mediator;
 
-        public ReviewController(IReviewUnitOfWork reviewUnitOfWork, IDrReviewMediatorService mediator)
+        public ReviewController(IDrReviewMediatorService mediator)
         {
-            _reviewUnitOfWork = reviewUnitOfWork;
             _mediator = mediator;
         }
 
@@ -60,7 +56,7 @@
         [RequiredScope(new[] { "drreview.read", "drreview.write" })]
         [Route("{revieweeSuid}/summary")]
         [ProducesResponseType(typeof(Result<GetReviewSummaryDto>), (int)HttpStatusCode.OK)]
-        public async Task<IActionResult> GetReviewSummary([FromRoute] string revieweeSuid)
+        public async Task<IActionResult> GetReviewSummaryAsync([FromRoute] string revieweeSuid)
         {
             return OkOrError(await _mediator.SendAsync(new GetReviewSummaryQuery(revieweeSuid: revieweeSuid)));
         }
@@ -86,7 +82,6 @@
                                                                                comment: request.Comment,
                                                                                score: request.Score)));
         }
-
 
         [HttpPost]
         [Authorize]

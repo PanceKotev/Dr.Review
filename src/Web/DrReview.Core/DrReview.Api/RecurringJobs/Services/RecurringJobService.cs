@@ -1,5 +1,6 @@
 ﻿namespace DrReview.Api.RecurringJobs.Services
 {
+    using DrReview.Api.Services.Interfaces;
     using Hangfire;
 
     public static class RecurringJobService
@@ -12,9 +13,9 @@
         [AutomaticRetry(Attempts = 2, OnAttemptsExceeded = AttemptsExceededAction.Fail)]
         private static void StarDoctorUpdatingService()
         {
-            //RecurringJob.AddOrUpdate<IDoctorMigrationService>(
-            //    migrationService => migrationService.MigrateDoctorDataAsync(),
-            //    Cron.Weekly());
+            RecurringJob.AddOrUpdate<INotificationSchedulerService>(
+                schedulerService => schedulerService.SendScheduleNotificationsAsync(),
+                Cron.Daily(10));
         }
 
     }

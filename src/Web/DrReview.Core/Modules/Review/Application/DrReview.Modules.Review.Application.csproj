@@ -8,11 +8,11 @@
 
   <ItemGroup>
 	<PackageReference Include="LinqKit.Microsoft.EntityFrameworkCore" Version="6.1.2" />
-	<PackageReference Include="Microsoft.VisualStudio.Threading.Analyzers" Version="17.1.46">
+	<PackageReference Include="Microsoft.VisualStudio.Threading.Analyzers" Version="17.3.44">
 	  <PrivateAssets>all</PrivateAssets>
 	  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 	</PackageReference>
-	<PackageReference Include="SonarAnalyzer.CSharp" Version="8.36.1.44192">
+	<PackageReference Include="SonarAnalyzer.CSharp" Version="8.44.0.52574">
 	  <PrivateAssets>all</PrivateAssets>
 	  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 	</PackageReference>

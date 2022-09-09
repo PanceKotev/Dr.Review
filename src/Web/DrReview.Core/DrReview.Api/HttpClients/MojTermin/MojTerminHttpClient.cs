@@ -6,7 +6,6 @@
 
     public class MojTerminHttpClient : IMojTerminHttpClient
     {
-
         private readonly HttpClient _httpClient;
 
         public MojTerminHttpClient(HttpClient httpClient)
@@ -49,7 +48,6 @@
                 throw new ArgumentException("Cannot convert locations");
             }
 
-
             return responseResult.Values.ToList();
         }
 
@@ -87,10 +85,9 @@
             {
                 result.LocationId = institutionIdLocationMap[result.Id];
 
-
                 SectionResponse doctorSection = result.Sections.First(s => s.Type == "doctor");
 
-                doctorSection.Items.ForEach(x => 
+                doctorSection.Items.ForEach(x =>
                 {
                     x.InstitutionFK = result.Id;
                     x.Institution = result;
@@ -100,6 +97,24 @@
             }
 
             return allDoctors;
+        }
+
+        public async Task<List<TimeslotDoctorResponse>> GetTimeslotsForDoctorsAsync(List<long> doctorIds)
+        {
+            string path = "pp/resources/";
+
+            List<Task<TimeslotDoctorResponse>> timeslots = new ();
+
+            foreach (long doctorId in doctorIds)
+            {
+                timeslots.Add(_httpClient.GetFromJsonAsync<TimeslotDoctorResponse>($@"{path}{doctorId}/slots_availability")!);
+            }
+
+            List<TimeslotDoctorResponse> results = (await Task.WhenAll(timeslots)).ToList();
+
+            List<TimeslotDoctorResponse> filteredResults = results.Where(r => r.Timeslots.Any(t => t.Value.Any(y => y.IsAvailable && y.TimeslotType != TimeslotType.BUSY))).ToList();
+
+            return filteredResults;
         }
     }
 }

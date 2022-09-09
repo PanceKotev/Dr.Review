@@ -1,5 +1,6 @@
 ﻿namespace DrReview.Api.Extensions
 {
+    using DateOnlyTimeOnly.AspNet;
     using Microsoft.OpenApi.Models;
 
     public static partial class Extensions
@@ -8,6 +9,7 @@
         {
             services.AddSwaggerGen(c =>
             {
+                c.UseDateOnlyTimeOnlyStringConverters();
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Swagger Dr Review API", Version = "v1" });
                 c.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
                 {

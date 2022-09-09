@@ -25,6 +25,9 @@
             });
 
             services.AddScoped<IDrReviewMediatorService, DrReviewMediatorService>();
+            services.AddScoped<IEmailService, EmailService>();
+            services.AddScoped<INotificationSchedulerService, NotificationSchedulerService>();
+
             return services;
         }
     }

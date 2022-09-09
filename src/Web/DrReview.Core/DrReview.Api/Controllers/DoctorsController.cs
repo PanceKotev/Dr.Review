@@ -1,13 +1,11 @@
 ﻿namespace DrReview.Api.Controllers
 {
-    using System.ComponentModel.DataAnnotations;
     using System.Net;
     using DrReview.Common.Auth.Interface;
     using DrReview.Common.Dtos.Doctor;
     using DrReview.Common.Mediator.Interfaces;
     using DrReview.Common.Query;
     using DrReview.Common.Results;
-    using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
 
     public class DoctorsController : BaseController
