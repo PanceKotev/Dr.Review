@@ -47,23 +47,57 @@
 
             var doctorSchedules = (await _mojTerminHttpClient.GetTimeslotsForDoctorsAsync(allScheduleNotifications.Select(s => s.DoctorFK).ToList()))
                                                              .GroupBy(d => d.Id)
-                                                             .ToDictionary(x => x.Key, x => x.ToList());
+                                                             .ToDictionary(x => x.Key, x => x.FirstOrDefault());
             List<Task> emailsToSend = new ();
 
             foreach (KeyValuePair<string, List<ScheduleSubscription>> entry in allScheduleNotificationsGrouped)
             {
-                var drSchedules = entry.Value.GroupBy(x => $@"{x.Doctor!.FirstName} - {x.Doctor!.LastName}")
-                                             .ToDictionary(x => x.Key, x => x.Select(x => x.RangeTo.ToString()).ToList());
+                var drSchedules = entry.Value.GroupBy(x => x.Doctor!)
+                                             .ToDictionary(x => x.Key, x => x.ToList());
 
-#pragma warning disable S1481 // Unused local variables should be removed
-                List<Contracts.ExternalApi.MojTermin.Responses.TimeslotDoctorResponse>? mojTerminResults = await _mojTerminHttpClient.GetTimeslotsForDoctorsAsync(entry.Value.Select(x => x.DoctorFK).ToList());
-#pragma warning restore S1481 // Unused local variables should be removed
+                Dictionary<DoctorScheduleNameLinkDto, List<string>> finalSchedules = new Dictionary<DoctorScheduleNameLinkDto, List<string>>();
+
+                foreach (KeyValuePair<Doctor, List<ScheduleSubscription>> drEntry in drSchedules)
+                {
+                    TimeslotDoctorResponse? schedulesForDoctor = doctorSchedules.GetValueOrDefault(drEntry.Key.Id);
+
+                    if (schedulesForDoctor is null || !schedulesForDoctor.Timeslots.Any())
+                    {
+                        continue;
+                    }
+
+                    List<DateTime> allTerms = schedulesForDoctor.Timeslots.SelectMany(x => x.Value.Where(y => y.IsAvailable && y.TimeslotType != TimeslotType.BUSY).Select(y => y.Term)).ToList();
+
+                    if (!allTerms.Any())
+                    {
+                        continue;
+                    }
+
+                    List<string> validTimeSlots = allTerms
+                                                                    .Where(x => drEntry.Value.Any(d => dateNow <= DateOnly.FromDateTime(x)
+                                                                                                            && d.RangeFrom <= DateOnly.FromDateTime(x)
+                                                                                                            && DateOnly.FromDateTime(x) <= d.RangeTo))
+                                                                    .Select(x => x.ToString("dd/MM/yyyy HH:mm")).ToList();
+
+                    if (!validTimeSlots.Any())
+                    {
+                        continue;
+                    }
+
+                    string doctorLink = "http://mojtermin.mk/map/specijalist?resource=";
+                    finalSchedules.Add(new DoctorScheduleNameLinkDto(drEntry.Key.FirstName, drEntry.Key.LastName, $@"{doctorLink}{drEntry.Key.Id}"), validTimeSlots);
+                }
+
+                if (!finalSchedules.Any())
+                {
+                    continue;
+                }
 
                 ScheduleNotificationEmail emailDto = new ScheduleNotificationEmail(
                     recipient: entry.Key,
-                    subject: "Слободни термини за доктори",
+                    subject: $@"Слободни термини за доктори {dateNow.ToString("dd/MM/yyyy")}",
                     numberOfFreeSlotsFound: entry.Value.Count,
-                    doctorSchedules: drSchedules);
+                    doctorSchedules: finalSchedules);
 
                 emailsToSend.Add(_emailService.SendEmailAsync(emailDto));
             }

@@ -4,7 +4,7 @@
 
     public class ScheduleNotificationEmail : BaseEmailDto
     {
-        public ScheduleNotificationEmail(string recipient, string subject, int numberOfFreeSlotsFound, Dictionary<string, List<string>> doctorSchedules)
+        public ScheduleNotificationEmail(string recipient, string subject, int numberOfFreeSlotsFound, Dictionary<DoctorScheduleNameLinkDto, List<string>> doctorSchedules)
             : base(recipient, subject)
         {
             NumberOfFreeSlotsFound = numberOfFreeSlotsFound;
@@ -13,6 +13,19 @@
 
         public int NumberOfFreeSlotsFound { get; init; }
 
-        public Dictionary<string, List<string>> DoctorSchedules { get; init; }
+        public Dictionary<DoctorScheduleNameLinkDto, List<string>> DoctorSchedules { get; init; }
+    }
+
+    public class DoctorScheduleNameLinkDto
+    {
+        public DoctorScheduleNameLinkDto(string firstName, string lastName, string link)
+        {
+            Name = $@"{firstName} {lastName}";
+            DoctorTimeslotsLink = link;
+        }
+
+        public string Name { get; init; }
+
+        public string DoctorTimeslotsLink { get; init; }
     }
 }

@@ -1,5 +1,7 @@
 ﻿@{
     @using System.Collections.Generic;
+    @using DrReview.Contracts.Dtos.Emails;
+
     @model DrReview.Contracts.Dtos.Emails.ScheduleNotificationEmail;
 }
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional //EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -587,15 +589,14 @@
                                         line-height: 22.4px;
                                         font-family: Lato, sans-serif;
                                       "
-                                      >Пронајдовме @Model.NumberOfFreeSlotsFound слободни термини кај
-                                      одбраните доктори на одбраните датуми.
+                                      >Пронајдовме слободни термини за @Model.NumberOfFreeSlotsFound доктори во размер на одбраните датуми за нив.
                                     </span>
                                   </p>
                                   <p style="font-size: 14px; line-height: 140%">
                                     &nbsp;
                                   </p>
                                   <p style="font-size: 14px; line-height: 140%">
-                                    <span
+                                    <div
                                       style="
                                         font-size: 16px;
                                         line-height: 22.4px;
@@ -604,19 +605,28 @@
                                       >
                                       <ul>
                                           <li>
-                                              @foreach (KeyValuePair<string, List<string>> item in Model.DoctorSchedules)
+                                              @foreach (KeyValuePair<DoctorScheduleNameLinkDto, List<string>> item in Model.DoctorSchedules)
                                               {
-                                                  @item.Key
+                                                  <a
+                                                    href="@item.Key.DoctorTimeslotsLink"
+                                                    target="_blank"
+                                                    rel="noopener">
+                                                  @item.Key.Name (@item.Value.Count)
+                                                    </a>
+                                                      
+
                                                   <ul>
-                                                      <li>
                                                           @foreach (string schedule in @item.Value){
+                                                      <li>
+
                                                               @schedule
-                                                          }
                                                       </li>
+
+                                                          }
                                                   </ul>
-                                              }</li>
-                                      </ul></span
-                                    >
+                                              }
+                                              </li>
+                                      </ul></div>
                                   </p>
                                 </div>
                               </td>
