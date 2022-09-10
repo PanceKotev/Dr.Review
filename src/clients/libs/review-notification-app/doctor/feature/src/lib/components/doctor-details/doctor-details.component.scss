@@ -7,6 +7,8 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   column-gap: 1em;
+  position:relative;
+
 }
 
 .doctor-summary{
@@ -42,7 +44,22 @@
   }
 }
 
+.schedule-notification{
+  display: flex;
+  align-self: flex-end;
+  width: 100%;
+  margin-top: auto;
+  position: absolute;
+  width: 100%;
+  bottom: 3em;
+  flex-direction: column;
+  max-width: 100%;
 
+  .range-input {
+    width: 100%;
+  }
+
+}
 .new-comment-wrapper{
   width: 100%;
   display: flex;

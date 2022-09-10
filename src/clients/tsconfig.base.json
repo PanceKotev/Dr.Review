@@ -39,6 +39,12 @@
       "@drreview/review-notification-app/navigation": [
         "libs/review-notification-app/navigation/src/index.ts"
       ],
+      "@drreview/review-notification-app/schedule-subscription/data-access": [
+        "libs/review-notification-app/schedule-subscription/data-access/src/index.ts"
+      ],
+      "@drreview/review-notification-app/schedule-subscription/ui": [
+        "libs/review-notification-app/schedule-subscription/ui/src/index.ts"
+      ],
       "@drreview/review-notification-app/shell": [
         "libs/review-notification-app/shell/src/index.ts"
       ],
@@ -49,6 +55,7 @@
       "@drreview/shared/services/themes": [
         "libs/shared/services/themes/src/index.ts"
       ],
+      "@drreview/shared/ui/avatar": ["libs/shared/ui/avatar/src/index.ts"],
       "@drreview/shared/ui/review": ["libs/shared/ui/review/src/index.ts"],
       "@drreview/shared/ui/search": ["libs/shared/ui/search/src/index.ts"],
       "@drreview/shared/ui/themes": ["libs/shared/ui/themes/src/index.ts"],
@@ -57,6 +64,7 @@
       ],
       "@drreview/shared/utils/date": ["libs/shared/utils/date/src/index.ts"],
       "@drreview/shared/utils/form": ["libs/shared/utils/form/src/index.ts"],
+      "@drreview/shared/utils/icons": ["libs/shared/utils/icons/src/index.ts"],
       "@drreview/shared/utils/pipes": ["libs/shared/utils/pipes/src/index.ts"],
       "@drreview/shared/utils/pipes/rxjs": [
         "libs/shared/utils/pipes/rxjs/src/index.ts"

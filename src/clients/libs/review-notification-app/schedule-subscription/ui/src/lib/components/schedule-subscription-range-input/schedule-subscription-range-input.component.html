@@ -1,0 +1,22 @@
+<div class="subscription-option" [formGroup]="fg">
+  <mat-form-field class="range-from-to" appearance="fill">
+    <mat-label>Одбери опсег на датуми</mat-label>
+    <mat-date-range-input [rangePicker]="picker" color="accent">
+      <input matStartDate formControlName="from" placeholder="Почетен датум" />
+      <input matEndDate formControlName="to" placeholder="Краен датум" />
+    </mat-date-range-input>
+    <mat-datepicker-toggle matSuffix [for]="picker">
+      <mat-icon color="accent" matDatepickerToggleIcon>date_range</mat-icon>
+    </mat-datepicker-toggle>
+    <mat-date-range-picker
+      [panelClass]="(themeService.isDarkTheme$ | async) ? 'dark-theme' : ''"
+      #picker
+    ></mat-date-range-picker>
+  </mat-form-field>
+  <mat-slide-toggle
+    [disabled]="!fg.get('from')?.value || !fg.get('to')?.value"
+    formControlName="subscribedTo"
+    labelPosition="before"
+    >Нотификации за слободни термини?</mat-slide-toggle
+  >
+</div>

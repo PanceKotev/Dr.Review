@@ -1,0 +1,27 @@
+{
+  "projectType": "library",
+  "sourceRoot": "libs/review-notification-app/schedule-subscription/data-access/src",
+  "prefix": "drreview",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": [
+        "coverage/libs/review-notification-app/schedule-subscription/data-access"
+      ],
+      "options": {
+        "jestConfig": "libs/review-notification-app/schedule-subscription/data-access/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/review-notification-app/schedule-subscription/data-access/**/*.ts",
+          "libs/review-notification-app/schedule-subscription/data-access/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}

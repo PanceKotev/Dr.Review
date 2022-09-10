@@ -180,7 +180,9 @@ $review-notification-app-dark-theme: mat-set-background($review-notification-app
   --color-accent: #{mat.get-color-from-palette($review-notification-app-light-accent, default)};
   --color-warn: #{mat.get-color-from-palette($review-notification-app-light-warn, default)};
   --text-grayed-out : grey;
+  --input-container-background-color: #ffffffd4;
   --container-background-color-transparent: #ffffffd4;
+  --text-color: rgba(0, 0, 0, 0.87);
 }
 
 .dark-theme {
@@ -192,10 +194,20 @@ $review-notification-app-dark-theme: mat-set-background($review-notification-app
   --color-accent: #{mat.get-color-from-palette($review-notification-app-dark-accent, default)};
   --color-warn: #{mat.get-color-from-palette($review-notification-app-dark-warn, default)};
   --container-background-color-transparent: #020c11ed;
-
+  --input-container-background-color: #283135;
   --text-grayed-out: #b6b5b5;
+  --text-color: white;
+
+
 }
 
+.mat-calendar {
+  background-color:var(--input-container-background-color) !important;
+}
+
+.mat-calendar-header, .mat-calendar-arrow {
+  color: var(--text-color) !important;
+}
 .mat-card {
   background-color: var(--container-background-color-transparent) !important;
 }

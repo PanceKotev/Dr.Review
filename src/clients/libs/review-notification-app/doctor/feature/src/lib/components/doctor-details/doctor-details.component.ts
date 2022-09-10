@@ -7,6 +7,7 @@ import { Component, NgZone, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ReviewChangedEvent } from '@drreview/shared/ui/review';
 import { SnackBarService } from '@drreview/shared/services/snack-bar';
+import { ScheduleNotificationRange } from '@drreview/review-notification-app/schedule-subscription/data-access';
 
 @Component({
   templateUrl: './doctor-details.component.html',
@@ -19,6 +20,8 @@ export class DoctorDetailsComponent implements OnInit, OnDestroy {
   public doctorReviews: GetReviewDto[] = [];
 
   public doctorReviewSummary: GetReviewSummaryDto | undefined;
+
+  public range: ScheduleNotificationRange | undefined;
 
   public currentUserReview: GetReviewDto | undefined;
 
@@ -51,6 +54,11 @@ export class DoctorDetailsComponent implements OnInit, OnDestroy {
     }
 
     this.setUpSubscriptions();
+  }
+
+  public logChanges(changes: ScheduleNotificationRange | null): void {
+    console.log(changes);
+
   }
 
   private setUpSubscriptions(): void {

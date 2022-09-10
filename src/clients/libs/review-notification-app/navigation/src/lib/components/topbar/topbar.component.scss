@@ -7,8 +7,13 @@
 }
 
 
-.theme-toggle{
+.left-elements{
+  display: flex;
+  align-items: center;
   margin-left: auto;
+  &> :first-child{
+    margin-right: 1em;
+  }
 }
 
 .app-title{

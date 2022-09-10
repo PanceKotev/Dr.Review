@@ -24,6 +24,16 @@
           <div>Институција</div>
           <div>{{ doctor.institution }}</div>
         </div>
+        <div class="schedule-notification">
+          <div>Нотификација за слободни термини?</div>
+          <div>
+            <drreview-schedule-subscription-range-input
+              class="range-input"
+              [(ngModel)]="range"
+              (ngModelChange)="logChanges($event)"
+            ></drreview-schedule-subscription-range-input>
+          </div>
+        </div>
       </div>
     </div>
   </mat-card-content>

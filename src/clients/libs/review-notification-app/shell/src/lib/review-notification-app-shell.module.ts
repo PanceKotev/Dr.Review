@@ -16,6 +16,7 @@ import { RouterModule } from '@angular/router';
 import { QuillModule } from 'ngx-quill';
 import { StarRatingModule } from 'angular-star-rating';
 import { SharedServicesSnackBarModule } from '@drreview/shared/services/snack-bar';
+import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
 
 @NgModule({
   imports: [
@@ -28,10 +29,11 @@ import { SharedServicesSnackBarModule } from '@drreview/shared/services/snack-ba
     ReviewNotificationAppCommonServicesAuthModule,
     SharedDataAccessModule,
     MatSidenavModule,
+    SharedServicesThemesModule,
     SharedServicesSnackBarModule,
     SharedUiThemesModule,
-    SharedServicesThemesModule,
-    ReviewNotificationAppNavigationModule],
+    ReviewNotificationAppNavigationModule,
+    MatNativeDateModule],
   declarations: [MainLayoutComponent, MainNavigationComponent],
   exports: [
     ReviewNotificationAppCommonConfigurationAuthConfigModule,
@@ -39,6 +41,9 @@ import { SharedServicesSnackBarModule } from '@drreview/shared/services/snack-ba
     SharedDataAccessModule,
     MainLayoutComponent,
     RouterModule
-    ]
+    ],
+  providers: [
+    {provide: MAT_DATE_LOCALE, useValue: 'mk'}
+  ]
 })
 export class ReviewNotificationAppShellModule {}
