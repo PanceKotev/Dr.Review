@@ -3,17 +3,29 @@
 .mat-toolbar.mat-primary {
   position: sticky;
   top: 0;
+  display: flex;
+  justify-content: space-between;
   z-index: 1;
 }
 
-
-.left-elements{
+.right-elements{
   display: flex;
   align-items: center;
-  margin-left: auto;
   &> :first-child{
     margin-right: 1em;
   }
+}
+.search{
+  display: flex;
+  justify-content: center;
+  max-height: 100%;
+  height: 65px;
+
+}
+
+:host::ng-deep .middle .search .mat-form-field-wrapper {
+  font: 400 14px / 20px 'Nunito Sans' !important;
+
 }
 
 .app-title{

@@ -16,6 +16,7 @@
         "assets": [
           "apps/review-notification-app/src/favicon.ico",
           "apps/review-notification-app/src/assets",
+          "apps/review-notification-app/src/assets/doctor-illustration.svg",
           "apps/review-notification-app/src/assets/logo/dr_review_logo_dark.svg",
           "apps/review-notification-app/src/assets/logo/dr_review_logo_light.svg"
         ],

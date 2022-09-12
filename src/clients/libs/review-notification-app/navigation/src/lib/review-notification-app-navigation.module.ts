@@ -12,6 +12,8 @@ import { BottomMobileNavigationComponent } from './components/bottom-mobile-navi
 import { UserDropdownComponent } from './components/user-dropdown/user-dropdown.component';
 import { SharedUiAvatarModule } from '@drreview/shared/ui/avatar';
 import {MatMenuModule} from '@angular/material/menu';
+import { SharedUiSearchModule } from '@drreview/shared/ui/search';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
@@ -19,9 +21,12 @@ import {MatMenuModule} from '@angular/material/menu';
     MatToolbarModule,
     MatMenuModule,
     RouterModule,
+    FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     MatIconModule,
     MatButtonModule,
+    SharedUiSearchModule,
     SharedUiAvatarModule,
     SharedUiThemesModule
   ],

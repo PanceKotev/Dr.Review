@@ -24,3 +24,42 @@
   display: flex;
   justify-content: center;
 }
+
+
+.chips {
+  display: flex;
+  width: 100%;
+  overflow-x: auto;
+  // background-color: var(--input-container-background-color);
+  border: none;
+  padding: 1em 0.5em;
+
+  border-radius: 12px;
+  margin-bottom: 0.5em;
+
+  .chip {
+    // display: flex;
+    margin-right: 1em;
+    padding: 0;
+    border-radius: 20px;
+    min-width: fit-content;
+  }
+}
+
+
+.content-below{
+  display: grid;
+  width: 100%;
+  column-gap: 2.5em;
+
+
+
+}
+
+.doctors {
+  width: 100%;
+  background-color: var(--container-background-color-transparent);
+  height: 80vh;
+  text-align: center;
+  border-radius: 15px;
+}

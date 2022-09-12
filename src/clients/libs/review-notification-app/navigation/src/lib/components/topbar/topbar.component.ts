@@ -2,6 +2,7 @@ import { AuthService, CurrentUser } from '@drreview/review-notification-app/comm
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Component, Input } from '@angular/core';
 import { map, Observable, shareReplay } from 'rxjs';
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'drreview-topbar',
@@ -9,7 +10,11 @@ import { map, Observable, shareReplay } from 'rxjs';
   styleUrls: ['./topbar.component.scss']
 })
 export class TopbarComponent {
+  public searchFormName = 'searchDoctor';
 
+  public formGroup = new FormGroup({
+    searchDoctor: new FormControl<string | undefined>('')
+  });
   @Input()
   public appTitle = "DrReview";
 

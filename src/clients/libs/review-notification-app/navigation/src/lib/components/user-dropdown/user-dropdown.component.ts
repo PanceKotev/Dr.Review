@@ -1,4 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { ThemesService } from '@drreview/shared/services/themes';
 
 @Component({
   selector: 'drreview-user-dropdown',
@@ -12,4 +13,7 @@ export class UserDropdownComponent {
   @Output()
   public logoutClicked = new EventEmitter<boolean>();
 
+  public constructor(public themeService: ThemesService){
+
+  }
 }
