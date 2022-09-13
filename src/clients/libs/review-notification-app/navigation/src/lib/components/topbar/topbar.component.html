@@ -15,6 +15,7 @@
     <button mat-button *ngIf="!currentUser" (click)="logIn()">Login</button>
     <drreview-user-dropdown
       *ngIf="currentUser"
+      [username]="currentUser.firstName + ' ' + currentUser.lastName"
       (logoutClicked)="logOut()"
     ></drreview-user-dropdown>
   </div>

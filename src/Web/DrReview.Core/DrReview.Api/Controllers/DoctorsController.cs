@@ -6,6 +6,8 @@
     using DrReview.Common.Mediator.Interfaces;
     using DrReview.Common.Query;
     using DrReview.Common.Results;
+    using DrReview.Contracts.Filters;
+    using DrReview.Contracts.Filters.Enums;
     using Microsoft.AspNetCore.Mvc;
 
     public class DoctorsController : BaseController
@@ -26,6 +28,18 @@
         public async Task<IActionResult> SearchDoctorsAsync([FromQuery] string? searchword)
         {
             GetDoctorsBySearchwordQuery query = new GetDoctorsBySearchwordQuery(searchword, 0, 1000);
+
+            return OkOrError(await _mediator.SendAsync(query));
+        }
+
+        [HttpGet]
+        [Route("")]
+        [ProducesResponseType(typeof(Result<List<SearchDoctorDto>>), (int)HttpStatusCode.OK)]
+        public async Task<IActionResult> GetDoctorsAsync([FromQuery] FilterBy? filterBy, [FromQuery] string? filterByValue)
+        {
+            FilterByValue? filter = filterBy != null && !string.IsNullOrEmpty(filterByValue) ? new FilterByValue(filterBy ?? FilterBy.LOCATION, filterByValue) : null;
+
+            GetDoctorsQuery query = new GetDoctorsQuery(new GetDoctorsFilter(0, 100, string.Empty, filter));
 
             return OkOrError(await _mediator.SendAsync(query));
         }

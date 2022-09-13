@@ -1,4 +1,5 @@
-﻿namespace DrReview.Contracts.Storage.Location.Entities
+﻿#nullable disable
+namespace DrReview.Contracts.Storage.Location.Entities
 {
     using System;
     using DrReview.Contracts.ExternalApi.MojTermin.Responses;
@@ -6,6 +7,14 @@
 
     public class Location : BaseEntity
     {
+        public Location()
+            : base(0, Guid.Empty, null, DateTime.UtcNow)
+        {
+            Longitude = 0;
+            Latitude = 0;
+            Name = string.Empty;
+        }
+
         public Location(long id, Guid uid, DateTime? deletedOn, DateTime modifiedOn, string name, decimal longitude, decimal latitude)
             : base(id, uid, deletedOn, modifiedOn)
         {
@@ -18,7 +27,7 @@
 
         public decimal Latitude { get; set; }
 
-        public string Name { get; init; }
+        public string Name { get; set; }
 
         public static Location FromResponse(LocationResponse response)
         {

@@ -36,4 +36,8 @@
 	  <Folder Include="Auth\Service\" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <ProjectReference Include="..\DrReview.Contracts\DrReview.Contracts.csproj" />
+	</ItemGroup>
+
 </Project>
