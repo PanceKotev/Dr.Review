@@ -1,0 +1,14 @@
+<div class="home">
+  <div>
+    <drreview-chip-filter
+      [filterOptions]="filterOptions"
+      [(ngModel)]="filterValue"
+      (ngModelChange)="modelChanged($event)"
+    ></drreview-chip-filter>
+  </div>
+  <div class="content-below">
+    <div class="doctors">
+      <h2>Топ доктори</h2>
+    </div>
+  </div>
+</div>

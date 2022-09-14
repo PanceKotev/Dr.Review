@@ -56,6 +56,7 @@
         "libs/shared/services/themes/src/index.ts"
       ],
       "@drreview/shared/ui/avatar": ["libs/shared/ui/avatar/src/index.ts"],
+      "@drreview/shared/ui/filters": ["libs/shared/ui/filters/src/index.ts"],
       "@drreview/shared/ui/review": ["libs/shared/ui/review/src/index.ts"],
       "@drreview/shared/ui/search": ["libs/shared/ui/search/src/index.ts"],
       "@drreview/shared/ui/themes": ["libs/shared/ui/themes/src/index.ts"],

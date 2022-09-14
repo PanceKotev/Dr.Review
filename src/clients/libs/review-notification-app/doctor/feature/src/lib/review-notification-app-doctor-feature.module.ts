@@ -7,6 +7,9 @@ import { DoctorDetailsComponent } from './components/doctor-details/doctor-detai
 import { RouterModule } from '@angular/router';
 import { SharedUiReviewModule } from '@drreview/shared/ui/review';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { DoctorsRootComponent } from './components/doctors-root/doctors-root.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { SharedUiFiltersModule } from '@drreview/shared/ui/filters';
 
 @NgModule({
   imports: [
@@ -14,10 +17,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MatCardModule,
     RouterModule.forChild(routes),
     ReviewNotificationAppScheduleSubscriptionUiModule,
+    SharedUiFiltersModule,
     FormsModule,
+    MatCardModule,
     ReactiveFormsModule,
-    SharedUiReviewModule],
-  declarations: [DoctorDetailsComponent],
+    MatFormFieldModule,
+    SharedUiReviewModule
+  ],
+  declarations: [DoctorDetailsComponent, DoctorsRootComponent],
   exports: [RouterModule]
 })
 export class ReviewNotificationAppDoctorFeatureModule {}

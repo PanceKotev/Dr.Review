@@ -13,6 +13,8 @@ export class HomepageComponent implements OnInit, OnDestroy {
   private destroying$ = new Subject<void>();
   public searchFormName = 'searchDoctor';
 
+  public filterBy = '';
+
   public doctors: SearchDoctorDto[] = [];
   public formGroup!: FormGroup;
 

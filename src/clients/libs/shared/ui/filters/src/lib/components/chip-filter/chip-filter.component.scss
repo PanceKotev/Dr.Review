@@ -1,0 +1,16 @@
+.chips {
+  display: flex;
+  width: 100%;
+  overflow-x: auto;
+  border: none;
+  padding: 1em 0.5em;
+  border-radius: 12px;
+  margin-bottom: 0.5em;
+
+  .chip {
+    margin-right: 1em;
+    padding: 0;
+    border-radius: 20px;
+    min-width: fit-content;
+  }
+}
