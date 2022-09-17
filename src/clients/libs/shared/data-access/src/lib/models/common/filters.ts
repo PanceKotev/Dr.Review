@@ -6,6 +6,11 @@ export class BaseFilter {
 };
 
 export class GetDoctorsFilter extends BaseFilter {
+  public constructor(filterBy: FilterByValue | undefined){
+    super();
+    this.filterBy = filterBy;
+  }
+
   public filterBy?: FilterByValue;
 
   public toQueryProperties(): string {

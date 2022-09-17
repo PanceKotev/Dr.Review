@@ -3,12 +3,21 @@
     <drreview-chip-filter
       [filterOptions]="filterOptions"
       [(ngModel)]="filterValue"
-      (ngModelChange)="modelChanged($event)"
+      (valueChanged)="filterChanged($event)"
     ></drreview-chip-filter>
   </div>
   <div class="content-below">
     <div class="doctors">
       <h2>Топ доктори</h2>
+      <div class="doctors">
+        <div class="doctor-wrapper" *ngIf="doctors$">
+          <drreview-doctor-card
+            class="doctor-card"
+            *ngFor="let doctor of doctors$ | async"
+            [doctor]="doctor"
+          ></drreview-doctor-card>
+        </div>
+      </div>
     </div>
   </div>
 </div>

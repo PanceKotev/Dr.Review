@@ -1,3 +1,4 @@
+import { GetDoctorsFilter } from './../models/common/filters';
 import { Result } from './../models/common/result';
 import { ApiService } from './../base/api.service';
 import { Injectable } from '@angular/core';
@@ -22,5 +23,13 @@ export class DoctorApiService {
     return this.apiService.get<Result<GetDoctorDetailsDto>>(`v1/doctors/${doctorSuid}`)
     .pipe(
       map((res: Result<GetDoctorDetailsDto>) => res.value));
+  }
+
+  public getDoctors(getDoctorsFilter: GetDoctorsFilter | undefined = undefined): Observable<SearchDoctorDto[]> {
+    const filterByQuery = getDoctorsFilter ? getDoctorsFilter.toQueryProperties(): '';
+
+    return this.apiService.get<Result<SearchDoctorDto[]>>(`v1/doctors/${filterByQuery}`)
+    .pipe(
+      map((res: Result<SearchDoctorDto[]>) => res.value));
   }
 }

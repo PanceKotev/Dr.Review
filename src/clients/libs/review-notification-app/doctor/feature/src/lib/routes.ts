@@ -3,8 +3,9 @@ import { DoctorDetailsComponent } from "./components/doctor-details/doctor-detai
 import { DoctorsRootComponent } from "./components/doctors-root/doctors-root.component";
 
 export const routes: Route[] = [
+  {path: 'filter/:filterType/:filterValue',  component: DoctorsRootComponent},
+
   {path: '', component: DoctorsRootComponent},
-  {path: 'filters/:filterType/:filterValue',  component: DoctorsRootComponent},
   {path: '*', component: DoctorsRootComponent},
   {path: ":doctorSuid", component: DoctorDetailsComponent}
 ];

@@ -1,3 +1,4 @@
+import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ChipFilterComponent } from './components/chip-filter/chip-filter.component';
@@ -11,6 +12,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
   imports: [
     CommonModule,
     FormsModule,
+    RouterModule,
     ReactiveFormsModule,
     MatButtonModule,
     MatButtonToggleModule,

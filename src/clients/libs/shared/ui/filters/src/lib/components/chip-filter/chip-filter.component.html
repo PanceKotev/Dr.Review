@@ -8,6 +8,7 @@
   <mat-button-toggle
     *ngFor="let option of filterOptions"
     mat-ripple
+    [routerLink]="option.link || ''"
     [matRippleRadius]="5"
     class="chip"
     [value]="option.value"

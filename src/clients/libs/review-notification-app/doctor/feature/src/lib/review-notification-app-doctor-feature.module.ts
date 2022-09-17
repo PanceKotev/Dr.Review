@@ -10,6 +10,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DoctorsRootComponent } from './components/doctors-root/doctors-root.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { SharedUiFiltersModule } from '@drreview/shared/ui/filters';
+import { ReviewNotificationAppDoctorUiModule } from '@drreview/review-notification-app/doctor/ui';
 
 @NgModule({
   imports: [
@@ -22,7 +23,8 @@ import { SharedUiFiltersModule } from '@drreview/shared/ui/filters';
     MatCardModule,
     ReactiveFormsModule,
     MatFormFieldModule,
-    SharedUiReviewModule
+    SharedUiReviewModule,
+    ReviewNotificationAppDoctorUiModule
   ],
   declarations: [DoctorDetailsComponent, DoctorsRootComponent],
   exports: [RouterModule]
