@@ -11,11 +11,12 @@ import { DoctorsRootComponent } from './components/doctors-root/doctors-root.com
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { SharedUiFiltersModule } from '@drreview/shared/ui/filters';
 import { ReviewNotificationAppDoctorUiModule } from '@drreview/review-notification-app/doctor/ui';
-
+import { MatPaginatorModule } from '@angular/material/paginator';
 @NgModule({
   imports: [
     CommonModule,
     MatCardModule,
+    MatPaginatorModule,
     RouterModule.forChild(routes),
     ReviewNotificationAppScheduleSubscriptionUiModule,
     SharedUiFiltersModule,

@@ -7,14 +7,10 @@
     using System.Threading.Tasks;
     using Dapper;
     using DrReview.Common.Dtos.Doctor;
-    using DrReview.Common.Entities;
     using DrReview.Common.Mediator.Contracts;
     using DrReview.Common.Results;
     using DrReview.Contracts.Filters;
     using DrReview.Contracts.Filters.Enums;
-    using DrReview.Contracts.Storage.Institution.Entities;
-    using DrReview.Contracts.Storage.Location.Entities;
-    using DrReview.Contracts.Storage.Specialization.Entities;
     using Microsoft.Extensions.Configuration;
 
     public class GetDoctorsQuery : IQuery<Result<List<SearchDoctorDto>>>
@@ -65,7 +61,11 @@
             }
 
             List<SearchDoctorDto> results = (await connection.QueryAsync<SearchDoctorDto>(
-               $@"{baseSqlForDoctors} {whereBlock}", new { filterValue = request.Filter?.FilterBy?.Value.Trim() ?? string.Empty })).ToList();
+               $@"{baseSqlForDoctors} {whereBlock} ORDER BY D.ReviewScore OFFSET @skip ROWS
+	               FETCH NEXT @take ROWS ONLY ", new { 
+                   filterValue = request.Filter?.FilterBy?.Value.Trim() ?? string.Empty,
+                   skip = request.Filter != null ? request.Filter.StartPage * request.Filter.ItemsPerPage : 0,
+                   take = request.Filter != null ? request.Filter.ItemsPerPage : 10000})).ToList();
 
             await connection.CloseAsync();
 

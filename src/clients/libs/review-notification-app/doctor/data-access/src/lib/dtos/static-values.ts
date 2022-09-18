@@ -9,7 +9,7 @@ export const filterOptions: IOptionItemWithLink<FilterBy>[] = [
   {
     label: 'Близу мене',
     value: FilterBy.CLOSE_BY,
-    link: '/doctors/filter/close-by/woo'
+    link: '/doctors/filter/close_by/woo'
   },
   {
     label: 'Професии',

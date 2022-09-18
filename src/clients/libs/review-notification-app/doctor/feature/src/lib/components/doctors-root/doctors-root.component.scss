@@ -26,8 +26,11 @@
 
 .doctors {
   width: 100%;
-  background-color: var(--container-background-color-transparent);
-  height: 80vh;
+  min-height: 80vh;
   text-align: center;
   border-radius: 15px;
+}
+
+.doctor-paginator {
+  margin-top: 1em;
 }

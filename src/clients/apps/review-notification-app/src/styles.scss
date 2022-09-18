@@ -224,6 +224,7 @@ $review-notification-app-dark-theme: mat-set-background($review-notification-app
   background-color: var(--container-background-color-transparent) !important;
 }
 
+@import './_paginator.scss';
 
 button.mat-button-base.mat-mini-fab, button.mat-button-base.mat-fab, button.mat-button-base.mat-icon-button {
   display: flex;

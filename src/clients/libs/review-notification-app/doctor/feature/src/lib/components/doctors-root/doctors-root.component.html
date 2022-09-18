@@ -17,6 +17,16 @@
             [doctor]="doctor"
           ></drreview-doctor-card>
         </div>
+        <mat-paginator
+          *ngIf="doctors$"
+          class="doctor-paginator"
+          [pageSize]="100"
+          [length]="1000"
+          [pageSizeOptions]="[25, 50, 75, 100, 150, 250]"
+          (page)="pageChanged($event)"
+          aria-label="Select page"
+        >
+        </mat-paginator>
       </div>
     </div>
   </div>
