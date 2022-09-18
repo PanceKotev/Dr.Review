@@ -26,6 +26,5 @@
         public string Institution { get; set; }
 
         public string Specialization { get; set; }
-
     }
 }

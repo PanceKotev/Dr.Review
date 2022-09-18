@@ -225,6 +225,7 @@ $review-notification-app-dark-theme: mat-set-background($review-notification-app
 }
 
 @import './_paginator.scss';
+@import './autocomplete.scss';
 
 button.mat-button-base.mat-mini-fab, button.mat-button-base.mat-fab, button.mat-button-base.mat-icon-button {
   display: flex;

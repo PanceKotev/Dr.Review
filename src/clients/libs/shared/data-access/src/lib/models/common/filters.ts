@@ -1,4 +1,6 @@
-import { FilterBy } from "../enums/filter.enum";
+import { IOptionItemWithLink } from './interfaces';
+import { Observable } from 'rxjs';
+import { FilterBy  } from "../enums/filter.enum";
 
 export class BaseFilter {
   public page = 0;
@@ -39,3 +41,28 @@ export interface PagingFilter {
   page: number;
   itemsPerPage: number;
 }
+
+
+export type IAdditionalSelectConfig =
+  ILocationAdditionalSelectConfig |
+  IInstitutionAdditionalSelectConfig |
+  ISpecializationAdditionalSelectConfig |
+  IAllSpecializationAdditionalSelectConfig;
+export interface ILocationAdditionalSelectConfig {
+  filterType: FilterBy.LOCATION;
+  items$: Observable<IOptionItemWithLink<string>[]>;
+}
+export interface IInstitutionAdditionalSelectConfig {
+  filterType: FilterBy.INSTITUTION;
+  items$: Observable<IOptionItemWithLink<string>[]>;
+}
+
+export interface ISpecializationAdditionalSelectConfig {
+  filterType: FilterBy.SPECIALIZATION;
+  items$: Observable<IOptionItemWithLink<string>[]>;
+}
+
+export interface IAllSpecializationAdditionalSelectConfig {
+  filterType: FilterBy.ALL;
+  items$: Observable<IOptionItemWithLink<string>[]>;
+};

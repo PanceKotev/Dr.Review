@@ -5,26 +5,37 @@
       [(ngModel)]="filterValue"
       (valueChanged)="filterChanged($event)"
     ></drreview-chip-filter>
+    <drreview-additional-select-filter
+      [config]="additionalFilterSelectConfig"
+      [selectedOption]="selectedFilter"
+      (selectionChanged)="
+        filterValueChanged($event);
+        filterChanged(additionalFilterSelectConfig?.filterType || FilterBy.ALL)
+      "
+    ></drreview-additional-select-filter>
   </div>
   <div class="content-below">
     <div class="doctors">
       <h2>Топ доктори</h2>
-      <div class="doctors">
-        <div class="doctor-wrapper" *ngIf="doctors$">
+      <div class="doctors" *ngIf="doctors$">
+        <div
+          class="doctor-wrapper"
+          *ngIf="doctors$ | async; let doctorsWrapper"
+        >
           <drreview-doctor-card
             class="doctor-card"
-            *ngFor="let doctor of doctors$ | async"
+            *ngFor="let doctor of doctorsWrapper.doctors"
             [doctor]="doctor"
           ></drreview-doctor-card>
         </div>
         <mat-paginator
-          *ngIf="doctors$"
+          *ngIf="doctors$ && pageCount !== undefined"
           class="doctor-paginator"
           [pageSize]="100"
-          [length]="1000"
+          [length]="pageCount"
           [pageSizeOptions]="[25, 50, 75, 100, 150, 250]"
           (page)="pageChanged($event)"
-          aria-label="Select page"
+          [showFirstLastButtons]="true"
         >
         </mat-paginator>
       </div>

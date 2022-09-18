@@ -4,7 +4,7 @@ import { DoctorsRootComponent } from "./components/doctors-root/doctors-root.com
 
 export const routes: Route[] = [
   {path: 'filter/:filterType/:filterValue',  component: DoctorsRootComponent},
-
+  {path: 'filter/:filterType',  component: DoctorsRootComponent},
   {path: '', component: DoctorsRootComponent},
   {path: '*', component: DoctorsRootComponent},
   {path: ":doctorSuid", component: DoctorDetailsComponent}

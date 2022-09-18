@@ -13,7 +13,7 @@
     using DrReview.Contracts.Filters.Enums;
     using Microsoft.Extensions.Configuration;
 
-    public class GetDoctorsQuery : IQuery<Result<List<SearchDoctorDto>>>
+    public class GetDoctorsQuery : IQuery<Result<GetDoctorsDto>>
     {
         public GetDoctorsQuery(GetDoctorsFilter filter)
         {
@@ -23,7 +23,7 @@
         public GetDoctorsFilter Filter { get; }
     }
 
-    public class GetDoctorsQueryHandler : IQueryHandler<GetDoctorsQuery, Result<List<SearchDoctorDto>>>
+    public class GetDoctorsQueryHandler : IQueryHandler<GetDoctorsQuery, Result<GetDoctorsDto>>
     {
         private readonly IConfiguration _configuration;
 
@@ -32,9 +32,8 @@
             _configuration = configuration;
         }
 
-        public async Task<Result<List<SearchDoctorDto>>> Handle(GetDoctorsQuery request, CancellationToken cancellationToken)
+        public async Task<Result<GetDoctorsDto>> Handle(GetDoctorsQuery request, CancellationToken cancellationToken)
         {
-
             string connectionString = _configuration.GetConnectionString("DatabaseConnection");
             using SqlConnection connection = new SqlConnection(connectionString);
 
@@ -42,6 +41,8 @@
 
             string baseSqlForDoctors = $@"SELECT D.Suid as Suid, D.FirstName as FirstName, D.LastName as LastName, I.Name as Institution, S.Name as Specialization FROM [dbo].[Doctor] as D INNER JOIN 
             [dbo].[Institution] AS I ON I.ID = D.InstitutionFK INNER JOIN [dbo].[Location] AS L ON I.LocationFK = L.ID INNER JOIN [dbo].[Specialization] AS S ON D.SpecializationFK = S.ID";
+
+            string countForDoctors = $@"SELECT COUNT(D.ID) FROM [dbo].[Doctor] as D INNER JOIN [dbo].[Institution] AS I ON I.ID = D.InstitutionFK INNER JOIN [dbo].[Location] AS L ON I.LocationFK = L.ID INNER JOIN [dbo].[Specialization] AS S ON D.SpecializationFK = S.ID";
 
             string whereBlock = $@"WHERE D.DeletedOn IS NULL";
 
@@ -60,16 +61,26 @@
                 whereBlock = $@"{whereBlock} AND S.NAME = @filterValue";
             }
 
-            List<SearchDoctorDto> results = (await connection.QueryAsync<SearchDoctorDto>(
+            List<GetDoctorDto> results = (await connection.QueryAsync<GetDoctorDto>(
                $@"{baseSqlForDoctors} {whereBlock} ORDER BY D.ReviewScore OFFSET @skip ROWS
-	               FETCH NEXT @take ROWS ONLY ", new { 
-                   filterValue = request.Filter?.FilterBy?.Value.Trim() ?? string.Empty,
-                   skip = request.Filter != null ? request.Filter.StartPage * request.Filter.ItemsPerPage : 0,
-                   take = request.Filter != null ? request.Filter.ItemsPerPage : 10000})).ToList();
+	               FETCH NEXT @take ROWS ONLY ", new
+                    {
+                       filterValue = request.Filter?.FilterBy?.Value.Trim() ?? string.Empty,
+                       skip = request.Filter != null ? request.Filter.StartPage * request.Filter.ItemsPerPage : 0,
+                       take = request.Filter != null ? request.Filter.ItemsPerPage : 10000
+                    })).ToList();
+
+            long doctorCount = await connection.ExecuteScalarAsync<long>(
+                $@"{countForDoctors} {whereBlock}", new
+                {
+                    filterValue = request.Filter?.FilterBy?.Value.Trim() ?? string.Empty
+                });
+
+            GetDoctorsDto result = new GetDoctorsDto(results ?? new List<GetDoctorDto>(), doctorCount);
 
             await connection.CloseAsync();
 
-            return Result.Ok(results);
+            return Result.Ok(result);
         }
     }
 }

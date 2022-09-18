@@ -11,7 +11,8 @@ import { DoctorsRootComponent } from './components/doctors-root/doctors-root.com
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { SharedUiFiltersModule } from '@drreview/shared/ui/filters';
 import { ReviewNotificationAppDoctorUiModule } from '@drreview/review-notification-app/doctor/ui';
-import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatPaginatorIntl, MatPaginatorModule } from '@angular/material/paginator';
+import { DoctorsCustomLabels } from './intl/doctors-custom-page';
 @NgModule({
   imports: [
     CommonModule,
@@ -26,6 +27,9 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     MatFormFieldModule,
     SharedUiReviewModule,
     ReviewNotificationAppDoctorUiModule
+  ],
+  providers: [
+    { provide: MatPaginatorIntl, useValue: DoctorsCustomLabels}
   ],
   declarations: [DoctorDetailsComponent, DoctorsRootComponent],
   exports: [RouterModule]

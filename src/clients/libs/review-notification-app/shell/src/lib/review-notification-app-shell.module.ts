@@ -1,3 +1,4 @@
+import { MatPaginatorIntl } from '@angular/material/paginator';
 import { ReviewNotificationAppCommonServicesAuthModule } from '@drreview/review-notification-app/common/services/auth';
 import { ReviewNotificationAppCommonConfigurationAuthConfigModule }
 from '@drreview/review-notification-app/common/configuration/auth-config';
@@ -17,6 +18,7 @@ import { QuillModule } from 'ngx-quill';
 import { StarRatingModule } from 'angular-star-rating';
 import { SharedServicesSnackBarModule } from '@drreview/shared/services/snack-bar';
 import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
+import { MatPaginatorCustomLabels } from './mat-paginator-intl';
 
 @NgModule({
   imports: [
@@ -43,7 +45,8 @@ import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
     RouterModule
     ],
   providers: [
-    {provide: MAT_DATE_LOCALE, useValue: 'mk'}
+    {provide: MAT_DATE_LOCALE, useValue: 'mk'},
+    { provide: MatPaginatorIntl, useValue: MatPaginatorCustomLabels}
   ]
 })
 export class ReviewNotificationAppShellModule {}

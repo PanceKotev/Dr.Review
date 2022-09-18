@@ -34,12 +34,22 @@
 
         [HttpGet]
         [Route("")]
-        [ProducesResponseType(typeof(Result<List<SearchDoctorDto>>), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(Result<GetDoctorsDto>), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> GetDoctorsAsync([FromQuery] FilterBy? filterBy, [FromQuery] string? filterByValue, [FromQuery] int page = 0, [FromQuery] int itemsCount = 10000)
         {
             FilterByValue? filter = filterBy != null && !string.IsNullOrEmpty(filterByValue) ? new FilterByValue(filterBy ?? FilterBy.LOCATION, filterByValue) : null;
 
             GetDoctorsQuery query = new GetDoctorsQuery(new GetDoctorsFilter(page, itemsCount, string.Empty, filter));
+
+            return OkOrError(await _mediator.SendAsync(query));
+        }
+
+        [HttpGet]
+        [Route("count")]
+        [ProducesResponseType(typeof(Result<long>), (int)HttpStatusCode.OK)]
+        public async Task<IActionResult> GetDoctorsCountAsync()
+        {
+            GetDoctorsCountQuery query = new GetDoctorsCountQuery();
 
             return OkOrError(await _mediator.SendAsync(query));
         }

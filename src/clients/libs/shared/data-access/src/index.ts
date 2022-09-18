@@ -6,3 +6,4 @@ export * from './lib/models/enums';
 export * from './lib/models/review';
 export * from './lib/doctor';
 export * from './lib/review';
+export * from './lib/common/option-api.service';

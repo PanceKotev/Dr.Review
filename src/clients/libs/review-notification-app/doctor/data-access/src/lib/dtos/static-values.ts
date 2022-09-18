@@ -4,29 +4,29 @@ export const filterOptions: IOptionItemWithLink<FilterBy>[] = [
   {
     label: 'Сите',
     value: FilterBy.ALL,
-    link: '/doctors/filter/all/woo'
+    link: '/doctors/filter/all/'
   },
   {
     label: 'Близу мене',
     value: FilterBy.CLOSE_BY,
-    link: '/doctors/filter/close_by/woo'
+    link: '/doctors/filter/close_by/'
   },
   {
     label: 'Професии',
     value: FilterBy.SPECIALIZATION,
-    link: '/doctors/filter/specialization/woo'
+    link: '/doctors/filter/specialization/'
 
   },
   {
     label: 'Институции',
     value: FilterBy.INSTITUTION,
-    link: '/doctors/filter/institution/woo'
+    link: '/doctors/filter/institution/'
 
   },
   {
     label: 'Локација',
     value: FilterBy.LOCATION,
-    link: '/doctors/filter/location/woo'
+    link: '/doctors/filter/location/'
 
   }
 ];
