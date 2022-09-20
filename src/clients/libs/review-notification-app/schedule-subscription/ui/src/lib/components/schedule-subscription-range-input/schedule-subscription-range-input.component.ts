@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, forwardRef, OnInit, OnDestroy } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, forwardRef, OnInit, OnDestroy, Input } from '@angular/core';
 import { BaseControlValueAccessor } from '@drreview/shared/utils/form';
 import { ScheduleNotificationRange } from '@drreview/review-notification-app/schedule-subscription/data-access';
 import { FormControl, FormGroup, NG_VALUE_ACCESSOR } from '@angular/forms';
@@ -22,6 +22,12 @@ export class ScheduleSubscriptionRangeInputComponent extends BaseControlValueAcc
     to: new FormControl<Date | null>(null),
     subscribedTo: new FormControl<boolean>(false)
   });
+
+  @Input()
+  public notificationSwitchUnder = true;
+
+  @Input()
+  public appearance: 'fill' | 'standard' | 'outline' | 'legacy' = 'fill';
 
   public constructor(public override cdr: ChangeDetectorRef, public themeService: ThemesService) {
     super(cdr);

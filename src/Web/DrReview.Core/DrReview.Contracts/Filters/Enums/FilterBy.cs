@@ -4,6 +4,9 @@
     {
         LOCATION,
         INSTITUTION,
-        SPECIALIZATION
+        SPECIALIZATION,
+        ALL,
+        CLOSE_BY,
+        MINE
     }
 }

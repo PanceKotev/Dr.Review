@@ -6,10 +6,8 @@
     using System.Threading;
     using System.Threading.Tasks;
     using Dapper;
-    using DrReview.Common.Dtos.Doctor;
     using DrReview.Common.Mediator.Contracts;
     using DrReview.Common.Results;
-    using DrReview.Contracts.Filters;
     using Microsoft.Extensions.Configuration;
 
     public class GetSpecializationOptionsQuery : IQuery<Result<List<string>>>

@@ -1,0 +1,16 @@
+<mat-card class="subscription-card">
+  <mat-card-header class="header-card">
+    <mat-checkbox
+      class="checkbox-subscription"
+      [checked]="isTicked"
+    ></mat-checkbox>
+  </mat-card-header>
+
+  <mat-card-title>{{ cardTitle }}</mat-card-title>
+  <mat-card-subtitle> {{ cardSubtitle }}</mat-card-subtitle>
+  <mat-card-actions>
+    <drreview-schedule-subscription-range-input
+      [(ngModel)]="rangeSelection"
+    ></drreview-schedule-subscription-range-input>
+  </mat-card-actions>
+</mat-card>

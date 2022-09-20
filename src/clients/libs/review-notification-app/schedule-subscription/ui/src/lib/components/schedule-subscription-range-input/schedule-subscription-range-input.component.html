@@ -1,5 +1,12 @@
-<div class="subscription-option" [formGroup]="fg">
-  <mat-form-field class="range-from-to" appearance="fill">
+<div
+  class="subscription-option"
+  [ngClass]="{
+    'subscription-option--vertical': notificationSwitchUnder,
+    'subscription-option--horizontal': !notificationSwitchUnder
+  }"
+  [formGroup]="fg"
+>
+  <mat-form-field class="range-from-to" [appearance]="appearance">
     <mat-label>Одбери опсег на датуми</mat-label>
     <mat-date-range-input [rangePicker]="picker" color="accent">
       <input matStartDate formControlName="from" placeholder="Почетен датум" />
@@ -17,6 +24,6 @@
     [disabled]="!fg.get('from')?.value || !fg.get('to')?.value"
     formControlName="subscribedTo"
     labelPosition="before"
-    >Нотификации за слободни термини?</mat-slide-toggle
+    >Нотификации?</mat-slide-toggle
   >
 </div>

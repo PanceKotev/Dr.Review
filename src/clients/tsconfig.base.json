@@ -42,6 +42,9 @@
       "@drreview/review-notification-app/schedule-subscription/data-access": [
         "libs/review-notification-app/schedule-subscription/data-access/src/index.ts"
       ],
+      "@drreview/review-notification-app/schedule-subscription/feature": [
+        "libs/review-notification-app/schedule-subscription/feature/src/index.ts"
+      ],
       "@drreview/review-notification-app/schedule-subscription/ui": [
         "libs/review-notification-app/schedule-subscription/ui/src/index.ts"
       ],

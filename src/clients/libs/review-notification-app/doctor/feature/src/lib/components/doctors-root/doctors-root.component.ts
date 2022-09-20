@@ -18,6 +18,8 @@ export class DoctorsRootComponent implements OnInit{
 
   public selectedFilter = '';
 
+  public onlySubscriptions = false;
+
   public FilterBy = FilterBy;
 
   @ViewChild(MatPaginator, {static: false}) public paginator!: MatPaginator;
@@ -27,8 +29,10 @@ export class DoctorsRootComponent implements OnInit{
   public pageCount: number | undefined;
   public refreshDoctors$ = new BehaviorSubject<FilterBy>(FilterBy.ALL);
   public doctors$: Observable<GetDoctorsDto> | undefined;
-  public additionalFilterSelectConfig$ = new Subject<IAdditionalSelectConfig>();
-  public additionalFilterSelectConfig: IAdditionalSelectConfig | undefined;
+  public additionalFilterSelectConfig$ = new BehaviorSubject<IAdditionalSelectConfig>({
+    filterType: FilterBy.ALL,
+    items$: of([])
+  });
 
   public constructor(
     private route: ActivatedRoute,
@@ -89,22 +93,8 @@ export class DoctorsRootComponent implements OnInit{
 
   public returnFilterValue(value: FilterBy, page: PagingFilter): Observable<GetDoctorsDto>{
     switch(value) {
-      case FilterBy.ALL: {
-        this.additionalFilterSelectConfig$.next(
-          {filterType: FilterBy.ALL,
-            items$:
-            of([])});
-
-      this.additionalFilterSelectConfig =    {filterType: FilterBy.ALL,
-          items$:
-          of([])};
-
-        return this.doctorApiService.getDoctors(new GetDoctorsFilter(undefined, page.page, page.itemsPerPage));
-      }
       case FilterBy.LOCATION: {
         this.additionalFilterSelectConfig$.next({filterType: FilterBy.LOCATION, items$: this.optionsApiService.getLocationOptions()});
-
-        this.additionalFilterSelectConfig = {filterType: FilterBy.LOCATION, items$: this.optionsApiService.getLocationOptions()};
 
         return this.doctorApiService.getDoctors(
           new GetDoctorsFilter({property: FilterBy.LOCATION, value: this.selectedFilter}, page.page, page.itemsPerPage));
@@ -112,30 +102,21 @@ export class DoctorsRootComponent implements OnInit{
       case FilterBy.INSTITUTION: {
         this.additionalFilterSelectConfig$.next({filterType: FilterBy.INSTITUTION, items$: this.optionsApiService.getInstitutionOptions()});
 
-        this.additionalFilterSelectConfig = {filterType: FilterBy.INSTITUTION, items$: this.optionsApiService.getInstitutionOptions()};
-
         return this.doctorApiService.getDoctors(
           new GetDoctorsFilter({property: FilterBy.INSTITUTION,
             value: this.selectedFilter}, page.page, page.itemsPerPage));
       }
       case FilterBy.SPECIALIZATION: {
-        this.additionalFilterSelectConfig$.next(
-          {filterType: FilterBy.SPECIALIZATION, items$: this.optionsApiService.getSpecializationOptions()});
-
-        this.additionalFilterSelectConfig = {filterType: FilterBy.SPECIALIZATION,
-          items$: this.optionsApiService.getSpecializationOptions()};
+        this.additionalFilterSelectConfig$.next({filterType: FilterBy.SPECIALIZATION,
+          items$: this.optionsApiService.getSpecializationOptions()});
 
         return this.doctorApiService.getDoctors(
           new GetDoctorsFilter({property: FilterBy.SPECIALIZATION, value: this.selectedFilter}, page.page, page.itemsPerPage));
       }
       default: {
-        this.additionalFilterSelectConfig$.next(
-          {filterType: FilterBy.ALL,
-            items$:
-            of([])});
-        this.additionalFilterSelectConfig =  {filterType: FilterBy.ALL,
+        this.additionalFilterSelectConfig$.next({filterType: FilterBy.ALL,
           items$:
-          of([])};
+          of([])});
 
         return this.doctorApiService.getDoctors(new GetDoctorsFilter(undefined, page.page, page.itemsPerPage));
       }

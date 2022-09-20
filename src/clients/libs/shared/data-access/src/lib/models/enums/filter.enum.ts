@@ -3,5 +3,6 @@ export enum FilterBy {
   INSTITUTION = 1,
   SPECIALIZATION = 2,
   ALL = 3,
-  CLOSE_BY = 4
+  CLOSE_BY = 4,
+  MINE = 5
 };

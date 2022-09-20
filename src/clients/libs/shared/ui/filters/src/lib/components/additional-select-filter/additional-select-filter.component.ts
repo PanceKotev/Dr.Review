@@ -25,7 +25,6 @@ import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
   styleUrls: ['./additional-select-filter.component.scss']
 })
 export class AdditionalSelectFilterComponent implements OnInit, OnChanges {
-  @Input() public config$: Observable<IAdditionalSelectConfig> | undefined;
   @Input() public config: IAdditionalSelectConfig | undefined;
   @Input() public selectedOption: string | undefined;
 
@@ -53,7 +52,7 @@ export class AdditionalSelectFilterComponent implements OnInit, OnChanges {
 
   public ngOnChanges(changes: SimpleChanges): void {
     if (changes['config']) {
-    this.items$ = this.config?.items$;
+      this.items$ = this.config?.items$;
       this.setItemsObservable();
     }
 

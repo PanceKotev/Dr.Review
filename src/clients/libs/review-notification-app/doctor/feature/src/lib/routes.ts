@@ -6,6 +6,6 @@ export const routes: Route[] = [
   {path: 'filter/:filterType/:filterValue',  component: DoctorsRootComponent},
   {path: 'filter/:filterType',  component: DoctorsRootComponent},
   {path: '', component: DoctorsRootComponent},
-  {path: '*', component: DoctorsRootComponent},
+  {path: '*', redirectTo: ''},
   {path: ":doctorSuid", component: DoctorDetailsComponent}
 ];

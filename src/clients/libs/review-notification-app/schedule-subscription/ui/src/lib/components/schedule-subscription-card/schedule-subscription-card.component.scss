@@ -1,0 +1,22 @@
+.subscription-card {
+  border-radius:0px 20px 20px 0px;
+  max-width: 250px;
+}
+
+:host::ng-deep .checkbox-subscription .mat-checkbox-inner-container{
+  --checkbox-size: 22.5px;
+  width: var(--checkbox-size);
+  height: var(--checkbox-size);
+  font-size: var(--checkbox-size);
+}
+
+.header-card {
+  height: 22.5px;
+  margin-bottom: 1em;
+  display: flex;
+  justify-content: flex-start;
+
+  &::ng-deep .mat-card-header-text {
+    display: none !important;
+  }
+}

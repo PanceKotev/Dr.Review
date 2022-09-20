@@ -1,31 +1,37 @@
 import { FilterBy, IOptionItemWithLink } from "@drreview/shared/data-access";
 
-export const filterOptions: IOptionItemWithLink<FilterBy>[] = [
+export const filterChips: IOptionItemWithLink<FilterBy>[] = [
   {
     label: 'Сите',
-    value: FilterBy.ALL,
-    link: '/doctors/filter/all/'
+    link: '/subscriptions/filter/all/',
+    value: FilterBy.ALL
+  },
+  {
+    label: 'Мои',
+    link: '/subscriptions/filter/mine/',
+    value: FilterBy.MINE
   },
   {
     label: 'Близу мене',
     value: FilterBy.CLOSE_BY,
-    link: '/doctors/filter/close_by/'
+    link: '/subscriptions/filter/close_by/'
   },
   {
     label: 'Професии',
     value: FilterBy.SPECIALIZATION,
-    link: '/doctors/filter/specialization/'
+    link: '/subscriptions/filter/specialization/'
 
   },
   {
     label: 'Институции',
     value: FilterBy.INSTITUTION,
-    link: '/doctors/filter/institution/'
+    link: '/subscriptions/filter/institution/'
 
   },
   {
     label: 'Локација',
     value: FilterBy.LOCATION,
-    link: '/doctors/filter/location/'
+    link: '/subscriptions/filter/location/'
+
   }
 ];

@@ -14,6 +14,12 @@ export const mainRoutes: Route[] = [
     (await import('@drreview/review-notification-app/doctor/feature')).ReviewNotificationAppDoctorFeatureModule
   },
   {
+    path: 'subscriptions',
+    canActivate: [MsalGuard],
+    loadChildren: async() =>
+    (await import('@drreview/review-notification-app/schedule-subscription/feature')).ReviewNotificationAppScheduleSubscriptionFeatureModule
+  },
+  {
     path: 'notfound',
     canActivate: [MsalGuard],
     component: NotFoundComponent

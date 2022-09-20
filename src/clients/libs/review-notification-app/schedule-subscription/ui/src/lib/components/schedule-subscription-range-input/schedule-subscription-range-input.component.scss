@@ -1,5 +1,18 @@
 .subscription-option{
   display:flex;
-  flex-direction: column;
   max-width: 300px;
+}
+
+.subscription-option{
+  &--vertical{
+    flex-direction: column;
+  }
+  &--horizontal {
+    align-items: center;
+
+    & ::ng-deep .mat-slide-toggle{
+      margin-left: 1em;
+
+    }
+  }
 }

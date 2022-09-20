@@ -13,16 +13,22 @@ import { SharedUiFiltersModule } from '@drreview/shared/ui/filters';
 import { ReviewNotificationAppDoctorUiModule } from '@drreview/review-notification-app/doctor/ui';
 import { MatPaginatorIntl, MatPaginatorModule } from '@angular/material/paginator';
 import { DoctorsCustomLabels } from './intl/doctors-custom-page';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatButtonModule } from '@angular/material/button';
 @NgModule({
   imports: [
     CommonModule,
     MatCardModule,
+    MatCheckboxModule,
     MatPaginatorModule,
+    MatButtonModule,
     RouterModule.forChild(routes),
     ReviewNotificationAppScheduleSubscriptionUiModule,
     SharedUiFiltersModule,
     FormsModule,
     MatCardModule,
+    MatSlideToggleModule,
     ReactiveFormsModule,
     MatFormFieldModule,
     SharedUiReviewModule,
