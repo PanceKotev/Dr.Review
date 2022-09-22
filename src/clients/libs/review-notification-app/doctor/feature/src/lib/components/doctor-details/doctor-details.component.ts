@@ -2,12 +2,14 @@ import { Subject, takeUntil, switchMap, combineLatest } from 'rxjs';
 import { DoctorApiService,
    ReviewApiService,
    GetDoctorDetailsDto,
-   GetReviewDto, GetReviewSummaryDto, GetReviewsDto, VoteOnReviewRequest, UpdateReviewRequest } from '@drreview/shared/data-access';
+   GetReviewDto,
+    GetReviewSummaryDto,
+     GetReviewsDto,
+     VoteOnReviewRequest, UpdateReviewRequest, ScheduleNotificationRange } from '@drreview/shared/data-access';
 import { Component, NgZone, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ReviewChangedEvent } from '@drreview/shared/ui/review';
 import { SnackBarService } from '@drreview/shared/services/snack-bar';
-import { ScheduleNotificationRange } from '@drreview/review-notification-app/schedule-subscription/data-access';
 
 @Component({
   templateUrl: './doctor-details.component.html',

@@ -1,3 +1,5 @@
+import { GetScheduleSubscriptionDto } from "./schedule-subscription.dto";
+
 export interface SearchDoctorDto {
   readonly suid: string;
   readonly firstName: string;
@@ -26,4 +28,5 @@ export interface GetDoctorDto {
   readonly lastName: string;
   readonly institution: string;
   readonly specialization: string;
+  readonly scheduleSubscription: GetScheduleSubscriptionDto | null;
 }

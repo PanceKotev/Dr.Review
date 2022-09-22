@@ -24,24 +24,21 @@
             Range = range;
         }
 
-        public string Suid { get; init; }
+        public string Suid { get; set; }
 
-        public ScheduleSubscriptionRangeDto Range { get; init; }
+        public ScheduleSubscriptionRangeDto Range { get; set; }
     }
 
     public class ScheduleSubscriptionRangeDto
     {
-        public ScheduleSubscriptionRangeDto(DateOnly from, DateOnly to, bool subscribedTo)
+        public ScheduleSubscriptionRangeDto(DateOnly from, DateOnly to)
         {
             From = from;
             To = to;
-            SubscribedTo = subscribedTo;
         }
 
-        public DateOnly From { get; init; }
+        public DateOnly From { get; set; }
 
-        public DateOnly To { get; init; }
-
-        public bool SubscribedTo { get; init; }
+        public DateOnly To { get; set; }
     }
 }

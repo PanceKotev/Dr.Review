@@ -25,8 +25,11 @@ export class DoctorApiService {
       map((res: Result<GetDoctorDetailsDto>) => res.value));
   }
 
-  public getDoctors(getDoctorsFilter: GetDoctorsFilter | undefined = undefined): Observable<GetDoctorsDto> {
-    const filterByQuery = getDoctorsFilter ? getDoctorsFilter.toQueryProperties(): '';
+  public getDoctors(getDoctorsFilter: GetDoctorsFilter | undefined = undefined,
+    withSubscription: boolean = false): Observable<GetDoctorsDto> {
+    let filterByQuery = getDoctorsFilter ? getDoctorsFilter.toQueryProperties(): '';
+
+    filterByQuery = filterByQuery && withSubscription ? `${filterByQuery}&&withSubscriptions=true` : filterByQuery;
 
     return this.apiService.get<Result<GetDoctorsDto>>(`v1/doctors/${filterByQuery}`)
     .pipe(

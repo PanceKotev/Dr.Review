@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { ScheduleNotificationRange } from '@drreview/review-notification-app/schedule-subscription/data-access';
+import { ScheduleNotificationRange } from '@drreview/shared/data-access';
 
 @Component({
   selector: 'drreview-schedule-subscription-card',
@@ -8,7 +8,8 @@ import { ScheduleNotificationRange } from '@drreview/review-notification-app/sch
 })
 export class ScheduleSubscriptionCardComponent implements OnInit {
 
-  public rangeSelection: ScheduleNotificationRange | undefined;
+  @Input()
+  public rangeSelection: ScheduleNotificationRange | null | undefined;
 
   @Input()
   public isTicked = false;
@@ -27,6 +28,9 @@ export class ScheduleSubscriptionCardComponent implements OnInit {
   }
 
   public selectionChanged(value: ScheduleNotificationRange | undefined): void{
-    this.rangeSelectionChange.emit(value);
+    console.log(this.rangeSelection?.subscribedTo, value?.subscribedTo);
+    if(value?.from && value.to  && this.rangeSelection?.subscribedTo !== value.subscribedTo){
+      this.rangeSelectionChange.emit(value);
+    }
   }
 }

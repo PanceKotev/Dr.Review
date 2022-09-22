@@ -1,5 +1,5 @@
 <div class="home">
-  <div class="header-ctions">
+  <div class="header-actions">
     <drreview-chip-filter
       [filterOptions]="filterOptions"
       [(ngModel)]="filterValue"
@@ -45,6 +45,14 @@
             *ngFor="let doctor of doctorsWrapper.doctors"
             [cardTitle]="doctor.firstName + ' ' + doctor.lastName"
             [cardSubtitle]="doctor.institution + ',' + doctor.specialization"
+            [rangeSelection]="doctor.scheduleSubscription?.range"
+            (rangeSelectionChange)="
+              rangeChanged(
+                doctor.suid,
+                $event,
+                doctor.scheduleSubscription?.suid
+              )
+            "
           >
           </drreview-schedule-subscription-card>
           <ng-template #onlyDoctors>

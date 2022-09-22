@@ -2,9 +2,12 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { ActivatedRoute, Router } from '@angular/router';
 import { filterOptions } from '@drreview/review-notification-app/doctor/data-access';
+import { ScheduleSubscriptionApiService } from '@drreview/review-notification-app/schedule-subscription/data-access';
 import { FilterBy,
   DoctorApiService,
-  GetDoctorsFilter, PagingFilter, GetDoctorsDto, IAdditionalSelectConfig, OptionApiService } from '@drreview/shared/data-access';
+  GetDoctorsFilter, PagingFilter, GetDoctorsDto,
+  IAdditionalSelectConfig, OptionApiService, ScheduleNotificationRange } from '@drreview/shared/data-access';
+import * as dayjs from 'dayjs';
 import { BehaviorSubject, Subject, takeUntil, switchMap, Observable, EMPTY, combineLatest, tap, of } from 'rxjs';
 
 @Component({
@@ -15,6 +18,12 @@ import { BehaviorSubject, Subject, takeUntil, switchMap, Observable, EMPTY, comb
 export class DoctorsRootComponent implements OnInit{
   public filterOptions = filterOptions;
   public filterValue = FilterBy.ALL;
+
+  public defaultRange: ScheduleNotificationRange = {
+    from: undefined,
+    to: undefined,
+    subscribedTo: false
+  };
 
   public selectedFilter = '';
 
@@ -37,6 +46,7 @@ export class DoctorsRootComponent implements OnInit{
   public constructor(
     private route: ActivatedRoute,
     private router: Router,
+    private scheduleSubscriptionApiService : ScheduleSubscriptionApiService,
     private optionsApiService: OptionApiService,
     private doctorApiService: DoctorApiService){
     const filterByEntries = Object.entries(FilterBy);
@@ -91,34 +101,61 @@ export class DoctorsRootComponent implements OnInit{
   }
 
 
+  public rangeChanged(doctorSuid: string, range: ScheduleNotificationRange | undefined, scheduleSuid?: string): void {
+    console.log(doctorSuid, range, scheduleSuid);
+    if(range && !scheduleSuid && range.subscribedTo){
+      this.scheduleSubscriptionApiService.subscribeToDoctorSchedule(
+        {doctorSuid: doctorSuid,
+          rangeFrom: this.convertToDate(range.from),
+          rangeTo: this.convertToDate(range.to)})
+      .subscribe(() => {});
+    } else if(range && scheduleSuid && !range.subscribedTo){
+      this.scheduleSubscriptionApiService.unsubscribeFromDoctorSchedule(scheduleSuid).subscribe(() => {});
+    } else if (range && scheduleSuid){
+      this.scheduleSubscriptionApiService
+        .updateScheduleSubscription({
+          rangeFrom: this.convertToDate(range.from),
+          rangeTo:this.convertToDate(range.to),
+          scheduleSuid: scheduleSuid}).subscribe(() => {});
+    }
+  }
+
+  private convertToDate(range: string | undefined | null): string | undefined {
+    console.log(dayjs(range).format('YYYY-MM-DD')
+    .toString());
+
+    return range ? dayjs(range).format('YYYY-MM-DD')
+    .toString() : undefined;
+  }
+
   public returnFilterValue(value: FilterBy, page: PagingFilter): Observable<GetDoctorsDto>{
     switch(value) {
       case FilterBy.LOCATION: {
         this.additionalFilterSelectConfig$.next({filterType: FilterBy.LOCATION, items$: this.optionsApiService.getLocationOptions()});
 
         return this.doctorApiService.getDoctors(
-          new GetDoctorsFilter({property: FilterBy.LOCATION, value: this.selectedFilter}, page.page, page.itemsPerPage));
+          new GetDoctorsFilter({property: FilterBy.LOCATION, value: this.selectedFilter}, page.page, page.itemsPerPage), true);
       }
       case FilterBy.INSTITUTION: {
         this.additionalFilterSelectConfig$.next({filterType: FilterBy.INSTITUTION, items$: this.optionsApiService.getInstitutionOptions()});
 
         return this.doctorApiService.getDoctors(
           new GetDoctorsFilter({property: FilterBy.INSTITUTION,
-            value: this.selectedFilter}, page.page, page.itemsPerPage));
+            value: this.selectedFilter}, page.page, page.itemsPerPage), true);
       }
       case FilterBy.SPECIALIZATION: {
         this.additionalFilterSelectConfig$.next({filterType: FilterBy.SPECIALIZATION,
           items$: this.optionsApiService.getSpecializationOptions()});
 
         return this.doctorApiService.getDoctors(
-          new GetDoctorsFilter({property: FilterBy.SPECIALIZATION, value: this.selectedFilter}, page.page, page.itemsPerPage));
+          new GetDoctorsFilter({property: FilterBy.SPECIALIZATION, value: this.selectedFilter}, page.page, page.itemsPerPage), true);
       }
       default: {
         this.additionalFilterSelectConfig$.next({filterType: FilterBy.ALL,
           items$:
           of([])});
 
-        return this.doctorApiService.getDoctors(new GetDoctorsFilter(undefined, page.page, page.itemsPerPage));
+        return this.doctorApiService.getDoctors(new GetDoctorsFilter(undefined, page.page, page.itemsPerPage), true);
       }
     }
   }

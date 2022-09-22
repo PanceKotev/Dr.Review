@@ -1,9 +1,9 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, forwardRef, OnInit, OnDestroy, Input } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, forwardRef, OnInit, OnChanges, OnDestroy, Input, SimpleChanges } from '@angular/core';
 import { BaseControlValueAccessor } from '@drreview/shared/utils/form';
-import { ScheduleNotificationRange } from '@drreview/review-notification-app/schedule-subscription/data-access';
 import { FormControl, FormGroup, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Subject, takeUntil } from 'rxjs';
 import { ThemesService } from '@drreview/shared/services/themes';
+import { ScheduleNotificationRange } from '@drreview/shared/data-access';
 
 @Component({
   selector: 'drreview-schedule-subscription-range-input',
@@ -13,14 +13,14 @@ import { ThemesService } from '@drreview/shared/services/themes';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ScheduleSubscriptionRangeInputComponent extends BaseControlValueAccessor<ScheduleNotificationRange>
-      implements OnInit, OnDestroy {
+      implements OnInit, OnChanges, OnDestroy {
 
   private isDestroying$ = new Subject<boolean>();
 
   public fg: FormGroup = new FormGroup({
-    from: new FormControl<Date | null>(null),
-    to: new FormControl<Date | null>(null),
-    subscribedTo: new FormControl<boolean>(false)
+    from: new FormControl<string | undefined | null>(this.value?.from),
+    to: new FormControl<string | undefined | null>(this.value?.to),
+    subscribedTo: new FormControl<boolean>(this.value?.subscribedTo)
   });
 
   @Input()
@@ -34,11 +34,33 @@ export class ScheduleSubscriptionRangeInputComponent extends BaseControlValueAcc
   }
 
   public ngOnInit(): void {
+    if (this.value) {
+      this.fg.patchValue(
+      {
+        from: this.value?.from,
+        to: this.value?.to,
+        subscribedTo: !!this.value?.subscribedTo
+      }
+    );
+  };
     this.fg.valueChanges.pipe(takeUntil(this.isDestroying$)).subscribe(c => {
       this.onChange(c);
     });
   }
 
+  public ngOnChanges(changes: SimpleChanges): void {
+      if(changes['value']){
+        if (this.value) {
+          this.fg.patchValue(
+          {
+            from: this.value?.from,
+            to: this.value?.to,
+            subscribedTo: !!this.value?.subscribedTo
+          }
+        );
+      }
+      }
+  }
   public ngOnDestroy(): void {
     this.isDestroying$.next(true);
     this.isDestroying$.complete();
