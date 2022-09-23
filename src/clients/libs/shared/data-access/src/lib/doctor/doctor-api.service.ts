@@ -3,7 +3,7 @@ import { Result } from './../models/common/result';
 import { ApiService } from './../base/api.service';
 import { Injectable } from '@angular/core';
 import { GetDoctorDetailsDto, GetDoctorsDto, SearchDoctorDto } from '../models/doctor';
-import { map, Observable } from 'rxjs';
+import { map, Observable, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -33,7 +33,8 @@ export class DoctorApiService {
 
     return this.apiService.get<Result<GetDoctorsDto>>(`v1/doctors/${filterByQuery}`)
     .pipe(
-      map((res: Result<GetDoctorsDto>) => res.value));
+      map((res: Result<GetDoctorsDto>) => res.value),
+      tap(x => console.log('doctors', x)));
   }
 
   public getDoctorsCount(): Observable<number> {

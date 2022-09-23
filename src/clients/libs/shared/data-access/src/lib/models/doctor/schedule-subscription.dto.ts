@@ -1,10 +1,15 @@
 export interface GetScheduleSubscriptionDto {
   readonly suid: string;
-  range: ScheduleNotificationRange;
+  range: ScheduleNotificationRangeString;
 }
 
-export interface ScheduleNotificationRange {
+export interface ScheduleNotificationRangeString {
   from: string | undefined | null;
   to: string | undefined | null;
+  subscribedTo: boolean;
+}
+export interface ScheduleNotificationRange {
+  from: Date  | null;
+  to: Date  | null;
   subscribedTo: boolean;
 }

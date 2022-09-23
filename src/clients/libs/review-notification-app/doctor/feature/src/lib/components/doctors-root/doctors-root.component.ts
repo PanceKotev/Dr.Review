@@ -6,9 +6,10 @@ import { ScheduleSubscriptionApiService } from '@drreview/review-notification-ap
 import { FilterBy,
   DoctorApiService,
   GetDoctorsFilter, PagingFilter, GetDoctorsDto,
-  IAdditionalSelectConfig, OptionApiService, ScheduleNotificationRange } from '@drreview/shared/data-access';
+  IAdditionalSelectConfig, OptionApiService,
+  ScheduleNotificationRange } from '@drreview/shared/data-access';
 import * as dayjs from 'dayjs';
-import { BehaviorSubject, Subject, takeUntil, switchMap, Observable, EMPTY, combineLatest, tap, of } from 'rxjs';
+import { BehaviorSubject, Subject, takeUntil, switchMap, Observable, EMPTY, combineLatest, tap, of, startWith } from 'rxjs';
 
 @Component({
   selector: 'drreview-doctors-root',
@@ -20,8 +21,8 @@ export class DoctorsRootComponent implements OnInit{
   public filterValue = FilterBy.ALL;
 
   public defaultRange: ScheduleNotificationRange = {
-    from: undefined,
-    to: undefined,
+    from: null,
+    to: null,
     subscribedTo: false
   };
 
@@ -50,8 +51,14 @@ export class DoctorsRootComponent implements OnInit{
     private optionsApiService: OptionApiService,
     private doctorApiService: DoctorApiService){
     const filterByEntries = Object.entries(FilterBy);
-    this.route.paramMap.pipe(takeUntil(this.destroying$)).subscribe({
-      next : res => {
+
+    combineLatest([this.route.paramMap, this.route.queryParamMap.pipe(startWith(undefined))]).pipe(takeUntil(this.destroying$))
+      .subscribe({
+      next : ([res, query]) => {
+        const subscriptionToggled = !!query?.get('onlySubscriptions');
+        this.onlySubscriptions = subscriptionToggled;
+
+
         const paramFilterBy = res.get('filterType');
         const selectedValue = res.get('filterValue');
 
@@ -102,27 +109,30 @@ export class DoctorsRootComponent implements OnInit{
 
 
   public rangeChanged(doctorSuid: string, range: ScheduleNotificationRange | undefined, scheduleSuid?: string): void {
-    console.log(doctorSuid, range, scheduleSuid);
     if(range && !scheduleSuid && range.subscribedTo){
       this.scheduleSubscriptionApiService.subscribeToDoctorSchedule(
         {doctorSuid: doctorSuid,
-          rangeFrom: this.convertToDate(range.from),
-          rangeTo: this.convertToDate(range.to)})
-      .subscribe(() => {});
+          rangeFrom: this.convertToString(range.from),
+          rangeTo: this.convertToString(range.to)})
+      .subscribe(() => {
+        this.refreshDoctors$.next(this.filterValue);
+      });
     } else if(range && scheduleSuid && !range.subscribedTo){
-      this.scheduleSubscriptionApiService.unsubscribeFromDoctorSchedule(scheduleSuid).subscribe(() => {});
+      this.scheduleSubscriptionApiService.unsubscribeFromDoctorSchedule(scheduleSuid).subscribe(() => {
+        this.refreshDoctors$.next(this.filterValue);
+      });
     } else if (range && scheduleSuid){
       this.scheduleSubscriptionApiService
         .updateScheduleSubscription({
-          rangeFrom: this.convertToDate(range.from),
-          rangeTo:this.convertToDate(range.to),
-          scheduleSuid: scheduleSuid}).subscribe(() => {});
+          rangeFrom: this.convertToString(range.from),
+          rangeTo:this.convertToString(range.to),
+          scheduleSuid: scheduleSuid}).subscribe(() => {
+            this.refreshDoctors$.next(this.filterValue);
+          });
     }
   }
 
-  private convertToDate(range: string | undefined | null): string | undefined {
-    console.log(dayjs(range).format('YYYY-MM-DD')
-    .toString());
+  private convertToString(range: Date | undefined | null): string | undefined {
 
     return range ? dayjs(range).format('YYYY-MM-DD')
     .toString() : undefined;

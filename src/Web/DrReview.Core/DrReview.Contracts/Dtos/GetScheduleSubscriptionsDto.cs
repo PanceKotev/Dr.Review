@@ -31,14 +31,17 @@
 
     public class ScheduleSubscriptionRangeDto
     {
-        public ScheduleSubscriptionRangeDto(DateOnly from, DateOnly to)
+        public ScheduleSubscriptionRangeDto(DateOnly from, DateOnly to, bool subscribedTo)
         {
             From = from;
             To = to;
+            SubscribedTo = subscribedTo;
         }
 
         public DateOnly From { get; set; }
 
         public DateOnly To { get; set; }
+
+        public bool SubscribedTo { get; set; }
     }
 }

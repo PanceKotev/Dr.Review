@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, forwardRef, OnInit, OnChanges, OnDestroy, Input, SimpleChanges } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component,
+  forwardRef, OnInit, OnDestroy, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { BaseControlValueAccessor } from '@drreview/shared/utils/form';
 import { FormControl, FormGroup, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Subject, takeUntil } from 'rxjs';
@@ -18,16 +19,23 @@ export class ScheduleSubscriptionRangeInputComponent extends BaseControlValueAcc
   private isDestroying$ = new Subject<boolean>();
 
   public fg: FormGroup = new FormGroup({
-    from: new FormControl<string | undefined | null>(this.value?.from),
-    to: new FormControl<string | undefined | null>(this.value?.to),
-    subscribedTo: new FormControl<boolean>(this.value?.subscribedTo)
+    from: new FormControl<Date | undefined | null>(null),
+    to: new FormControl<Date | undefined | null>(null),
+    subscribedTo: new FormControl<boolean>(false)
   });
 
   @Input()
   public notificationSwitchUnder = true;
 
+
   @Input()
   public appearance: 'fill' | 'standard' | 'outline' | 'legacy' = 'fill';
+
+  public override writeValue(obj: ScheduleNotificationRange): void {
+    this.value = obj;
+    this.fg.patchValue(obj);
+    this.cdr?.markForCheck();
+  }
 
   public constructor(public override cdr: ChangeDetectorRef, public themeService: ThemesService) {
     super(cdr);
@@ -35,14 +43,10 @@ export class ScheduleSubscriptionRangeInputComponent extends BaseControlValueAcc
 
   public ngOnInit(): void {
     if (this.value) {
-      this.fg.patchValue(
-      {
-        from: this.value?.from,
-        to: this.value?.to,
-        subscribedTo: !!this.value?.subscribedTo
-      }
-    );
-  };
+      this.fg.patchValue(this.value);
+      this.fg.updateValueAndValidity({emitEvent: false});
+    };
+
     this.fg.valueChanges.pipe(takeUntil(this.isDestroying$)).subscribe(c => {
       this.onChange(c);
     });
@@ -50,15 +54,14 @@ export class ScheduleSubscriptionRangeInputComponent extends BaseControlValueAcc
 
   public ngOnChanges(changes: SimpleChanges): void {
       if(changes['value']){
+        console.log('cange');
+
         if (this.value) {
-          this.fg.patchValue(
-          {
-            from: this.value?.from,
-            to: this.value?.to,
-            subscribedTo: !!this.value?.subscribedTo
-          }
-        );
-      }
+
+          this.fg.patchValue(this.value);
+          this.fg.updateValueAndValidity({emitEvent: false});
+
+        };
       }
   }
   public ngOnDestroy(): void {

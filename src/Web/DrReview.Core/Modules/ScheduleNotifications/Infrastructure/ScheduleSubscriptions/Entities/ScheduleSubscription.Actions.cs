@@ -16,7 +16,7 @@
                                      DateOnly rangeFrom,
                                      DateOnly rangeTo)
         {
-            if (rangeTo > rangeFrom)
+            if (rangeTo <= rangeFrom)
             {
                 return Result.Invalid<ScheduleSubscription>(ResultCodes.RangeDateFromBeforeToDate);
             }

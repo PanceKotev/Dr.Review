@@ -62,7 +62,7 @@
                                                 .Take(request.Filter is not null ? request.Filter.ItemsPerPage : 10000)
                                                 .Select(x => new GetScheduleSubscriptionDto(
                                                     x.Suid,
-                                                    new ScheduleSubscriptionRangeDto(x.RangeFrom, x.RangeTo)))
+                                                    new ScheduleSubscriptionRangeDto(x.RangeFrom, x.RangeTo, true)))
                                                 .ToListAsync();
 
             GetScheduleSubscriptionsDto result = new GetScheduleSubscriptionsDto(

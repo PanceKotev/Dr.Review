@@ -8,19 +8,9 @@
 >
   <mat-form-field class="range-from-to" [appearance]="appearance">
     <mat-label>Одбери опсег на датуми</mat-label>
-    <mat-date-range-input [rangePicker]="picker" color="accent">
-      <input
-        matStartDate
-        formControlName="from"
-        [value]="value ? value.from : ''"
-        placeholder="Почетен датум"
-      />
-      <input
-        matEndDate
-        formControlName="to"
-        [value]="value ? value.to : ''"
-        placeholder="Краен датум"
-      />
+    <mat-date-range-input [formGroup]="fg" [rangePicker]="picker">
+      <input matStartDate formControlName="from" placeholder="Почетен датум" />
+      <input matEndDate formControlName="to" placeholder="Краен датум" />
     </mat-date-range-input>
     <mat-datepicker-toggle matSuffix [for]="picker">
       <mat-icon color="accent" matDatepickerToggleIcon>date_range</mat-icon>
@@ -33,7 +23,7 @@
   <mat-slide-toggle
     [disabled]="!fg.get('from')?.value || !fg.get('to')?.value"
     formControlName="subscribedTo"
-    [checked]="value ? value.subscribedTo : false"
+    [ngModel]="!!value?.subscribedTo"
     labelPosition="before"
     >Нотификации?</mat-slide-toggle
   >

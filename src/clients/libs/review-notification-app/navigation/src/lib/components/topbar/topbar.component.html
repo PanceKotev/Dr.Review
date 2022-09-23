@@ -1,5 +1,13 @@
 <mat-toolbar color="primary" class="custom-toolbar">
   <div class="left-elements">
+    <button
+      mat-icon-button
+      color="accent"
+      class="ham-menu"
+      (click)="toggleSidebar()"
+    >
+      <mat-icon>menu</mat-icon>
+    </button>
     <mat-icon routerLink="/" class="app-logo">medication</mat-icon>
     <span routerLink="/" class="app-title">{{ appTitle }}</span>
   </div>

@@ -38,31 +38,33 @@
           class="doctor-wrapper"
           *ngIf="doctors$ | async; let doctorsWrapper"
         >
-          <ng-template
-            *ngIf="onlySubscriptions; else onlyDoctors"
-          ></ng-template>
-          <drreview-schedule-subscription-card
-            *ngFor="let doctor of doctorsWrapper.doctors"
-            [cardTitle]="doctor.firstName + ' ' + doctor.lastName"
-            [cardSubtitle]="doctor.institution + ',' + doctor.specialization"
-            [rangeSelection]="doctor.scheduleSubscription?.range"
-            (rangeSelectionChange)="
-              rangeChanged(
-                doctor.suid,
-                $event,
-                doctor.scheduleSubscription?.suid
-              )
-            "
-          >
-          </drreview-schedule-subscription-card>
-          <ng-template #onlyDoctors>
-            <drreview-doctor-card
-              class="doctor-card"
-              *ngFor="let doctor of doctorsWrapper.doctors"
-              [doctor]="doctor"
-            ></drreview-doctor-card>
-          </ng-template>
+          <div *ngFor="let doctor of doctorsWrapper.doctors">
+            <div *ngIf="onlySubscriptions; else onlyDoctors">
+              <drreview-schedule-subscription-card
+                [cardTitle]="doctor.firstName + ' ' + doctor.lastName"
+                [cardSubtitle]="
+                  doctor.institution + ',' + doctor.specialization
+                "
+                [rangeSelection]="doctor.scheduleSubscription?.range"
+                (rangeSelectionChange)="
+                  rangeChanged(
+                    doctor.suid,
+                    $event,
+                    doctor.scheduleSubscription?.suid
+                  )
+                "
+              >
+              </drreview-schedule-subscription-card>
+            </div>
+            <ng-template #onlyDoctors>
+              <drreview-doctor-card
+                class="doctor-card"
+                [doctor]="doctor"
+              ></drreview-doctor-card>
+            </ng-template>
+          </div>
         </div>
+
         <mat-paginator
           *ngIf="doctors$ && pageCount !== undefined"
           class="doctor-paginator"

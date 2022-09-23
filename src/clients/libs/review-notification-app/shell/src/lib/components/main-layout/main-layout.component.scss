@@ -18,6 +18,9 @@
   background: #11222c;
 }
 
+:host ::ng-deep .dark-theme .app-sidenav{
+  background: #11222c;
+}
 @include handheldStyles(){
   .main-container{
     height: calc(100% - 130px);

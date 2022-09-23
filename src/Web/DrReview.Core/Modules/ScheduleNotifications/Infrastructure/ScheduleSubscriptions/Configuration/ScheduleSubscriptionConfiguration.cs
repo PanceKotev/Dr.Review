@@ -17,8 +17,8 @@
 
             builder.Property(x => x.UserFK);
 
-            builder.HasOne(x => x.ScheduleSubscriber).WithOne().HasForeignKey<ScheduleSubscription>(s => s.UserFK);
-            builder.HasOne(x => x.Doctor).WithOne().HasForeignKey<ScheduleSubscription>(s => s.DoctorFK);
+            builder.HasOne(x => x.ScheduleSubscriber).WithMany().HasForeignKey(s => s.UserFK);
+            builder.HasOne(x => x.Doctor).WithMany().HasForeignKey(s => s.DoctorFK);
         }
     }
 }

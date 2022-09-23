@@ -51,7 +51,7 @@
         }
 
         [HttpDelete]
-        [Route("/{scheduleSuid}")]
+        [Route("{scheduleSuid}")]
         [Authorize]
         [RequiredScope(new[] { "drreview.read", "drreview.write" })]
         [ProducesResponseType(typeof(Result<EmptyValue>), (int)HttpStatusCode.OK)]
