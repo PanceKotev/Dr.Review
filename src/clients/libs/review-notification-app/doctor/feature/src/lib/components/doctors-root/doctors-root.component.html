@@ -41,7 +41,7 @@
           class="doctor-wrapper"
           *ngIf="doctors$ | async; let doctorsWrapper"
         >
-          <div *ngIf="doctorsWrapper.doctors[0]; let doctor">
+          <div *ngFor="let doctor of doctorsWrapper.doctors">
             <div *ngIf="onlySubscriptions; else onlyDoctors">
               <drreview-schedule-subscription-card
                 [cardTitle]="doctor.firstName + ' ' + doctor.lastName"

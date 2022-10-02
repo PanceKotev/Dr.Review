@@ -15,11 +15,10 @@ export class ScheduleSubscriptionCardComponent {
   public set rangeSelection(
     range: ScheduleNotificationRangeString | undefined | null
   ) {
-    console.log('I GOT THIS', range);
-    this.rangeSelectionValue= this.convertStringToDate(range);
+    this.rangeSelectionValue = this.convertStringToDate(range);
   }
 
-  public rangeSelectionValue: ScheduleNotificationRange | undefined | null = undefined;
+  public rangeSelectionValue: ScheduleNotificationRange | undefined = undefined;
 
   @Input()
   public isTicked = false;
@@ -36,32 +35,31 @@ export class ScheduleSubscriptionCardComponent {
   >();
 
   public selectionChanged(value: ScheduleNotificationRange | undefined): void {
-    console.log('from range', value);
     if (
       value?.from &&
       value.to &&
       value.subscribedTo !== null
     ) {
-      console.log('card changed');
       this.rangeSelectionChange.emit(value);
     }
   }
 
   private convertStringToDate(
     range: ScheduleNotificationRangeString | null | undefined
-  ): ScheduleNotificationRange | undefined {
+  ): ScheduleNotificationRange {
     if (!range) {
-      return undefined;
+      return {
+        from: null,
+        to: null,
+        subscribedTo: null
+      };
     }
-
-    console.log('gotten range from backend', range);
 
     const convertedRange = {
       from: range.from ? dayjs(range.from).toDate() : null,
       to: range.to? dayjs(range.to).toDate() : null,
       subscribedTo: range.subscribedTo
     };
-    console.log(convertedRange);
 
     return convertedRange;
   }

@@ -70,17 +70,12 @@ export class AdditionalSelectFilterComponent implements OnInit, OnChanges {
         this.config.items$
       ]).pipe(
         switchMap(([formFilter, item]) => {
-          console.log('wot');
-          console.log(formFilter);
           if (!formFilter) {
             return of(item);
           }
-          console.log(formFilter, '2');
-          console.log(item, '2');
 
           const filteredItems = item.filter((i) =>
                i.value.toLowerCase().includes(formFilter.toLowerCase()));
-          console.log('filtered items', filteredItems);
 
           return of(
                 filteredItems
@@ -88,7 +83,6 @@ export class AdditionalSelectFilterComponent implements OnInit, OnChanges {
         })
       );
     }
-    console.log('here');
     this.filteredItems$ = items;
   }
 

@@ -5,9 +5,12 @@
     'subscription-option--horizontal': !notificationSwitchUnder
   }"
   *ngIf="fg"
-  [formGroup]="fg"
 >
-  <mat-form-field class="range-from-to" [appearance]="appearance">
+  <mat-form-field
+    [formGroup]="fg"
+    class="range-from-to"
+    [appearance]="appearance"
+  >
     <mat-label>Одбери опсег на датуми</mat-label>
     <mat-date-range-input [rangePicker]="picker">
       <input matStartDate formControlName="from" placeholder="Почетен датум" />
@@ -21,7 +24,10 @@
       #picker
     ></mat-date-range-picker>
   </mat-form-field>
-  <mat-slide-toggle formControlName="subscribedTo" labelPosition="before"
+  <mat-slide-toggle
+    labelPosition="before"
+    [checked]="!!value?.subscribedTo"
+    (change)="checkBoxChange($event.checked)"
     >Нотификации?</mat-slide-toggle
   >
 </div>

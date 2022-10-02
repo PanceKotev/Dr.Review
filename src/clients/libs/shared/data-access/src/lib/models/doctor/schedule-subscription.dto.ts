@@ -6,10 +6,10 @@ export interface GetScheduleSubscriptionDto {
 export interface ScheduleNotificationRangeString {
   from: string | undefined | null;
   to: string | undefined | null;
-  subscribedTo: boolean | undefined;
+  subscribedTo: boolean | null;
 }
 export interface ScheduleNotificationRange {
   from: Date  | null;
   to: Date  | null;
-  subscribedTo: boolean | undefined;
+  subscribedTo: boolean | null;
 }

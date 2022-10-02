@@ -27,14 +27,14 @@ import { ScheduleNotificationRange } from '@drreview/shared/data-access';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ScheduleSubscriptionRangeInputComponent
-  extends BaseControlValueAccessor<ScheduleNotificationRange | null | undefined>
+  extends BaseControlValueAccessor<ScheduleNotificationRange>
   implements OnInit, OnDestroy {
   private isDestroying$ = new Subject<boolean>();
 
   public fg: FormGroup = new FormGroup({
-    from: new FormControl<Date | undefined | null>(null),
-    to: new FormControl<Date | undefined | null>(null),
-    subscribedTo: new FormControl<boolean | undefined>(false)
+    from: new FormControl<Date | null>(null),
+    to: new FormControl<Date | null>(null),
+    subscribedTo: new FormControl<boolean | null>(null)
   });
 
   @Input()
@@ -44,16 +44,19 @@ export class ScheduleSubscriptionRangeInputComponent
   public appearance: 'fill' | 'standard' | 'outline' | 'legacy' = 'fill';
 
   public override writeValue(
-    obj: ScheduleNotificationRange | undefined | null
+    obj: ScheduleNotificationRange
   ): void {
-      // this.value = obj;
-      this.fg.patchValue({
-        from: obj?.from,
-        to: obj?.to,
-        subscribedTo: !!obj?.subscribedTo
-      }, { emitEvent: false, onlySelf: true });
-      this.fg.updateValueAndValidity({ emitEvent: false, onlySelf: true });
+      this.value = obj;
+      if(obj){
+        this.fg.setValue({
+          from: obj?.from ?? null,
+          to: obj?.to ,
+          subscribedTo: obj?.subscribedTo
+        }, { emitEvent: false, onlySelf: true });
+      }
+
       this.cdr?.markForCheck();
+
 
   }
 
@@ -66,9 +69,20 @@ export class ScheduleSubscriptionRangeInputComponent
 
   public ngOnInit(): void {
     this.fg.valueChanges.pipe(debounceTime(250),takeUntil(this.isDestroying$)).subscribe((c) => {
-      console.log('ooh value change', c);
-      this.onChange(c);
+        if(c.subscribedTo !== null){
+
+          this.onChange(c);
+        }
     });
+  }
+
+  public checkBoxChange(val: boolean): void {
+    this.value = {
+      ...this.fg.value,
+      subscribedTo: val
+    };
+    this.onChange(this.value);
+
   }
 
   public ngOnDestroy(): void {

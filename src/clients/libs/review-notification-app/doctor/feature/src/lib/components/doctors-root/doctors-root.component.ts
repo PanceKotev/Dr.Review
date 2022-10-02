@@ -111,7 +111,6 @@ export class DoctorsRootComponent implements OnInit{
   }
 
   public changeSubscriptionMode(value: boolean): void {
-    console.log('value', value);
     this.router.navigate(['/doctors/filter/', FilterBy[this.filterValue].toLowerCase(), this.selectedFilter],
       {queryParams: value? { 'onlySubscriptions': value } : {}});
   }
@@ -124,7 +123,7 @@ export class DoctorsRootComponent implements OnInit{
 
 
   public rangeChanged(doctorSuid: string, range: ScheduleNotificationRange | undefined, scheduleSuid?: string): void {
-    console.log('called');
+
     const existingSchedule = scheduleSuid ? this.scheduleSubscriptionGroups.get(scheduleSuid) : undefined;
 
     if(range && !scheduleSuid && range.subscribedTo && !existingSchedule){
@@ -133,11 +132,11 @@ export class DoctorsRootComponent implements OnInit{
           rangeFrom: this.convertToString(range.from),
           rangeTo: this.convertToString(range.to)})
       .subscribe(() => {
-        // this.refreshDoctors$.next(this.filterValue);
+        this.refreshDoctors$.next(this.filterValue);
       });
     } else if(range && scheduleSuid && range.subscribedTo !== existingSchedule?.range.subscribedTo){
       this.scheduleSubscriptionApiService.unsubscribeFromDoctorSchedule(scheduleSuid).subscribe(() => {
-        // this.refreshDoctors$.next(this.filterValue);
+        this.refreshDoctors$.next(this.filterValue);
       });
     } else if (range && scheduleSuid && (range.from !== existingSchedule?.range.from || range?.to !== existingSchedule?.range.to)){
       this.scheduleSubscriptionApiService
@@ -145,7 +144,7 @@ export class DoctorsRootComponent implements OnInit{
           rangeFrom: this.convertToString(range.from),
           rangeTo:this.convertToString(range.to),
           scheduleSuid: scheduleSuid}).subscribe(() => {
-            // this.refreshDoctors$.next(this.filterValue);
+            this.refreshDoctors$.next(this.filterValue);
           });
     }
   }
