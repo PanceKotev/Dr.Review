@@ -73,7 +73,10 @@
       "@drreview/shared/utils/pipes/rxjs": [
         "libs/shared/utils/pipes/rxjs/src/index.ts"
       ],
-      "@drreview/shared/utils/rxjs": ["libs/shared/utils/rxjs/src/index.ts"]
+      "@drreview/shared/utils/rxjs": ["libs/shared/utils/rxjs/src/index.ts"],
+      "@drreview/shared/utils/typescript-helpers": [
+        "libs/shared/utils/typescript-helpers/src/index.ts"
+      ]
     }
   },
   "exclude": ["node_modules", "tmp", "*.spec.ts", "*.po.ts"]

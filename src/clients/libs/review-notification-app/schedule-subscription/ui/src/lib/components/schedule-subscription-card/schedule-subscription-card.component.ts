@@ -42,7 +42,7 @@ export class ScheduleSubscriptionCardComponent {
       value.to &&
       value.subscribedTo !== null
     ) {
-      console.count('card changed');
+      console.log('card changed');
       this.rangeSelectionChange.emit(value);
     }
   }

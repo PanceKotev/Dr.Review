@@ -29,6 +29,7 @@
     "shared-utils-form": "libs/shared/utils/form",
     "shared-utils-icons": "libs/shared/utils/icons",
     "shared-utils-pipes": "libs/shared/utils/pipes",
-    "shared-utils-rxjs": "libs/shared/utils/rxjs"
+    "shared-utils-rxjs": "libs/shared/utils/rxjs",
+    "shared-utils-typescript-helpers": "libs/shared/utils/typescript-helpers"
   }
 }

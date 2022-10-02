@@ -9,6 +9,7 @@ import { FilterBy,
   IAdditionalSelectConfig, OptionApiService,
   ScheduleNotificationRange,
   GetScheduleSubscriptionDto} from '@drreview/shared/data-access';
+import { valueNotNull } from '@drreview/shared/utils/typescript-helpers';
 import * as dayjs from 'dayjs';
 import { BehaviorSubject, Subject, takeUntil, switchMap, Observable, EMPTY, combineLatest, tap, of, startWith } from 'rxjs';
 
@@ -97,8 +98,8 @@ export class DoctorsRootComponent implements OnInit{
         this.pageCount = val ? val.totalCount : 0;
         const group = new Map<string, GetScheduleSubscriptionDto>();
         if(val){
-          val.doctors.filter(x => x.scheduleSubscription !== null)
-            .forEach(x => group.set(x.scheduleSubscription!.suid, x.scheduleSubscription!));
+          val.doctors.filter(valueNotNull("scheduleSubscription"))
+            .forEach(x => group.set(x.scheduleSubscription.suid, x.scheduleSubscription));
         }
         this.scheduleSubscriptionGroups = group;
       }));
@@ -123,7 +124,7 @@ export class DoctorsRootComponent implements OnInit{
 
 
   public rangeChanged(doctorSuid: string, range: ScheduleNotificationRange | undefined, scheduleSuid?: string): void {
-    console.count('called');
+    console.log('called');
     const existingSchedule = scheduleSuid ? this.scheduleSubscriptionGroups.get(scheduleSuid) : undefined;
 
     if(range && !scheduleSuid && range.subscribedTo && !existingSchedule){
