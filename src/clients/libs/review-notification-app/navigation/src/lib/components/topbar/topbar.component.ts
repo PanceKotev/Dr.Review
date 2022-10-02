@@ -1,7 +1,8 @@
 import { AuthService, CurrentUser } from '@drreview/review-notification-app/common/services/auth';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { map, Observable, shareReplay } from 'rxjs';
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'drreview-topbar',
@@ -9,9 +10,16 @@ import { map, Observable, shareReplay } from 'rxjs';
   styleUrls: ['./topbar.component.scss']
 })
 export class TopbarComponent {
+  public searchFormName = 'searchDoctor';
 
+  public formGroup = new FormGroup({
+    searchDoctor: new FormControl<string | undefined>('')
+  });
   @Input()
   public appTitle = "DrReview";
+
+  @Output()
+  public sideNavButtonClicked = new EventEmitter<void>();
 
 
   public get currentUser(): CurrentUser | null {
@@ -39,4 +47,7 @@ export class TopbarComponent {
       this.authService.logout();
     }
 
+    public toggleSidebar(): void {
+      this.sideNavButtonClicked.emit();
+    }
 }

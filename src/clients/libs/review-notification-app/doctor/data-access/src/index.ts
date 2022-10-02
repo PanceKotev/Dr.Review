@@ -1,1 +1,1 @@
-export * from './lib/review-notification-app-doctor-data-access';
+export * from './lib/dtos';

@@ -1,0 +1,27 @@
+<div class="schedules-root">
+  <div class="header-actions">
+    <drreview-chip-filter
+      [filterOptions]="filterOptions"
+    ></drreview-chip-filter>
+    <div class="selection-actions">
+      <mat-checkbox class="select-all-checkbox"
+        >Селектирај ги сите</mat-checkbox
+      >
+      <drreview-schedule-subscription-range-input
+        [notificationSwitchUnder]="false"
+        [appearance]="'standard'"
+      ></drreview-schedule-subscription-range-input>
+    </div>
+    <button mat-flat-button color="accent">Зачувај</button>
+  </div>
+  <div class="subscriptions">
+    <drreview-schedule-subscription-card></drreview-schedule-subscription-card>
+
+    <drreview-schedule-subscription-card></drreview-schedule-subscription-card>
+    <drreview-schedule-subscription-card></drreview-schedule-subscription-card>
+    <drreview-schedule-subscription-card></drreview-schedule-subscription-card>
+    <drreview-schedule-subscription-card></drreview-schedule-subscription-card>
+
+    <drreview-schedule-subscription-card></drreview-schedule-subscription-card>
+  </div>
+</div>

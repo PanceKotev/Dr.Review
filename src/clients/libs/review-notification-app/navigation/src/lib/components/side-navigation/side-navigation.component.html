@@ -1,0 +1,45 @@
+<div class="sidebar-container">
+  <div class="elements-top">
+    <button
+      mat-icon-button
+      color="accent"
+      class="ham-menu"
+      (click)="toggleSidebar()"
+    >
+      <mat-icon>menu</mat-icon>
+    </button>
+    <mat-icon routerLink="/" class="app-logo">medication</mat-icon>
+    <span routerLink="/" class="app-title">DrReview</span>
+  </div>
+
+  <div class="menu-items">
+    <mat-list>
+      <mat-list-item
+        routerLink="/"
+        routerLinkActive="active-menu-item"
+        [routerLinkActiveOptions]="{ exact: true }"
+        class="menu-item"
+      >
+        <mat-icon>home</mat-icon> Дома
+      </mat-list-item>
+
+      <mat-list-item
+        routerLinkActive="active-menu-item"
+        routerLink="/doctors"
+        class="menu-item"
+      >
+        <mat-icon>medical_services</mat-icon> Доктори
+      </mat-list-item>
+      <mat-list-item
+        routerLinkActive="active-menu-item"
+        [routerLinkActiveOptions]="{ exact: true }"
+        routerLink="/doctors"
+        [queryParams]="{ onlySubscriptions: true }"
+        queryParamsHandling="merge"
+        class="menu-item"
+      >
+        <mat-icon>notifications</mat-icon> Мои претплати
+      </mat-list-item>
+    </mat-list>
+  </div>
+</div>

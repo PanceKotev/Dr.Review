@@ -6,6 +6,8 @@
     using DrReview.Common.Mediator.Interfaces;
     using DrReview.Common.Query;
     using DrReview.Common.Results;
+    using DrReview.Contracts.Filters;
+    using DrReview.Contracts.Filters.Enums;
     using Microsoft.AspNetCore.Mvc;
 
     public class DoctorsController : BaseController
@@ -26,6 +28,33 @@
         public async Task<IActionResult> SearchDoctorsAsync([FromQuery] string? searchword)
         {
             GetDoctorsBySearchwordQuery query = new GetDoctorsBySearchwordQuery(searchword, 0, 1000);
+
+            return OkOrError(await _mediator.SendAsync(query));
+        }
+
+        [HttpGet]
+        [Route("")]
+        [ProducesResponseType(typeof(Result<GetDoctorsDto>), (int)HttpStatusCode.OK)]
+        public async Task<IActionResult> GetDoctorsAsync(
+            [FromQuery] FilterBy? filterBy,
+            [FromQuery] string? filterByValue,
+            [FromQuery] int page = 0,
+            [FromQuery] int itemsCount = 10000,
+            [FromQuery] bool withSubscriptions = false)
+        {
+            FilterByValue? filter = filterBy != null && !string.IsNullOrEmpty(filterByValue) ? new FilterByValue(filterBy ?? FilterBy.LOCATION, filterByValue) : null;
+
+            GetDoctorsQuery query = new GetDoctorsQuery(new GetDoctorsFilter(page, itemsCount, string.Empty, filter), withSubscriptions);
+
+            return OkOrError(await _mediator.SendAsync(query));
+        }
+
+        [HttpGet]
+        [Route("count")]
+        [ProducesResponseType(typeof(Result<long>), (int)HttpStatusCode.OK)]
+        public async Task<IActionResult> GetDoctorsCountAsync()
+        {
+            GetDoctorsCountQuery query = new GetDoctorsCountQuery();
 
             return OkOrError(await _mediator.SendAsync(query));
         }

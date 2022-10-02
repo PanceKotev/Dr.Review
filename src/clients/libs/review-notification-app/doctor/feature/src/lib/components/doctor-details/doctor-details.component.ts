@@ -2,7 +2,10 @@ import { Subject, takeUntil, switchMap, combineLatest } from 'rxjs';
 import { DoctorApiService,
    ReviewApiService,
    GetDoctorDetailsDto,
-   GetReviewDto, GetReviewSummaryDto, GetReviewsDto, VoteOnReviewRequest, UpdateReviewRequest } from '@drreview/shared/data-access';
+   GetReviewDto,
+    GetReviewSummaryDto,
+     GetReviewsDto,
+     VoteOnReviewRequest, UpdateReviewRequest, ScheduleNotificationRange } from '@drreview/shared/data-access';
 import { Component, NgZone, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ReviewChangedEvent } from '@drreview/shared/ui/review';
@@ -19,6 +22,8 @@ export class DoctorDetailsComponent implements OnInit, OnDestroy {
   public doctorReviews: GetReviewDto[] = [];
 
   public doctorReviewSummary: GetReviewSummaryDto | undefined;
+
+  public range: ScheduleNotificationRange | undefined;
 
   public currentUserReview: GetReviewDto | undefined;
 
@@ -51,6 +56,11 @@ export class DoctorDetailsComponent implements OnInit, OnDestroy {
     }
 
     this.setUpSubscriptions();
+  }
+
+  public logChanges(changes: ScheduleNotificationRange | null): void {
+    console.log(changes);
+
   }
 
   private setUpSubscriptions(): void {

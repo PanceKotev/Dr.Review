@@ -1,0 +1,7 @@
+.form-field{
+  max-height: 100%;
+}
+
+:host::ng-deep .form-field .mat-form-field-infix {
+  line-height: 1;
+}

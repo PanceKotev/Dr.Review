@@ -1,26 +1,30 @@
 @import 'apps/review-notification-app/src/mixins.scss';
 
 .main-container{
-  height: calc(100% - 65px - 2rem);
+  height: calc(100% - 65px);
   padding: 1rem;
+  padding-top: 0;
   overflow-x: hidden;
   position: relative;
+  background-image: url("/assets/doctor-illustration.svg");
+  background-position: top bottom, 50%, 50%;
+  background-size: cover;
+  background-repeat: no-repeat;
 
 }
 
-.illustration{
-  position: absolute;
-  top:-20%;
-  right: -10%;
-}
 
 :host ::ng-deep .dark-theme .custom-toolbar{
   background: #11222c;
 }
 
+:host ::ng-deep .dark-theme .app-sidenav{
+  background: #11222c;
+}
 @include handheldStyles(){
   .main-container{
-    height: calc(100% - 130px - 2rem);
+    height: calc(100% - 130px);
+
   }
 
   .illustration{

@@ -6,12 +6,19 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HomepageComponent } from './components/homepage/homepage.component';
 import { homeRoutes } from './routes';
+import { MatButtonModule } from '@angular/material/button';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatRippleModule } from '@angular/material/core';
+
 
 @NgModule({
   imports: [
     CommonModule,
     RouterModule.forChild(homeRoutes),
     SharedUiSearchModule,
+    MatButtonModule,
+    MatButtonToggleModule,
+    MatRippleModule,
     MatFormFieldModule,
     ReviewNotificationAppDoctorUiModule],
   declarations: [HomepageComponent],

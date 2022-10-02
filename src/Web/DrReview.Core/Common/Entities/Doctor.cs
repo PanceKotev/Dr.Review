@@ -2,10 +2,11 @@
 namespace DrReview.Common.Entities
 {
     using System;
-
+    using System.Text.Json.Serialization;
 
     public class Doctor
     {
+        [JsonPropertyName("ID")]
         public long Id { get; set; }
 
         public Guid Uid { get; set; }
@@ -21,7 +22,7 @@ namespace DrReview.Common.Entities
         public DateTime? DeletedOn { get; set; }
 
         public long InstitutionFK { get; set; }
-        
+
         public long SpecializationFK { get; set; }
     }
 }

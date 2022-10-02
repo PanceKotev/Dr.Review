@@ -1,3 +1,4 @@
+import { MatIconModule } from '@angular/material/icon';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SearchinputComponent } from './components/searchinput/searchinput.component';
@@ -14,6 +15,7 @@ import { SearchComponent } from './components/search/search.component';
     FormsModule,
     ReactiveFormsModule,
     MatInputModule,
+    MatIconModule,
     MatFormFieldModule,
     MatAutocompleteModule
   ],
@@ -23,12 +25,9 @@ import { SearchComponent } from './components/search/search.component';
     SearchComponent
   ],
   exports: [
-
-    MatFormFieldModule,
-    MatInputModule,
-    MatAutocompleteModule,
     SearchinputComponent,
-    SearchLocationComponent
+    SearchLocationComponent,
+    SearchComponent
     ]
 })
 export class SharedUiSearchModule {}

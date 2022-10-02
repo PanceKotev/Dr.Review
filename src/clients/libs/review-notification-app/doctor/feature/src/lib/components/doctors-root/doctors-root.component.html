@@ -1,0 +1,84 @@
+<div class="home">
+  <div class="header-actions">
+    <drreview-chip-filter
+      [filterOptions]="filterOptions"
+      [(ngModel)]="filterValue"
+      [onlySubscriptions]="onlySubscriptions"
+      (valueChanged)="filterChanged($event)"
+    ></drreview-chip-filter>
+    <div>
+      <mat-slide-toggle
+        [(ngModel)]="onlySubscriptions"
+        (ngModelChange)="changeSubscriptionMode($event)"
+        >Само субскрипции</mat-slide-toggle
+      >
+      <drreview-additional-select-filter
+        *ngIf="additionalFilterSelectConfig$ | async; let filterConfig"
+        [config]="filterConfig"
+        [selectedOption]="selectedFilter"
+        (selectionChanged)="
+          filterValueChanged($event); filterChanged(filterConfig.filterType)
+        "
+      ></drreview-additional-select-filter>
+    </div>
+    <div class="header-subscriptions" *ngIf="onlySubscriptions">
+      <div class="selection-actions">
+        <mat-checkbox class="select-all-checkbox"
+          >Селектирај ги сите</mat-checkbox
+        >
+        <drreview-schedule-subscription-range-input
+          [notificationSwitchUnder]="false"
+          [appearance]="'standard'"
+        ></drreview-schedule-subscription-range-input>
+      </div>
+      <button mat-flat-button color="accent">Зачувај</button>
+    </div>
+  </div>
+  <div class="content-below">
+    <div class="doctors">
+      <div class="doctors" *ngIf="doctors$">
+        <div
+          class="doctor-wrapper"
+          *ngIf="doctors$ | async; let doctorsWrapper"
+        >
+          <div *ngFor="let doctor of doctorsWrapper.doctors">
+            <div *ngIf="onlySubscriptions; else onlyDoctors">
+              <drreview-schedule-subscription-card
+                [cardTitle]="doctor.firstName + ' ' + doctor.lastName"
+                [cardSubtitle]="
+                  doctor.institution + ',' + doctor.specialization
+                "
+                [rangeSelection]="doctor.scheduleSubscription?.range"
+                (rangeSelectionChange)="
+                  rangeChanged(
+                    doctor.suid,
+                    $event,
+                    doctor.scheduleSubscription?.suid
+                  )
+                "
+              >
+              </drreview-schedule-subscription-card>
+            </div>
+            <ng-template #onlyDoctors>
+              <drreview-doctor-card
+                class="doctor-card"
+                [doctor]="doctor"
+              ></drreview-doctor-card>
+            </ng-template>
+          </div>
+        </div>
+
+        <mat-paginator
+          *ngIf="doctors$ && pageCount !== undefined"
+          class="doctor-paginator"
+          [pageSize]="100"
+          [length]="pageCount"
+          [pageSizeOptions]="[25, 50, 75, 100, 150, 250]"
+          (page)="pageChanged($event)"
+          [showFirstLastButtons]="true"
+        >
+        </mat-paginator>
+      </div>
+    </div>
+  </div>
+</div>

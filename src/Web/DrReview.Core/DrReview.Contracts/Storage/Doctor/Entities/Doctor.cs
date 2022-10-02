@@ -23,13 +23,13 @@
             InstitutionFK = institutionFK;
         }
 
-        public string FirstName { get; init; }
+        public string FirstName { get; set; }
 
-        public string LastName { get; init; }
+        public string LastName { get; set; }
 
-        public long SpecializationFK { get; init; }
+        public long SpecializationFK { get; set; }
 
-        public long InstitutionFK { get; init; }
+        public long InstitutionFK { get; set; }
 
         public static Doctor FromResponse(DoctorResponse response, long specializationFK)
         {

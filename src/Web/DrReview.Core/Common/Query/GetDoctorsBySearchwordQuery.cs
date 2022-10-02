@@ -1,19 +1,17 @@
 ﻿namespace DrReview.Common.Query
 {
-    using DrReview.Common.Dtos.Doctor;
-    using DrReview.Common.Mediator.Contracts;
-    using DrReview.Common.Results;
-    using Microsoft.Extensions.Configuration;
-    using System;
     using System.Collections.Generic;
     using System.Data;
     using System.Data.SqlClient;
     using System.Linq;
-    using System.Text;
     using System.Threading;
     using System.Threading.Tasks;
     using Dapper;
+    using DrReview.Common.Dtos.Doctor;
     using DrReview.Common.Entities;
+    using DrReview.Common.Mediator.Contracts;
+    using DrReview.Common.Results;
+    using Microsoft.Extensions.Configuration;
 
     public class GetDoctorsBySearchwordQuery : IQuery<Result<List<SearchDoctorDto>>>
     {
@@ -44,8 +42,9 @@
         {
             if (string.IsNullOrEmpty(request.Searchword))
             {
-                return Result.Ok<List<SearchDoctorDto>>(new());
-            }   
+                return Result.Ok<List<SearchDoctorDto>>(new ());
+            }
+
             string connectionString = _configuration.GetConnectionString("DatabaseConnection");
             using SqlConnection connection = new SqlConnection(connectionString);
 
@@ -73,8 +72,8 @@
                                                                           suid: d.Suid,
                                                                           firstName: d.FirstName,
                                                                           lastName: d.LastName,
-                                                                          institution: insitutionDict.GetValueOrDefault(d.InstitutionFK)!,
-                                                                          specialization: specializationDict.GetValueOrDefault(d.SpecializationFK)!)).ToList();
+                                                                          institution: insitutionDict.GetValueOrDefault(d.InstitutionFK) ?? string.Empty,
+                                                                          specialization: specializationDict.GetValueOrDefault(d.SpecializationFK) ?? string.Empty)).ToList();
 
             await connection.CloseAsync();
 

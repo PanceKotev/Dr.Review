@@ -1,7 +1,30 @@
 <mat-toolbar color="primary" class="custom-toolbar">
-  <mat-icon routerLink="/" class="app-logo">medication</mat-icon>
-  <span routerLink="/" class="app-title">{{ appTitle }}</span>
-  <button mat-button *ngIf="!currentUser" (click)="logIn()">Login</button>
-  <button mat-button *ngIf="currentUser" (click)="logOut()">Logout</button>
-  <drreview-theme-toggle class="theme-toggle"></drreview-theme-toggle>
+  <div class="left-elements">
+    <button
+      mat-icon-button
+      color="accent"
+      class="ham-menu"
+      (click)="toggleSidebar()"
+    >
+      <mat-icon>menu</mat-icon>
+    </button>
+    <mat-icon routerLink="/" class="app-logo">medication</mat-icon>
+    <span routerLink="/" class="app-title">{{ appTitle }}</span>
+  </div>
+
+  <div class="middle">
+    <drreview-search class="search" placeholder="Барај Доктори"
+      >Барај Доктор</drreview-search
+    >
+  </div>
+
+  <div class="right-elements">
+    <drreview-theme-toggle class="theme-toggle"></drreview-theme-toggle>
+    <button mat-button *ngIf="!currentUser" (click)="logIn()">Login</button>
+    <drreview-user-dropdown
+      *ngIf="currentUser"
+      [username]="currentUser.firstName + ' ' + currentUser.lastName"
+      (logoutClicked)="logOut()"
+    ></drreview-user-dropdown>
+  </div>
 </mat-toolbar>

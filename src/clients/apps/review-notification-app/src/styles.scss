@@ -144,7 +144,7 @@ $review-notification-app-dark-accent: mat.define-palette($dark-secondary-palette
 $review-notification-app-dark-warn: mat.define-palette(mat.$red-palette);
 
 $review-notification-app-typography: mat.define-typography-config(
-  $font-family: 'Encode Sans'
+  $font-family:   ('Nunito Sans', sans-serif)
 );
 
 // Create the theme object. A theme consists of configurations for individual
@@ -180,7 +180,9 @@ $review-notification-app-dark-theme: mat-set-background($review-notification-app
   --color-accent: #{mat.get-color-from-palette($review-notification-app-light-accent, default)};
   --color-warn: #{mat.get-color-from-palette($review-notification-app-light-warn, default)};
   --text-grayed-out : grey;
+  --input-container-background-color: #ffffffd4;
   --container-background-color-transparent: #ffffffd4;
+  --text-color: rgba(0, 0, 0, 0.87);
 }
 
 .dark-theme {
@@ -192,14 +194,38 @@ $review-notification-app-dark-theme: mat-set-background($review-notification-app
   --color-accent: #{mat.get-color-from-palette($review-notification-app-dark-accent, default)};
   --color-warn: #{mat.get-color-from-palette($review-notification-app-dark-warn, default)};
   --container-background-color-transparent: #020c11ed;
-
+  --input-container-background-color: #283135;
   --text-grayed-out: #b6b5b5;
+  --text-color: white;
+
+  .mat-button-toggle-group-appearance-standard .mat-button-toggle + .mat-button-toggle {
+    border-left: none;
+  }
+}
+.mat-button-toggle-appearance-standard .mat-button-toggle-label-content{
+  line-height: 34px;
+}
+.mat-calendar {
+  background-color:var(--input-container-background-color) !important;
 }
 
+.mat-menu-panel{
+  background-color: unset !important;
+}
+
+.mat-menu-content {
+  background-color: var(--input-container-background-color) !important;
+  color: var(--text-color) !important;
+}
+.mat-calendar-header, .mat-calendar-arrow {
+  color: var(--text-color) !important;
+}
 .mat-card {
   background-color: var(--container-background-color-transparent) !important;
 }
 
+@import './_paginator.scss';
+@import './autocomplete.scss';
 
 button.mat-button-base.mat-mini-fab, button.mat-button-base.mat-fab, button.mat-button-base.mat-icon-button {
   display: flex;
@@ -208,10 +234,13 @@ button.mat-button-base.mat-mini-fab, button.mat-button-base.mat-fab, button.mat-
 }
 
 html, body { height: 100%; }
-body { margin: 0; font-family: 'Encode Sans', sans-serif; }
+body { margin: 0; font-family: 'Nunito Sans', sans-serif; }
 
 .d-flex {
   display: flex;
 }
 
+* {
+  box-sizing: border-box;
+}
 
