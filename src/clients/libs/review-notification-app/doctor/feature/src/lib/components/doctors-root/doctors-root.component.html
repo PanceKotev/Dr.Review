@@ -3,10 +3,13 @@
     <drreview-chip-filter
       [filterOptions]="filterOptions"
       [(ngModel)]="filterValue"
+      [onlySubscriptions]="onlySubscriptions"
       (valueChanged)="filterChanged($event)"
     ></drreview-chip-filter>
     <div>
-      <mat-slide-toggle [(ngModel)]="onlySubscriptions"
+      <mat-slide-toggle
+        [(ngModel)]="onlySubscriptions"
+        (ngModelChange)="changeSubscriptionMode($event)"
         >Само субскрипции</mat-slide-toggle
       >
       <drreview-additional-select-filter
@@ -38,7 +41,7 @@
           class="doctor-wrapper"
           *ngIf="doctors$ | async; let doctorsWrapper"
         >
-          <div *ngFor="let doctor of doctorsWrapper.doctors">
+          <div *ngIf="doctorsWrapper.doctors[0]; let doctor">
             <div *ngIf="onlySubscriptions; else onlyDoctors">
               <drreview-schedule-subscription-card
                 [cardTitle]="doctor.firstName + ' ' + doctor.lastName"

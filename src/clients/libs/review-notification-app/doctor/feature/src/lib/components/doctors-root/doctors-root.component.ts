@@ -7,7 +7,8 @@ import { FilterBy,
   DoctorApiService,
   GetDoctorsFilter, PagingFilter, GetDoctorsDto,
   IAdditionalSelectConfig, OptionApiService,
-  ScheduleNotificationRange } from '@drreview/shared/data-access';
+  ScheduleNotificationRange,
+  GetScheduleSubscriptionDto} from '@drreview/shared/data-access';
 import * as dayjs from 'dayjs';
 import { BehaviorSubject, Subject, takeUntil, switchMap, Observable, EMPTY, combineLatest, tap, of, startWith } from 'rxjs';
 
@@ -39,6 +40,7 @@ export class DoctorsRootComponent implements OnInit{
   public pageCount: number | undefined;
   public refreshDoctors$ = new BehaviorSubject<FilterBy>(FilterBy.ALL);
   public doctors$: Observable<GetDoctorsDto> | undefined;
+  public scheduleSubscriptionGroups = new Map<string, GetScheduleSubscriptionDto>();
   public additionalFilterSelectConfig$ = new BehaviorSubject<IAdditionalSelectConfig>({
     filterType: FilterBy.ALL,
     items$: of([])
@@ -93,12 +95,24 @@ export class DoctorsRootComponent implements OnInit{
         return this.returnFilterValue(filterVal, page);
       }), tap((val) => {
         this.pageCount = val ? val.totalCount : 0;
+        const group = new Map<string, GetScheduleSubscriptionDto>();
+        if(val){
+          val.doctors.filter(x => x.scheduleSubscription !== null)
+            .forEach(x => group.set(x.scheduleSubscription!.suid, x.scheduleSubscription!));
+        }
+        this.scheduleSubscriptionGroups = group;
       }));
 
   }
 
   public filterValueChanged(value: string | undefined): void {
     this.selectedFilter = value || '';
+  }
+
+  public changeSubscriptionMode(value: boolean): void {
+    console.log('value', value);
+    this.router.navigate(['/doctors/filter/', FilterBy[this.filterValue].toLowerCase(), this.selectedFilter],
+      {queryParams: value? { 'onlySubscriptions': value } : {}});
   }
 
   public filterChanged(value: FilterBy): void {
@@ -109,25 +123,28 @@ export class DoctorsRootComponent implements OnInit{
 
 
   public rangeChanged(doctorSuid: string, range: ScheduleNotificationRange | undefined, scheduleSuid?: string): void {
-    if(range && !scheduleSuid && range.subscribedTo){
+    console.count('called');
+    const existingSchedule = scheduleSuid ? this.scheduleSubscriptionGroups.get(scheduleSuid) : undefined;
+
+    if(range && !scheduleSuid && range.subscribedTo && !existingSchedule){
       this.scheduleSubscriptionApiService.subscribeToDoctorSchedule(
         {doctorSuid: doctorSuid,
           rangeFrom: this.convertToString(range.from),
           rangeTo: this.convertToString(range.to)})
       .subscribe(() => {
-        this.refreshDoctors$.next(this.filterValue);
+        // this.refreshDoctors$.next(this.filterValue);
       });
-    } else if(range && scheduleSuid && !range.subscribedTo){
+    } else if(range && scheduleSuid && range.subscribedTo !== existingSchedule?.range.subscribedTo){
       this.scheduleSubscriptionApiService.unsubscribeFromDoctorSchedule(scheduleSuid).subscribe(() => {
-        this.refreshDoctors$.next(this.filterValue);
+        // this.refreshDoctors$.next(this.filterValue);
       });
-    } else if (range && scheduleSuid){
+    } else if (range && scheduleSuid && (range.from !== existingSchedule?.range.from || range?.to !== existingSchedule?.range.to)){
       this.scheduleSubscriptionApiService
         .updateScheduleSubscription({
           rangeFrom: this.convertToString(range.from),
           rangeTo:this.convertToString(range.to),
           scheduleSuid: scheduleSuid}).subscribe(() => {
-            this.refreshDoctors$.next(this.filterValue);
+            // this.refreshDoctors$.next(this.filterValue);
           });
     }
   }
@@ -141,13 +158,15 @@ export class DoctorsRootComponent implements OnInit{
   public returnFilterValue(value: FilterBy, page: PagingFilter): Observable<GetDoctorsDto>{
     switch(value) {
       case FilterBy.LOCATION: {
-        this.additionalFilterSelectConfig$.next({filterType: FilterBy.LOCATION, items$: this.optionsApiService.getLocationOptions()});
+        this.additionalFilterSelectConfig$.next({filterType: FilterBy.LOCATION, items$: this.optionsApiService.getLocationOptions(),
+           onlySubscriptions: !!this.onlySubscriptions});
 
         return this.doctorApiService.getDoctors(
           new GetDoctorsFilter({property: FilterBy.LOCATION, value: this.selectedFilter}, page.page, page.itemsPerPage), true);
       }
       case FilterBy.INSTITUTION: {
-        this.additionalFilterSelectConfig$.next({filterType: FilterBy.INSTITUTION, items$: this.optionsApiService.getInstitutionOptions()});
+        this.additionalFilterSelectConfig$.next({filterType: FilterBy.INSTITUTION, items$: this.optionsApiService.getInstitutionOptions(),
+          onlySubscriptions: !!this.onlySubscriptions});
 
         return this.doctorApiService.getDoctors(
           new GetDoctorsFilter({property: FilterBy.INSTITUTION,
@@ -155,7 +174,7 @@ export class DoctorsRootComponent implements OnInit{
       }
       case FilterBy.SPECIALIZATION: {
         this.additionalFilterSelectConfig$.next({filterType: FilterBy.SPECIALIZATION,
-          items$: this.optionsApiService.getSpecializationOptions()});
+          items$: this.optionsApiService.getSpecializationOptions(), onlySubscriptions: !!this.onlySubscriptions});
 
         return this.doctorApiService.getDoctors(
           new GetDoctorsFilter({property: FilterBy.SPECIALIZATION, value: this.selectedFilter}, page.page, page.itemsPerPage), true);
@@ -163,7 +182,8 @@ export class DoctorsRootComponent implements OnInit{
       default: {
         this.additionalFilterSelectConfig$.next({filterType: FilterBy.ALL,
           items$:
-          of([])});
+          of([]),
+        onlySubscriptions: !!this.onlySubscriptions});
 
         return this.doctorApiService.getDoctors(new GetDoctorsFilter(undefined, page.page, page.itemsPerPage), true);
       }

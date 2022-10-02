@@ -4,7 +4,6 @@ import {
   ScheduleNotificationRangeString
 } from '@drreview/shared/data-access';
 import * as dayjs from 'dayjs';
-import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'drreview-schedule-subscription-card',
@@ -14,16 +13,13 @@ import { BehaviorSubject } from 'rxjs';
 export class ScheduleSubscriptionCardComponent {
   @Input()
   public set rangeSelection(
-    range: ScheduleNotificationRangeString | undefined
+    range: ScheduleNotificationRangeString | undefined | null
   ) {
-    this.rangeSelectionValue$.next(this.convertStringToDate(range ? { ...range } : {
-      from: null,
-      to: null,
-      subscribedTo: false
-    }));
+    console.log('I GOT THIS', range);
+    this.rangeSelectionValue= this.convertStringToDate(range);
   }
 
-  public rangeSelectionValue$ = new BehaviorSubject<ScheduleNotificationRange | undefined>(undefined);
+  public rangeSelectionValue: ScheduleNotificationRange | undefined | null = undefined;
 
   @Input()
   public isTicked = false;
@@ -40,11 +36,13 @@ export class ScheduleSubscriptionCardComponent {
   >();
 
   public selectionChanged(value: ScheduleNotificationRange | undefined): void {
+    console.log('from range', value);
     if (
       value?.from &&
       value.to &&
-      this.rangeSelection?.subscribedTo !== value.subscribedTo
+      value.subscribedTo !== null
     ) {
+      console.count('card changed');
       this.rangeSelectionChange.emit(value);
     }
   }
@@ -56,10 +54,15 @@ export class ScheduleSubscriptionCardComponent {
       return undefined;
     }
 
-    return {
-      from: dayjs(range.from).toDate(),
-      to: dayjs(range.to).toDate(),
+    console.log('gotten range from backend', range);
+
+    const convertedRange = {
+      from: range.from ? dayjs(range.from).toDate() : null,
+      to: range.to? dayjs(range.to).toDate() : null,
       subscribedTo: range.subscribedTo
     };
+    console.log(convertedRange);
+
+    return convertedRange;
   }
 }

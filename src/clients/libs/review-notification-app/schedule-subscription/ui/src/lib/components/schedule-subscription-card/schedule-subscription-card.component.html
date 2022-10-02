@@ -10,7 +10,7 @@
   <mat-card-subtitle> {{ cardSubtitle }}</mat-card-subtitle>
   <mat-card-actions>
     <drreview-schedule-subscription-range-input
-      [ngModel]="rangeSelectionValue$ | async"
+      [ngModel]="rangeSelectionValue"
       (ngModelChange)="selectionChanged($event)"
     ></drreview-schedule-subscription-range-input>
   </mat-card-actions>

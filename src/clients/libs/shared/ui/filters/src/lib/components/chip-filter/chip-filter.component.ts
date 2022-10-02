@@ -13,4 +13,7 @@ import { NG_VALUE_ACCESSOR } from '@angular/forms';
 export class ChipFilterComponent<TValue = string>  extends BaseControlValueAccessor<TValue>{
   @Input()
   public filterOptions: (IOptionItem<TValue> & IOptionItemWithLink<TValue>)[] = [];
+
+  @Input()
+  public onlySubscriptions = false;
 }

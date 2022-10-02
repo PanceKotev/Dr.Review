@@ -51,18 +51,22 @@ export type IAdditionalSelectConfig =
 export interface ILocationAdditionalSelectConfig {
   filterType: FilterBy.LOCATION;
   items$: Observable<IOptionItemWithLink<string>[]>;
+  onlySubscriptions?: boolean;
 }
 export interface IInstitutionAdditionalSelectConfig {
   filterType: FilterBy.INSTITUTION;
   items$: Observable<IOptionItemWithLink<string>[]>;
+  onlySubscriptions?: boolean;
 }
 
 export interface ISpecializationAdditionalSelectConfig {
   filterType: FilterBy.SPECIALIZATION;
   items$: Observable<IOptionItemWithLink<string>[]>;
+  onlySubscriptions?: boolean;
 }
 
 export interface IAllSpecializationAdditionalSelectConfig {
   filterType: FilterBy.ALL;
   items$: Observable<IOptionItemWithLink<string>[]>;
+  onlySubscriptions?: boolean;
 };
