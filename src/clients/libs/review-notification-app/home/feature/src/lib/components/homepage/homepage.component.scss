@@ -1,65 +1,69 @@
-.doctor-wrapper{
-  display: grid;
+.homepage{
   width: 100%;
-  grid-template-columns:  repeat(auto-fit, minmax(250px, 1fr));
-  column-gap: 5px;
-  justify-items: space-between;
-  grid-template-rows: max-content;
-  row-gap: 10px;
+  min-height: 100vh;
+  padding-top: 1rem;
 }
 
-.doctor-card{
+.header{
+  height: 50vh;
+  outline: 1px solid red;
+  width: 100%;
+  background-color: rgba(32, 69, 1, 0.554);
   display: flex;
   justify-content: center;
-}
-
-.start-page-illustration{
-  position: absolute;
-  top: 20%;
-  right: 0;
-
+  align-items: center;
 }
 
 .search{
   display: flex;
+  width: 100%;
   justify-content: center;
 }
 
-
-.chips {
-  display: flex;
+.search-locations{
+  margin: 1rem 0;
   width: 100%;
-  overflow-x: auto;
-  // background-color: var(--input-container-background-color);
-  border: none;
-  padding: 1em 0.5em;
+  height: 80vh;
+  outline: 1px solid red;
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
 
-  border-radius: 12px;
-  margin-bottom: 0.5em;
+  .article{
+    outline: 1px solid red;
+  }
 
-  .chip {
-    // display: flex;
-    margin-right: 1em;
-    padding: 0;
-    border-radius: 20px;
-    min-width: fit-content;
+  .map-container{
+    background-color: white;
+    outline: 1px solid red;
+  }
+
+}
+
+.most-popular{
+  width: 100%;
+  height: 80vh;
+  outline: 1px solid red;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .filters {
+    outline: 1px solid red;
+
+  }
+
+  .carousel {
+    width: 80%;
+    padding: 2rem;
+    height: 80%;
+    outline: 1px solid red;
+    background-color: tan;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    column-gap: 2rem;
+    .carousel-item {
+      outline: 1px solid red;
+
+    }
   }
 }
 
-
-.content-below{
-  display: grid;
-  width: 100%;
-  column-gap: 2.5em;
-
-
-
-}
-
-.doctors {
-  width: 100%;
-  background-color: var(--container-background-color-transparent);
-  height: 80vh;
-  text-align: center;
-  border-radius: 15px;
-}
