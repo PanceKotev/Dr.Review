@@ -1,4 +1,5 @@
 {
+  "name": "review-notification-app-common-ui-routing-pages",
   "projectType": "library",
   "sourceRoot": "libs/review-notification-app/common/ui/routing-pages/src",
   "prefix": "drreview",

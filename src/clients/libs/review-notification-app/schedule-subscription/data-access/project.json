@@ -1,4 +1,5 @@
 {
+  "name": "review-notification-app-schedule-subscription-data-access",
   "projectType": "library",
   "sourceRoot": "libs/review-notification-app/schedule-subscription/data-access/src",
   "prefix": "drreview",

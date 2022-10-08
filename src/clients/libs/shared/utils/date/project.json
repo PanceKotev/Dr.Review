@@ -1,4 +1,5 @@
 {
+  "name": "shared-utils-date",
   "projectType": "library",
   "sourceRoot": "libs/shared/utils/date/src",
   "prefix": "drreview",

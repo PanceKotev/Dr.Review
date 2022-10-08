@@ -1,4 +1,5 @@
 {
+  "name": "review-notification-app-doctor-data-access",
   "$schema": "..\\..\\..\\..\\node_modules\\nx\\schemas\\project-schema.json",
   "sourceRoot": "libs/review-notification-app/doctor/data-access/src",
   "projectType": "library",

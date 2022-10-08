@@ -1,4 +1,5 @@
 {
+  "name": "shared-ui-search",
   "projectType": "library",
   "sourceRoot": "libs/shared/ui/search/src",
   "prefix": "drreview",

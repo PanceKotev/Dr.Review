@@ -1,4 +1,5 @@
 {
+  "name": "shared-utils-rxjs",
   "$schema": "..\\..\\..\\..\\node_modules\\nx\\schemas\\project-schema.json",
   "sourceRoot": "libs/shared/utils/rxjs/src",
   "projectType": "library",

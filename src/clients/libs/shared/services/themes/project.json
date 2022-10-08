@@ -1,4 +1,5 @@
 {
+  "name": "shared-services-themes",
   "projectType": "library",
   "sourceRoot": "libs/shared/services/themes/src",
   "prefix": "drreview",

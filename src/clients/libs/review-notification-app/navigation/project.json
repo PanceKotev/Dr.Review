@@ -1,4 +1,5 @@
 {
+  "name": "review-notification-app-navigation",
   "projectType": "library",
   "sourceRoot": "libs/review-notification-app/navigation/src",
   "prefix": "drreview",

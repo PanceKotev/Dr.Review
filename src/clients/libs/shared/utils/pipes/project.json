@@ -1,4 +1,5 @@
 {
+  "name": "shared-utils-pipes",
   "projectType": "library",
   "sourceRoot": "libs/shared/utils/pipes/src",
   "prefix": "drreview",

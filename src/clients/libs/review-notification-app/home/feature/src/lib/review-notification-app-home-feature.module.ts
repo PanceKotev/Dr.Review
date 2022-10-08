@@ -9,6 +9,7 @@ import { homeRoutes } from './routes';
 import { MatButtonModule } from '@angular/material/button';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatRippleModule } from '@angular/material/core';
+import { SharedUiMapsModule } from '@drreview/shared/ui/maps';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { MatRippleModule } from '@angular/material/core';
     MatButtonToggleModule,
     MatRippleModule,
     MatFormFieldModule,
-    ReviewNotificationAppDoctorUiModule],
+    ReviewNotificationAppDoctorUiModule,
+    SharedUiMapsModule],
   declarations: [HomepageComponent],
   exports: [RouterModule]
 })

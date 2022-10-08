@@ -1,4 +1,5 @@
 {
+  "name": "review-notification-app-doctor-feature",
   "projectType": "library",
   "sourceRoot": "libs/review-notification-app/doctor/feature/src",
   "prefix": "drreview",

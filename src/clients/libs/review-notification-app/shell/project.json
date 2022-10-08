@@ -1,13 +1,12 @@
 {
+  "name": "review-notification-app-shell",
   "projectType": "library",
   "sourceRoot": "libs/review-notification-app/shell/src",
   "prefix": "drreview",
   "targets": {
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": [
-        "coverage/libs/review-notification-app/shell"
-      ],
+      "outputs": ["coverage/libs/review-notification-app/shell"],
       "options": {
         "jestConfig": "libs/review-notification-app/shell/jest.config.ts",
         "passWithNoTests": true

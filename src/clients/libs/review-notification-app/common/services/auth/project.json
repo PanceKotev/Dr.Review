@@ -1,4 +1,5 @@
 {
+  "name": "review-notification-app-common-services-auth",
   "projectType": "library",
   "sourceRoot": "libs/review-notification-app/common/services/auth/src",
   "prefix": "drreview",
