@@ -3,4 +3,6 @@
   leaflet
   [leafletOptions]="options"
   (leafletMapReady)="mapFinishedLoading($event)"
-></div>
+>
+  <div *ngFor="let marker of markers" [leafletLayer]="marker"></div>
+</div>

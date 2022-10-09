@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { LatLng, Map,latLng, MapOptions, tileLayer } from 'leaflet';
+import { LatLng, Map,latLng, MapOptions, tileLayer, Marker, marker, icon, Layer } from 'leaflet';
 
 @Component({
   selector: 'drreview-map',
@@ -8,6 +8,7 @@ import { LatLng, Map,latLng, MapOptions, tileLayer } from 'leaflet';
 })
 export class MapComponent implements OnInit {
   public currentLocation: LatLng  | undefined;
+  public markers: Layer[] = [];
   public map: Map | undefined;
   public options: MapOptions =
   {
@@ -20,12 +21,22 @@ export class MapComponent implements OnInit {
     center: latLng([ 41.6771844,21.6609852 ])
   };
 
+  public summit: Marker = marker([ 46.8523, -121.7603 ], {
+
+    icon: icon({
+      iconSize: [ 25, 41 ],
+      iconAnchor: [ 13, 41 ],
+      iconUrl: 'leaflet/marker-icon.png',
+      shadowUrl: 'leaflet/marker-shadow.png'
+    })
+  });
 
   public ngOnInit(): void {
       if (navigator.geolocation){
         navigator.geolocation.getCurrentPosition((pos) => {
           if(pos && this.map){
             this.map.flyTo(latLng(pos.coords.latitude, pos.coords.longitude, pos.coords.accuracy), 10);
+            this.markers.push(this.getMarker(pos));
           }
         });
       }
@@ -33,5 +44,18 @@ export class MapComponent implements OnInit {
 
   public mapFinishedLoading(map: Map): void {
     this.map = map;
+  }
+
+  public getMarker(position: GeolocationPosition): Marker {
+    return marker([ position.coords.latitude, position.coords.longitude ], {
+      title: 'Тековна локација',
+      alt: 'Тековна локација',
+      icon: icon({
+        iconSize: [ 25, 41 ],
+        iconAnchor: [ 13, 41 ],
+        iconUrl: 'leaflet/marker-icon.png',
+        shadowUrl: 'leaflet/marker-shadow.png'
+      })
+    });
   }
 }
