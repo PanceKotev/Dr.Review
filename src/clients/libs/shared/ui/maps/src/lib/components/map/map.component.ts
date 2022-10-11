@@ -14,7 +14,7 @@ export class MapComponent implements OnInit {
   {
     layers: [
       tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&amp;copy; OpenStreetMap contributors'
+        attribution: ' &copy; OpenStreetMap contributors'
       })
     ],
     zoom: 9,
@@ -36,12 +36,18 @@ export class MapComponent implements OnInit {
         navigator.geolocation.getCurrentPosition((pos) => {
           if(pos && this.map){
             this.map.flyTo(latLng(pos.coords.latitude, pos.coords.longitude, pos.coords.accuracy), 10);
-            this.markers.push(this.getMarker(pos));
+            const marker1 = this.getMarker(pos);
+
+            marker1.addEventListener('click', ($event) => console.log($event));
+            this.markers.push(marker1);
           }
         });
       }
   }
 
+  public markerClicked(layer: Layer): void {
+    console.log(layer);
+  }
   public mapFinishedLoading(map: Map): void {
     this.map = map;
   }
