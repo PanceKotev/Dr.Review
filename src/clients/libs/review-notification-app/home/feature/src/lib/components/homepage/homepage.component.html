@@ -61,7 +61,17 @@
   </div>
   <div class="connector"></div>
   <div class="most-popular">
-    <div class="filters"></div>
+    <div class="filters">
+      <div *ngIf="selectedLocation$ | async; let locationSelected">
+        <h2 *ngIf="locationSelected.nearLocation?.name; else nothingSelected">
+          Најдобри доктори близу
+          <b>{{ locationSelected.nearLocation?.name }}</b>
+        </h2>
+        <ng-template #nothingSelected>
+          <h2>Одберете локација од мапата погоре</h2>
+        </ng-template>
+      </div>
+    </div>
     <div class="carousel">
       <div class="carousel-item"></div>
       <div class="carousel-item"></div>

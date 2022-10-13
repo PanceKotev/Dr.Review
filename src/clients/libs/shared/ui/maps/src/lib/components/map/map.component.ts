@@ -1,15 +1,24 @@
-import { Component, OnInit } from '@angular/core';
-import { LatLng, Map,latLng, MapOptions, tileLayer, Marker, marker, icon, Layer } from 'leaflet';
+/* eslint-disable @typescript-eslint/no-shadow */
+import { combineLatest, distinctUntilChanged, skip, skipUntil, skipWhile, Subject, take, takeUntil } from 'rxjs';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { SharedFacade, SharedQuery } from '@drreview/shared/data-access';
+import { LatLng, Map as LeafletMap,
+    latLng, MapOptions, tileLayer, Marker, marker, icon, Layer, LeafletMouseEvent, IconOptions } from 'leaflet';
 
 @Component({
   selector: 'drreview-map',
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.scss']
 })
-export class MapComponent implements OnInit {
+export class MapComponent implements OnInit, OnDestroy {
   public currentLocation: LatLng  | undefined;
-  public markers: Layer[] = [];
-  public map: Map | undefined;
+  public markersMap = new Map<LatLng, Layer>();
+  public markersOriginalIcons = new Map<LatLng, IconOptions>();
+  public map: LeafletMap | undefined;
+
+  public markersMapLoaded$ = new Subject<boolean>();
+  private destroying$ = new Subject<boolean>();
+
   public options: MapOptions =
   {
     layers: [
@@ -31,37 +40,146 @@ export class MapComponent implements OnInit {
     })
   });
 
+  public constructor(
+    private sharedQuery: SharedQuery,
+    private sharedFacade: SharedFacade){
+
+    combineLatest([sharedQuery.homepageOptions$, this.markersMapLoaded$]).pipe(takeUntil(this.destroying$))
+      .subscribe(([val,,]) => {
+        if(!val.nearLocation){
+          return;
+        }
+        const currentLatLng = latLng(val.nearLocation.latitude, val.nearLocation.longitude);
+        this.currentLocation = currentLatLng;
+
+        const entryFromMap = Array.from(this.markersMap.entries())
+          .find(([key,,]) => key.lat === currentLatLng.lat && key.lng === currentLatLng.lng);
+
+        if(entryFromMap){
+          const selectedMarker = entryFromMap[1] as Marker;
+
+          if(!selectedMarker){
+            return;
+          }
+          const existingIcon = selectedMarker.getIcon();
+
+
+          this.markersMap.forEach((val, key) => {
+            if(key !== selectedMarker.getLatLng() && this.markersOriginalIcons.has(key)){
+              // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+              (val as Marker).setIcon(icon(this.markersOriginalIcons.get(key)!));
+            }
+          });
+
+          selectedMarker.setIcon(icon({
+            ...existingIcon.options as IconOptions,
+            iconSize: [30, 46],
+            iconAnchor: [15, 46]
+          }));
+        }
+      });
+    sharedQuery.locations$.pipe(takeUntil(this.destroying$))
+      .subscribe({
+        next: val => {
+          val.forEach(v => {
+            const latitude = latLng(v.latitude, v.longitude);
+            const marker2 = this.getLocationMarker(latitude, v.name);
+            this.markersOriginalIcons.set(latitude, marker2.getIcon().options as IconOptions);
+            if(!this.markersMap.has(latitude)){
+              marker2.addEventListener('click', ($event) =>  this.handleMarkerClick($event, marker2));
+            }
+            this.markersMap.set(latitude, marker2);
+          });
+
+          this.markersMapLoaded$.next(true);
+        }
+      });
+  }
+
   public ngOnInit(): void {
       if (navigator.geolocation){
         navigator.geolocation.getCurrentPosition((pos) => {
           if(pos && this.map){
-            this.map.flyTo(latLng(pos.coords.latitude, pos.coords.longitude, pos.coords.accuracy), 10);
-            const marker1 = this.getMarker(pos);
+              const latitudeLongitude = latLng(pos.coords.latitude, pos.coords.longitude);
+              if(this.currentLocation){
+                this.map.flyTo(this.currentLocation, 10);
+              } else {
+                this.map.flyTo(latitudeLongitude, 10);
 
-            marker1.addEventListener('click', ($event) => console.log($event));
-            this.markers.push(marker1);
-          }
+              }
+              const marker1 = this.getMarker(latitudeLongitude);
+              this.markersOriginalIcons.set(latitudeLongitude, marker1.getIcon().options as IconOptions);
+              if(!this.markersMap.has(latitudeLongitude)){
+                marker1.addEventListener('click', ($event) =>  this.handleMarkerClick($event, marker1));
+              }
+              this.markersMap.set(latLng(pos.coords.latitude, pos.coords.longitude), marker1);
+            }
+
         });
       }
   }
 
-  public markerClicked(layer: Layer): void {
-    console.log(layer);
+  public handleMarkerClick(event: LeafletMouseEvent, markerLayer: Marker): void {
+    const existingIcon = markerLayer.getIcon();
+
+
+    this.markersMap.forEach((val, key) => {
+      if(key !== markerLayer.getLatLng() && this.markersOriginalIcons.has(key)){
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        (val as Marker).setIcon(icon(this.markersOriginalIcons.get(key)!));
+      }
+    });
+
+    markerLayer.setIcon(icon({
+      ...existingIcon.options as IconOptions,
+      iconSize: [30, 46],
+      iconAnchor: [15, 46]
+    }));
+
+    this.sharedFacade.setHomepageLocationNear({
+      latitude: markerLayer.getLatLng().lat,
+      longitude: markerLayer.getLatLng().lng,
+      name: markerLayer.options.title ?? ''
+    });
   }
-  public mapFinishedLoading(map: Map): void {
+  public mapFinishedLoading(map: LeafletMap): void {
     this.map = map;
   }
 
-  public getMarker(position: GeolocationPosition): Marker {
-    return marker([ position.coords.latitude, position.coords.longitude ], {
-      title: 'Тековна локација',
-      alt: 'Тековна локација',
+  public getMarker(latLng: LatLng, title: string = 'Тековна Локација'): Marker {
+    return marker([ latLng.lat, latLng.lng ], {
+      title: title,
+      alt: title,
       icon: icon({
         iconSize: [ 25, 41 ],
         iconAnchor: [ 13, 41 ],
         iconUrl: 'leaflet/marker-icon.png',
         shadowUrl: 'leaflet/marker-shadow.png'
+      }),
+      zIndexOffset: 50
+    });
+  }
+
+  public getLocationMarker(latLng: LatLng, title: string = 'Локација'): Marker {
+    return marker([ latLng.lat, latLng.lng ], {
+      title: title,
+      alt: title,
+      icon: icon({
+        iconSize: [ 18, 34 ],
+        iconAnchor: [ 10, 34 ],
+        iconUrl: 'map-markers/hospital-location-marker.png',
+        shadowUrl: 'leaflet/marker-shadow.png',
+        shadowAnchor: [10, 38]
       })
+    });
+  }
+
+  public ngOnDestroy(): void {
+      this.destroying$.next(true);
+      this.destroying$.complete();
+
+    this.markersMap.forEach(mark => {
+      mark.removeEventListener('click', ($event) => this.handleMarkerClick($event, mark as Marker));
     });
   }
 }

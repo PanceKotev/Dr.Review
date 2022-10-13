@@ -5,8 +5,7 @@
   (leafletMapReady)="mapFinishedLoading($event)"
 >
   <div
-    *ngFor="let marker of markers"
-    [leafletLayer]="marker"
-    (leafletLayerAdd)="markerClicked(marker)"
+    *ngFor="let marker of markersMap | keyvalue"
+    [leafletLayer]="marker.value"
   ></div>
 </div>

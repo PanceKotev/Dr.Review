@@ -1,8 +1,8 @@
 
-import { SearchDoctorDto, DoctorApiService } from '@drreview/shared/data-access';
+import { SearchDoctorDto, DoctorApiService, SharedQuery, ILocation } from '@drreview/shared/data-access';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { debounceTime, Subject, switchMap, takeUntil } from 'rxjs';
+import { debounceTime, Observable, Subject, switchMap, takeUntil } from 'rxjs';
 import { inputToCyrillic } from '@drreview/shared/utils/rxjs';
 @Component({
   selector: 'drreview-homepage',
@@ -18,10 +18,16 @@ export class HomepageComponent implements OnInit, OnDestroy {
   public doctors: SearchDoctorDto[] = [];
   public formGroup!: FormGroup;
 
-  public constructor(private fb: FormBuilder, private doctorsApi: DoctorApiService){
-    this.formGroup = this.fb.group({
-      searchDoctor: [null]
-    });
+  public selectedLocation$: Observable<{nearLocation: ILocation | undefined}> | undefined;
+
+  public constructor(
+    private fb: FormBuilder,
+    private sharedQuery: SharedQuery,
+    private doctorsApi: DoctorApiService){
+      this.selectedLocation$ = this.sharedQuery.homepageOptions$;
+      this.formGroup = this.fb.group({
+        searchDoctor: [null]
+      });
   }
 
   public ngOnInit(): void {

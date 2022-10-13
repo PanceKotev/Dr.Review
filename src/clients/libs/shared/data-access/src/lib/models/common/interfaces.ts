@@ -12,3 +12,9 @@ export interface ILocation {
   latitude: number;
   name: string;
 }
+
+export interface IAllOptionsItems {
+  locations: ILocation[];
+  institutions: string[];
+  specializations: string[];
+}

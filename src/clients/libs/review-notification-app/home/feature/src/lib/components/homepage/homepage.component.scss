@@ -66,30 +66,30 @@
 .search-locations{
   width: 100%;
   height: 80vh;
-  outline: 1px solid red;
+  background-color: var(--container-background-color-transparent);
+
   display: grid;
   grid-template-columns: 0.9fr 1.1fr;
 
   .article{
-    outline: 1px solid red;
   }
 
   .map-container{
     background-color: white;
-    outline: 1px solid red;
   }
 
 }
 
 .most-popular{
+  margin-top: 1rem;
   width: 100%;
   height: 80vh;
-  outline: 1px solid red;
   display: flex;
+  background-color: var(--container-background-color-transparent);
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   .filters {
-    outline: 1px solid red;
 
   }
 
@@ -97,7 +97,6 @@
     width: 80%;
     padding: 2rem;
     height: 80%;
-    outline: 1px solid red;
     background-color: tan;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;

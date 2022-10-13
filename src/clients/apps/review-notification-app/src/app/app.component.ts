@@ -20,7 +20,7 @@ export class AppComponent implements OnInit, OnDestroy{
 
   public ngOnInit(): void {
     this.authService.initializeAuth();
-    this.sharedFacade.updateUserName('wot');
+    this.sharedFacade.getAndCacheFilterOptions();
   }
   public ngOnDestroy(): void {
     this.authService.ngOnDestroy();

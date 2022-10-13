@@ -15,7 +15,7 @@ import { AkitaNgDevtools } from '@datorama/akita-ngdevtools';
   imports: [
     BrowserModule,
     ReviewNotificationAppShellModule,
-    [environment.production ? [] : AkitaNgDevtools.forRoot()],
+    ...[environment.production ? [] : AkitaNgDevtools.forRoot()],
     SharedServicesThemesModule,
     BrowserAnimationsModule],
   bootstrap: [AppComponent]

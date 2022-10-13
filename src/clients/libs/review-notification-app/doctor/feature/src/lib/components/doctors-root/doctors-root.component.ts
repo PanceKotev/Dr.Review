@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { ActivatedRoute, Router } from '@angular/router';
-import { filterOptions } from '@drreview/review-notification-app/doctor/data-access';
+import { DoctorsFacade, filterOptions } from '@drreview/review-notification-app/doctor/data-access';
 import { ScheduleSubscriptionApiService } from '@drreview/review-notification-app/schedule-subscription/data-access';
 import { FilterBy,
   DoctorApiService,
@@ -52,6 +52,7 @@ export class DoctorsRootComponent implements OnInit{
     private router: Router,
     private scheduleSubscriptionApiService : ScheduleSubscriptionApiService,
     private optionsApiService: OptionApiService,
+    private doctorsFacade: DoctorsFacade,
     private doctorApiService: DoctorApiService){
     const filterByEntries = Object.entries(FilterBy);
 
@@ -185,7 +186,8 @@ export class DoctorsRootComponent implements OnInit{
           of([]),
         onlySubscriptions: !!this.onlySubscriptions});
 
-        return this.doctorApiService.getDoctors(new GetDoctorsFilter(undefined, page.page, page.itemsPerPage), true);
+        return this.doctorApiService.getDoctors(new GetDoctorsFilter(undefined, page.page, page.itemsPerPage), true)
+          .pipe(tap(dr => this.doctorsFacade.setDoctors(dr)));
       }
     }
   }

@@ -20,10 +20,16 @@
           "apps/review-notification-app/src/assets/doctor-illustration.svg",
           "apps/review-notification-app/src/assets/logo/dr_review_logo_dark.svg",
           "apps/review-notification-app/src/assets/logo/dr_review_logo_light.svg",
+          "apps/review-notification-app/src/assets/map-markers/dr_review_logo_light.svg",
           {
             "glob": "**/*",
             "input": "./node_modules/leaflet/dist/images",
             "output": "leaflet/"
+          },
+          {
+            "glob": "**/*",
+            "input": "apps/review-notification-app/src/assets/map-markers",
+            "output": "map-markers/"
           }
         ],
         "styles": ["apps/review-notification-app/src/styles.scss",
