@@ -36,6 +36,9 @@
       "@drreview/review-notification-app/home/feature": [
         "libs/review-notification-app/home/feature/src/index.ts"
       ],
+      "@drreview/review-notification-app/home/ui": [
+        "libs/review-notification-app/home/ui/src/index.ts"
+      ],
       "@drreview/review-notification-app/navigation": [
         "libs/review-notification-app/navigation/src/index.ts"
       ],

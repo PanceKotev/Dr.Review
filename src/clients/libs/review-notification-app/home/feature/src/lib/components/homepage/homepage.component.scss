@@ -97,13 +97,10 @@
     width: 80%;
     padding: 2rem;
     height: 80%;
-    background-color: tan;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    column-gap: 2rem;
-    .carousel-item {
-      outline: 1px solid red;
-
+    .carousel-wrapper {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      column-gap: 2rem;
     }
   }
 }

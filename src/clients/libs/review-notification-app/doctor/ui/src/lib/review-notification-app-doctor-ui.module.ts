@@ -8,6 +8,7 @@ import { MatCardModule } from '@angular/material/card';
 import { AvatarModule } from 'ngx-avatars';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { DoctorRankingCardComponent } from './components/doctor-ranking-card/doctor-ranking-card.component';
 
 @NgModule({
   imports: [
@@ -19,8 +20,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MatCheckboxModule,
     ReviewNotificationAppScheduleSubscriptionUiModule,
     AvatarModule,
-    MatCardModule],
-  declarations: [DoctorCardComponent],
-  exports: [DoctorCardComponent]
+    MatCardModule
+  ],
+  declarations: [DoctorCardComponent, DoctorRankingCardComponent],
+  exports: [DoctorCardComponent, DoctorRankingCardComponent]
 })
 export class ReviewNotificationAppDoctorUiModule {}

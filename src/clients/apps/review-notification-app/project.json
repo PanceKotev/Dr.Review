@@ -32,8 +32,10 @@
             "output": "map-markers/"
           }
         ],
-        "styles": ["apps/review-notification-app/src/styles.scss",
-        "./node_modules/leaflet/dist/leaflet.css"],
+        "styles": [
+          "apps/review-notification-app/src/styles.scss",
+          "./node_modules/leaflet/dist/leaflet.css"
+        ],
         "stylePreprocessorOptions": {
           "includePaths": ["apps/review-notification-app/src"]
         },

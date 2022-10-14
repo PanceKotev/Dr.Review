@@ -8,3 +8,4 @@ export * from './lib/doctor';
 export * from './lib/review';
 export * from './lib/common/option-api.service';
 export * from './lib/+state';
+export * from './lib/popularity';

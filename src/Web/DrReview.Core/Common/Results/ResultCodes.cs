@@ -6,6 +6,8 @@
 
         public const string UserNotFound = "USER_NOT_FOUND";
 
+        public const string LocationNotFound = "LOCATION_NOT_FOUND";
+
         public const string NoPermission = "NO_PERMISSION";
 
         public const string InvalidEntityReference = "INVALID_ENTITY_REFERENCE";

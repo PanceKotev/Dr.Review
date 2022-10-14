@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-shadow */
-import { combineLatest, distinctUntilChanged, skip, skipUntil, skipWhile, Subject, take, takeUntil } from 'rxjs';
+import { combineLatest, Subject, takeUntil } from 'rxjs';
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { SharedFacade, SharedQuery } from '@drreview/shared/data-access';
+import { ILocation, SharedFacade, SharedQuery } from '@drreview/shared/data-access';
 import { LatLng, Map as LeafletMap,
     latLng, MapOptions, tileLayer, Marker, marker, icon, Layer, LeafletMouseEvent, IconOptions } from 'leaflet';
 
@@ -15,6 +15,7 @@ export class MapComponent implements OnInit, OnDestroy {
   public markersMap = new Map<LatLng, Layer>();
   public markersOriginalIcons = new Map<LatLng, IconOptions>();
   public map: LeafletMap | undefined;
+  public locations: ILocation[] = [];
 
   public markersMapLoaded$ = new Subject<boolean>();
   private destroying$ = new Subject<boolean>();
@@ -81,6 +82,7 @@ export class MapComponent implements OnInit, OnDestroy {
     sharedQuery.locations$.pipe(takeUntil(this.destroying$))
       .subscribe({
         next: val => {
+          this.locations = val ?? [];
           val.forEach(v => {
             const latitude = latLng(v.latitude, v.longitude);
             const marker2 = this.getLocationMarker(latitude, v.name);
@@ -136,11 +138,12 @@ export class MapComponent implements OnInit, OnDestroy {
       iconAnchor: [15, 46]
     }));
 
-    this.sharedFacade.setHomepageLocationNear({
-      latitude: markerLayer.getLatLng().lat,
-      longitude: markerLayer.getLatLng().lng,
-      name: markerLayer.options.title ?? ''
-    });
+    const location = this.locations.find(x => x.latitude === markerLayer.getLatLng().lat && x.longitude === markerLayer.getLatLng().lng);
+
+    if(location){
+      console.log('location set', location);
+      this.sharedFacade.setHomepageLocationNear({...location});
+    }
   }
   public mapFinishedLoading(map: LeafletMap): void {
     this.map = map;

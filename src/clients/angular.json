@@ -11,6 +11,7 @@
     "review-notification-app-doctor-ui": "libs/review-notification-app/doctor/ui",
     "review-notification-app-e2e": "apps/review-notification-app-e2e",
     "review-notification-app-home-feature": "libs/review-notification-app/home/feature",
+    "review-notification-app-home-ui": "libs/review-notification-app/home/ui",
     "review-notification-app-navigation": "libs/review-notification-app/navigation",
     "review-notification-app-schedule-subscription-data-access": "libs/review-notification-app/schedule-subscription/data-access",
     "review-notification-app-schedule-subscription-feature": "libs/review-notification-app/schedule-subscription/feature",
