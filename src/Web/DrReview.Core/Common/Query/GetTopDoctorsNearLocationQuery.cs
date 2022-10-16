@@ -14,14 +14,17 @@
 
     public class GetTopDoctorsNearLocationQuery : IQuery<Result<List<GetTopDoctorsDto>>>
     {
-        public GetTopDoctorsNearLocationQuery(string locationSuid, int distance, int numberOfDoctors)
+        public GetTopDoctorsNearLocationQuery(decimal latitude, decimal longitude,  int distance, int numberOfDoctors)
         {
-            LocationSuid = locationSuid;
+            Latitude = latitude;
+            Longitude = longitude;
             Distance = distance;
             NumberOfDoctors = numberOfDoctors;
         }
 
-        public string LocationSuid { get; init; }
+        public decimal Latitude { get; init; }
+
+        public decimal Longitude { get; init; }
 
         public int Distance { get; init; }
 
@@ -39,22 +42,18 @@
 
         public async Task<Result<List<GetTopDoctorsDto>>> Handle(GetTopDoctorsNearLocationQuery request, CancellationToken cancellationToken)
         {
+            bool validLatitude = request.Latitude <= 90 && request.Latitude >= -90;
+            bool validLongitude = request.Longitude <= 180 && request.Longitude >= -180;
+
+            if (!validLatitude || !validLongitude)
+            {
+                return Result.Invalid<List<GetTopDoctorsDto>>(ResultCodes.LocationNotFound);
+            }
+
             string connectionString = _configuration.GetConnectionString("DatabaseConnection");
             using SqlConnection connection = new SqlConnection(connectionString);
 
             await connection.OpenAsync();
-            string queryForLocation = $@"SELECT TOP(1) L.* FROM [dbo].[Location] AS L WHERE L.Suid = @locationSuid AND L.DeletedOn IS NULL";
-
-            Location? location = await connection.QueryFirstOrDefaultAsync<Location>(
-                queryForLocation,
-                new { locationSuid = request.LocationSuid });
-
-            if (location is null)
-            {
-                await connection.CloseAsync();
-
-                return Result.NotFound<List<GetTopDoctorsDto>>(ResultCodes.LocationNotFound);
-            }
 
             string queryForTopDoctors = $@"SELECT TOP(@doctorLimit) D.Suid as Suid, D.FirstName as FirstName, D.LastName as LastName,
                 I.Name as Institution, S.Name as Specialization, L.Name as Location,  ABS([dbo].[DistanceKM](@lat, @lng, L.Latitude, L.Longitude)) AS Distance
@@ -67,8 +66,8 @@
             List<GetTopDoctorsDto> result = (await connection.QueryAsync<GetTopDoctorsDto>(queryForTopDoctors, new
             {
                 doctorLimit = request.NumberOfDoctors,
-                lat = location.Latitude,
-                lng = location.Longitude,
+                lat = request.Latitude,
+                lng = request.Longitude,
                 distance = request.Distance
             })).ToList();
 

@@ -3,7 +3,7 @@ import { combineLatest, Subject, takeUntil } from 'rxjs';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ILocation, SharedFacade, SharedQuery } from '@drreview/shared/data-access';
 import { LatLng, Map as LeafletMap,
-    latLng, MapOptions, tileLayer, Marker, marker, icon, Layer, LeafletMouseEvent, IconOptions } from 'leaflet';
+    latLng, MapOptions, tileLayer, Marker, marker, icon, Layer, IconOptions } from 'leaflet';
 
 @Component({
   selector: 'drreview-map',
@@ -67,8 +67,11 @@ export class MapComponent implements OnInit, OnDestroy {
 
           this.markersMap.forEach((val, key) => {
             if(key !== selectedMarker.getLatLng() && this.markersOriginalIcons.has(key)){
+              const originalIcon = this.markersOriginalIcons.get(key);
               // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-              (val as Marker).setIcon(icon(this.markersOriginalIcons.get(key)!));
+              if(originalIcon){
+                (val as Marker).setIcon(icon(originalIcon));
+              }
             }
           });
 
@@ -88,7 +91,7 @@ export class MapComponent implements OnInit, OnDestroy {
             const marker2 = this.getLocationMarker(latitude, v.name);
             this.markersOriginalIcons.set(latitude, marker2.getIcon().options as IconOptions);
             if(!this.markersMap.has(latitude)){
-              marker2.addEventListener('click', ($event) =>  this.handleMarkerClick($event, marker2));
+              marker2.addEventListener('click', () =>  this.handleMarkerClick(marker2));
             }
             this.markersMap.set(latitude, marker2);
           });
@@ -110,21 +113,23 @@ export class MapComponent implements OnInit, OnDestroy {
 
               }
               const marker1 = this.getMarker(latitudeLongitude);
-              this.markersOriginalIcons.set(latitudeLongitude, marker1.getIcon().options as IconOptions);
               if(!this.markersMap.has(latitudeLongitude)){
-                marker1.addEventListener('click', ($event) =>  this.handleMarkerClick($event, marker1));
+                marker1.addEventListener('click', () =>  this.handleMarkerClick(marker1));
               }
-              this.markersMap.set(latLng(pos.coords.latitude, pos.coords.longitude), marker1);
+              this.markersMap.set(latitudeLongitude, marker1);
+              this.markersOriginalIcons.set(latitudeLongitude, marker1.getIcon().options as IconOptions);
+
+              if(!this.currentLocation){
+                this.handleMarkerClick(marker1);
+              }
             }
 
         });
       }
   }
 
-  public handleMarkerClick(event: LeafletMouseEvent, markerLayer: Marker): void {
+  public handleMarkerClick(markerLayer: Marker): void {
     const existingIcon = markerLayer.getIcon();
-
-
     this.markersMap.forEach((val, key) => {
       if(key !== markerLayer.getLatLng() && this.markersOriginalIcons.has(key)){
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
@@ -141,8 +146,14 @@ export class MapComponent implements OnInit, OnDestroy {
     const location = this.locations.find(x => x.latitude === markerLayer.getLatLng().lat && x.longitude === markerLayer.getLatLng().lng);
 
     if(location){
-      console.log('location set', location);
       this.sharedFacade.setHomepageLocationNear({...location});
+    } else {
+      this.sharedFacade.setHomepageLocationNear({
+        latitude: markerLayer.getLatLng().lat,
+        longitude: markerLayer.getLatLng().lng,
+        name: 'Тековна локација',
+        suid: ''
+      });
     }
   }
   public mapFinishedLoading(map: LeafletMap): void {
@@ -182,7 +193,7 @@ export class MapComponent implements OnInit, OnDestroy {
       this.destroying$.complete();
 
     this.markersMap.forEach(mark => {
-      mark.removeEventListener('click', ($event) => this.handleMarkerClick($event, mark as Marker));
+      mark.removeEventListener('click', () => this.handleMarkerClick(mark as Marker));
     });
   }
 }

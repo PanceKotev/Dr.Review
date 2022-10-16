@@ -12,9 +12,10 @@ export class PopularityApiService {
   public constructor(private apiService: ApiService) {
   }
 
-  public getTopDoctorsNearLocation(locationSuid: string, distance: number = 26, doctorLimit: number = 3): Observable<TopDoctor[]> {
+  public getTopDoctorsNearLocation(
+    latitude: number, longitude: number, distance: number = 26, doctorLimit: number = 3): Observable<TopDoctor[]> {
     return this.apiService.get<Result<TopDoctor[]>>(
-      `popularity/doctors/location/${locationSuid}?distance=${distance}&doctorLimit=${doctorLimit}`)
+      `popularity/doctors/location/?latitude=${latitude}&longitude=${longitude}&distance=${distance}&doctorLimit=${doctorLimit}`)
     .pipe(
       map((res: Result<TopDoctor[]>) => res.value));
   }

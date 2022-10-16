@@ -5,6 +5,7 @@
     using DrReview.Common.Mediator.Interfaces;
     using DrReview.Common.Query;
     using DrReview.Common.Results;
+    using Hangfire.Annotations;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Identity.Web.Resource;
 
@@ -21,15 +22,17 @@
         }
 
         [HttpGet]
-        [Route("doctors/location/{locationSuid}")]
+        [Route("doctors/location")]
         [ProducesResponseType(typeof(Result<List<GetTopDoctorsDto>>), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> GetTop3DoctorsNearLocationAsync(
-            [FromRoute] string locationSuid,
+            [FromQuery] [NotNull] decimal latitude,
+            [FromQuery] [NotNull] decimal longitude,
             [FromQuery] int distance = 15,
             [FromQuery] int doctorLimit = 3)
         {
             return OkOrError(await _mediatorService.SendAsync(new GetTopDoctorsNearLocationQuery(
-                locationSuid: locationSuid,
+                latitude: latitude,
+                longitude: longitude,
                 distance: distance,
                 numberOfDoctors: doctorLimit)));
         }

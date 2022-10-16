@@ -42,7 +42,7 @@ export class HomepageComponent implements OnDestroy, OnInit {
         }
         this.topDoctorsLoading = true;
 
-        return this.popularityApi.getTopDoctorsNearLocation(nearLocation.suid);
+        return this.popularityApi.getTopDoctorsNearLocation(nearLocation.latitude, nearLocation.longitude);
       }),
       takeUntil(this.destroying$)).subscribe({
         next: val => {
