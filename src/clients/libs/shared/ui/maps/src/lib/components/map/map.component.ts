@@ -1,9 +1,10 @@
+
 /* eslint-disable @typescript-eslint/no-shadow */
 import { combineLatest, Subject, takeUntil } from 'rxjs';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ILocation, SharedFacade, SharedQuery } from '@drreview/shared/data-access';
 import { LatLng, Map as LeafletMap,
-    latLng, MapOptions, tileLayer, Marker, marker, icon, Layer, IconOptions } from 'leaflet';
+    latLng, MapOptions, tileLayer, Marker, marker, icon, Layer, IconOptions, tooltip, point } from 'leaflet';
 
 @Component({
   selector: 'drreview-map',
@@ -11,7 +12,7 @@ import { LatLng, Map as LeafletMap,
   styleUrls: ['./map.component.scss']
 })
 export class MapComponent implements OnInit, OnDestroy {
-  public currentLocation: LatLng  | undefined;
+  public currentLocation: { latitudeLongitude: LatLng, name: string}  | undefined;
   public markersMap = new Map<LatLng, Layer>();
   public markersOriginalIcons = new Map<LatLng, IconOptions>();
   public map: LeafletMap | undefined;
@@ -28,7 +29,11 @@ export class MapComponent implements OnInit, OnDestroy {
       })
     ],
     zoom: 9,
-    center: latLng([ 41.6771844,21.6609852 ])
+    center: latLng([ 41.6771844,21.6609852 ]),
+    maxZoom: 11,
+    minZoom: 9,
+    zoomControl: false,
+    bounceAtZoomLimits: true
   };
 
   public summit: Marker = marker([ 46.8523, -121.7603 ], {
@@ -51,7 +56,7 @@ export class MapComponent implements OnInit, OnDestroy {
           return;
         }
         const currentLatLng = latLng(val.nearLocation.latitude, val.nearLocation.longitude);
-        this.currentLocation = currentLatLng;
+        this.currentLocation = { latitudeLongitude: currentLatLng, name: val.nearLocation.name };
 
         const entryFromMap = Array.from(this.markersMap.entries())
           .find(([key,,]) => key.lat === currentLatLng.lat && key.lng === currentLatLng.lng);
@@ -93,7 +98,13 @@ export class MapComponent implements OnInit, OnDestroy {
             if(!this.markersMap.has(latitude)){
               marker2.addEventListener('click', () =>  this.handleMarkerClick(marker2));
             }
+            marker2.bindPopup(v.name, {
+              offset: point(0, -30),
+              className: 'map-marker-popup'
+            }).openPopup();
+
             this.markersMap.set(latitude, marker2);
+
           });
 
           this.markersMapLoaded$.next(true);
@@ -107,12 +118,18 @@ export class MapComponent implements OnInit, OnDestroy {
           if(pos && this.map){
               const latitudeLongitude = latLng(pos.coords.latitude, pos.coords.longitude);
               if(this.currentLocation){
-                this.map.flyTo(this.currentLocation, 10);
+                this.map.flyTo(this.currentLocation.latitudeLongitude, 10);
               } else {
                 this.map.flyTo(latitudeLongitude, 10);
 
               }
               const marker1 = this.getMarker(latitudeLongitude);
+
+
+              marker1.bindPopup('Тековна локација', {
+                offset: point(0, -30),
+                className: 'map-marker-popup'
+              }).openPopup();
               if(!this.markersMap.has(latitudeLongitude)){
                 marker1.addEventListener('click', () =>  this.handleMarkerClick(marker1));
               }
@@ -120,7 +137,20 @@ export class MapComponent implements OnInit, OnDestroy {
               this.markersOriginalIcons.set(latitudeLongitude, marker1.getIcon().options as IconOptions);
 
               if(!this.currentLocation){
+                tooltip({
+                  direction: 'bottom',
+                  sticky: true
+                }).setLatLng(latitudeLongitude)
+                .setContent('Тековна локација')
+                .addTo(this.map);
                 this.handleMarkerClick(marker1);
+              } else {
+                tooltip({
+                  direction: 'bottom',
+                  sticky: true
+                }).setLatLng(this.currentLocation.latitudeLongitude)
+                .setContent(this.currentLocation.name)
+                .addTo(this.map);
               }
             }
 

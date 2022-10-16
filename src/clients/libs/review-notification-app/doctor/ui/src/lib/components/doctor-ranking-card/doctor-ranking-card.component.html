@@ -1,22 +1,21 @@
-<mat-card *ngIf="doctor">
-  <mat-card-header class="doctor-header">
-    <mat-card-title-group>
-      <mat-card-title class="icon-wrapper">
-        <mat-icon>person</mat-icon>
-      </mat-card-title>
-      <mat-card-title class="doctor-name"
-        >{{ doctor.firstName }} {{ doctor.lastName }}</mat-card-title
-      >
-      <mat-card-subtitle>
+<div *ngIf="doctor" class="ranking-card">
+  <div class="doctor-header">
+    <div class="icon-wrapper">
+      <mat-icon>person</mat-icon>
+    </div>
+    <div class="doctor-details">
+      <div class="doctor-name">
+        {{ doctor.firstName }} {{ doctor.lastName }}
+      </div>
+      <div>
         {{ doctor.specialization }}
-      </mat-card-subtitle>
-    </mat-card-title-group>
-  </mat-card-header>
-
-  <mat-card-content>
+      </div>
+    </div>
+  </div>
+  <div class="location-details">
     <div class="location">
       {{ doctor.location }}
-      {{ doctor.distance }}
-    </div></mat-card-content
-  >
-</mat-card>
+    </div>
+    <div class="distance">{{ doctor.distance }}km</div>
+  </div>
+</div>

@@ -64,7 +64,8 @@
     <div class="filters">
       <div *ngIf="selectedLocation$ | async; let locationSelected">
         <h2 *ngIf="locationSelected.nearLocation?.name; else nothingSelected">
-          Најдобри доктори близу
+          Најдобри доктори во област од
+          <b class="km-selector"><i>25km</i></b> близу
           <b>{{ locationSelected.nearLocation?.name }}</b>
         </h2>
         <ng-template #nothingSelected>
@@ -74,12 +75,17 @@
     </div>
     <div class="carousel">
       <div class="carousel-wrapper" *ngIf="!topDoctorsLoading; else loadingTop">
-        <drreview-doctor-ranking-card
-          class="carousel-item"
-          *ngFor="let doctor of topDoctors"
-          [doctor]="doctor"
-        >
-        </drreview-doctor-ranking-card>
+        <div class="doctors" *ngIf="topDoctors?.length; else noDoctors">
+          <drreview-doctor-ranking-card
+            class="carousel-item"
+            *ngFor="let doctor of topDoctors"
+            [doctor]="doctor"
+          >
+          </drreview-doctor-ranking-card>
+        </div>
+        <ng-template #noDoctors class="no-doctors">
+          Нема доктори во таа област
+        </ng-template>
       </div>
       <ng-template #loadingTop>
         <div class="carousel-item">Loading...</div></ng-template
