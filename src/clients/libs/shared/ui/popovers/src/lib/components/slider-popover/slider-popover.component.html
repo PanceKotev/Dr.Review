@@ -11,8 +11,13 @@
   [closeOnBackdropClick]="true"
   [class]="!!(isDarkMode$ | async) ? 'dark-theme' : 'light-theme'"
   [hasBackdrop]="true"
-  (closed)="onChange(value)"
 >
-  <mtx-slider [(ngModel)]="value" [min]="min" [max]="max" [thumbLabel]="true">
+  <mtx-slider
+    [(ngModel)]="value"
+    [min]="min"
+    [max]="max"
+    [thumbLabel]="true"
+    (ngModelChange)="onChange($event)"
+  >
   </mtx-slider>
 </mtx-popover>
