@@ -11,7 +11,9 @@
         </h2>
       </div>
       <div class="search">
-        <button mat-flat-button color="accent">ПРЕБАРАЈТЕ</button>
+        <button mat-flat-button color="accent" routerLink="./doctors">
+          ПРЕБАРАЈТЕ
+        </button>
       </div>
     </div>
     <div class="header-image"></div>
@@ -59,7 +61,9 @@
           </drreview-doctor-ranking-card>
         </div>
         <ng-template #noDoctors>
-          <div class="no-doctors">Нема доктори во таа област</div>
+          <div class="no-doctors">
+            Нема доктори во таа област, пробајта да ја зголемите областа
+          </div>
         </ng-template>
       </div>
       <ng-template #loadingTop>
