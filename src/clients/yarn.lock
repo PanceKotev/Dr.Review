@@ -2203,6 +2203,11 @@
   resolved "https://registry.yarnpkg.com/@csstools/selector-specificity/-/selector-specificity-2.0.2.tgz#1bfafe4b7ed0f3e4105837e056e0a89b108ebe36"
   integrity sha512-IkpVW/ehM1hWKln4fCA3NzJU8KwD+kIOvPZA4cqxoJHtE21CCzjyp+Kxbu0i5I4tBNOlXPL9mjwnWlL0VEG4Fg==
 
+"@ctrl/tinycolor@^3.4.1":
+  version "3.4.1"
+  resolved "https://registry.yarnpkg.com/@ctrl/tinycolor/-/tinycolor-3.4.1.tgz#75b4c27948c81e88ccd3a8902047bcd797f38d32"
+  integrity sha512-ej5oVy6lykXsvieQtqZxCOaLT+xD4+QNarq78cIYISHmZXshCvROLudpQN3lfL8G0NL7plMSSK+zlyvCaIJ4Iw==
+
 "@cypress/request@^2.88.10":
   version "2.88.10"
   resolved "https://registry.npmjs.org/@cypress/request/-/request-2.88.10.tgz"
@@ -2647,6 +2652,23 @@
   version "2.0.4"
   resolved "https://registry.npmjs.org/@leichtgewicht/ip-codec/-/ip-codec-2.0.4.tgz"
   integrity sha512-Hcv+nVC0kZnQ3tD9GVu5xSMR4VVYOteQIr/hwFPVEvPdlXqgGEuRjiheChHgdM+JyqdgNcmzZOX/tnl0JOiI7A==
+
+"@ng-matero/extensions@^14.4.0":
+  version "14.4.0"
+  resolved "https://registry.yarnpkg.com/@ng-matero/extensions/-/extensions-14.4.0.tgz#75ba8923cf051ab29605ab732c0829534b419fd8"
+  integrity sha512-eWzHIOu54GNyapfooUr8vMreCvNzak2CHi5AlunaohDGnxZIe1Q96fuPD3D9ZEJ0CX89NffEVQG+vQShN2fWwg==
+  dependencies:
+    "@ng-select/ng-select" "^9.0.0"
+    ngx-color "^8.0.0"
+    photoviewer "^3.6.0"
+    tslib "^2.3.0"
+
+"@ng-select/ng-select@^9.0.0":
+  version "9.0.2"
+  resolved "https://registry.yarnpkg.com/@ng-select/ng-select/-/ng-select-9.0.2.tgz#15e270c2933423c7eaef6a09a1723db1e5212521"
+  integrity sha512-xdNiz/kgkMWYW1qFtk/337xDk/cmfEbSVtTFxWIM2OnIX1XsQOnTlGiBYces1TsMfqS68HjAvljEkj8QIGN2Lg==
+  dependencies:
+    tslib "^2.3.1"
 
 "@ngtools/webpack@14.2.4":
   version "14.2.4"
@@ -5364,6 +5386,11 @@ domhandler@^4.2.0, domhandler@^4.3.1:
   integrity sha512-GrwoxYN+uWlzO8uhUXRl0P+kHE4GtVPfYzVLcUxPL7KNdHKj66vvlhiweIHqYYXWlw+T8iLMp42Lm67ghw4WMQ==
   dependencies:
     domelementtype "^2.2.0"
+
+domq.js@^0.6.7:
+  version "0.6.7"
+  resolved "https://registry.yarnpkg.com/domq.js/-/domq.js-0.6.7.tgz#3e7684c6281fd8ebbb406e95547f1e3faed508ec"
+  integrity sha512-WwRGORo/eYGf7v7YXZ3M6x/PEoxCsP3D0my7pnAVwtbfsKRvW6qioSdlLsy1MFzfwN1TM9oO9QJcvkE8ERYmlg==
 
 domutils@^2.8.0:
   version "2.8.0"
@@ -8259,6 +8286,11 @@ makeerror@1.0.12:
   dependencies:
     tmpl "1.0.5"
 
+material-colors@^1.2.6:
+  version "1.2.6"
+  resolved "https://registry.yarnpkg.com/material-colors/-/material-colors-1.2.6.tgz#6d1958871126992ceecc72f4bcc4d8f010865f46"
+  integrity sha512-6qE4B9deFBIa9YSpOc9O0Sgc43zTeVYbgDT5veRKSlB2+ZuHNoVVxA1L/ckMUayV9Ay9y7Z/SZCLcGteW9i7bg==
+
 mdn-data@2.0.14:
   version "2.0.14"
   resolved "https://registry.yarnpkg.com/mdn-data/-/mdn-data-2.0.14.tgz#7113fc4281917d63ce29b43446f701e68c25ba50"
@@ -8557,6 +8589,15 @@ ngx-avatars@^1.4.0:
   dependencies:
     ts-md5 "^1.2.11"
     tslib "^2.4.0"
+
+ngx-color@^8.0.0:
+  version "8.0.3"
+  resolved "https://registry.yarnpkg.com/ngx-color/-/ngx-color-8.0.3.tgz#2e63b4af0a05979ff4adcca06f2abe640c21e901"
+  integrity sha512-tuLP+uIoDEu2m0bh711kb2P1M1bh/oIrOn8mJd9mb8xGL2v+OcokcxPmVvWRn0avMG1lXL53CjSlWXGkdV4CDA==
+  dependencies:
+    "@ctrl/tinycolor" "^3.4.1"
+    material-colors "^1.2.6"
+    tslib "^2.3.0"
 
 ngx-quill@^18.0.0:
   version "18.0.0"
@@ -9232,6 +9273,13 @@ performance-now@^2.1.0:
   version "2.1.0"
   resolved "https://registry.npmjs.org/performance-now/-/performance-now-2.1.0.tgz"
   integrity sha512-7EAHlyLHI56VEIdK57uwHdHKIaAGbnXPiw0yWbarQZOKaKpvUIgW0jWRVLiatnM+XXlSwsanIBH/hzGMJulMow==
+
+photoviewer@^3.6.0:
+  version "3.6.5"
+  resolved "https://registry.yarnpkg.com/photoviewer/-/photoviewer-3.6.5.tgz#06c6e5d3fa70bbeb9de40a177efeca22e9d825f8"
+  integrity sha512-qCxKJ2TMPpA4rBl23/hQiTmxZIMOU8RQJF2plSyOe8j/whIjtIN/SxGw0y4CtRhLK4skYuDnay2xDLxPIMvrCg==
+  dependencies:
+    domq.js "^0.6.7"
 
 picocolors@^1.0.0:
   version "1.0.0"
@@ -11347,7 +11395,7 @@ tsconfig-paths@^3.9.0:
     minimist "^1.2.6"
     strip-bom "^3.0.0"
 
-tslib@2.4.0, tslib@^2.0.0, tslib@^2.1.0, tslib@^2.3.0, tslib@^2.4.0:
+tslib@2.4.0, tslib@^2.0.0, tslib@^2.1.0, tslib@^2.3.0, tslib@^2.3.1, tslib@^2.4.0:
   version "2.4.0"
   resolved "https://registry.npmjs.org/tslib/-/tslib-2.4.0.tgz"
   integrity sha512-d6xOpEDfsi2CZVlPQzGeux8XMwLT9hssAsaPYExaQMuYskwb+x1x7J371tWlbBdWHroy99KnVB6qIkUbs5X3UQ==

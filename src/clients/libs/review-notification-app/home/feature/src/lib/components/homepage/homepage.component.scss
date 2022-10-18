@@ -4,7 +4,7 @@
 }
 
 .header{
-  height: 70vh;
+  min-height: 70vh;
   width: 100%;
   display:grid;
   grid-template-columns: 0.85fr 1.15fr;
@@ -17,7 +17,7 @@
     background-size: contain;
     height:100%;
     clip-path: polygon(25% 0%, 100% 0%, 100% 100%, 0% 100%);
-    border-radius: 6px;
+    border-radius: 0 6px 6px 0;
   }
 
   &-text{
@@ -27,7 +27,7 @@
     align-items: center;
     justify-content: center;
     height: 80%;
-    border-radius: 6px;
+    border-radius: 6px 0 0 6px;
     background-color: var(--container-background-color-transparent);
 
     text-align: left;
@@ -68,37 +68,50 @@
 
 .search-locations{
   width: 100%;
-  height: 80vh;
+  min-height: 80vh;
   background-color: var(--container-background-color-transparent);
   border-radius: 6px !important;
   display: grid;
   grid-template-columns: 0.9fr 1.1fr;
+  padding: 0 1rem 1rem 1rem;
 
-  .map-container{
-    background-color: white;
-
+  .article {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
   }
-
 }
 
+.headline-2 {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--container-background-color-transparent);
+  margin-bottom: 0;
+  padding: 1rem;
+
+}
 .most-popular{
   margin-top: 1rem;
   width: 100%;
-  height: 80vh;
+  min-height: 80vh;
   display: flex;
   border-radius: 6px;
   background-color: var(--container-background-color-transparent);
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  padding: 1rem;
 
   .carousel {
-    width: 80%;
     padding: 2rem;
+    width: 100%;
+
     height: 80%;
     .carousel-wrapper {
-
-  width: 100%;
+      width: 100%;
 
     }
   }
@@ -108,7 +121,7 @@
 .doctors {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  column-gap: 2rem;
+  gap: 2rem;
   width: 100%;
 
 }
@@ -127,7 +140,25 @@
   width: 100%;
 }
 
-.km-selector{
+:host::ng-deep .km-selector{
   text-decoration: underline;
   cursor: pointer;
+  font-style: italic;
+  font-weight: bold;
+  display: inline;
 }
+
+.more-info{
+  margin-top: auto;
+}
+
+.link {
+  color: var(--color-accent);
+
+  &:visited {
+  color: var(--color-accent);
+
+  }
+}
+
+

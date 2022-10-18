@@ -1,0 +1,27 @@
+{
+  "name": "shared-ui-popovers",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/shared/ui/popovers/src",
+  "prefix": "drreview",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/shared/ui/popovers"],
+      "options": {
+        "jestConfig": "libs/shared/ui/popovers/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/shared/ui/popovers/**/*.ts",
+          "libs/shared/ui/popovers/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}

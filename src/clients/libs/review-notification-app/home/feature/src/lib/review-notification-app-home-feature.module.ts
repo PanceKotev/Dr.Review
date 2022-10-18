@@ -10,18 +10,23 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatRippleModule } from '@angular/material/core';
 import { SharedUiMapsModule } from '@drreview/shared/ui/maps';
+import { SharedUiPopoversModule } from '@drreview/shared/ui/popovers';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
   imports: [
     CommonModule,
     RouterModule.forChild(homeRoutes),
+    FormsModule,
+    ReactiveFormsModule,
     SharedUiSearchModule,
     MatButtonModule,
     MatButtonToggleModule,
     MatRippleModule,
     MatFormFieldModule,
     ReviewNotificationAppDoctorUiModule,
+    SharedUiPopoversModule,
     SharedUiMapsModule],
   declarations: [HomepageComponent],
   exports: [RouterModule]

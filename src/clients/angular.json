@@ -23,6 +23,7 @@
     "shared-ui-avatar": "libs/shared/ui/avatar",
     "shared-ui-filters": "libs/shared/ui/filters",
     "shared-ui-maps": "libs/shared/ui/maps",
+    "shared-ui-popovers": "libs/shared/ui/popovers",
     "shared-ui-review": "libs/shared/ui/review",
     "shared-ui-search": "libs/shared/ui/search",
     "shared-ui-themes": "libs/shared/ui/themes",
