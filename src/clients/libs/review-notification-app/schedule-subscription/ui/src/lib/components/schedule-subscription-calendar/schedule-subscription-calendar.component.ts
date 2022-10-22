@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostBinding, Input } from '@angular/core';
 import { DateRange } from '@angular/material/datepicker';
 import { drReviewDate } from '@drreview/shared/utils/date';
 
@@ -13,4 +13,9 @@ export class ScheduleSubscriptionCalendarComponent{
   public selectedRangeValue: DateRange<Date> =
     new DateRange<Date>(drReviewDate().toDate(),  drReviewDate().add(7, 'days')
     .toDate());
+
+
+  @Input()
+  @HostBinding("style.--selector-color")
+  public selectorColor = 'var(--color-primary)';
 }

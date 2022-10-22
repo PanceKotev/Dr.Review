@@ -33,7 +33,7 @@
 
 .subscription-item {
   display:block;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.25rem;
 }
 
 .schedule-action-button {
@@ -54,4 +54,8 @@
   max-width: 100%;
   padding-inline: 1rem;
   padding-top: 0;
+}
+
+.mode-toggle{
+  margin-block: 1rem;
 }

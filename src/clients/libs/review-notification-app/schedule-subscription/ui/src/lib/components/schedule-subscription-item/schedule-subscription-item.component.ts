@@ -27,6 +27,12 @@ export class ScheduleSubscriptionItemComponent {
   @Input()
   public lastName = 'Докторски';
 
+  public get status(): 'expired' | 'normal' {
+    const past = drReviewDate().isAfter(this.range.end, 'days');
+
+    return past ? 'expired' : 'normal';
+  }
+
   @Output()
   public deleteClicked = new EventEmitter<void>();
 

@@ -10,6 +10,8 @@ import { SharedUiFiltersModule } from '@drreview/shared/ui/filters';
 import { MatButtonModule } from '@angular/material/button';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatIconModule } from '@angular/material/icon';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
@@ -19,7 +21,9 @@ import { MatIconModule } from '@angular/material/icon';
     ReviewNotificationAppScheduleSubscriptionUiModule,
     SharedUiFiltersModule,
     MatPaginatorModule,
+    FormsModule,
     MatButtonModule,
+    MatSlideToggleModule,
     MatIconModule,
     MatExpansionModule
   ],

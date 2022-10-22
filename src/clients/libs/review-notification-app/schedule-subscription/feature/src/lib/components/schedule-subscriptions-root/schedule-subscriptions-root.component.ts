@@ -9,6 +9,7 @@ export class ScheduleSubscriptionsRootComponent{
 
   public allExpanded = false;
 
+  public editMode = false;
 
   public toggleAllExpanded(): void {
     this.allExpanded = !this.allExpanded;

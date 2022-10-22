@@ -51,7 +51,15 @@
     <div class="calendar-header">
       <h1>Календар</h1>
     </div>
+    <div class="mode-toggle">
+      <mat-slide-toggle [(ngModel)]="editMode">
+        {{ editMode ? 'Едитирање' : 'Филтрирање' }}
+      </mat-slide-toggle>
+    </div>
     <drreview-schedule-subscription-calendar
+      [selectorColor]="
+        editMode ? 'var(--color-accent)' : 'var(--color-primary)'
+      "
       class="subscription-calendar"
     ></drreview-schedule-subscription-calendar>
   </div>
