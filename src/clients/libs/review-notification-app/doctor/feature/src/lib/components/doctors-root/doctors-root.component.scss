@@ -13,13 +13,14 @@
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   column-gap: 5px;
   justify-items: space-between;
-  grid-template-rows: max-content;
+  grid-template-columns: repeat(350px);
   row-gap: 10px;
 }
 
 .doctor-card{
   display: flex;
   justify-content: center;
+  height: 100%;
 }
 
 .doctors {
