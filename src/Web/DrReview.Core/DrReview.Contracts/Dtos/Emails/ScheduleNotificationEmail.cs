@@ -11,7 +11,7 @@
             DoctorSchedules = doctorSchedules;
         }
 
-        public int NumberOfFreeSlotsFound { get; init; }
+        public int NumberOfFreeSlotsFound { get; set; }
 
         public Dictionary<DoctorScheduleNameLinkDto, List<string>> DoctorSchedules { get; init; }
     }
