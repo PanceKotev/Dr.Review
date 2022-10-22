@@ -1,4 +1,5 @@
 {
+  "name": "shared-ui-filters",
   "projectType": "library",
   "sourceRoot": "libs/shared/ui/filters/src",
   "prefix": "drreview",

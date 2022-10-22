@@ -30,3 +30,13 @@ export interface GetDoctorDto {
   readonly specialization: string;
   readonly scheduleSubscription: GetScheduleSubscriptionDto | null;
 }
+
+export interface TopDoctor {
+  readonly suid: string;
+  readonly firstName: string;
+  readonly lastName: string;
+  readonly institution: string;
+  readonly specialization: string;
+  readonly location: string;
+  readonly distance: number;
+}

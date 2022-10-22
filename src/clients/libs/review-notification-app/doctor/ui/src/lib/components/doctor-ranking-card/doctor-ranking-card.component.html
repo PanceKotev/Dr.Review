@@ -1,0 +1,21 @@
+<div *ngIf="doctor" class="ranking-card">
+  <div class="doctor-header">
+    <div class="icon-wrapper">
+      <mat-icon>person</mat-icon>
+    </div>
+    <div class="doctor-details">
+      <div class="doctor-name">
+        {{ doctor.firstName }} {{ doctor.lastName }}
+      </div>
+      <div>
+        {{ doctor.specialization }}
+      </div>
+    </div>
+  </div>
+  <div class="location-details">
+    <div class="location">
+      {{ doctor.location }}
+    </div>
+    <div class="distance">{{ doctor.distance }}km</div>
+  </div>
+</div>

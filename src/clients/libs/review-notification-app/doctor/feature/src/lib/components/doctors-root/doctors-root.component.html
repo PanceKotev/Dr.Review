@@ -23,9 +23,7 @@
     </div>
     <div class="header-subscriptions" *ngIf="onlySubscriptions">
       <div class="selection-actions">
-        <mat-checkbox class="select-all-checkbox"
-          >Селектирај ги сите</mat-checkbox
-        >
+        <mat-checkbox class="select-all-checkbox">Сите</mat-checkbox>
         <drreview-schedule-subscription-range-input
           [notificationSwitchUnder]="false"
           [appearance]="'standard'"
@@ -42,7 +40,10 @@
           *ngIf="doctors$ | async; let doctorsWrapper"
         >
           <div *ngFor="let doctor of doctorsWrapper.doctors">
-            <div *ngIf="onlySubscriptions; else onlyDoctors">
+            <div
+              *ngIf="onlySubscriptions; else onlyDoctors"
+              class="subscription-doctor-card"
+            >
               <drreview-schedule-subscription-card
                 [cardTitle]="doctor.firstName + ' ' + doctor.lastName"
                 [cardSubtitle]="

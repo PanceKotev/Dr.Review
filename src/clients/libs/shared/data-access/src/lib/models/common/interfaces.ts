@@ -8,7 +8,14 @@ export interface IOptionItemWithLink<TValue = string> extends IOptionItem<TValue
 }
 
 export interface ILocation {
+  suid: string;
   longitude : number;
   latitude: number;
   name: string;
+}
+
+export interface IAllOptionsItems {
+  locations: ILocation[];
+  institutions: string[];
+  specializations: string[];
 }

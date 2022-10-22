@@ -1,4 +1,5 @@
 {
+  "name": "shared-services-snack-bar",
   "projectType": "library",
   "sourceRoot": "libs/shared/services/snack-bar/src",
   "prefix": "drreview",

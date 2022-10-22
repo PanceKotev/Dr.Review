@@ -1,0 +1,12 @@
+.mtx-popover, .mtx-popover-panel{
+  background-color: var(--input-container-background-color);
+}
+
+.mtx-popover-direction-arrow::after{
+  border-color:  var(--input-container-background-color) !important;
+}
+
+[class*="mtx-popover-below"] .mtx-popover-direction-arrow::before, [class*="mtx-popover-below"] .mtx-popover-direction-arrow::after, [class*="mtx-popover-above"] .mtx-popover-direction-arrow::before, [class*="mtx-popover-above"] .mtx-popover-direction-arrow::after {
+  border-left-color: transparent !important;
+border-right-color: transparent !important;
+}

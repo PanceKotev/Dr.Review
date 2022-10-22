@@ -1,4 +1,5 @@
 {
+  "name": "shared-utils-form",
   "projectType": "library",
   "sourceRoot": "libs/shared/utils/form/src",
   "prefix": "drreview",

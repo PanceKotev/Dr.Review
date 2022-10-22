@@ -13,9 +13,12 @@
 
 }
 
-
+:host ::ng-deep .custom-toolbar {
+  background: transparent;
+  color: black;
+}
 :host ::ng-deep .dark-theme .custom-toolbar{
-  background: #11222c;
+  background: transparent;
 }
 
 :host ::ng-deep .dark-theme .app-sidenav{

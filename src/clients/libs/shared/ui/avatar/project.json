@@ -1,4 +1,5 @@
 {
+  "name": "shared-ui-avatar",
   "projectType": "library",
   "sourceRoot": "libs/shared/ui/avatar/src",
   "prefix": "drreview",

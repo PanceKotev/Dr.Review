@@ -1,0 +1,78 @@
+<div class="homepage">
+  <div class="header">
+    <div class="header-text">
+      <div class="left-wrapper">
+        <h1 class="title">ПРОНАЈДЕТЕ ГО ВАШИОТ ДОКТОР И ВАШИОТ ТЕРМИН</h1>
+        <h2>
+          Не сте сигурни кој доктор да изберете? <br />Дали репутацијата е
+          добра? <br />
+          Што мислат другите за докторот? <br />
+          Сакате да добиете известување за избрани термини за доктори?
+        </h2>
+      </div>
+      <div class="search">
+        <button mat-flat-button color="accent" routerLink="./doctors">
+          ПРЕБАРАЈТЕ
+        </button>
+      </div>
+    </div>
+    <div class="header-image"></div>
+  </div>
+  <h1 class="headline-2">ОДБЕРЕТЕ ЛОКАЦИЈА</h1>
+  <div class="search-locations">
+    <div class="article">
+      <h2>
+        Притиснете на локациите на мапата, или пак дозволете пристап до вашата
+        локација и ќе ви ги покажеме најдобрите доктори во околината според
+        рејтингот.
+      </h2>
+    </div>
+    <div class="map-container">
+      <drreview-map></drreview-map>
+    </div>
+  </div>
+  <div class="connector"></div>
+  <div class="most-popular">
+    <div class="filters">
+      <div *ngIf="selectedLocation$ | async; let locationSelected">
+        <h2 *ngIf="locationSelected.nearLocation?.name; else nothingSelected">
+          Најдобри доктори во област од
+          <drreview-slider-popover
+            [formControl]="kmDistance"
+            valueClass="km-selector"
+            valueSuffix="km"
+          ></drreview-slider-popover>
+          околу
+          <b>{{ locationSelected.nearLocation?.name }}</b>
+        </h2>
+        <ng-template #nothingSelected>
+          <h2>Одберете локација од мапата погоре</h2>
+        </ng-template>
+      </div>
+    </div>
+    <div class="carousel">
+      <div class="carousel-wrapper" *ngIf="!topDoctorsLoading; else loadingTop">
+        <div class="doctors" *ngIf="topDoctors?.length; else noDoctors">
+          <drreview-doctor-ranking-card
+            class="carousel-item"
+            *ngFor="let doctor of topDoctors"
+            [doctor]="doctor"
+          >
+          </drreview-doctor-ranking-card>
+        </div>
+        <ng-template #noDoctors>
+          <div class="no-doctors">
+            Нема доктори во таа област, пробајта да ја зголемите областа
+          </div>
+        </ng-template>
+      </div>
+      <ng-template #loadingTop>
+        <div class="carousel-item">Loading...</div></ng-template
+      >
+    </div>
+    <div class="more-info">
+      Ако сакате да пребарувате со повеќе опции, притиснете
+      <a class="link" routerLink="doctors">тука.</a>
+    </div>
+  </div>
+</div>

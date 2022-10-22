@@ -1,0 +1,23 @@
+<div
+  #popoverTrigger="mtxPopoverTrigger"
+  [mtxPopoverTriggerFor]="popover"
+  [mtxPopoverTriggerOn]="(isHandset$ | async) ? 'click' : 'hover'"
+  [class]="valueClass"
+>
+  {{ value }} {{ valueSuffix }}
+</div>
+<mtx-popover
+  #popover="mtxPopover"
+  [closeOnBackdropClick]="true"
+  [class]="!!(isDarkMode$ | async) ? 'dark-theme' : 'light-theme'"
+  [hasBackdrop]="true"
+>
+  <mtx-slider
+    [(ngModel)]="value"
+    [min]="min"
+    [max]="max"
+    [thumbLabel]="true"
+    (ngModelChange)="onChange($event)"
+  >
+  </mtx-slider>
+</mtx-popover>

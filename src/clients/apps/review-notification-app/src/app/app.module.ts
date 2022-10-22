@@ -7,6 +7,7 @@ import { environment } from '../environments/environment';
 import { AppComponent } from './app.component';
 import { ReviewNotificationAppShellModule } from '@drreview/review-notification-app/shell';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AkitaNgDevtools } from '@datorama/akita-ngdevtools';
 
 @NgModule({
   declarations: [AppComponent],
@@ -14,6 +15,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   imports: [
     BrowserModule,
     ReviewNotificationAppShellModule,
+    ...[environment.production ? [] : AkitaNgDevtools.forRoot()],
     SharedServicesThemesModule,
     BrowserAnimationsModule],
   bootstrap: [AppComponent]

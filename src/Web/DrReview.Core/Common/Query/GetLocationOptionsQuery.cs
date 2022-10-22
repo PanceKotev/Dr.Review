@@ -36,7 +36,7 @@
 
             await connection.OpenAsync();
 
-            string queryForLocations = $@"SELECT L.Longitude AS Longitude, L.Latitude as Latitude, L.Name as Name FROM [dbo].[Location] as L
+            string queryForLocations = $@"SELECT L.Suid as Suid, L.Longitude AS Longitude, L.Latitude as Latitude, L.Name as Name FROM [dbo].[Location] as L
                                         WHERE L.DeletedOn IS NULL";
 
             List<GetLocationOptionsDto> result = (await connection.QueryAsync<GetLocationOptionsDto>(queryForLocations)).ToList();
