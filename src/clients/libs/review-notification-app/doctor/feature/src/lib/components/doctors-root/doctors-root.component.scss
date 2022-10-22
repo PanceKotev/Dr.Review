@@ -10,11 +10,9 @@
   display: grid;
   width: 100%;
   height: 100%;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  column-gap: 5px;
-  justify-items: space-between;
-  grid-template-columns: repeat(350px);
-  row-gap: 10px;
+  grid-template-columns: repeat(auto-fit, minmax(285px, 1fr));
+  gap: 10px;
+  grid-template-rows: repeat(350px);
 }
 
 .doctor-card{
@@ -32,6 +30,12 @@
 
 .doctor-paginator {
   margin-top: 1em;
+}
+
+.subscription-doctor-card {
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 .select-all-checkbox {

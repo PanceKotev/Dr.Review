@@ -252,3 +252,16 @@ body { margin: 0; font-family: 'Nunito Sans', sans-serif; }
   box-sizing: border-box;
 }
 
+.truncate-text {
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  &-clamp {
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}

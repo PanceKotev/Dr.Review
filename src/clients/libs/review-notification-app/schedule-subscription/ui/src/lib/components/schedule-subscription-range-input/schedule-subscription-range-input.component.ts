@@ -27,7 +27,7 @@ import { ScheduleNotificationRange } from '@drreview/shared/data-access';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ScheduleSubscriptionRangeInputComponent
-  extends BaseControlValueAccessor<ScheduleNotificationRange>
+  extends BaseControlValueAccessor<ScheduleNotificationRange | undefined>
   implements OnInit, OnDestroy {
   private isDestroying$ = new Subject<boolean>();
 

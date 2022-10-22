@@ -9,8 +9,9 @@
 .hover-icon{
   position: absolute;
   bottom: 10px;
-  right: 20px;
+  right: 10px;
   display: none;
+  transform: skewX(-10deg);
 }
 .doctor-card{
   height: 100%;
