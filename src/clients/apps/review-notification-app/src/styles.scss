@@ -3,7 +3,7 @@
 // For more information: https://material.angular.io/guide/theming
 @use '@angular/material' as mat;
 @use '@ng-matero/extensions' as mtx;
-@import '~quill/dist/quill.snow.css';
+@import '../../../node_modules/quill/dist/quill.snow.css';
 @import '_snackbars.scss';
 
 
@@ -12,7 +12,7 @@ $color-ok-rating: #ffcc00 !default;
 $color-positive-rating: #ffcc00 !default;
 $color-default-rating: #ffcc00 !default;
 
-@import '~css-star-rating/scss/star-rating';
+@import '../../../node_modules/css-star-rating/scss/star-rating';
 
 @import url('https://fonts.googleapis.com/css2?family=Encode+Sans:wght@100;300;600&display=swap');
 // Plus imports for other components in your app.
@@ -189,6 +189,7 @@ $review-notification-app-dark-theme: mat-set-background($review-notification-app
   --input-container-background-color: #ffffffd4;
   --container-background-color-transparent: #ffffffd4;
   --text-color: rgba(0, 0, 0, 0.87);
+  --subscriptions-background-gradient: linear-gradient(to top, #0119b761, #96d5e49c, #bce6f1);
 }
 
 .dark-theme {
@@ -205,6 +206,7 @@ $review-notification-app-dark-theme: mat-set-background($review-notification-app
   --input-container-background-color: #283135;
   --text-grayed-out: #b6b5b5;
   --text-color: white;
+  --subscriptions-background-gradient: linear-gradient(to top, #2c536487, #203A43, #0F2027);
 
   .mat-button-toggle-group-appearance-standard .mat-button-toggle + .mat-button-toggle {
     border-left: none;

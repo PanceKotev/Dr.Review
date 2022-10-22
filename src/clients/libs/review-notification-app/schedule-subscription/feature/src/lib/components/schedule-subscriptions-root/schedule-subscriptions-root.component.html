@@ -1,27 +1,58 @@
 <div class="schedules-root">
-  <div class="header-actions">
-    <drreview-chip-filter
-      [filterOptions]="filterOptions"
-    ></drreview-chip-filter>
-    <div class="selection-actions">
-      <mat-checkbox class="select-all-checkbox"
-        >Селектирај ги сите</mat-checkbox
-      >
-      <drreview-schedule-subscription-range-input
-        [notificationSwitchUnder]="false"
-        [appearance]="'standard'"
-      ></drreview-schedule-subscription-range-input>
+  <div class="schedules">
+    <div class="schedule-header">
+      <h1 class="schedules-title">Нотификациски претплати</h1>
+      <button mat-icon-button (click)="toggleAllExpanded()">
+        <mat-icon>
+          {{ allExpanded ? 'expand_less' : 'expand_more' }}
+        </mat-icon>
+      </button>
     </div>
-    <button mat-flat-button color="accent">Зачувај</button>
+    <div class="schedule-action-button">
+      <button mat-stroked-button color="accent">Нова субскрипција</button>
+    </div>
+    <div class="accordion-schedules">
+      <mat-accordion multi="true">
+        <drreview-schedule-subscription-item
+          [expanded]="allExpanded"
+          class="subscription-item"
+        ></drreview-schedule-subscription-item>
+        <drreview-schedule-subscription-item
+          [expanded]="allExpanded"
+          class="subscription-item"
+        ></drreview-schedule-subscription-item>
+        <drreview-schedule-subscription-item
+          [expanded]="allExpanded"
+          class="subscription-item"
+        ></drreview-schedule-subscription-item>
+        <drreview-schedule-subscription-item
+          [expanded]="allExpanded"
+          class="subscription-item"
+        ></drreview-schedule-subscription-item>
+        <drreview-schedule-subscription-item
+          [expanded]="allExpanded"
+          class="subscription-item"
+        ></drreview-schedule-subscription-item>
+        <drreview-schedule-subscription-item
+          [expanded]="allExpanded"
+          class="subscription-item"
+        ></drreview-schedule-subscription-item>
+        <drreview-schedule-subscription-item
+          [expanded]="allExpanded"
+          class="subscription-item"
+        ></drreview-schedule-subscription-item>
+      </mat-accordion>
+    </div>
+    <div class="schedule-pagination">
+      <mat-paginator class="paginator"></mat-paginator>
+    </div>
   </div>
-  <div class="subscriptions">
-    <drreview-schedule-subscription-card></drreview-schedule-subscription-card>
-
-    <drreview-schedule-subscription-card></drreview-schedule-subscription-card>
-    <drreview-schedule-subscription-card></drreview-schedule-subscription-card>
-    <drreview-schedule-subscription-card></drreview-schedule-subscription-card>
-    <drreview-schedule-subscription-card></drreview-schedule-subscription-card>
-
-    <drreview-schedule-subscription-card></drreview-schedule-subscription-card>
+  <div class="calendar">
+    <div class="calendar-header">
+      <h1>Календар</h1>
+    </div>
+    <drreview-schedule-subscription-calendar
+      class="subscription-calendar"
+    ></drreview-schedule-subscription-calendar>
   </div>
 </div>

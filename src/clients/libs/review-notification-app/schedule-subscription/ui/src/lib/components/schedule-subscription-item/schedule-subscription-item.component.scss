@@ -1,0 +1,27 @@
+.schedule-panel{
+  border-radius: 20px !important;
+  background: var(--container-background-color-transparent);
+}
+
+.non-expanded-content {
+  padding: 0.5rem;
+
+  height: 100%;
+}
+
+.content-inside {
+  padding-inline: 0.25rem;
+}
+:host ::ng-deep .mat-expansion-panel-header{
+  height: fit-content;
+}
+
+ .icons {
+  margin-right: 0.25em;
+}
+
+.checkbox {
+  position: absolute;
+  left: 7.5px;
+  top: 30%;
+}

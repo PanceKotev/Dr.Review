@@ -1,0 +1,38 @@
+<mat-expansion-panel
+  class="schedule-panel"
+  (opened)="expanded = true"
+  (closed)="expanded = false"
+  [expanded]="expanded"
+  #expansionPanel
+>
+  <mat-expansion-panel-header>
+    <div class="non-expanded-content">
+      <div class="checkbox">
+        <mat-checkbox (click)="expansionPanel.toggle()"></mat-checkbox>
+      </div>
+      <div class="mat-small mat-hint">
+        {{ range.start | date: 'dd.MM.YYYY' }} -
+        {{ range.end | date: 'dd.MM.YYYY' }}
+      </div>
+      <div>{{ firstName }} {{ lastName }}</div>
+    </div>
+  </mat-expansion-panel-header>
+  <div class="content-inside">
+    <div class="details">
+      <div class="institution">
+        <mat-icon class="icons">local_hospital</mat-icon>{{ institution }}
+      </div>
+      <div class="proffesion">
+        <mat-icon class="icons">biotech</mat-icon>{{ specialization }}
+      </div>
+      <div class="location">
+        <mat-icon class="icons">location_on</mat-icon>{{ location }}
+      </div>
+    </div>
+  </div>
+  <mat-action-row
+    ><button mat-icon-button (click)="handlePanelDelete()">
+      <mat-icon>delete</mat-icon>
+    </button></mat-action-row
+  >
+</mat-expansion-panel>

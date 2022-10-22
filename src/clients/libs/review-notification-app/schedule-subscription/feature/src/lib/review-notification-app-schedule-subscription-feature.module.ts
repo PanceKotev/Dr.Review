@@ -1,3 +1,4 @@
+import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -7,6 +8,8 @@ import { routes } from './routes';
 import { ReviewNotificationAppScheduleSubscriptionUiModule } from '@drreview/review-notification-app/schedule-subscription/ui';
 import { SharedUiFiltersModule } from '@drreview/shared/ui/filters';
 import { MatButtonModule } from '@angular/material/button';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   imports: [
@@ -15,7 +18,10 @@ import { MatButtonModule } from '@angular/material/button';
     MatCheckboxModule,
     ReviewNotificationAppScheduleSubscriptionUiModule,
     SharedUiFiltersModule,
-    MatButtonModule
+    MatPaginatorModule,
+    MatButtonModule,
+    MatIconModule,
+    MatExpansionModule
   ],
   declarations: [ScheduleSubscriptionsRootComponent],
   exports: [

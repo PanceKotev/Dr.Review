@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { filterChips } from '@drreview/review-notification-app/schedule-subscription/data-access';
 
 @Component({
   selector: 'drreview-schedule-subscriptions-root',
@@ -7,5 +6,11 @@ import { filterChips } from '@drreview/review-notification-app/schedule-subscrip
   styleUrls: ['./schedule-subscriptions-root.component.scss']
 })
 export class ScheduleSubscriptionsRootComponent{
-  public filterOptions = filterChips;
+
+  public allExpanded = false;
+
+
+  public toggleAllExpanded(): void {
+    this.allExpanded = !this.allExpanded;
+  }
 }
