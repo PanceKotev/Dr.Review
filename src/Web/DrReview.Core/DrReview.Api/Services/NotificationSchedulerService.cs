@@ -7,6 +7,7 @@
     using DrReview.Contracts.ExternalApi.MojTermin.Responses;
     using DrReview.Modules.ScheduleNotifications.Infrastructure.Common.Contexts;
     using DrReview.Modules.ScheduleNotifications.Infrastructure.ScheduleSubscriptions.Entities;
+    using FluentEmail.Core.Models;
     using Microsoft.EntityFrameworkCore;
 
     public class NotificationSchedulerService : INotificationSchedulerService
@@ -48,7 +49,7 @@
             var doctorSchedules = (await _mojTerminHttpClient.GetTimeslotsForDoctorsAsync(allScheduleNotifications.Select(s => s.DoctorFK).ToList()))
                                                              .GroupBy(d => d.Id)
                                                              .ToDictionary(x => x.Key, x => x.FirstOrDefault());
-            List<Task> emailsToSend = new ();
+            List<ScheduleNotificationEmail> emailDtos = new List<ScheduleNotificationEmail>();
 
             foreach (KeyValuePair<string, List<ScheduleSubscription>> entry in allScheduleNotificationsGrouped)
             {
@@ -96,11 +97,19 @@
                 ScheduleNotificationEmail emailDto = new ScheduleNotificationEmail(
                     recipient: entry.Key,
                     subject: $@"Слободни термини за доктори {dateNow.ToString("dd/MM/yyyy")}",
-                    numberOfFreeSlotsFound: entry.Value.Count,
+                    numberOfFreeSlotsFound: finalSchedules.Count,
                     doctorSchedules: finalSchedules);
 
-                emailsToSend.Add(_emailService.SendEmailAsync(emailDto));
+                emailDtos.Add(emailDto);
             }
+            if (!emailDtos.Any())
+            {
+                return;
+            }
+            List<Task<SendResponse>> emailsToSend = emailDtos.Select(emailDto =>
+            { 
+                return _emailService.SendEmailAsync(emailDto);
+            }).ToList();
 
             await Task.WhenAll(emailsToSend);
         }
