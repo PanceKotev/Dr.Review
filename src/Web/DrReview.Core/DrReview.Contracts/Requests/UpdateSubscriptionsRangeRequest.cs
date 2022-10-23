@@ -3,9 +3,9 @@ namespace DrReview.Contracts.Requests
 {
     using System;
 
-    public class UpdateSubscriptionRangeRequest
+    public class UpdateSubscriptionsRangeRequest
     {
-        public string ScheduleSuid { get; set; }
+        public List<string> ScheduleSuids { get; set; }
 
         public DateOnly RangeFrom { get; set; }
 

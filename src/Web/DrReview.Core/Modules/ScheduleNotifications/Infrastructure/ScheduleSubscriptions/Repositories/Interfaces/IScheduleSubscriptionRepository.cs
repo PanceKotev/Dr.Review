@@ -2,10 +2,9 @@
 {
     public interface IScheduleSubscriptionRepository
     {
-        public void InsertScheduleSubscription(Entities.ScheduleSubscription scheduleSubscription);
-
         public void InsertScheduleSubscriptions(List<Entities.ScheduleSubscription> scheduleSubscriptions);
 
-        public void UpdateScheduleSubscription(Entities.ScheduleSubscription scheduleSubscription);
+        public void UpdateScheduleSubscriptions(List<Entities.ScheduleSubscription> scheduleSubscriptions);
+
     }
 }

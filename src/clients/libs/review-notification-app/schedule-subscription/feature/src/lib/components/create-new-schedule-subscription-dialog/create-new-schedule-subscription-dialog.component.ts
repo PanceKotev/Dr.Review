@@ -16,7 +16,7 @@ export class CreateNewScheduleSubscriptionDialogComponent {
   public searchForm: string | undefined;
 
   public rangeForm: ScheduleNotificationRange | undefined;
-
+  public hiddenDoctors: SearchDoctorDto[] = [];
   public doctors$: Observable<SearchDoctorDto[]>;
   public doctorsLoading = false;
   public searchInput$ = new Subject<string>();
@@ -30,7 +30,7 @@ export class CreateNewScheduleSubscriptionDialogComponent {
   public constructor(
     private dialogRef: MatDialogRef<CreateNewScheduleSubscriptionDialogComponent>,
     private doctorsApi: DoctorApiService,
-    @Inject(MAT_DIALOG_DATA) private data: CreateNewScheduleSubscriptionsDialogData | undefined){
+    @Inject(MAT_DIALOG_DATA) public data: CreateNewScheduleSubscriptionsDialogData | undefined){
       this.doctors$ = concat(
         of([]), // default items
         this.searchInput$.pipe(

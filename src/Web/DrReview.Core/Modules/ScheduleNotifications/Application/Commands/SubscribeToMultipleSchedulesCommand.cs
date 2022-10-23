@@ -66,16 +66,12 @@
                                                                         .Select(x => x.DoctorFK)
                                                                         .ToListAsync();
 
-
-
             List<long> filteredDoctorFks = doctorFks.Where(x => !existingSubscriptionDoctorFks.Contains(x)).ToList();
-
 
             if (!filteredDoctorFks.Any())
             {
                 return Result.Invalid<EmptyValue>(ResultCodes.ScheduleSubscriptionAlreadyExists);
             }
-
 
             List<Result<ScheduleSubscription>> createdSubscriptionsOrError =
                 filteredDoctorFks.Select(doctorId => ScheduleSubscription.Create(

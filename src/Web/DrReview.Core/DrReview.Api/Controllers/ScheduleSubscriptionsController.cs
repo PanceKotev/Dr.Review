@@ -39,22 +39,21 @@
         [Authorize]
         [RequiredScope(new[] { "drreview.read", "drreview.write" })]
         [ProducesResponseType(typeof(Result<EmptyValue>), (int)HttpStatusCode.OK)]
-        public async Task<IActionResult> UpdateSubscriptionRangeAsync([FromBody] UpdateSubscriptionRangeRequest request)
+        public async Task<IActionResult> UpdateSubscriptionsRangeAsync([FromBody] UpdateSubscriptionsRangeRequest request)
         {
-            return OkOrError(await _mediator.SendAsync(new UpdateRangeScheduleCommand(
-                                                                               scheduleSuid: request.ScheduleSuid,
+            return OkOrError(await _mediator.SendAsync(new UpdateSubscriptionsRangeScheduleCommand(
+                                                                               scheduleSuids: request.ScheduleSuids,
                                                                                rangeFrom: request.RangeFrom,
                                                                                rangeTo: request.RangeTo)));
         }
 
         [HttpDelete]
-        [Route("{scheduleSuid}")]
         [Authorize]
         [RequiredScope(new[] { "drreview.read", "drreview.write" })]
         [ProducesResponseType(typeof(Result<EmptyValue>), (int)HttpStatusCode.OK)]
-        public async Task<IActionResult> UnsubscribeFromDoctorsScheduleAsync([FromRoute] string scheduleSuid)
+        public async Task<IActionResult> UnsubscribeFromMultipleDoctorsSchedulesAsync([FromBody] UnsubscribeFromMultipleDoctorSchedulesRequest unsubscribeRequest)
         {
-            return OkOrError(await _mediator.SendAsync(new UnsubscribeFromScheduleCommand(scheduleSuid: scheduleSuid)));
+            return OkOrError(await _mediator.SendAsync(new UnsubscribeFromSchedulesCommand(scheduleSuids: unsubscribeRequest.ScheduleSuids)));
         }
 
         [HttpGet]
@@ -64,9 +63,9 @@
             [FromQuery] DateOnly? rangeFrom,
             [FromQuery] DateOnly? rangeTo,
             [FromQuery] int page = 0,
-            [FromQuery] int itemsCount = 50)
+            [FromQuery] int itemsPerPage = 50)
         {
-            GetScheduleSubscriptionsQuery query = new GetScheduleSubscriptionsQuery(new GetScheduleSubscriptionsFilter(page, itemsCount, rangeFrom, rangeTo));
+            GetScheduleSubscriptionsQuery query = new GetScheduleSubscriptionsQuery(new GetScheduleSubscriptionsFilter(page, itemsPerPage, rangeFrom, rangeTo));
 
             return OkOrError(await _mediator.SendAsync(query));
         }

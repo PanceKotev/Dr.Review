@@ -141,10 +141,10 @@ export class DoctorsRootComponent implements OnInit{
       });
     } else if (range && scheduleSuid && (range.from !== existingSchedule?.range.from || range?.to !== existingSchedule?.range.to)){
       this.scheduleSubscriptionApiService
-        .updateScheduleSubscription({
+        .updateScheduleSubscriptions({
           rangeFrom: this.convertToString(range.from),
           rangeTo:this.convertToString(range.to),
-          scheduleSuid: scheduleSuid}).subscribe(() => {
+          scheduleSuids: [scheduleSuid]}).subscribe(() => {
             this.refreshDoctors$.next(this.filterValue);
           });
     }

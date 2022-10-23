@@ -18,9 +18,9 @@ from '../create-new-schedule-subscription-dialog/create-new-schedule-subscriptio
 })
 export class ScheduleSubscriptionsRootComponent implements OnDestroy {
   private destroying$ = new Subject<void>();
-  private pagingChanged$ = new BehaviorSubject<PagingFilter>({page: 0, itemsPerPage: 100});
+  private pagingChanged$ = new BehaviorSubject<PagingFilter>({page: 0, itemsPerPage: 10});
   private refreshSubscriptions$ = new BehaviorSubject<boolean>(true);
-  private deleteSubscription$ = new Subject<string[]>();
+  private deleteSubscriptions$ = new Subject<string[]>();
   private createSubscriptions$ = new Subject<SubscribeToMultipleDoctorsSchedulesRequest>();
 
   public pageCount: number | undefined;
@@ -56,10 +56,11 @@ export class ScheduleSubscriptionsRootComponent implements OnDestroy {
         next : (value) => {
             this.subscriptions = value.subscriptions;
             this.totalCount = value.totalCount;
+            this.setCheckboxState();
         }
       });
 
-    this.deleteSubscription$.pipe(
+    this.deleteSubscriptions$.pipe(
             takeUntil(this.destroying$),
             switchMap((scheduleSuids) => this.scheduleApi.unsubscribeFromDoctorSchedules(scheduleSuids))
           ).subscribe(() => this.refreshSubscriptions$.next(true));
@@ -82,6 +83,28 @@ export class ScheduleSubscriptionsRootComponent implements OnDestroy {
     this.checkedSubscriptions[scheduleSuid] = checked;
     this.setCheckboxState();
 
+  }
+
+  public unsubscribeMultiple(): void {
+    console.log('clicked');
+    if(this.someChecked || this.allChecked){
+      const itemsToDelete =  this.subscriptions.filter(x => !!this.checkedSubscriptions[x.suid]).map(x => x.suid);
+      if(itemsToDelete.length){
+        const dialogRef = this.dialogService.open<DeleteDialogComponent, DeleteDialogData, boolean>(DeleteDialogComponent, {
+
+          width: '550px',
+          minHeight: '150px',
+          hasBackdrop: true,
+          panelClass: this.isDarkTheme ? 'dark-theme' : '',
+          data: {
+            deleteTitle: 'Избриши ги селектираните претплати за нотификации?',
+            deleteButtonName: undefined
+          }});
+
+        dialogRef.afterClosed().pipe(takeUntil(this.destroying$), filter(x => !!x))
+          .subscribe(() => this.deleteSubscriptions$.next(itemsToDelete));;
+        }
+    }
   }
 
   public pageChanged(page: PageEvent): void {
@@ -107,7 +130,7 @@ export class ScheduleSubscriptionsRootComponent implements OnDestroy {
     const dialogRef = this.dialogService.open<DeleteDialogComponent, DeleteDialogData, boolean>(DeleteDialogComponent, {
 
         width: '550px',
-        height: '150px',
+        minHeight: '150px',
         hasBackdrop: true,
         panelClass: this.isDarkTheme ? 'dark-theme' : '',
         data: {
@@ -116,7 +139,7 @@ export class ScheduleSubscriptionsRootComponent implements OnDestroy {
         }});
 
     dialogRef.afterClosed().pipe(takeUntil(this.destroying$), filter(x => !!x))
-      .subscribe(() => this.deleteSubscription$.next(subscriptionSuids));
+      .subscribe(() => this.deleteSubscriptions$.next(subscriptionSuids));
   }
 
   public handleCreateSubscription(): void {
@@ -128,7 +151,10 @@ export class ScheduleSubscriptionsRootComponent implements OnDestroy {
                                                                     height: '650px',
                                                                     hasBackdrop: true,
                                                                     disableClose: true,
-                                                                    panelClass: this.isDarkTheme ? 'dark-theme' : ''
+                                                                    panelClass: this.isDarkTheme ? 'dark-theme' : '',
+                                                                    data: {
+                                                                      selectedRange: undefined
+                                                                    }
     });
     dialogRef.afterClosed().pipe(takeUntil(this.destroying$), filter(x => !!x))
       .subscribe((data) => {

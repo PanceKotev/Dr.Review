@@ -4,7 +4,6 @@ import { ApiService, GetScheduleSubscriptionsDto, Result } from "@drreview/share
 import { map, Observable } from "rxjs";
 import {
   SubscribeToMultipleDoctorsSchedulesRequest,
-  UpdateSubscriptionRangeRequest,
   UpdateSubscriptionsRangeRequest } from "../models/schedule-subscription.requests";
 
 @Injectable({
@@ -16,10 +15,6 @@ export class ScheduleSubscriptionApiService {
 
   public subscribeToDoctorSchedules(request: SubscribeToMultipleDoctorsSchedulesRequest): Observable<Result<void>>{
     return this.apiService.post<Result<void>>("v1/schedules", request);
-  }
-
-  public updateScheduleSubscription(updateSchedule: UpdateSubscriptionRangeRequest): Observable<Result<void>>{
-    return this.apiService.put<Result<void>>("v1/schedules", updateSchedule);
   }
 
   public updateScheduleSubscriptions(updateSubscriptions: UpdateSubscriptionsRangeRequest): Observable<Result<void>>{
