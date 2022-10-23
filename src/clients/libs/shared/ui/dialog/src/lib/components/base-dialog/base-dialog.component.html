@@ -1,0 +1,11 @@
+<div class="dialog-wrapper">
+  <h1 mat-dialog-title class="d-title">
+    <ng-content select="[dialogHeader]"></ng-content>
+  </h1>
+  <div class="d-content" mat-dialog-content>
+    <ng-content></ng-content>
+  </div>
+  <div class="d-actions" mat-dialog-actions>
+    <ng-content select="[actions]"></ng-content>
+  </div>
+</div>

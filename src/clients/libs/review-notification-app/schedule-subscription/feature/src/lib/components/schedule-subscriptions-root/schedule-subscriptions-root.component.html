@@ -23,10 +23,17 @@
       </button>
     </div>
     <div class="schedule-action-buttons">
-      <button mat-stroked-button color="accent">Нова субскрипција</button>
+      <button
+        mat-flat-button
+        color="accent"
+        (click)="handleCreateSubscription()"
+      >
+        Нова субскрипција
+      </button>
       <button
         mat-stroked-button
-        color="accent"
+        color="basic"
+        class="edit-button"
         [disabled]="!someChecked && !allChecked"
       >
         Измени

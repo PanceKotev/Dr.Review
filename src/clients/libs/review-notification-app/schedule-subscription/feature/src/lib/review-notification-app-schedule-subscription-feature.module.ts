@@ -11,9 +11,12 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CreateNewScheduleSubscriptionDialogComponent } from
   './components/create-new-schedule-subscription-dialog/create-new-schedule-subscription-dialog.component';
+import { SharedUiDialogModule } from '@drreview/shared/ui/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   imports: [
@@ -22,8 +25,12 @@ import { CreateNewScheduleSubscriptionDialogComponent } from
     MatCheckboxModule,
     ReviewNotificationAppScheduleSubscriptionUiModule,
     SharedUiFiltersModule,
+    SharedUiDialogModule,
     MatPaginatorModule,
     FormsModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
     MatButtonModule,
     MatSlideToggleModule,
     MatIconModule,

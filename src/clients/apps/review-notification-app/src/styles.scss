@@ -5,6 +5,7 @@
 @use '@ng-matero/extensions' as mtx;
 @import '../../../node_modules/quill/dist/quill.snow.css';
 @import '_snackbars.scss';
+@import '_dialogs.scss';
 
 
 $color-negative-rating: #ffcc00 !default;
@@ -182,6 +183,8 @@ $review-notification-app-dark-theme: mat-set-background($review-notification-app
 @import '_slider.scss';
 
 :root {
+  --background-main: #e1f4f9;
+
   --color-primary: #{mat.get-color-from-palette($review-notification-app-light-primary, default)};
   --color-accent: #{mat.get-color-from-palette($review-notification-app-light-accent, default)};
   --color-warn: #{mat.get-color-from-palette($review-notification-app-light-warn, default)};
@@ -189,7 +192,7 @@ $review-notification-app-dark-theme: mat-set-background($review-notification-app
   --input-container-background-color: #ffffffd4;
   --container-background-color-transparent: #ffffffd4;
   --text-color: rgba(0, 0, 0, 0.87);
-  --subscriptions-background-gradient: linear-gradient(to top, #0119b761, #96d5e49c, #bce6f1);
+  --subscriptions-background-gradient: linear-gradient(to top, transparent, #0119b761, #96d5e49c, #bce6f1, transparent);
 }
 
 .dark-theme {
@@ -198,6 +201,8 @@ $review-notification-app-dark-theme: mat-set-background($review-notification-app
   @include mat.all-component-colors($review-notification-app-dark-theme);
   @include mtx.all-component-colors($review-notification-app-dark-theme);
   @include mtx.all-experimental-component-colors($review-notification-app-dark-theme);
+  --background-main: #0a171e;
+
 
   --color-primary: #{mat.get-color-from-palette($review-notification-app-dark-primary, default)};
   --color-accent: #{mat.get-color-from-palette($review-notification-app-dark-accent, default)};
@@ -206,7 +211,7 @@ $review-notification-app-dark-theme: mat-set-background($review-notification-app
   --input-container-background-color: #283135;
   --text-grayed-out: #b6b5b5;
   --text-color: white;
-  --subscriptions-background-gradient: linear-gradient(to top, #2c536487, #203A43, #0F2027);
+  --subscriptions-background-gradient: linear-gradient(to top, transparent, #2c536487, #203A43, transparent);
 
   .mat-button-toggle-group-appearance-standard .mat-button-toggle + .mat-button-toggle {
     border-left: none;

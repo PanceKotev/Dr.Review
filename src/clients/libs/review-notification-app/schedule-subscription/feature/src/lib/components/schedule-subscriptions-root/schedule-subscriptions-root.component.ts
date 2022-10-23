@@ -1,8 +1,12 @@
 import { Component, OnDestroy } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ScheduleSubscriptionApiService } from '@drreview/review-notification-app/schedule-subscription/data-access';
 import { GetScheduleSubscriptionDto } from '@drreview/shared/data-access';
 import { SnackBarService } from '@drreview/shared/services/snack-bar';
+import { ThemesService } from '@drreview/shared/services/themes';
 import { Subject, takeUntil } from 'rxjs';
+import { CreateNewScheduleSubscriptionDialogComponent }
+from '../create-new-schedule-subscription-dialog/create-new-schedule-subscription-dialog.component';
 
 @Component({
   selector: 'drreview-schedule-subscriptions-root',
@@ -22,11 +26,14 @@ export class ScheduleSubscriptionsRootComponent implements OnDestroy {
 
   public editMode = false;
   public totalCount = 0;
+  public isDarkTheme = false;
 
   public subscriptions: GetScheduleSubscriptionDto[] = [];
 
   public constructor(
     private snackbar: SnackBarService,
+    private dialogService: MatDialog,
+    private themeService: ThemesService,
     private scheduleApi: ScheduleSubscriptionApiService){
     this.scheduleApi.getScheduleSubscriptions(0, 50)
       .pipe(takeUntil(this.destroying$))
@@ -36,6 +43,8 @@ export class ScheduleSubscriptionsRootComponent implements OnDestroy {
             this.totalCount = value.totalCount;
         }
       });
+    this.themeService.isDarkTheme$.pipe(takeUntil(this.destroying$)).subscribe((val) => this.isDarkTheme = val);
+
 
   }
   public toggleAllExpanded(): void {
@@ -63,6 +72,16 @@ export class ScheduleSubscriptionsRootComponent implements OnDestroy {
 
   public editModeChange(change: boolean): void {
     this.snackbar.openInfo(`Сега сте во состојба на ${change ? 'едитирање' : 'филтрирање'}`);
+  }
+
+  public handleCreateSubscription(): void {
+    const dialogRef = this.dialogService.open(CreateNewScheduleSubscriptionDialogComponent, {
+      width: '550px',
+      minHeight: '450px',
+      hasBackdrop: true,
+      panelClass: this.isDarkTheme ? 'dark-theme' : ''
+    });
+    dialogRef.afterClosed().subscribe(() => console.log('closed'));
   }
 
   public ngOnDestroy(): void {

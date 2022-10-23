@@ -10,7 +10,6 @@
   background: var(--subscriptions-background-gradient);
 
 }
-
 .schedule-header {
   display: flex;
   line-height: 1em;
@@ -27,6 +26,10 @@
   flex-direction: column;
 }
 
+.edit-button {
+  background-color: #15a7afbe;
+  color:white;
+}
 .schedule-pagination {
   margin-top: auto;
 }
