@@ -8,7 +8,7 @@ import { FilterBy,
   GetDoctorsFilter, PagingFilter, GetDoctorsDto,
   IAdditionalSelectConfig, OptionApiService,
   ScheduleNotificationRange,
-  GetScheduleSubscriptionDto} from '@drreview/shared/data-access';
+  GetDoctorScheduleSubscriptionDto} from '@drreview/shared/data-access';
 import { valueNotNull } from '@drreview/shared/utils/typescript-helpers';
 import * as dayjs from 'dayjs';
 import { BehaviorSubject, Subject, takeUntil, switchMap, Observable, EMPTY, combineLatest, tap, of, startWith } from 'rxjs';
@@ -41,7 +41,7 @@ export class DoctorsRootComponent implements OnInit{
   public pageCount: number | undefined;
   public refreshDoctors$ = new BehaviorSubject<FilterBy>(FilterBy.ALL);
   public doctors$: Observable<GetDoctorsDto> | undefined;
-  public scheduleSubscriptionGroups = new Map<string, GetScheduleSubscriptionDto>();
+  public scheduleSubscriptionGroups = new Map<string, GetDoctorScheduleSubscriptionDto>();
   public additionalFilterSelectConfig$ = new BehaviorSubject<IAdditionalSelectConfig>({
     filterType: FilterBy.ALL,
     items$: of([])
@@ -97,7 +97,7 @@ export class DoctorsRootComponent implements OnInit{
         return this.returnFilterValue(filterVal, page);
       }), tap((val) => {
         this.pageCount = val ? val.totalCount : 0;
-        const group = new Map<string, GetScheduleSubscriptionDto>();
+        const group = new Map<string, GetDoctorScheduleSubscriptionDto>();
         if(val){
           val.doctors.filter(valueNotNull("scheduleSubscription"))
             .forEach(x => group.set(x.scheduleSubscription.suid, x.scheduleSubscription));

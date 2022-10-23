@@ -1,4 +1,4 @@
-import { GetScheduleSubscriptionDto } from "@drreview/shared/data-access";
+import { GetDoctorScheduleSubscriptionDto } from "@drreview/shared/data-access";
 
 export interface Doctor {
    suid: string;
@@ -6,6 +6,6 @@ export interface Doctor {
    lastName: string;
    institution?: string;
    specialization?: string;
-   scheduleSubscription?: GetScheduleSubscriptionDto | null;
+   scheduleSubscription?: GetDoctorScheduleSubscriptionDto | null;
    location: string;
 }

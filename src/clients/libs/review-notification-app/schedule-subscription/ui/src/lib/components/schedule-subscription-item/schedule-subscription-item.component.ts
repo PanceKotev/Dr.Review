@@ -1,3 +1,4 @@
+import { ScheduleNotificationRange } from '@drreview/shared/data-access';
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { DateRange } from '@angular/material/datepicker';
 import { drReviewDate } from '@drreview/shared/utils/date';
@@ -27,24 +28,45 @@ export class ScheduleSubscriptionItemComponent {
   @Input()
   public lastName = 'Докторски';
 
-  public get status(): 'expired' | 'normal' {
-    const past = drReviewDate().isAfter(this.range.end, 'days');
+  @Input()
+  public checked = false;
 
-    return past ? 'expired' : 'normal';
+  @Input()
+  public doctorSuid = '';
+
+  public get status(): 'expired' | 'normal' | 'close-to-expiry' {
+    if(!this._range){
+      return 'normal';
+    }
+
+    const past = drReviewDate().isAfter(this._range.end, 'days');
+
+    const daysToExpiry = drReviewDate().diff(this._range.end, 'days');
+
+    return past ? 'expired' : daysToExpiry <= 5 && daysToExpiry >= 0? 'close-to-expiry' : 'normal';
   }
 
   @Output()
   public deleteClicked = new EventEmitter<void>();
 
+  @Output()
+  public checkedChanged = new EventEmitter<boolean>();
 
   @Input()
-  public range: DateRange<Date> = new DateRange<Date>(
-    drReviewDate().toDate(),
-    drReviewDate().add(7, 'days')
-    .toDate()
-  );
+  public set range(range: ScheduleNotificationRange) {
+    this._range = new DateRange<Date>(range.from, range.to);
+  };
+
+  public _range: DateRange<Date> | undefined;
+
+  @Input()
+  public suid = '';
 
   public handlePanelDelete(): void {
     this.deleteClicked.emit();
+  }
+
+  public handleCheckedChange(event: boolean): void {
+    this.checkedChanged.emit(event);
   }
 }

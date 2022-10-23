@@ -12,6 +12,8 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { FormsModule } from '@angular/forms';
+import { CreateNewScheduleSubscriptionDialogComponent } from
+  './components/create-new-schedule-subscription-dialog/create-new-schedule-subscription-dialog.component';
 
 @NgModule({
   imports: [
@@ -27,9 +29,10 @@ import { FormsModule } from '@angular/forms';
     MatIconModule,
     MatExpansionModule
   ],
-  declarations: [ScheduleSubscriptionsRootComponent],
-  exports: [
-    RouterModule
-  ]
+  declarations: [
+    ScheduleSubscriptionsRootComponent,
+    CreateNewScheduleSubscriptionDialogComponent
+  ],
+  exports: [RouterModule]
 })
 export class ReviewNotificationAppScheduleSubscriptionFeatureModule {}

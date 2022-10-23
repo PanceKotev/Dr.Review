@@ -8,15 +8,15 @@
 
     public class GetScheduleSubscriptionsFilter : BaseFilter
     {
-        public GetScheduleSubscriptionsFilter(int pageStart, int itemsPerPage, string? searchWord, FilterByValue? filterBy = null)
+        public GetScheduleSubscriptionsFilter(int pageStart, int itemsPerPage, DateOnly? rangeFrom, DateOnly? rangeTo)
             : base(pageStart, itemsPerPage)
         {
-            FilterBy = filterBy;
-            SearchWord = searchWord;
+            RangeFrom = rangeFrom;
+            RangeTo = rangeTo;
         }
 
-        public FilterByValue? FilterBy { get; }
+        public DateOnly? RangeFrom { get; init; }
 
-        public string? SearchWord { get; }
+        public DateOnly? RangeTo { get; init; }
     }
 }

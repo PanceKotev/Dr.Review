@@ -36,10 +36,11 @@
   margin-bottom: 1.25rem;
 }
 
-.schedule-action-button {
+.schedule-action-buttons {
   display: flex;
   width: 100%;
   margin-block: 1rem;
+  justify-content: space-between;
 }
 :host ::ng-deep .paginator{
   border-radius: 16px;
@@ -58,4 +59,12 @@
 
 .mode-toggle{
   margin-block: 1rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.schedule-checkbox-options{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
 }

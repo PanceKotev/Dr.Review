@@ -16,6 +16,7 @@ import { ScheduleSubscriptionCalendarComponent } from
   './components/schedule-subscription-calendar/schedule-subscription-calendar.component';
 import { SharedUtilsDateModule } from '@drreview/shared/utils/date';
 import { MatButtonModule } from '@angular/material/button';
+import { RouterModule } from '@angular/router';
 @NgModule({
   imports: [
     CommonModule,
@@ -29,7 +30,8 @@ import { MatButtonModule } from '@angular/material/button';
     MatDatepickerModule,
     MatSlideToggleModule,
     MatExpansionModule,
-    SharedUtilsDateModule
+    SharedUtilsDateModule,
+    RouterModule
   ],
   declarations: [
     ScheduleSubscriptionRangeInputComponent,

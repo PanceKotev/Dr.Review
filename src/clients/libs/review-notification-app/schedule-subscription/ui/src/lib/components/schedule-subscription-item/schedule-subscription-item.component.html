@@ -5,15 +5,20 @@
   [expanded]="expanded"
   [ngClass]="status"
   #expansionPanel
+  *ngIf="_range"
 >
   <mat-expansion-panel-header>
     <div class="non-expanded-content">
       <div class="checkbox">
-        <mat-checkbox (click)="expansionPanel.toggle()"></mat-checkbox>
+        <mat-checkbox
+          (click)="expansionPanel.toggle()"
+          [checked]="checked"
+          (change)="handleCheckedChange($event.checked)"
+        ></mat-checkbox>
       </div>
       <div class="mat-small mat-hint">
-        {{ range.start | date: 'dd.MM.YYYY' }} -
-        {{ range.end | date: 'dd.MM.YYYY' }}
+        {{ _range.start | date: 'dd.MM.YYYY' }} -
+        {{ _range.end | date: 'dd.MM.YYYY' }}
       </div>
       <div>{{ firstName }} {{ lastName }}</div>
     </div>
@@ -31,8 +36,11 @@
       </div>
     </div>
   </div>
-  <mat-action-row
-    ><button mat-icon-button (click)="handlePanelDelete()">
+  <mat-action-row>
+    <button mat-icon-button [routerLink]="['/doctors/', this.doctorSuid]">
+      <mat-icon>description</mat-icon>
+    </button>
+    <button mat-icon-button (click)="handlePanelDelete()">
       <mat-icon>delete</mat-icon>
     </button></mat-action-row
   >
