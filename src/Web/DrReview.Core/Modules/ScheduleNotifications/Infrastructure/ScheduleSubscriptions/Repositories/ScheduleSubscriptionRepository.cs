@@ -17,6 +17,11 @@
             Insert(scheduleSubscription);
         }
 
+        public void InsertScheduleSubscriptions(List<ScheduleSubscription> scheduleSubscriptions)
+        {
+            InsertRange(scheduleSubscriptions);
+        }
+
         public void UpdateScheduleSubscription(ScheduleSubscription scheduleSubscription)
         {
             AttachOrUpdate(scheduleSubscription, EntityState.Modified);

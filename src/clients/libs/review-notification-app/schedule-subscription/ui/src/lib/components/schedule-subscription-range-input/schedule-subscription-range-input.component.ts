@@ -43,6 +43,12 @@ export class ScheduleSubscriptionRangeInputComponent
   @Input()
   public appearance: 'fill' | 'standard' | 'outline' | 'legacy' = 'fill';
 
+  @Input()
+  public hideNotificationSwitch = false;
+
+  @Input()
+  public disabled = false;
+
   public override writeValue(
     obj: ScheduleNotificationRange
   ): void {
@@ -69,8 +75,7 @@ export class ScheduleSubscriptionRangeInputComponent
 
   public ngOnInit(): void {
     this.fg.valueChanges.pipe(debounceTime(250),takeUntil(this.isDestroying$)).subscribe((c) => {
-        if(c.subscribedTo !== null){
-
+        if(c.subscribedTo !== null || this.hideNotificationSwitch){
           this.onChange(c);
         }
     });

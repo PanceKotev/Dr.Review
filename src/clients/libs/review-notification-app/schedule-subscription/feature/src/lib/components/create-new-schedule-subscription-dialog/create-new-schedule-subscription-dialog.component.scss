@@ -1,0 +1,40 @@
+.dialog-form {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+
+
+:host ::ng-deep .search-form {
+  display: flex;
+  width: 70%;
+
+  .mat-form-field-wrapper{
+    width: 100%;
+  }
+}
+
+:host ::ng-deep .range-input-subscription {
+  display: flex;
+  width: 70%;
+  margin-top: auto;
+
+  .subscription-option,
+  .mat-form-field-wrapper {
+    width: 100%;
+  }
+
+}
+
+.selected-doctors {
+  height: 60%;
+  overflow: auto;
+}
+
+.buttons {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}

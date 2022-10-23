@@ -128,8 +128,8 @@ export class DoctorsRootComponent implements OnInit{
     const existingSchedule = scheduleSuid ? this.scheduleSubscriptionGroups.get(scheduleSuid) : undefined;
 
     if(range && !scheduleSuid && range.subscribedTo && !existingSchedule){
-      this.scheduleSubscriptionApiService.subscribeToDoctorSchedule(
-        {doctorSuid: doctorSuid,
+      this.scheduleSubscriptionApiService.subscribeToDoctorSchedules(
+        {doctorSuids: [doctorSuid],
           rangeFrom: this.convertToString(range.from),
           rangeTo: this.convertToString(range.to)})
       .subscribe(() => {

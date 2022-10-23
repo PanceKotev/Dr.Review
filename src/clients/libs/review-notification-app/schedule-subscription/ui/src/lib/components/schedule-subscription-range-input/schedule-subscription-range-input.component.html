@@ -12,7 +12,7 @@
     [appearance]="appearance"
   >
     <mat-label>Одбери опсег на датуми</mat-label>
-    <mat-date-range-input [rangePicker]="picker">
+    <mat-date-range-input [rangePicker]="picker" [disabled]="disabled">
       <input matStartDate formControlName="from" placeholder="Почетен датум" />
       <input matEndDate formControlName="to" placeholder="Краен датум" />
     </mat-date-range-input>
@@ -25,6 +25,7 @@
     ></mat-date-range-picker>
   </mat-form-field>
   <mat-slide-toggle
+    *ngIf="!hideNotificationSwitch"
     labelPosition="before"
     [checked]="!!value?.subscribedTo"
     (change)="checkBoxChange($event.checked)"

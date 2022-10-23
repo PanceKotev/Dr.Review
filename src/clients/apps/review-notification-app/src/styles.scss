@@ -272,3 +272,12 @@ body { margin: 0; font-family: 'Nunito Sans', sans-serif; }
     overflow: hidden;
   }
 }
+
+.mat-form-field-disabled{
+  cursor: not-allowed;
+
+  & * {
+    cursor: not-allowed;
+
+  }
+}

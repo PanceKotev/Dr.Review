@@ -3,9 +3,9 @@ namespace DrReview.Contracts.Requests
 {
     using System;
 
-    public class SubscribeToDoctorsScheduleRequest
+    public class SubscribeToMultipleDoctorsSchedulesRequest
     {
-        public string DoctorSuid { get; set; }
+        public List<string> DoctorSuids { get; set; }
 
         public DateOnly RangeFrom { get; set; }
 

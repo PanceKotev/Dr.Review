@@ -27,10 +27,10 @@
         [Authorize]
         [RequiredScope(new[] { "drreview.read", "drreview.write" })]
         [ProducesResponseType(typeof(Result<EmptyValue>), (int)HttpStatusCode.OK)]
-        public async Task<IActionResult> SubscribeToDoctorScheduleAsync([FromBody] SubscribeToDoctorsScheduleRequest request)
+        public async Task<IActionResult> SubscribeToMultipleDoctorSchedulesAsync([FromBody] SubscribeToMultipleDoctorsSchedulesRequest request)
         {
-            return OkOrError(await _mediator.SendAsync(new SubscribeToScheduleCommand(
-                                                                               doctorSuid: request.DoctorSuid,
+            return OkOrError(await _mediator.SendAsync(new SubscribeToMultipleSchedulesCommand(
+                                                                               doctorSuids: request.DoctorSuids,
                                                                                rangeFrom: request.RangeFrom,
                                                                                rangeTo: request.RangeTo)));
         }

@@ -4,6 +4,8 @@
     {
         public void InsertScheduleSubscription(Entities.ScheduleSubscription scheduleSubscription);
 
+        public void InsertScheduleSubscriptions(List<Entities.ScheduleSubscription> scheduleSubscriptions);
+
         public void UpdateScheduleSubscription(Entities.ScheduleSubscription scheduleSubscription);
     }
 }

@@ -17,6 +17,7 @@ import { CreateNewScheduleSubscriptionDialogComponent } from
 import { SharedUiDialogModule } from '@drreview/shared/ui/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MtxSelectModule } from '@ng-matero/extensions/select';
 
 @NgModule({
   imports: [
@@ -34,7 +35,8 @@ import { MatInputModule } from '@angular/material/input';
     MatButtonModule,
     MatSlideToggleModule,
     MatIconModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MtxSelectModule
   ],
   declarations: [
     ScheduleSubscriptionsRootComponent,

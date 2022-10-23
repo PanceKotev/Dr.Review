@@ -28,7 +28,7 @@
         color="accent"
         (click)="handleCreateSubscription()"
       >
-        Нова субскрипција
+        Нови субскрипции
       </button>
       <button
         mat-stroked-button
@@ -53,6 +53,9 @@
           [specialization]="scheduleSubscription.doctor.specialization"
           [firstName]="scheduleSubscription.doctor.firstName"
           [doctorSuid]="scheduleSubscription.doctor.suid"
+          (deleteClicked)="
+            unsubsribeFromSubscriptions([scheduleSubscription.suid])
+          "
           (checkedChanged)="onCheckboxClick(scheduleSubscription.suid, $event)"
           class="subscription-item"
         ></drreview-schedule-subscription-item>
@@ -64,6 +67,7 @@
         [pageSize]="25"
         [pageSizeOptions]="[10, 15, 20, 25]"
         [pageIndex]="0"
+        (page)="pageChanged($event)"
         class="paginator"
       ></mat-paginator>
     </div>
