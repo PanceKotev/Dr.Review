@@ -8,11 +8,14 @@
   align-items: flex-start;
   height: 100%;
   padding: 0 0.5em;
+  padding-left: 1em;
   margin-top: 1em;
 }
 
 .comment-container{
   height: 100%;
+  padding-inline: 1em;
+  padding-bottom: 0.5em;
 
   &>.row:first-child{
     margin-top: 1em;

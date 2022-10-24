@@ -5,7 +5,9 @@ import {
   forwardRef,
   OnInit,
   OnDestroy,
-  Input
+  Input,
+  Output,
+  EventEmitter
 } from '@angular/core';
 import { BaseControlValueAccessor } from '@drreview/shared/utils/form';
 import { FormControl, FormGroup, NG_VALUE_ACCESSOR } from '@angular/forms';
@@ -46,20 +48,20 @@ export class ScheduleSubscriptionRangeInputComponent
   @Input()
   public hideNotificationSwitch = false;
 
+  @Output()
+  public selectionFinished = new EventEmitter<boolean>(true);
+
   @Input()
   public disabled = false;
-
   public override writeValue(
-    obj: ScheduleNotificationRange
+    obj: ScheduleNotificationRange | undefined
   ): void {
       this.value = obj;
-      if(obj){
         this.fg.setValue({
           from: obj?.from ?? null,
-          to: obj?.to ,
-          subscribedTo: obj?.subscribedTo
+          to: obj?.to ?? null ,
+          subscribedTo: obj?.subscribedTo ?? null
         }, { emitEvent: false, onlySelf: true });
-      }
 
       this.cdr?.markForCheck();
 
@@ -88,6 +90,9 @@ export class ScheduleSubscriptionRangeInputComponent
     };
     this.onChange(this.value);
 
+  }
+  public calendarStateChanged(state: boolean): void {
+    this.selectionFinished.next(!state);
   }
 
   public ngOnDestroy(): void {

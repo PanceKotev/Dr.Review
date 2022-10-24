@@ -19,7 +19,9 @@
     (click)="createReview()"
     class="create-comment-button"
     color="accent"
+    [title]="!rating ? 'Можеш само да оставиш рецензија ако имаш рејтинг' : ''"
+    [disabled]="!rating"
   >
-    Креирај
+    Остави рецензија
   </button>
 </div>

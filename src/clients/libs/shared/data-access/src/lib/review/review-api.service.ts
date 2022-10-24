@@ -20,8 +20,8 @@ export class ReviewApiService {
     return this.apiService.post<Result<void>>("v1/reviews/vote", request);
   }
 
-  public getReviewsForDoctor(revieweeSuid: string, userSuid: string): Observable<GetReviewsDto> {
-    return this.apiService.get<Result<GetReviewsDto>>(`v1/reviews?reviewerSuid=${userSuid}&revieweeSuid=${revieweeSuid}`)
+  public getReviewsForDoctor(revieweeSuid: string): Observable<GetReviewsDto> {
+    return this.apiService.get<Result<GetReviewsDto>>(`v1/reviews?revieweeSuid=${revieweeSuid}`)
                   .pipe(map((res: Result<GetReviewsDto>) => res.value));
   }
 

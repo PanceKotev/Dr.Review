@@ -1,4 +1,4 @@
-import { Subject, takeUntil, switchMap, combineLatest } from 'rxjs';
+import { Subject, takeUntil, switchMap, combineLatest, startWith } from 'rxjs';
 import { DoctorApiService,
    ReviewApiService,
    GetDoctorDetailsDto,
@@ -10,6 +10,9 @@ import { Component, NgZone, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ReviewChangedEvent } from '@drreview/shared/ui/review';
 import { SnackBarService } from '@drreview/shared/services/snack-bar';
+import { Location } from '@angular/common';
+import { ScheduleSubscriptionApiService } from '@drreview/review-notification-app/schedule-subscription/data-access';
+import { dateToString } from '@drreview/shared/utils/date';
 
 @Component({
   templateUrl: './doctor-details.component.html',
@@ -25,6 +28,10 @@ export class DoctorDetailsComponent implements OnInit, OnDestroy {
 
   public range: ScheduleNotificationRange | undefined;
 
+  public initialDoctorRange:ScheduleNotificationRange | undefined;
+
+  public rangesDiffering = false;
+
   public currentUserReview: GetReviewDto | undefined;
 
   public refreshReviews$ = new Subject<boolean>();
@@ -35,16 +42,24 @@ export class DoctorDetailsComponent implements OnInit, OnDestroy {
 
   public deleteReview$ = new Subject<string>();
 
+  public refreshDoctor$ = new Subject<boolean>();
+
   public doctorSuid: string;
 
   private destroying$ = new Subject();
 
   private voteOnReview$ = new Subject<VoteOnReviewRequest>();
 
+  private scheduleSuid: string | undefined = '';
+
+  public rangeSelectionFinished = true;
+
   public constructor(
     private doctorsApi: DoctorApiService,
     private reviewApi: ReviewApiService,
+    private schedulesApi: ScheduleSubscriptionApiService,
     private zone: NgZone,
+    private location: Location,
     private snackBar: SnackBarService,
     private route: ActivatedRoute) {
       this.doctorSuid = this.route.snapshot.params['doctorSuid'];
@@ -58,19 +73,73 @@ export class DoctorDetailsComponent implements OnInit, OnDestroy {
     this.setUpSubscriptions();
   }
 
-  public logChanges(changes: ScheduleNotificationRange | null): void {
-    console.log(changes);
+  public updateSchedule(): void {
+    const deleteSubscription = this.range?.subscribedTo !== this.initialDoctorRange?.subscribedTo;
+    const rangeValidState = this.range?.from && this.range.to;
+    const rangeChanged = this.range ? this.range?.from !== this.initialDoctorRange?.from || this.range?.to !== this.initialDoctorRange?.to
+      : undefined !== this.initialDoctorRange;
 
+    if(this.scheduleSuid && deleteSubscription){
+      this.schedulesApi.unsubscribeFromDoctorSchedules([this.scheduleSuid])
+        .pipe(takeUntil(this.destroying$))
+        .subscribe(() =>  this.refreshDoctor$.next(true));
+    } else if(this.scheduleSuid && !deleteSubscription && rangeValidState && rangeChanged) {
+      this.schedulesApi.updateScheduleSubscriptions({
+        scheduleSuids: [this.scheduleSuid],
+        rangeFrom: dateToString(this.range?.from),
+        rangeTo: dateToString(this.range?.to)
+      })
+      .pipe(takeUntil(this.destroying$))
+      .subscribe(() => this.refreshDoctor$.next(true));
+    } else if(!this.scheduleSuid && rangeValidState){
+      this.schedulesApi.subscribeToDoctorSchedules({
+        doctorSuids: [this.doctorSuid],
+        rangeFrom: dateToString(this.range?.from),
+        rangeTo: dateToString(this.range?.to)
+      })
+      .pipe(takeUntil(this.destroying$))
+      .subscribe(() => this.refreshDoctor$.next(true));
+    }
+  }
+  public handleRangeSelectionFinishing(isFinished: boolean): void {
+    if(isFinished){
+      this.setStateRangesDiffering();
+    }
+  }
+  public rangeChanged(): void {
+    this.setStateRangesDiffering();
+  }
+
+  public setStateRangesDiffering(): void {
+    if(!this.range || !this.range.from || !this.range.to){
+      this.rangesDiffering = false;
+
+      return;
+    }
+
+
+    this.rangesDiffering =
+      this.range.from !== this.initialDoctorRange?.from ||
+      this.range.to !== this.initialDoctorRange?.to ||
+      this.range.subscribedTo !== this.initialDoctorRange?.subscribedTo;
+  }
+  public navigateToPrevious(): void {
+    this.location.back();
   }
 
   private setUpSubscriptions(): void {
     // ---- Doctors ----
-    this.doctorsApi.getDoctorDetails(this.doctorSuid).pipe(
-      takeUntil(this.destroying$)
-    )
+    this.refreshDoctor$.pipe(
+      startWith(true),
+      switchMap(() => this.doctorsApi.getDoctorDetails(this.doctorSuid)),
+      takeUntil(this.destroying$))
     .subscribe({
       next: val => {
         this.doctor = val;
+        this.range = val.scheduleSubscription ?  {...val.scheduleSubscription.range} : undefined;
+        this.initialDoctorRange = val.scheduleSubscription ? {...val.scheduleSubscription.range} : undefined;
+        this.scheduleSuid = val.scheduleSubscription?.scheduleSuid;
+        this.setStateRangesDiffering();
         this.refreshReviews$.next(true);
       },
       error: err => {
@@ -86,12 +155,11 @@ export class DoctorDetailsComponent implements OnInit, OnDestroy {
       switchMap(() => {
 
         return combineLatest([
-                              this.reviewApi.getReviewsForDoctor(this.doctorSuid, 'FRtJ-4ZPYkyh8d-fJGuXVg'),
+                              this.reviewApi.getReviewsForDoctor(this.doctorSuid),
                               this.reviewApi.getReviewSummaryForDoctor(this.doctorSuid)]);
       })
     ).subscribe({
       next: ([reviews, summary] : [GetReviewsDto, GetReviewSummaryDto]) => {
-        console.log("reviews", reviews);
         this.doctorReviews = reviews.reviews;
         this.currentUserReview = reviews.currentUserReview;
         this.doctorReviewSummary = summary;

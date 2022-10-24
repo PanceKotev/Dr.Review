@@ -3,7 +3,7 @@
 	 [ID]               BIGINT                      NOT NULL PRIMARY KEY,
 	 [Uid]              UNIQUEIDENTIFIER            NOT NULL UNIQUE,
 	 [Suid]             NVARCHAR(200)               NOT NULL UNIQUE,
-	 [DeletedOn]        SMALLDATETIME               NULL,
+	 [DeletedOn]        DATETIME2(7)                NULL,
 	 [ModifiedOn]       SMALLDATETIME               NOT NULL DEFAULT GETUTCDATE(),
 	 [FirstName]        NVARCHAR(500)               NOT NULL,
 	 [LastName]         NVARCHAR(500)               NOT NULL,

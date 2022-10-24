@@ -16,12 +16,14 @@ import { DoctorsCustomLabels } from './intl/doctors-custom-page';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 @NgModule({
   imports: [
     CommonModule,
     MatCardModule,
     MatCheckboxModule,
     MatPaginatorModule,
+    MatIconModule,
     MatButtonModule,
     RouterModule.forChild(routes),
     ReviewNotificationAppScheduleSubscriptionUiModule,

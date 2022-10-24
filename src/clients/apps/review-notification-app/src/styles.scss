@@ -193,6 +193,8 @@ $review-notification-app-dark-theme: mat-set-background($review-notification-app
   --container-background-color-transparent: #ffffffd4;
   --text-color: rgba(0, 0, 0, 0.87);
   --subscriptions-background-gradient: linear-gradient(to top, transparent, #0119b761, #96d5e49c, #bce6f1, transparent);
+  --glasmorphism-background-color: rgba(255, 255, 255, 0.45);
+  --glasmorphism-border: rgba(255, 255, 255, 0.55);
 }
 
 .dark-theme {
@@ -207,8 +209,11 @@ $review-notification-app-dark-theme: mat-set-background($review-notification-app
   --color-primary: #{mat.get-color-from-palette($review-notification-app-dark-primary, default)};
   --color-accent: #{mat.get-color-from-palette($review-notification-app-dark-accent, default)};
   --color-warn: #{mat.get-color-from-palette($review-notification-app-dark-warn, default)};
-  --container-background-color-transparent: #020c11ed;
-  --input-container-background-color: #283135;
+  --container-background-color-transparent: #000000db;
+  --glasmorphism-background-color: rgba(0, 0, 0, 0.25);
+  --glasmorphism-border: rgba(0, 0, 0, 0.35);
+
+  --input-container-background-color: #041C32;
   --text-grayed-out: #b6b5b5;
   --text-color: white;
   --subscriptions-background-gradient: linear-gradient(to top, transparent, #2c536487, #203A43, transparent);
