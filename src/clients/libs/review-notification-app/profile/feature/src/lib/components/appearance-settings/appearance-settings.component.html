@@ -1,0 +1,25 @@
+<div class="basic-info">
+  <div class="title">
+    <h1>Опции за изглед</h1>
+  </div>
+  <div class="theme">
+    <div class="field-pair">
+      <div class="label">Преферирана тема:</div>
+      <mat-form-field appearance="outline">
+        <input matInput value="Темна" />
+      </mat-form-field>
+    </div>
+    <div class="field-pair">
+      <div class="label">Системска тема:</div>
+      <mat-slide-toggle class="field" [checked]="true"></mat-slide-toggle>
+    </div>
+    <div class="field-pair">
+      <div class="label">Автоматски промени ја темата во однос на времето:</div>
+      <mat-slide-toggle class="field" [checked]="false"></mat-slide-toggle>
+    </div>
+  </div>
+  <div class="action-buttons">
+    <button mat-stroked-button color="accent">Зачувај</button>
+    <button mat-stroked-button>Откажи</button>
+  </div>
+</div>

@@ -1,0 +1,34 @@
+<div class="basic-info">
+  <div class="title">
+    <h1>Акаунт опции</h1>
+  </div>
+  <div class="details">
+    <div class="field-pair">
+      <div class="label">Име:</div>
+      <mat-form-field appearance="outline">
+        <input matInput value="Име" />
+      </mat-form-field>
+    </div>
+    <div class="field-pair">
+      <div class="label">Презиме:</div>
+      <mat-form-field appearance="outline">
+        <input matInput value="Презиме" />
+      </mat-form-field>
+    </div>
+    <div class="field-pair">
+      <div class="label">Емаил:</div>
+      <mat-form-field appearance="outline">
+        <input matInput [readonly]="true" value="example@example.com" />
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="security">
+    <button mat-stroked-button class="change-password-button" color="primary">
+      Промени го пасвордот
+    </button>
+  </div>
+  <div class="action-buttons">
+    <button mat-stroked-button color="accent">Зачувај</button>
+    <button mat-stroked-button>Откажи</button>
+  </div>
+</div>

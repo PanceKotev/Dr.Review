@@ -286,3 +286,7 @@ body { margin: 0; font-family: 'Nunito Sans', sans-serif; }
 
   }
 }
+
+.active-menu-item{
+  background-color: var(--color-accent) !important;
+}

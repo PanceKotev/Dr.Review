@@ -1,0 +1,22 @@
+.field-pair{
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  .label{
+    margin-right: 0.5em;
+    min-width: 150px;
+
+  }
+}
+
+.details {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.action-buttons{
+  margin-top: 2rem;
+  display: flex;
+  gap: 1rem;
+}

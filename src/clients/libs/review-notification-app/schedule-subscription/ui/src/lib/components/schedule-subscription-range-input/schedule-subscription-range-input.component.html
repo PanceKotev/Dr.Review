@@ -29,6 +29,7 @@
   <mat-slide-toggle
     *ngIf="!hideNotificationSwitch"
     labelPosition="before"
+    class="slide-notification-toggle"
     formControlName="subscribedTo"
     (change)="checkBoxChange($event.checked)"
     >Нотификации?</mat-slide-toggle
