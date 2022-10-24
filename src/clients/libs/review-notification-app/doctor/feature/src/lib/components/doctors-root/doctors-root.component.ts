@@ -11,7 +11,7 @@ import { FilterBy,
   GetDoctorScheduleSubscriptionDto} from '@drreview/shared/data-access';
 import { valueNotNull } from '@drreview/shared/utils/typescript-helpers';
 import * as dayjs from 'dayjs';
-import { BehaviorSubject, Subject, takeUntil, switchMap, Observable, EMPTY, combineLatest, tap, of, startWith } from 'rxjs';
+import { BehaviorSubject, Subject, takeUntil, switchMap, Observable, EMPTY, combineLatest, tap, of } from 'rxjs';
 
 @Component({
   selector: 'drreview-doctors-root',
@@ -29,8 +29,6 @@ export class DoctorsRootComponent implements OnInit{
   };
 
   public selectedFilter = '';
-
-  public onlySubscriptions = false;
 
   public FilterBy = FilterBy;
 
@@ -56,13 +54,9 @@ export class DoctorsRootComponent implements OnInit{
     private doctorApiService: DoctorApiService){
     const filterByEntries = Object.entries(FilterBy);
 
-    combineLatest([this.route.paramMap, this.route.queryParamMap.pipe(startWith(undefined))]).pipe(takeUntil(this.destroying$))
+    this.route.paramMap.pipe(takeUntil(this.destroying$))
       .subscribe({
-      next : ([res, query]) => {
-        const subscriptionToggled = !!query?.get('onlySubscriptions');
-        this.onlySubscriptions = subscriptionToggled;
-
-
+      next : (res) => {
         const paramFilterBy = res.get('filterType');
         const selectedValue = res.get('filterValue');
 
@@ -111,11 +105,6 @@ export class DoctorsRootComponent implements OnInit{
     this.selectedFilter = value || '';
   }
 
-  public changeSubscriptionMode(value: boolean): void {
-    this.router.navigate(['/doctors/filter/', FilterBy[this.filterValue].toLowerCase(), this.selectedFilter],
-      {queryParams: value? { 'onlySubscriptions': value } : {}});
-  }
-
   public filterChanged(value: FilterBy): void {
     this.router.navigate(['/doctors/filter/', FilterBy[value].toLowerCase(), this.selectedFilter]);
     this.refreshDoctors$.next(value);
@@ -159,15 +148,13 @@ export class DoctorsRootComponent implements OnInit{
   public returnFilterValue(value: FilterBy, page: PagingFilter): Observable<GetDoctorsDto>{
     switch(value) {
       case FilterBy.LOCATION: {
-        this.additionalFilterSelectConfig$.next({filterType: FilterBy.LOCATION, items$: this.optionsApiService.getLocationOptions(),
-           onlySubscriptions: !!this.onlySubscriptions});
+        this.additionalFilterSelectConfig$.next({filterType: FilterBy.LOCATION, items$: this.optionsApiService.getLocationOptions()});
 
         return this.doctorApiService.getDoctors(
           new GetDoctorsFilter({property: FilterBy.LOCATION, value: this.selectedFilter}, page.page, page.itemsPerPage), true);
       }
       case FilterBy.INSTITUTION: {
-        this.additionalFilterSelectConfig$.next({filterType: FilterBy.INSTITUTION, items$: this.optionsApiService.getInstitutionOptions(),
-          onlySubscriptions: !!this.onlySubscriptions});
+        this.additionalFilterSelectConfig$.next({filterType: FilterBy.INSTITUTION, items$: this.optionsApiService.getInstitutionOptions()});
 
         return this.doctorApiService.getDoctors(
           new GetDoctorsFilter({property: FilterBy.INSTITUTION,
@@ -175,7 +162,7 @@ export class DoctorsRootComponent implements OnInit{
       }
       case FilterBy.SPECIALIZATION: {
         this.additionalFilterSelectConfig$.next({filterType: FilterBy.SPECIALIZATION,
-          items$: this.optionsApiService.getSpecializationOptions(), onlySubscriptions: !!this.onlySubscriptions});
+          items$: this.optionsApiService.getSpecializationOptions()});
 
         return this.doctorApiService.getDoctors(
           new GetDoctorsFilter({property: FilterBy.SPECIALIZATION, value: this.selectedFilter}, page.page, page.itemsPerPage), true);
@@ -183,8 +170,7 @@ export class DoctorsRootComponent implements OnInit{
       default: {
         this.additionalFilterSelectConfig$.next({filterType: FilterBy.ALL,
           items$:
-          of([]),
-        onlySubscriptions: !!this.onlySubscriptions});
+          of([])});
 
         return this.doctorApiService.getDoctors(new GetDoctorsFilter(undefined, page.page, page.itemsPerPage), true)
           .pipe(tap(dr => this.doctorsFacade.setDoctors(dr)));

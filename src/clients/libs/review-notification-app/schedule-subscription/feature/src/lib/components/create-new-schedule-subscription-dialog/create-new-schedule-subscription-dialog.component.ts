@@ -22,10 +22,6 @@ export class CreateNewScheduleSubscriptionDialogComponent {
   public searchInput$ = new Subject<string>();
   public selectedDoctors: SearchDoctorDto[] = [];
 
-  public trackByFn(item: SearchDoctorDto): string {
-      return item.suid;
-  }
-
 
   public constructor(
     private dialogRef: MatDialogRef<CreateNewScheduleSubscriptionDialogComponent>,
@@ -56,7 +52,16 @@ export class CreateNewScheduleSubscriptionDialogComponent {
     this.dialogRef.close();
   }
 
+  public trackByFn(item: SearchDoctorDto): string {
+    return item.suid;
+  }
+
+  public deleteSelection(doctorSuid: string): void {
+    this.selectedDoctors = [...this.selectedDoctors.filter(d => d.suid !== doctorSuid)];
+  }
+
   public resetForm(): void {
+    this.selectedDoctors = [];
   }
   public returnRequest(): void {
     if (!this.selectedDoctors.length || !this.rangeForm?.from || !this.rangeForm?.to){

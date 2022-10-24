@@ -31,6 +31,26 @@
 .selected-doctors {
   height: 60%;
   overflow: auto;
+
+  .doctor {
+    display: flex;
+    align-items: center;
+    cursor: default;
+    width: fit-content;
+    text-decoration: underline;
+    padding: 0.25em 1em;
+    background-color: #00000029;
+    border-radius: 6px;
+    margin-bottom: 0.25em;
+
+    & .delete-icon {
+      cursor: pointer !important;
+    }
+  }
+}
+
+:host::ng-deep .mtx-select-search .ng-value {
+  display: none;
 }
 
 .buttons {

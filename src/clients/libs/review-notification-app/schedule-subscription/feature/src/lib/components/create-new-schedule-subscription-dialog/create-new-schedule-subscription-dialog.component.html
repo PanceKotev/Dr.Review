@@ -13,13 +13,24 @@
         typeToSearchText="Внесете 3 или повеќе карактери"
         [typeahead]="searchInput$"
         [(ngModel)]="selectedDoctors"
+        [virtualScroll]="true"
+        notFoundText="Нема ништо пронајдено"
+        class="mtx-select-search"
+        loadingText="Се вчитува..."
       >
       </mtx-select>
       <mat-icon matPrefix>search</mat-icon>
     </mat-form-field>
     <div class="selected-doctors">
-      <div class="doctor" *ngFor="let doctor of selectedDoctors">
+      <div
+        class="doctor"
+        [title]="doctor.specialization + '-' + doctor.institution"
+        *ngFor="let doctor of selectedDoctors; let index"
+      >
         {{ doctor.fullName }}
+        <mat-icon class="delete-icon" (click)="deleteSelection(doctor.suid)"
+          >close</mat-icon
+        >
       </div>
     </div>
 
