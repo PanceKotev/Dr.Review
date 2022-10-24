@@ -44,7 +44,7 @@ export class CreateNewScheduleSubscriptionDialogComponent {
                 return of([]).pipe(tap(() => this.doctorsLoading = false));
               }
 
-              return this.doctorsApi.searchDoctors(term).pipe(
+              return this.doctorsApi.searchDoctors(term, true).pipe(
                 catchError(() => of([])),
                 tap(() => this.doctorsLoading = false));
 

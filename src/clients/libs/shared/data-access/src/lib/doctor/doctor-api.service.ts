@@ -15,10 +15,10 @@ import { map, Observable, tap } from 'rxjs';
 export class DoctorApiService {
   public constructor(private apiService: ApiService) {}
 
-  public searchDoctors(searchWord: string): Observable<SearchDoctorDto[]> {
+  public searchDoctors(searchWord: string, filterSchedules: boolean = false): Observable<SearchDoctorDto[]> {
     return this.apiService
       .get<Result<SearchDoctorDto[]>>(
-        `v1/doctors/search?searchword=${searchWord}`
+        `v1/doctors/search?searchword=${searchWord}${filterSchedules ? `'&filterSchedules=${filterSchedules}` : ''}`
       )
       .pipe(
         map((res: Result<SearchDoctorDto[]>) =>
