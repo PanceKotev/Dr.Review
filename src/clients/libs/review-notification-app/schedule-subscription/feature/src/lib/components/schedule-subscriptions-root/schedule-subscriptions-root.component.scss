@@ -64,10 +64,30 @@
   margin-block: 1rem;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 .schedule-checkbox-options{
   width: 100%;
   display: flex;
   justify-content: space-between;
+}
+
+.hint-row{
+  margin-bottom: 1rem;
+}
+
+.selected-date-text{
+  border-radius: 16px;
+  color: white;
+  width: fit-content;
+  padding: 0.25rem 1rem;
+  &.primary {
+    background-color: var(--color-primary);
+  }
+
+  &.accent {
+    background-color: var(--color-accent);
+
+  }
 }

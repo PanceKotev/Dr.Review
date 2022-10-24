@@ -1,4 +1,10 @@
 <div class="calendar">
-  <mat-calendar class="actual-calendar" [selected]="selectedRangeValue">
+  <mat-calendar
+    class="actual-calendar"
+    [selected]="value"
+    (selectedChange)="onSelectedChange($event)"
+    [comparisonStart]="comparsionRange?.start"
+    [comparisonEnd]="comparsionRange?.end"
+  >
   </mat-calendar>
 </div>

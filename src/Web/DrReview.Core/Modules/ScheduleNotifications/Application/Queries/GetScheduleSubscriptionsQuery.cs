@@ -52,7 +52,7 @@
                 predicate.And(s => s.RangeFrom >= request.Filter.RangeFrom && s.RangeTo <= request.Filter.RangeTo);
             }
 
-            long totalCount = await _databaseContext.ScheduleSubscriptions.CountAsync();
+            long totalCount = await _databaseContext.ScheduleSubscriptions.CountAsync(predicate);
 
             List<ScheduleSubscription> results = await _databaseContext.ScheduleSubscriptions
                                                 .Include(x => x.ScheduleSubscriber)

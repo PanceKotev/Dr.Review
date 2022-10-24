@@ -11,6 +11,7 @@
     <div class="schedule-checkbox-options">
       <mat-checkbox
         [indeterminate]="someChecked"
+        [checked]="allChecked"
         (change)="selectAllCheckboxClicked($event.checked)"
         >Сите</mat-checkbox
       >
@@ -34,11 +35,29 @@
       <button
         mat-stroked-button
         color="basic"
+        (click)="bulkUpdateSubscriptions()"
         class="edit-button"
-        [disabled]="!someChecked && !allChecked"
+        [disabled]="
+          (!someChecked && !allChecked) ||
+          !this.selectedRange.end ||
+          !this.editMode
+        "
       >
         Измени
       </button>
+    </div>
+    <div class="hint-row">
+      <div
+        class="mat-hint mat-small mat-warn"
+        *ngIf="
+          (!someChecked && !allChecked) ||
+          !this.selectedRange.end ||
+          !this.editMode
+        "
+      >
+        За да може да едитирате, треба да бидете во мод на едитирање, да имате
+        селектирано субскрипција и опсег.
+      </div>
     </div>
     <div class="accordion-schedules">
       <mat-accordion multi="true">
@@ -55,7 +74,7 @@
           [firstName]="scheduleSubscription.doctor.firstName"
           [doctorSuid]="scheduleSubscription.doctor.suid"
           (deleteClicked)="
-            unsubsribeFromSubscriptions([scheduleSubscription.suid])
+            unsubsribeFromSubscription([scheduleSubscription.suid])
           "
           (checkedChanged)="onCheckboxClick(scheduleSubscription.suid, $event)"
           class="subscription-item"
@@ -84,12 +103,26 @@
       >
         {{ editMode ? 'Едитирање' : 'Филтрирање' }}
       </mat-slide-toggle>
-      <button mat-flat-button color="warn">Ресетирај</button>
+      <button mat-flat-button color="warn" (click)="resetCalendarFilterState()">
+        Ресетирај
+      </button>
+    </div>
+    <div class="selected-date-header">
+      <h2
+        class="selected-date-text"
+        [ngClass]="{ accent: editMode, primary: !editMode }"
+        *ngIf="this.selectedRange?.end"
+      >
+        {{ this.selectedRange.start | date: 'dd.MM.YYYY' }} -
+        {{ this.selectedRange.end | date: 'dd.MM.YYYY' }}
+      </h2>
     </div>
     <drreview-schedule-subscription-calendar
       [selectorColor]="
         editMode ? 'var(--color-accent)' : 'var(--color-primary)'
       "
+      [(ngModel)]="selectedRange"
+      (ngModelChange)="calendarFilterChanged($event)"
       class="subscription-calendar"
     ></drreview-schedule-subscription-calendar>
   </div>

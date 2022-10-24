@@ -31,6 +31,7 @@ export class CreateNewScheduleSubscriptionDialogComponent {
     private dialogRef: MatDialogRef<CreateNewScheduleSubscriptionDialogComponent>,
     private doctorsApi: DoctorApiService,
     @Inject(MAT_DIALOG_DATA) public data: CreateNewScheduleSubscriptionsDialogData | undefined){
+      this.rangeForm = data?.selectedRange;
       this.doctors$ = concat(
         of([]), // default items
         this.searchInput$.pipe(
