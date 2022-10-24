@@ -27,7 +27,6 @@
         [RequiredScope("drreview.read")]
         [ProducesResponseType(typeof(Result<List<GetReviewsDto>>), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> GetReviewsAsync(
-                                                                [FromQuery] string? reviewerSuid,
                                                                 [FromQuery] string? revieweeSuid,
                                                                 [FromQuery] int startPage = 0,
                                                                 [FromQuery] int itemsPerPage = 50)
@@ -35,8 +34,7 @@
             return OkOrError(await _mediator.SendAsync(new GetReviewsQuery(
                                                                            startPage: startPage,
                                                                            itemsPerPage: itemsPerPage,
-                                                                           revieweeSuid: revieweeSuid,
-                                                                           reviewerSuid: reviewerSuid)));
+                                                                           revieweeSuid: revieweeSuid)));
         }
 
         [HttpPost]

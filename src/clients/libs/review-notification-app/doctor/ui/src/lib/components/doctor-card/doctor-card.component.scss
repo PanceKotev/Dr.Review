@@ -16,7 +16,11 @@
 .doctor-card{
   height: 100%;
   position: relative;
+  border: solid 1px (var(--glasmorphism-border));
+  background: var(--glasmorphism-background-color) !important;
+  backdrop-filter: blur(10px) saturate(100%) contrast(45%) brightness(130%);
   cursor: pointer;
+  border-radius: 16px;
   transition: all 0.2s ease-in-out;
 
   &:hover{
@@ -27,6 +31,10 @@
       display: block;
       transition: all 0.1s ease-in-out;
     }
+  }
+
+  .doctor-specialization {
+    // color: black;
   }
 }
 

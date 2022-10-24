@@ -29,8 +29,7 @@ import { AvatarModule } from 'ngx-avatars';
     AvatarModule,
     SharedUtilsDateModule,
     StarRatingModule,
-    QuillModule
-  ],
+    QuillModule  ],
   declarations: [
     CommentComponent,
     ReviewComponent,

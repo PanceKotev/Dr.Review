@@ -24,14 +24,17 @@
   background: #11222c;
 }
 @include handheldStyles(){
-  .main-container{
-    height: calc(100% - 130px);
 
-  }
 
   .illustration{
     width: 800px;
     height: 500px;
     top: 100px;
+  }
+}
+
+@media (max-width: 599px){
+  .main-container {
+    height: calc(100% - 56px);
   }
 }

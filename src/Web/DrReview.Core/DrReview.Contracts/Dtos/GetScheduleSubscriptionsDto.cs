@@ -67,6 +67,13 @@
             SubscribedTo = subscribedTo;
         }
 
+        public ScheduleSubscriptionRangeDto(DateTime from, DateTime to, bool subscribedTo)
+        {
+            From = DateOnly.FromDateTime(from);
+            To = DateOnly.FromDateTime(to);
+            SubscribedTo = subscribedTo;
+        }
+
         public DateOnly From { get; set; }
 
         public DateOnly To { get; set; }

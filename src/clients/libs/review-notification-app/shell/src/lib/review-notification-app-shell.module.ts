@@ -19,6 +19,7 @@ import { StarRatingModule } from 'angular-star-rating';
 import { SharedServicesSnackBarModule } from '@drreview/shared/services/snack-bar';
 import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatPaginatorCustomLabels } from './mat-paginator-intl';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   imports: [
@@ -35,6 +36,7 @@ import { MatPaginatorCustomLabels } from './mat-paginator-intl';
     SharedServicesSnackBarModule,
     SharedUiThemesModule,
     ReviewNotificationAppNavigationModule,
+    MatDialogModule,
     MatNativeDateModule],
   declarations: [MainLayoutComponent, MainNavigationComponent],
   exports: [

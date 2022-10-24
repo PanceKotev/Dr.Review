@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, Output, EventEmitter, OnInit, OnDestroy } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { DeleteDialogData } from '@drreview/shared/data-access';
+import { ThemesService } from '@drreview/shared/services/themes';
+import { DeleteDialogComponent } from '@drreview/shared/ui/dialog';
+import { filter, Subject, takeUntil } from 'rxjs';
 import { ReviewChangedEvent } from '../events/review.events';
 
 @Component({
@@ -7,7 +12,8 @@ import { ReviewChangedEvent } from '../events/review.events';
   styleUrls: ['./review.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ReviewComponent implements OnInit {
+export class ReviewComponent implements OnInit, OnDestroy {
+  private destroying$ = new Subject<boolean>();
   @Input()
   public text = '';
 
@@ -34,6 +40,8 @@ export class ReviewComponent implements OnInit {
 
   public isInEditMode = false;
 
+  public darkTheme = false;
+
   public initialComment: string | undefined;
 
   public initialRating = 0;
@@ -48,6 +56,11 @@ export class ReviewComponent implements OnInit {
   @Output()
   public deletedReview = new EventEmitter();
 
+  public constructor(
+    private dialogService: MatDialog,
+    private themeService: ThemesService){
+    this.themeService.isDarkTheme$.pipe(takeUntil(this.destroying$)).subscribe(darkTheme => this.darkTheme = darkTheme);
+  }
 
   public ngOnInit(): void {
       this.initialComment = this.text;
@@ -89,11 +102,25 @@ export class ReviewComponent implements OnInit {
 
   public deleteReview(): void {
     if(this.isEditable){
-      // eslint-disable-next-line no-alert
-      const answer = confirm("Сигурно сакате да ја избришете рецензијата?");
-      if(answer){
-        this.deletedReview.emit(true);
+
+      const dialogRef = this.dialogService.open<DeleteDialogComponent, DeleteDialogData, boolean>(DeleteDialogComponent, {
+
+        width: '550px',
+        minHeight: '150px',
+        hasBackdrop: true,
+        panelClass: this.darkTheme ? 'dark-theme' : '',
+        data: {
+          deleteTitle: 'Избриши ја рецензијата?',
+          deleteButtonName: undefined
+        }});
+
+      dialogRef.afterClosed().pipe(takeUntil(this.destroying$), filter(x => !!x))
+          .subscribe(() =>  this.deletedReview.emit(true));
       }
     }
+
+  public ngOnDestroy(): void {
+    this.destroying$.next(true);
+    this.destroying$.complete();
   }
 }

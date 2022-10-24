@@ -9,8 +9,8 @@ import { FilterBy,
   IAdditionalSelectConfig, OptionApiService,
   ScheduleNotificationRange,
   GetDoctorScheduleSubscriptionDto} from '@drreview/shared/data-access';
+import { dateToString } from '@drreview/shared/utils/date';
 import { valueNotNull } from '@drreview/shared/utils/typescript-helpers';
-import * as dayjs from 'dayjs';
 import { BehaviorSubject, Subject, takeUntil, switchMap, Observable, EMPTY, combineLatest, tap, of } from 'rxjs';
 
 @Component({
@@ -119,8 +119,8 @@ export class DoctorsRootComponent implements OnInit{
     if(range && !scheduleSuid && range.subscribedTo && !existingSchedule){
       this.scheduleSubscriptionApiService.subscribeToDoctorSchedules(
         {doctorSuids: [doctorSuid],
-          rangeFrom: this.convertToString(range.from),
-          rangeTo: this.convertToString(range.to)})
+          rangeFrom: dateToString(range.from),
+          rangeTo: dateToString(range.to)})
       .subscribe(() => {
         this.refreshDoctors$.next(this.filterValue);
       });
@@ -131,19 +131,14 @@ export class DoctorsRootComponent implements OnInit{
     } else if (range && scheduleSuid && (range.from !== existingSchedule?.range.from || range?.to !== existingSchedule?.range.to)){
       this.scheduleSubscriptionApiService
         .updateScheduleSubscriptions({
-          rangeFrom: this.convertToString(range.from),
-          rangeTo:this.convertToString(range.to),
+          rangeFrom: dateToString(range.from),
+          rangeTo: dateToString(range.to),
           scheduleSuids: [scheduleSuid]}).subscribe(() => {
             this.refreshDoctors$.next(this.filterValue);
           });
     }
   }
 
-  private convertToString(range: Date | undefined | null): string | undefined {
-
-    return range ? dayjs(range).format('YYYY-MM-DD')
-    .toString() : undefined;
-  }
 
   public returnFilterValue(value: FilterBy, page: PagingFilter): Observable<GetDoctorsDto>{
     switch(value) {

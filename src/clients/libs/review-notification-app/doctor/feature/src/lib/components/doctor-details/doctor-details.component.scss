@@ -1,3 +1,6 @@
+.doctor-details-root{
+  margin-inline: 1rem;
+}
 .field{
   display: grid;
   grid-template-columns: 0.3fr 0.7fr;
@@ -48,8 +51,7 @@
   display: flex;
   align-self: flex-end;
   width: 100%;
-  margin-top: auto;
-  position: absolute;
+  margin-top: 2.5rem;
   width: 100%;
   bottom: 3em;
   flex-direction: column;
@@ -64,10 +66,37 @@
   width: 100%;
   display: flex;
   justify-content: center;
-
   .current-user-review{
     max-width: 1200px;
     width: 100%;
   }
 
+}
+
+.reviews {
+  background-color: var(--container-background-color-transparent);
+  border-radius: 6px;
+  margin-top: 0.25rem;
+  padding-bottom: 0.25rem;
+  .review-title{
+    padding-inline: 16px;
+    padding-block: 0.5rem;
+  }
+
+  .review {
+    display: block;
+  }
+}
+
+.back{
+  width: fit-content;
+  padding-inline: 12px;
+  margin-bottom: 1rem;
+}
+.back-arrow {
+  cursor: pointer;
+}
+
+.card-title {
+  display: flex;
 }

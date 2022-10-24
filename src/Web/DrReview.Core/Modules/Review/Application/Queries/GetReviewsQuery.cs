@@ -14,13 +14,12 @@
 
     public class GetReviewsQuery : IQuery<Result<GetReviewsDto>>
     {
-        public GetReviewsQuery(int startPage, int itemsPerPage, string? revieweeSuid, string? reviewerSuid)
+        public GetReviewsQuery(int startPage, int itemsPerPage, string? revieweeSuid)
         {
             Filter = new GetReviewsFilter(
                                           pageStart: startPage,
                                           itemsPerPage: itemsPerPage,
-                                          revieweeSuid: revieweeSuid,
-                                          reviewerSuid: reviewerSuid);
+                                          revieweeSuid: revieweeSuid);
         }
 
         public GetReviewsFilter Filter { get; init; }
