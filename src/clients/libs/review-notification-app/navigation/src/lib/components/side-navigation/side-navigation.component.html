@@ -32,13 +32,10 @@
       </mat-list-item>
       <mat-list-item
         routerLinkActive="active-menu-item"
-        [routerLinkActiveOptions]="{ exact: true }"
-        routerLink="/doctors"
-        [queryParams]="{ onlySubscriptions: true }"
-        queryParamsHandling="merge"
+        routerLink="/subscriptions"
         class="menu-item"
       >
-        <mat-icon>notifications</mat-icon> Мои претплати
+        <mat-icon>notifications</mat-icon>Претплати
       </mat-list-item>
     </mat-list>
   </div>

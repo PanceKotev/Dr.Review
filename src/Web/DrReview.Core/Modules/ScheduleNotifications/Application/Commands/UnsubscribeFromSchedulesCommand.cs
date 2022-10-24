@@ -10,17 +10,17 @@
     using DrReview.Modules.ScheduleNotifications.Infrastructure.ScheduleSubscriptions.Entities;
     using Microsoft.EntityFrameworkCore;
 
-    public class UnsubscribeFromScheduleCommand : ICommand<Result<EmptyValue>>
+    public class UnsubscribeFromSchedulesCommand : ICommand<Result<EmptyValue>>
     {
-        public UnsubscribeFromScheduleCommand(string scheduleSuid)
+        public UnsubscribeFromSchedulesCommand(List<string> scheduleSuids)
         {
-            ScheduleSuid = scheduleSuid;
+            ScheduleSuids = scheduleSuids;
         }
 
-        public string ScheduleSuid { get; init; }
+        public List<string> ScheduleSuids { get; init; }
     }
 
-    public class UnsubscribeToScheduleCommandHandler : ICommandHandler<UnsubscribeFromScheduleCommand, Result<EmptyValue>>
+    public class UnsubscribeToSchedulesCommandHandler : ICommandHandler<UnsubscribeFromSchedulesCommand, Result<EmptyValue>>
     {
         private readonly ICurrentUser _currentUser;
 
@@ -28,7 +28,7 @@
 
         private readonly ScheduleNotificationReadonlyDatabaseContext _database;
 
-        public UnsubscribeToScheduleCommandHandler(
+        public UnsubscribeToSchedulesCommandHandler(
             ICurrentUser currentUser,
             IScheduleNotificationsUnitOfWork unitOfWork,
             ScheduleNotificationReadonlyDatabaseContext database)
@@ -38,19 +38,22 @@
             _database = database;
         }
 
-        public async Task<Result<EmptyValue>> Handle(UnsubscribeFromScheduleCommand request, CancellationToken cancellationToken)
+        public async Task<Result<EmptyValue>> Handle(UnsubscribeFromSchedulesCommand request, CancellationToken cancellationToken)
         {
-            ScheduleSubscription? existingSubscription = await _database.ScheduleSubscriptions
-                                                                        .FirstOrDefaultAsync(x => x.Suid == request.ScheduleSuid);
+            List<ScheduleSubscription> existingSubscriptions = request.ScheduleSuids.Any() ?
+                await _database.ScheduleSubscriptions
+                                .Where(x => request.ScheduleSuids.Contains(x.Suid))
+                                .ToListAsync() :
+                new List<ScheduleSubscription>();
 
-            if (existingSubscription is null)
+            if (!existingSubscriptions.Any())
             {
-                return Result.Invalid<EmptyValue>(ResultCodes.ScheduleSubscriptionNotFound);
+                return Result.Invalid<EmptyValue>(ResultCodes.ScheduleSubscriptionsNotFound);
             }
 
-            existingSubscription.Delete();
+            existingSubscriptions.ForEach(x => x.Delete());
 
-            _unitOfWork.ScheduleSubscriptions.UpdateScheduleSubscription(existingSubscription);
+            _unitOfWork.ScheduleSubscriptions.UpdateScheduleSubscriptions(existingSubscriptions);
 
             await _unitOfWork.SaveAsync();
 

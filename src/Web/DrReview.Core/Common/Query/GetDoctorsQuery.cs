@@ -78,8 +78,8 @@
 
             string sqlForSchedules = $@"SELECT SC.*, D.Suid AS DoctorSuid FROM [dbo].[ScheduleSubscription] AS SC INNER JOIN [dbo].[Doctor] AS D ON D.ID = SC.DoctorFK WHERE SC.DeletedOn IS NULL AND D.Suid IN @Suids";
 
-            Dictionary<string, GetScheduleSubscriptionDto> scheduleDict = request.WithSubscriptions ? 
-                (await connection.QueryAsync(sqlForSchedules, new { Suids = doctorSuids })).ToDictionary(row => (string)row.DoctorSuid, row => new GetScheduleSubscriptionDto(row.Suid, new ScheduleSubscriptionRangeDto(DateOnly.FromDateTime(row.RangeFrom), DateOnly.FromDateTime(row.RangeTo), true))) 
+            Dictionary<string, GetDoctorScheduleSubscriptionDto> scheduleDict = request.WithSubscriptions ? 
+                (await connection.QueryAsync(sqlForSchedules, new { Suids = doctorSuids })).ToDictionary(row => (string)row.DoctorSuid, row => new GetDoctorScheduleSubscriptionDto(row.Suid, new ScheduleSubscriptionRangeDto(DateOnly.FromDateTime(row.RangeFrom), DateOnly.FromDateTime(row.RangeTo), true))) 
                 : new ();
 
             long doctorCount = await connection.ExecuteScalarAsync<long>(

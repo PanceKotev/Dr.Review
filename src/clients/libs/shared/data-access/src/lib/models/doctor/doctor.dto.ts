@@ -1,4 +1,4 @@
-import { GetScheduleSubscriptionDto } from "./schedule-subscription.dto";
+import { ScheduleNotificationRangeString } from "./schedule-subscription.dto";
 
 export interface SearchDoctorDto {
   readonly suid: string;
@@ -6,6 +6,7 @@ export interface SearchDoctorDto {
   readonly lastName: string;
   readonly institution: string;
   readonly specialization: string;
+  fullName: string;
 }
 
 export interface GetDoctorDetailsDto {
@@ -26,11 +27,15 @@ export interface GetDoctorDto {
   readonly suid: string;
   readonly firstName: string;
   readonly lastName: string;
+  fullName: string;
   readonly institution: string;
   readonly specialization: string;
-  readonly scheduleSubscription: GetScheduleSubscriptionDto | null;
+  readonly scheduleSubscription: GetDoctorScheduleSubscriptionDto | null;
 }
-
+export interface GetDoctorScheduleSubscriptionDto {
+  readonly suid: string;
+  range: ScheduleNotificationRangeString;
+}
 export interface TopDoctor {
   readonly suid: string;
   readonly firstName: string;

@@ -1,3 +1,4 @@
+import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -7,6 +8,16 @@ import { routes } from './routes';
 import { ReviewNotificationAppScheduleSubscriptionUiModule } from '@drreview/review-notification-app/schedule-subscription/ui';
 import { SharedUiFiltersModule } from '@drreview/shared/ui/filters';
 import { MatButtonModule } from '@angular/material/button';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatIconModule } from '@angular/material/icon';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CreateNewScheduleSubscriptionDialogComponent } from
+  './components/create-new-schedule-subscription-dialog/create-new-schedule-subscription-dialog.component';
+import { SharedUiDialogModule } from '@drreview/shared/ui/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MtxSelectModule } from '@ng-matero/extensions/select';
 
 @NgModule({
   imports: [
@@ -15,11 +26,22 @@ import { MatButtonModule } from '@angular/material/button';
     MatCheckboxModule,
     ReviewNotificationAppScheduleSubscriptionUiModule,
     SharedUiFiltersModule,
-    MatButtonModule
+    SharedUiDialogModule,
+    MatPaginatorModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    MatSlideToggleModule,
+    MatIconModule,
+    MatExpansionModule,
+    MtxSelectModule
   ],
-  declarations: [ScheduleSubscriptionsRootComponent],
-  exports: [
-    RouterModule
-  ]
+  declarations: [
+    ScheduleSubscriptionsRootComponent,
+    CreateNewScheduleSubscriptionDialogComponent
+  ],
+  exports: [RouterModule]
 })
 export class ReviewNotificationAppScheduleSubscriptionFeatureModule {}

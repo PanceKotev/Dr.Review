@@ -21,6 +21,7 @@
     "shared-services-snack-bar": "libs/shared/services/snack-bar",
     "shared-services-themes": "libs/shared/services/themes",
     "shared-ui-avatar": "libs/shared/ui/avatar",
+    "shared-ui-dialog": "libs/shared/ui/dialog",
     "shared-ui-filters": "libs/shared/ui/filters",
     "shared-ui-maps": "libs/shared/ui/maps",
     "shared-ui-popovers": "libs/shared/ui/popovers",

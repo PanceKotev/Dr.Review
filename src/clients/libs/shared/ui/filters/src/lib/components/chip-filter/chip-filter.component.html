@@ -9,8 +9,6 @@
     *ngFor="let option of filterOptions"
     mat-ripple
     [routerLink]="[option.link] || ['']"
-    [queryParams]="onlySubscriptions ? { onlySubscriptions: true } : {}"
-    queryParamsHandling="preserve"
     [matRippleRadius]="5"
     class="chip"
     [value]="option.value"

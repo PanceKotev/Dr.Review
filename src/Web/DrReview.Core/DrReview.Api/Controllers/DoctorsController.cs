@@ -25,9 +25,9 @@
         [HttpGet]
         [Route("search")]
         [ProducesResponseType(typeof(Result<List<SearchDoctorDto>>), (int)HttpStatusCode.OK)]
-        public async Task<IActionResult> SearchDoctorsAsync([FromQuery] string? searchword)
+        public async Task<IActionResult> SearchDoctorsAsync([FromQuery] string? searchword, [FromQuery] bool filterSchedules = false)
         {
-            GetDoctorsBySearchwordQuery query = new GetDoctorsBySearchwordQuery(searchword, 0, 1000);
+            GetDoctorsBySearchwordQuery query = new GetDoctorsBySearchwordQuery(searchword, filterSchedules);
 
             return OkOrError(await _mediator.SendAsync(query));
         }

@@ -1,0 +1,65 @@
+<drreview-base-dialog class="create-dialog">
+  <div dialogHeader>Нова субскрипција</div>
+  <div class="dialog-form">
+    <mat-form-field class="search-form" *ngIf="doctors$ | async; let doctors">
+      <mat-label>Барај доктори</mat-label>
+      <mtx-select
+        [items]="doctors"
+        bindLabel="fullName"
+        [multiple]="true"
+        [hideSelected]="true"
+        [trackByFn]="trackByFn"
+        [loading]="doctorsLoading"
+        typeToSearchText="Внесете 3 или повеќе карактери"
+        [typeahead]="searchInput$"
+        [(ngModel)]="selectedDoctors"
+        [virtualScroll]="true"
+        notFoundText="Нема ништо пронајдено"
+        class="mtx-select-search"
+        loadingText="Се вчитува..."
+      >
+      </mtx-select>
+      <mat-icon matPrefix>search</mat-icon>
+    </mat-form-field>
+    <div class="selected-doctors">
+      <div
+        class="doctor"
+        [title]="doctor.specialization + '-' + doctor.institution"
+        *ngFor="let doctor of selectedDoctors; let index"
+      >
+        {{ doctor.fullName }}
+        <mat-icon class="delete-icon" (click)="deleteSelection(doctor.suid)"
+          >close</mat-icon
+        >
+      </div>
+    </div>
+
+    <drreview-schedule-subscription-range-input
+      [hideNotificationSwitch]="true"
+      [disabled]="!selectedDoctors.length"
+      class="range-input-subscription"
+      [(ngModel)]="rangeForm"
+    ></drreview-schedule-subscription-range-input>
+  </div>
+
+  <div class="buttons" actions>
+    <div class="reset-button">
+      <button mat-flat-button color="warn" (click)="resetForm()">
+        Ресетирај
+      </button>
+    </div>
+    <div class="action-buttons-range">
+      <button mat-button (click)="closeDialog()">Откажи</button>
+      <button
+        mat-flat-button
+        color="accent"
+        (click)="returnRequest()"
+        [disabled]="
+          !selectedDoctors.length || !rangeForm?.from || !rangeForm?.to
+        "
+      >
+        Креирај
+      </button>
+    </div>
+  </div>
+</drreview-base-dialog>

@@ -14,7 +14,7 @@
                 typeof(Program),
                 typeof(GetDoctorsBySearchwordQueryHandler),
                 typeof(CreateReviewCommandHandler),
-                typeof(SubscribeToScheduleCommandHandler),
+                typeof(SubscribeToMultipleSchedulesCommandHandler),
                 typeof(CreateUserIfNotExistsHandler));
 
             return services;

@@ -14,6 +14,13 @@
         "polyfills": "apps/review-notification-app/src/polyfills.ts",
         "tsConfig": "apps/review-notification-app/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
+        "allowedCommonJsDependencies": [
+          "dayjs",
+          "leaflet",
+          "ngx-avatars",
+          "quill",
+          "ts-md5"
+        ],
         "assets": [
           "apps/review-notification-app/src/favicon.ico",
           "apps/review-notification-app/src/assets",

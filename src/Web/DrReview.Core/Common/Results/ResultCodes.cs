@@ -34,6 +34,9 @@
 
         public const string ScheduleSubscriptionNotFound = "SCHEDULE_SUBSCRIPTION_NOT_FOUND";
 
+        public const string ScheduleSubscriptionsNotFound = "SCHEDULE_SUBSCRIPTIONs_NOT_FOUND";
+
+
         #endregion
     }
 }

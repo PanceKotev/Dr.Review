@@ -7,6 +7,7 @@
     using System.Threading;
     using System.Threading.Tasks;
     using Dapper;
+    using DrReview.Common.Auth.Interface;
     using DrReview.Common.Dtos.Doctor;
     using DrReview.Common.Entities;
     using DrReview.Common.Mediator.Contracts;
@@ -15,27 +16,29 @@
 
     public class GetDoctorsBySearchwordQuery : IQuery<Result<List<SearchDoctorDto>>>
     {
-        public GetDoctorsBySearchwordQuery(string? searchword, int startPage, int offset)
+        public GetDoctorsBySearchwordQuery(string? searchword, bool filterSchedules = false)
         {
             Searchword = searchword;
-            StartPage = startPage;
-            Offset = offset;
+            FilterSchedules = filterSchedules;
         }
 
         public string? Searchword { get; init; }
 
-        public int StartPage { get; init; }
-
-        public int Offset { get; init; }
+        public bool FilterSchedules { get; init; } = false;
     }
 
     public class GetDoctorsBySearchwordQueryHandler : IQueryHandler<GetDoctorsBySearchwordQuery, Result<List<SearchDoctorDto>>>
     {
         private readonly IConfiguration _configuration;
 
-        public GetDoctorsBySearchwordQueryHandler(IConfiguration configuration)
+        private readonly ICurrentUser _currentUser;
+
+        public GetDoctorsBySearchwordQueryHandler(
+            IConfiguration configuration,
+            ICurrentUser currentUser)
         {
             _configuration = configuration;
+            _currentUser = currentUser;
         }
 
         public async Task<Result<List<SearchDoctorDto>>> Handle(GetDoctorsBySearchwordQuery request, CancellationToken cancellationToken)
@@ -51,7 +54,15 @@
             await connection.OpenAsync();
 
             string procedure = "[dbo].[SearchDoctorsBySearchword]";
-            List<Doctor> results = connection.Query<Doctor>(procedure, new { searchword = request.Searchword.Trim() }, commandType: CommandType.StoredProcedure).ToList();
+            List<Doctor> results = connection.Query<Doctor>(
+                procedure,
+                new
+                {
+                    searchword = request.Searchword.Trim(),
+                    currentUserUid = _currentUser.Uid,
+                    filterSchedules = request.FilterSchedules
+                },
+                commandType: CommandType.StoredProcedure).ToList();
 
             if (results is null)
             {

@@ -1,16 +1,18 @@
-export interface SubscribeToDoctorsScheduleRequest {
-  readonly doctorSuid: string;
+
+export interface UpdateSubscriptionsRangeRequest {
+  readonly scheduleSuids: string[];
 
   readonly rangeFrom: string | undefined | null;
 
   readonly rangeTo: string | undefined | null;
 };
 
-
-export interface UpdateSubscriptionRangeRequest {
-  readonly scheduleSuid: string;
-
+export interface SubscribeToMultipleDoctorsSchedulesRequest {
+  readonly doctorSuids: string[];
   readonly rangeFrom: string | undefined | null;
-
   readonly rangeTo: string | undefined | null;
+};
+
+export interface UnsubscribeFromMultipleDoctorSchedulesRequest {
+  readonly scheduleSuids: string[];
 };

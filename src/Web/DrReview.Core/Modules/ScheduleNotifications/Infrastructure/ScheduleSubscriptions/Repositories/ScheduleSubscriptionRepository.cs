@@ -12,14 +12,14 @@
         {
         }
 
-        public void InsertScheduleSubscription(ScheduleSubscription scheduleSubscription)
+        public void InsertScheduleSubscriptions(List<ScheduleSubscription> scheduleSubscriptions)
         {
-            Insert(scheduleSubscription);
+            InsertRange(scheduleSubscriptions);
         }
 
-        public void UpdateScheduleSubscription(ScheduleSubscription scheduleSubscription)
+        public void UpdateScheduleSubscriptions(List<ScheduleSubscription> scheduleSubscriptions)
         {
-            AttachOrUpdate(scheduleSubscription, EntityState.Modified);
+            scheduleSubscriptions.ForEach(scheduleSubscription => AttachOrUpdate(scheduleSubscription, EntityState.Modified));
         }
     }
 }

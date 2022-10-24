@@ -12,12 +12,6 @@
     <span routerLink="/" class="app-title">{{ appTitle }}</span>
   </div>
 
-  <div class="middle">
-    <drreview-search class="search" placeholder="Барај Доктори"
-      >Барај Доктор</drreview-search
-    >
-  </div>
-
   <div class="right-elements">
     <drreview-theme-toggle class="theme-toggle"></drreview-theme-toggle>
     <button mat-button *ngIf="!currentUser" (click)="logIn()">Login</button>

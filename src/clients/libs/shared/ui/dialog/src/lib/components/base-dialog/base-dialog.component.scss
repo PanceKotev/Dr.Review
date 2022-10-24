@@ -1,0 +1,14 @@
+.dialog-wrapper{
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+
+   .d-actions{
+    margin-top: auto;
+    justify-self: end;
+   }
+
+   .d-content{
+    height: 100%;
+  }
+}

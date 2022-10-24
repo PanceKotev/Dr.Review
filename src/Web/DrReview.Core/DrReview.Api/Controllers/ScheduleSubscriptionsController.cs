@@ -1,20 +1,17 @@
 ﻿namespace DrReview.Api.Controllers
 {
     using System.Net;
-    using DrReview.Common.Dtos.Doctor;
     using DrReview.Common.Mediator.Contracts;
     using DrReview.Common.Mediator.Interfaces;
-    using DrReview.Common.Query;
     using DrReview.Common.Results;
-    using DrReview.Contracts.Filters.Enums;
+    using DrReview.Contracts.Dtos;
     using DrReview.Contracts.Filters;
     using DrReview.Contracts.Requests;
     using DrReview.Modules.ScheduleNotifications.Application.Commands;
+    using DrReview.Modules.ScheduleNotifications.Application.Queries;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Identity.Web.Resource;
-    using DrReview.Contracts.Dtos;
-    using DrReview.Modules.ScheduleNotifications.Application.Queries;
 
     [Route("api/v1/schedules")]
     public class ScheduleSubscriptionsController : BaseController
@@ -30,10 +27,10 @@
         [Authorize]
         [RequiredScope(new[] { "drreview.read", "drreview.write" })]
         [ProducesResponseType(typeof(Result<EmptyValue>), (int)HttpStatusCode.OK)]
-        public async Task<IActionResult> SubscribeToDoctorScheduleAsync([FromBody] SubscribeToDoctorsScheduleRequest request)
+        public async Task<IActionResult> SubscribeToMultipleDoctorSchedulesAsync([FromBody] SubscribeToMultipleDoctorsSchedulesRequest request)
         {
-            return OkOrError(await _mediator.SendAsync(new SubscribeToScheduleCommand(
-                                                                               doctorSuid: request.DoctorSuid,
+            return OkOrError(await _mediator.SendAsync(new SubscribeToMultipleSchedulesCommand(
+                                                                               doctorSuids: request.DoctorSuids,
                                                                                rangeFrom: request.RangeFrom,
                                                                                rangeTo: request.RangeTo)));
         }
@@ -42,32 +39,33 @@
         [Authorize]
         [RequiredScope(new[] { "drreview.read", "drreview.write" })]
         [ProducesResponseType(typeof(Result<EmptyValue>), (int)HttpStatusCode.OK)]
-        public async Task<IActionResult> UpdateSubscriptionRangeAsync([FromBody] UpdateSubscriptionRangeRequest request)
+        public async Task<IActionResult> UpdateSubscriptionsRangeAsync([FromBody] UpdateSubscriptionsRangeRequest request)
         {
-            return OkOrError(await _mediator.SendAsync(new UpdateRangeScheduleCommand(
-                                                                               scheduleSuid: request.ScheduleSuid,
+            return OkOrError(await _mediator.SendAsync(new UpdateSubscriptionsRangeScheduleCommand(
+                                                                               scheduleSuids: request.ScheduleSuids,
                                                                                rangeFrom: request.RangeFrom,
                                                                                rangeTo: request.RangeTo)));
         }
 
         [HttpDelete]
-        [Route("{scheduleSuid}")]
         [Authorize]
         [RequiredScope(new[] { "drreview.read", "drreview.write" })]
         [ProducesResponseType(typeof(Result<EmptyValue>), (int)HttpStatusCode.OK)]
-        public async Task<IActionResult> UnsubscribeFromDoctorsScheduleAsync([FromRoute] string scheduleSuid)
+        public async Task<IActionResult> UnsubscribeFromMultipleDoctorsSchedulesAsync([FromBody] UnsubscribeFromMultipleDoctorSchedulesRequest unsubscribeRequest)
         {
-            return OkOrError(await _mediator.SendAsync(new UnsubscribeFromScheduleCommand(scheduleSuid: scheduleSuid)));
+            return OkOrError(await _mediator.SendAsync(new UnsubscribeFromSchedulesCommand(scheduleSuids: unsubscribeRequest.ScheduleSuids)));
         }
 
         [HttpGet]
         [Route("")]
         [ProducesResponseType(typeof(Result<GetScheduleSubscriptionsDto>), (int)HttpStatusCode.OK)]
-        public async Task<IActionResult> GetScheduleSubscriptionsAsync([FromQuery] FilterBy? filterBy, [FromQuery] string? filterByValue, [FromQuery] int page = 0, [FromQuery] int itemsCount = 10000)
+        public async Task<IActionResult> GetScheduleSubscriptionsAsync(
+            [FromQuery] DateOnly? rangeFrom,
+            [FromQuery] DateOnly? rangeTo,
+            [FromQuery] int page = 0,
+            [FromQuery] int itemsPerPage = 50)
         {
-            FilterByValue? filter = filterBy != null && !string.IsNullOrEmpty(filterByValue) ? new FilterByValue(filterBy ?? FilterBy.ALL, filterByValue) : null;
-
-            GetScheduleSubscriptionsQuery query = new GetScheduleSubscriptionsQuery(new GetScheduleSubscriptionsFilter(page, itemsCount, string.Empty, filter));
+            GetScheduleSubscriptionsQuery query = new GetScheduleSubscriptionsQuery(new GetScheduleSubscriptionsFilter(page, itemsPerPage, rangeFrom, rangeTo));
 
             return OkOrError(await _mediator.SendAsync(query));
         }

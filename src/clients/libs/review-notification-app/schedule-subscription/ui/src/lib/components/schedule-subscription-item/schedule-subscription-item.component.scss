@@ -1,0 +1,38 @@
+.schedule-panel{
+  border-radius: 20px !important;
+  border-top-left-radius: 6px !important;
+  border-bottom-left-radius: 6px !important;
+  background: var(--container-background-color-transparent);
+}
+
+.non-expanded-content {
+  padding: 1rem;
+  height: 100%;
+}
+
+.content-inside {
+  padding-top: 1em;
+  padding-inline: 0.25rem;
+}
+:host ::ng-deep .mat-expansion-panel-header{
+  height: fit-content;
+}
+
+ .icons {
+  margin-right: 0.25em;
+}
+
+.checkbox {
+  position: absolute;
+  left: 8.5px;
+  top: 33.33%;
+}
+
+.expired {
+  background-color:  rgba(255, 0, 0, 0.296);
+}
+
+.close-to-expiry {
+  background-color:  rgba(255, 213, 0, 0.296);
+}
+

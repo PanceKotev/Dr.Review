@@ -1,0 +1,12 @@
+<drreview-base-dialog>
+  <div dialogHeader>
+    {{ data?.deleteTitle || 'Дали сте сигурни дека сакате да избришете?' }}
+  </div>
+
+  <div class="action-buttons" actions>
+    <button mat-button (click)="cancel()">Откажи</button>
+    <button mat-flat-button color="warn" (click)="deleteItem()">
+      {{ data?.deleteButtonName || 'Избриши' }}
+    </button>
+  </div>
+</drreview-base-dialog>

@@ -17,6 +17,19 @@
         public long TotalCount { get; init; }
     }
 
+    public class GetDoctorScheduleSubscriptionDto
+    {
+        public GetDoctorScheduleSubscriptionDto(string suid, ScheduleSubscriptionRangeDto range)
+        {
+            Suid = suid;
+            Range = range;
+        }
+
+        public string Suid { get; init; }
+
+        public ScheduleSubscriptionRangeDto Range { get; init; }
+    }
+
     public class GetDoctorDto
     {
         public GetDoctorDto()
@@ -27,7 +40,7 @@
             string suid,
             string firstName,
             string lastName,
-            GetScheduleSubscriptionDto? scheduleSubscription,
+            GetDoctorScheduleSubscriptionDto? scheduleSubscription,
             string institution = "",
             string specialization = "")
         {
@@ -49,6 +62,6 @@
 
         public string Specialization { get; set; }
 
-        public GetScheduleSubscriptionDto? ScheduleSubscription { get; set; }
+        public GetDoctorScheduleSubscriptionDto? ScheduleSubscription { get; set; }
     }
 }
