@@ -5,6 +5,7 @@ import {
   MsalGuard,
   MsalInterceptor,
   MsalModule,
+  MsalRedirectComponent,
   MsalService,
   MSAL_GUARD_CONFIG,
   MSAL_INSTANCE,

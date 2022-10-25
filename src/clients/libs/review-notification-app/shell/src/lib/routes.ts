@@ -27,7 +27,6 @@ export const mainRoutes: Route[] = [
   },
   {
     path: 'notfound',
-    canActivate: [MsalGuard],
     component: NotFoundComponent
   },
   {
