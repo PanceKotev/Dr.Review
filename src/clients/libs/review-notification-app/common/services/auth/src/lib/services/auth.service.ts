@@ -28,7 +28,6 @@ export class AuthService implements OnDestroy {
 
   public initializeAuth(): void {
 
-    this.msalService.instance.handleRedirectPromise().then();
     this.msalService.instance.enableAccountStorageEvents();
     this.msalBroadcastService.msalSubject$
       .pipe(
