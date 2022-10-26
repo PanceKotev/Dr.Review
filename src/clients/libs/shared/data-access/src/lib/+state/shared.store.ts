@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Store, StoreConfig } from '@datorama/akita';
 import { IAllOptionsItems, ILocation } from '../models/common';
+import { CurrentUserDetailsDto } from '../models/user';
 
 export interface SharedState {
-   email: string;
-   fullName: string;
+   currentUser: CurrentUserDetailsDto | undefined;
    locations: ILocation[];
    institutions: string[];
    specializations: string[];
@@ -15,8 +15,7 @@ export interface SharedState {
 
 export function createInitialState(): SharedState {
   return {
-    email: '',
-    fullName: '',
+    currentUser: undefined,
     locations: [],
     institutions: [],
     specializations: [],
@@ -50,6 +49,15 @@ export class SharedStore extends Store<SharedState> {
       homepage: {
         nearLocation: location
       }
+    }));
+    this.setLoading(false);
+  }
+
+  public setCurrentUser(currentUser: CurrentUserDetailsDto): void {
+    this.setLoading(true);
+    this.update(state => ({
+      ...state,
+      currentUser: {...currentUser}
     }));
     this.setLoading(false);
   }

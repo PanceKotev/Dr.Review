@@ -1,4 +1,4 @@
-<div class="basic-info">
+<div class="basic-info" *ngIf="!isLoading" [formGroup]="fg">
   <div class="title">
     <h1>Акаунт опции</h1>
   </div>
@@ -6,29 +6,31 @@
     <div class="field-pair">
       <div class="label">Име:</div>
       <mat-form-field appearance="outline">
-        <input matInput value="Име" />
+        <input matInput formControlName="firstName" />
       </mat-form-field>
     </div>
     <div class="field-pair">
       <div class="label">Презиме:</div>
       <mat-form-field appearance="outline">
-        <input matInput value="Презиме" />
+        <input matInput formControlName="lastName" />
       </mat-form-field>
     </div>
     <div class="field-pair">
       <div class="label">Емаил:</div>
       <mat-form-field appearance="outline">
-        <input matInput [readonly]="true" value="example@example.com" />
+        <input matInput [readonly]="true" formControlName="email" />
       </mat-form-field>
     </div>
   </div>
-  <div class="security">
-    <button mat-stroked-button class="change-password-button" color="primary">
-      Промени го пасвордот
-    </button>
-  </div>
   <div class="action-buttons">
-    <button mat-stroked-button color="accent">Зачувај</button>
+    <button
+      mat-stroked-button
+      color="accent"
+      [disabled]="fg.invalid || !valueChanged"
+      (click)="updateUser()"
+    >
+      Зачувај
+    </button>
     <button mat-stroked-button>Откажи</button>
   </div>
 </div>

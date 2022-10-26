@@ -1,3 +1,4 @@
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatButtonModule } from '@angular/material/button';
 import { MatListModule } from '@angular/material/list';
@@ -20,6 +21,8 @@ import { SharedUiAvatarModule } from '@drreview/shared/ui/avatar';
     CommonModule,
     MatListModule,
     MatIconModule,
+    FormsModule,
+    ReactiveFormsModule,
     MatCheckboxModule,
     MatInputModule,
     MatFormFieldModule,

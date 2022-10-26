@@ -18,6 +18,11 @@
             AttachOrUpdate(user, EntityState.Modified);
         }
 
+        public void UpdateUser(Entities.User user)
+        {
+            AttachOrUpdate(user, entityState: EntityState.Modified);
+        }
+
         public async Task<User?> GetUserByUidAsync(Guid uid)
         {
             return await Query().FirstOrDefaultAsync(x => x.Uid == uid);

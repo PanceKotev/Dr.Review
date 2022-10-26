@@ -1,15 +1,15 @@
 <div class="profile-root">
   <div class="navigation-options">
-    <div class="accounts-header">
+    <div class="accounts-header" *ngIf="currentUser$ | async; let currentUser">
       <drreview-avatar
         class="avatar-left"
         [isRound]="true"
-        text="Панче Панчевски"
+        [text]="currentUser.fullName"
       ></drreview-avatar>
       <div class="text-right">
-        <div class="name truncate-text">Панче Панчевски</div>
+        <div class="name truncate-text">{{ currentUser.fullName }}</div>
         <div class="email mat-hint mat-small truncate-text">
-          avreinix@gmail.com
+          {{ currentUser.email }}
         </div>
       </div>
     </div>
