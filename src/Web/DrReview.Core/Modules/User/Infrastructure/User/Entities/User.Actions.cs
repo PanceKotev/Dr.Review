@@ -1,12 +1,7 @@
 ﻿namespace DrReview.Modules.User.Infrastructure.User.Entities
 {
-    using CSharpVitamins;
-    using DrReview.Common.Results;
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
+    using DrReview.Common.Results;
 
     public partial class User
     {
@@ -22,6 +17,8 @@
 
             this.FirstName = firstName.Trim();
             this.LastName = lastName.Trim();
+            this.ModifiedOn = DateTime.UtcNow;
+
 
             return Result.Ok(this);
         }

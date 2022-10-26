@@ -15,6 +15,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { SharedUiAvatarModule } from '@drreview/shared/ui/avatar';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   imports: [
@@ -23,6 +24,7 @@ import { SharedUiAvatarModule } from '@drreview/shared/ui/avatar';
     MatIconModule,
     FormsModule,
     ReactiveFormsModule,
+    MatSelectModule,
     MatCheckboxModule,
     MatInputModule,
     MatFormFieldModule,

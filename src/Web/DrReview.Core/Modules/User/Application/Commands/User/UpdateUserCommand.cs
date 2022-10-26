@@ -50,7 +50,7 @@
             {
                 return Result.FromError<EmptyValue>(updatedUser);
             }
-            _unitOfWork.Users.UpdateUser(updatedUser);
+            _unitOfWork.Users.UpdateUser(user);
 
             await _unitOfWork.SaveAsync();
 

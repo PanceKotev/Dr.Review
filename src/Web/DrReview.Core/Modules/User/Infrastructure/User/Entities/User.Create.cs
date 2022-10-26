@@ -1,9 +1,7 @@
 ﻿namespace DrReview.Modules.User.Infrastructure.User.Entities
 {
     using System;
-    using System.Collections.Generic;
     using CSharpVitamins;
-    using DrReview.Common.Mediator.Contracts;
     using DrReview.Common.Results;
 
     public partial class User

@@ -146,7 +146,7 @@ export class DoctorsRootComponent implements OnInit{
         this.additionalFilterSelectConfig$.next({filterType: FilterBy.LOCATION, items$: this.optionsApiService.getLocationOptions()});
 
         return this.doctorApiService.getDoctors(
-          new GetDoctorsFilter({property: FilterBy.LOCATION, value: this.selectedFilter}, page.page, page.itemsPerPage), true);
+          new GetDoctorsFilter({property: FilterBy.LOCATION, value: this.selectedFilter}, page.page, page.itemsPerPage));
       }
       case FilterBy.INSTITUTION: {
         this.additionalFilterSelectConfig$.next({filterType: FilterBy.INSTITUTION, items$: this.optionsApiService.getInstitutionOptions()});
@@ -160,14 +160,14 @@ export class DoctorsRootComponent implements OnInit{
           items$: this.optionsApiService.getSpecializationOptions()});
 
         return this.doctorApiService.getDoctors(
-          new GetDoctorsFilter({property: FilterBy.SPECIALIZATION, value: this.selectedFilter}, page.page, page.itemsPerPage), true);
+          new GetDoctorsFilter({property: FilterBy.SPECIALIZATION, value: this.selectedFilter}, page.page, page.itemsPerPage));
       }
       default: {
         this.additionalFilterSelectConfig$.next({filterType: FilterBy.ALL,
           items$:
           of([])});
 
-        return this.doctorApiService.getDoctors(new GetDoctorsFilter(undefined, page.page, page.itemsPerPage), true)
+        return this.doctorApiService.getDoctors(new GetDoctorsFilter(undefined, page.page, page.itemsPerPage))
           .pipe(tap(dr => this.doctorsFacade.setDoctors(dr)));
       }
     }

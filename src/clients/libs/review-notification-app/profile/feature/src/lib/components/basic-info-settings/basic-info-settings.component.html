@@ -17,8 +17,14 @@
     </div>
     <div class="field-pair">
       <div class="label">Емаил:</div>
-      <mat-form-field appearance="outline">
-        <input matInput [readonly]="true" formControlName="email" />
+
+      <mat-form-field appearance="outline" floatLabel="never">
+        <input
+          matInput
+          [readonly]="true"
+          [placeholder]="'email'"
+          formControlName="email"
+        />
       </mat-form-field>
     </div>
   </div>

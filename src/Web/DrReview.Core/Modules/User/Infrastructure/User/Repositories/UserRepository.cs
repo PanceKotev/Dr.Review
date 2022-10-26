@@ -2,35 +2,40 @@
 {
     using System.Threading.Tasks;
     using DrReview.Common.Infrastructure.Repository;
-    using DrReview.Modules.User.Infrastructure.User.Entities;
     using DrReview.Modules.User.Infrastructure.User.Repositories.Interfaces;
     using Microsoft.EntityFrameworkCore;
 
-    public class UserRepository : BaseRepository<User>, IUserRepository
+    public class UserRepository : BaseRepository<Entities.User>, IUserRepository
     {
         public UserRepository(DbContext dbContext) 
             : base(dbContext)
         {
         }
 
-        public void AddOrUpdateUser(User user)
+        public void AddOrUpdateUser(Entities.User user)
         {
             AttachOrUpdate(user, EntityState.Modified);
         }
 
         public void UpdateUser(Entities.User user)
         {
-            AttachOrUpdate(user, entityState: EntityState.Modified);
+            AttachOrUpdate(user, EntityState.Modified);
         }
 
-        public async Task<User?> GetUserByUidAsync(Guid uid)
+        public async Task<Entities.User?> GetUserByUidAsync(Guid uid)
         {
             return await Query().FirstOrDefaultAsync(x => x.Uid == uid);
         }
 
-        public void AddUser(User user)
+        public void AddUser(Entities.User user)
         {
             Insert(user);
         }
+
+        Task<Entities.User?> IUserRepository.GetUserByUidAsync(Guid uid)
+        {
+            throw new NotImplementedException();
+        }
+
     }
 }

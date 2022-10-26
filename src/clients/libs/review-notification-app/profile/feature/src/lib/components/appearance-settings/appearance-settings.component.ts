@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ThemesService } from '@drreview/shared/services/themes';
 
 @Component({
   selector: 'drreview-appearance-settings',
@@ -6,4 +7,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./appearance-settings.component.scss']
 })
 export class AppearanceSettingsComponent {
+
+  public constructor(public themeService: ThemesService){
+  }
 }
