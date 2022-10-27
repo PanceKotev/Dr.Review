@@ -13,6 +13,8 @@ export class CreateReviewComponent {
 
   public rating = 0;
 
+  public anonymous = true;
+
   @Output()
   public reviewCreate = new EventEmitter<ReviewChangedEvent>();
 

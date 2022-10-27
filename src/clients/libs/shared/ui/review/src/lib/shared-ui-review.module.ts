@@ -15,6 +15,7 @@ import { RatingComponent } from './components/rating/rating.component';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { CreateReviewComponent } from './components/create-review/create-review.component';
 import { AvatarModule } from 'ngx-avatars';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 @NgModule({
   imports: [
@@ -25,6 +26,7 @@ import { AvatarModule } from 'ngx-avatars';
     MatIconModule,
     MatFormFieldModule,
     MatInputModule,
+    MatSlideToggleModule,
     MatProgressBarModule,
     AvatarModule,
     SharedUtilsDateModule,

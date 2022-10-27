@@ -14,6 +14,9 @@
   </div>
 </div>
 <div class="action-buttons">
+  <mat-slide-toggle class="anon-toggle" [(ngModel)]="anonymous">
+    Анонимно?
+  </mat-slide-toggle>
   <button
     mat-raised-button
     (click)="createReview()"
