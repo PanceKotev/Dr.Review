@@ -1,6 +1,10 @@
 <div class="review-container">
   <div class="avatar-container">
-    <ngx-avatars [round]="true" [size]="50" [name]="createdBy"></ngx-avatars>
+    <ngx-avatars
+      [round]="true"
+      [size]="50"
+      [name]="createdBy.split('\(')[0]"
+    ></ngx-avatars>
   </div>
   <div class="comment-container">
     <div class="row">
