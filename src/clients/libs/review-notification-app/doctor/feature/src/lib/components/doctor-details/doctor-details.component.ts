@@ -1,4 +1,4 @@
-import { Subject, takeUntil, switchMap, combineLatest, startWith } from 'rxjs';
+import { Subject, takeUntil, switchMap, combineLatest, startWith, tap } from 'rxjs';
 import { DoctorApiService,
    ReviewApiService,
    GetDoctorDetailsDto,
@@ -51,6 +51,9 @@ export class DoctorDetailsComponent implements OnInit, OnDestroy {
   private voteOnReview$ = new Subject<VoteOnReviewRequest>();
 
   private scheduleSuid: string | undefined = '';
+
+  public isLoadingDoctor = true;
+  public isLoadingReviews = true;
 
   public rangeSelectionFinished = true;
 
@@ -131,6 +134,7 @@ export class DoctorDetailsComponent implements OnInit, OnDestroy {
     // ---- Doctors ----
     this.refreshDoctor$.pipe(
       startWith(true),
+      tap(() => this.isLoadingDoctor = true),
       switchMap(() => this.doctorsApi.getDoctorDetails(this.doctorSuid)),
       takeUntil(this.destroying$))
     .subscribe({
@@ -140,16 +144,18 @@ export class DoctorDetailsComponent implements OnInit, OnDestroy {
         this.initialDoctorRange = val.scheduleSubscription ? {...val.scheduleSubscription.range} : undefined;
         this.scheduleSuid = val.scheduleSubscription?.scheduleSuid;
         this.setStateRangesDiffering();
+        this.isLoadingDoctor = false;
         this.refreshReviews$.next(true);
       },
       error: err => {
         console.error(err);
+        this.isLoadingDoctor = false;
         this.refreshReviews$.next(true);
       }
     });
 
     // ---- Reviews ----
-
+    this.isLoadingReviews = true;
     this.refreshReviews$.pipe(
       takeUntil(this.destroying$),
       switchMap(() => {
@@ -163,12 +169,15 @@ export class DoctorDetailsComponent implements OnInit, OnDestroy {
         this.doctorReviews = reviews.reviews;
         this.currentUserReview = reviews.currentUserReview;
         this.doctorReviewSummary = summary;
-        console.log(summary);
+        this.isLoadingReviews = false;
       },
       error: err => {
         console.error(err);
+        this.isLoadingReviews = false;
+
       },
       complete: () => {
+        this.isLoadingReviews = false;
 
       }
     });
@@ -179,7 +188,8 @@ export class DoctorDetailsComponent implements OnInit, OnDestroy {
         return this.reviewApi.addNewReview({
           revieweeSuid: this.doctorSuid,
           score: doctorCreateEvent.rating,
-          comment:  doctorCreateEvent.comment
+          comment:  doctorCreateEvent.comment,
+          anonymous: doctorCreateEvent.anonymous
           });
       })).subscribe({
         next: () => {
@@ -241,7 +251,7 @@ export class DoctorDetailsComponent implements OnInit, OnDestroy {
   }
 
   public handleReviewChanged(reviewSuid: string, event: ReviewChangedEvent): void {
-    this.updateReview$.next({reviewSuid: reviewSuid, score: event.rating, comment: event.comment});
+    this.updateReview$.next({reviewSuid: reviewSuid, score: event.rating, comment: event.comment, anonymous: event.anonymous});
   }
 
   public handleReviewDelete(reviewSuid: string): void {

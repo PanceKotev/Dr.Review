@@ -14,7 +14,8 @@
 
         public Result<Review> Update(
                                      string? comment,
-                                     decimal score)
+                                     decimal score,
+                                     bool anonymous)
         {
             if (score < 0 || score > 5 || ((double)score % 0.5 != 0))
             {
@@ -25,6 +26,7 @@
 
             this.Comment = trimmedComment;
             this.Score = score;
+            this.Anonymous = anonymous;
             this.ModifiedOn = DateTime.UtcNow;
 
             return Result.Ok(this);

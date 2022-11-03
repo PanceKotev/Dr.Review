@@ -19,7 +19,7 @@ export class CreateReviewComponent {
   public reviewCreate = new EventEmitter<ReviewChangedEvent>();
 
   public createReview() : void{
-    this.reviewCreate.emit({ comment: this.comment, rating: this.rating});
+    this.reviewCreate.emit({ comment: this.comment, rating: this.rating, anonymous: this.anonymous});
   }
 
 }

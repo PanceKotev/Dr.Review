@@ -38,6 +38,11 @@ export class ReviewComponent implements OnInit, OnDestroy {
   @Input()
   public isEditable = true;
 
+  @Input()
+  public anonymous = false;
+
+  public initialAnonymous = false;
+
   public isInEditMode = false;
 
   public darkTheme = false;
@@ -65,6 +70,7 @@ export class ReviewComponent implements OnInit, OnDestroy {
   public ngOnInit(): void {
       this.initialComment = this.text;
       this.initialRating = this.givenRating;
+      this.initialAnonymous = this.anonymous;
   }
 
   public voteOnReview(upvoted: boolean): void {
@@ -82,9 +88,11 @@ export class ReviewComponent implements OnInit, OnDestroy {
   public saveChanges(): void {
     this.initialComment = this.text;
     this.initialRating = this.givenRating;
+    this.initialAnonymous = this.anonymous;
     this.reviewChanged.emit({
       comment: this.text,
-      rating: this.givenRating
+      rating: this.givenRating,
+      anonymous: this.anonymous
     });
     this.isInEditMode = false;
   }
@@ -92,11 +100,13 @@ export class ReviewComponent implements OnInit, OnDestroy {
   public resetChanges(): void {
     this.text = this.initialComment ?? '';
     this.givenRating =this.initialRating;
+    this.anonymous = this.initialAnonymous;
   }
 
   public cancelChanges(): void {
     this.text = this.initialComment ?? '';
     this.givenRating = this.initialRating;
+    this.anonymous = this.initialAnonymous;
     this.isInEditMode = false;
   }
 

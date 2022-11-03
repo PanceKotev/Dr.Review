@@ -12,11 +12,12 @@
 
     public class CreateReviewCommand : ICommand<Result<EmptyValue>>
     {
-        public CreateReviewCommand(string revieweeSuid, string? comment, decimal score)
+        public CreateReviewCommand(string revieweeSuid, string? comment, decimal score, bool anonymous)
         {
             RevieweeSuid = revieweeSuid;
             Comment = comment;
             Score = score;
+            Anonymous = anonymous;
         }
 
         public string RevieweeSuid { get; init; }
@@ -24,6 +25,8 @@
         public string? Comment { get; init; }
 
         public decimal Score { get; init; }
+
+        public bool Anonymous { get; init; }
     }
 
     public class CreateReviewCommandHandler : ICommandHandler<CreateReviewCommand, Result<EmptyValue>>
@@ -68,7 +71,8 @@
                                                      reviewerFK: reviewer.Id,
                                                      revieweeFK: reviewee.Id,
                                                      comment: request.Comment,
-                                                     score: request.Score);
+                                                     score: request.Score,
+                                                     anonymous: request.Anonymous);
 
             if (newReview.IsFailure)
             {

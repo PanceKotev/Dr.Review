@@ -31,11 +31,5 @@
         {
             Insert(user);
         }
-
-        Task<Entities.User?> IUserRepository.GetUserByUidAsync(Guid uid)
-        {
-            throw new NotImplementedException();
-        }
-
     }
 }

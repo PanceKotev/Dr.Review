@@ -46,7 +46,8 @@
             return OkOrError(await _mediator.SendAsync(new CreateReviewCommand(
                                                                                revieweeSuid: request.RevieweeSuid,
                                                                                comment: request.Comment,
-                                                                               score: request.Score)));
+                                                                               score: request.Score,
+                                                                               anonymous: request.Anonymous)));
         }
 
         [HttpGet]
@@ -78,7 +79,8 @@
             return OkOrError(await _mediator.SendAsync(new UpdateReviewCommand(
                                                                                reviewSuid: request.ReviewSuid,
                                                                                comment: request.Comment,
-                                                                               score: request.Score)));
+                                                                               score: request.Score,
+                                                                               anonymous: request.Anonymous)));
         }
 
         [HttpPost]

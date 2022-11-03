@@ -8,7 +8,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\Common\DrReview.Common.csproj" />
-    <ProjectReference Include="..\Domain\DrReview.Modules.User.Domain.csproj" />
     <ProjectReference Include="..\Infrastructure\DrReview.Modules.User.Infrastructure.csproj" />
   </ItemGroup>
 

@@ -49,6 +49,9 @@
           <div class="vote-count">{{ numberOfDislikes }}</div>
         </div>
       </div>
+      <div class="anonymous-toggle" *ngIf="isInEditMode">
+        <mat-slide-toggle [(ngModel)]="anonymous">Анонимно</mat-slide-toggle>
+      </div>
       <div class="buttons">
         <div class="hover-buttons" *ngIf="isEditable">
           <button

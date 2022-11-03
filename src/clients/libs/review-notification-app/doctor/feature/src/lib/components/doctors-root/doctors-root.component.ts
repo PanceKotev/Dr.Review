@@ -153,7 +153,7 @@ export class DoctorsRootComponent implements OnInit{
 
         return this.doctorApiService.getDoctors(
           new GetDoctorsFilter({property: FilterBy.INSTITUTION,
-            value: this.selectedFilter}, page.page, page.itemsPerPage), true);
+            value: this.selectedFilter}, page.page, page.itemsPerPage));
       }
       case FilterBy.SPECIALIZATION: {
         this.additionalFilterSelectConfig$.next({filterType: FilterBy.SPECIALIZATION,
