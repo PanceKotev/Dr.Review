@@ -60,6 +60,10 @@
           >
           </drreview-doctor-ranking-card>
         </div>
+        <div class="subscription-info" *ngIf="topDoctors.length">
+          Доколку сакате да добивате известување за термини на доктори
+          притиснете &nbsp;<a class="link" routerLink="/subscriptions">тука.</a>
+        </div>
         <ng-template #noDoctors>
           <div class="no-doctors">
             Не пронајдовме доктори во таа област, зголемите ја областа и обидете

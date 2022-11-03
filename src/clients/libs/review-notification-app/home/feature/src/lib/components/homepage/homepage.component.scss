@@ -4,6 +4,13 @@
   scroll-behavior: smooth;
 }
 
+.subscription-info {
+  display: flex;
+width: 100%;
+justify-content: center;
+margin-top: 3rem;
+}
+
 .header{
   min-height: 70vh;
   width: 100%;
