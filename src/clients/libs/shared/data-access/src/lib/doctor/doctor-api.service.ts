@@ -34,17 +34,11 @@ export class DoctorApiService {
   }
 
   public getDoctors(
-    getDoctorsFilter: GetDoctorsFilter | undefined = undefined,
-    withSubscription: boolean = false
+    getDoctorsFilter: GetDoctorsFilter | undefined = undefined
   ): Observable<GetDoctorsDto> {
-    let filterByQuery = getDoctorsFilter
+    const filterByQuery = getDoctorsFilter
       ? getDoctorsFilter.toQueryProperties()
       : '';
-
-    filterByQuery =
-      filterByQuery && withSubscription
-        ? `${filterByQuery}&&withSubscriptions=true`
-        : filterByQuery;
 
     return this.apiService
       .get<Result<GetDoctorsDto>>(`v1/doctors/${filterByQuery}`)

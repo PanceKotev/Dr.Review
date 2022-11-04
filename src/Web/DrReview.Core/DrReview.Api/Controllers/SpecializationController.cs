@@ -8,7 +8,6 @@
     using Microsoft.Identity.Web.Resource;
 
     [Route("api/[controller]")]
-    [RequiredScope("drreview.read")]
     public class SpecializationController : BaseController
     {
         private readonly IDrReviewMediatorService _mediatorService;

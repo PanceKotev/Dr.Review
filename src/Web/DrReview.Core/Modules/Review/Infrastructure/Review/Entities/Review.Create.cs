@@ -9,7 +9,8 @@
                                             long reviewerFK,
                                             long revieweeFK,
                                             string? comment,
-                                            decimal score)
+                                            decimal score,
+                                            bool anonymous)
         {
             if (score < 0 || score > 5 || ((double)score % 0.5 != 0))
             {
@@ -28,7 +29,8 @@
                                           comment: trimmedComment,
                                           score: score,
                                           upvotes: 0,
-                                          downvotes: 0);
+                                          downvotes: 0,
+                                          anonymous: anonymous);
 
             return Result.Ok(newReview);
         }

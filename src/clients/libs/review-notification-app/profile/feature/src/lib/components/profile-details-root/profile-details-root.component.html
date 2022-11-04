@@ -1,0 +1,43 @@
+<div class="profile-root">
+  <div class="navigation-options">
+    <div class="accounts-header" *ngIf="currentUser$ | async; let currentUser">
+      <drreview-avatar
+        class="avatar-left"
+        [isRound]="true"
+        [text]="currentUser.fullName"
+      ></drreview-avatar>
+      <div class="text-right">
+        <div class="name truncate-text">{{ currentUser.fullName }}</div>
+        <div class="email mat-hint mat-small truncate-text">
+          {{ currentUser.email }}
+        </div>
+      </div>
+    </div>
+    <mat-nav-list>
+      <mat-list-item
+        routerLinkActive="active-menu-item"
+        routerLink="./basic"
+        class="menu-item"
+      >
+        <mat-icon>account_circle</mat-icon> Акаунт опции
+      </mat-list-item>
+      <mat-list-item
+        routerLinkActive="active-menu-item"
+        routerLink="./appearance"
+        class="menu-item"
+      >
+        <mat-icon>palette</mat-icon> Изглед
+      </mat-list-item>
+      <mat-list-item
+        routerLinkActive="active-menu-item"
+        routerLink="./notifications"
+        class="menu-item"
+      >
+        <mat-icon>timer</mat-icon> Нотификации
+      </mat-list-item>
+    </mat-nav-list>
+  </div>
+  <div class="router-selection">
+    <router-outlet></router-outlet>
+  </div>
+</div>

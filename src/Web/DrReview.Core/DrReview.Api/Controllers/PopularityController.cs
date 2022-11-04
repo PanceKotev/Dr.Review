@@ -10,7 +10,6 @@
     using Microsoft.Identity.Web.Resource;
 
     [Route("api/popularity")]
-    [RequiredScope("drreview.read")]
     public class PopularityController : BaseController
     {
         private readonly IDrReviewMediatorService _mediatorService;

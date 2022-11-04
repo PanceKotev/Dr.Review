@@ -12,11 +12,12 @@
 
     public class UpdateReviewCommand : ICommand<Result<EmptyValue>>
     {
-        public UpdateReviewCommand(string? comment, decimal score, string reviewSuid)
+        public UpdateReviewCommand(string? comment, decimal score, string reviewSuid, bool anonymous)
         {
             Comment = comment;
             Score = score;
             ReviewSuid = reviewSuid;
+            Anonymous = anonymous;
         }
 
         public string ReviewSuid { get; init; }
@@ -24,6 +25,8 @@
         public string? Comment { get; init; }
 
         public decimal Score { get; init; }
+
+        public bool Anonymous { get; init; }
     }
 
     public class UpdateReviewCommandHandler : ICommandHandler<UpdateReviewCommand, Result<EmptyValue>>
@@ -60,7 +63,8 @@
 
             review.Update(
                         comment: request.Comment,
-                        score: request.Score);
+                        score: request.Score,
+                        anonymous: request.Anonymous);
 
             _unitOfWork.Reviews.UpdateReview(review);
 

@@ -1,6 +1,10 @@
 <div class="review-container">
   <div class="avatar-container">
-    <ngx-avatars [round]="true" [size]="50" [name]="createdBy"></ngx-avatars>
+    <ngx-avatars
+      [round]="true"
+      [size]="50"
+      [name]="createdBy.split('\(')[0]"
+    ></ngx-avatars>
   </div>
   <div class="comment-container">
     <div class="row">
@@ -48,6 +52,9 @@
           </div>
           <div class="vote-count">{{ numberOfDislikes }}</div>
         </div>
+      </div>
+      <div class="anonymous-toggle" *ngIf="isInEditMode">
+        <mat-slide-toggle [(ngModel)]="anonymous">Анонимно</mat-slide-toggle>
       </div>
       <div class="buttons">
         <div class="hover-buttons" *ngIf="isEditable">

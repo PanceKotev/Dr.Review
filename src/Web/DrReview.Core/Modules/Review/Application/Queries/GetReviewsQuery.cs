@@ -76,11 +76,13 @@
 
             fromSqlResult.ForEach(r =>
             {
+                string reviewerFullName = r.Anonymous ? "Анонимно" : $@"{r.Reviewer!.FirstName} {r.Reviewer!.LastName}";
+
                 if (r.Reviewer!.Uid == _currentUser.Uid)
                 {
                     reviewFromCurrentUser = new GetReviewDto(
                                                             r.Suid,
-                                                            $@"{r.Reviewer!.FirstName} {r.Reviewer!.LastName}",
+                                                            $@"{reviewerFullName} (Мое)",
                                                             $@"{r.Reviewee!.FirstName} {r.Reviewee!.LastName}",
                                                             r.ModifiedOn,
                                                             r.Comment,
@@ -93,7 +95,7 @@
                 {
                     reviews.Add(new GetReviewDto(
                                                 r.Suid,
-                                                $@"{r.Reviewer!.FirstName} {r.Reviewer!.LastName}",
+                                                reviewerFullName,
                                                 $@"{r.Reviewee!.FirstName} {r.Reviewee!.LastName}",
                                                 r.ModifiedOn,
                                                 r.Comment,

@@ -13,6 +13,7 @@
         typeToSearchText="Внесете 3 или повеќе карактери"
         [typeahead]="searchInput$"
         [(ngModel)]="selectedDoctors"
+        [clearable]="false"
         [virtualScroll]="true"
         notFoundText="Нема ништо пронајдено"
         class="mtx-select-search"

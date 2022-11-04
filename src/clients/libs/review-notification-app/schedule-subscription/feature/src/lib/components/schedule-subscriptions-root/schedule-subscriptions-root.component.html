@@ -60,7 +60,7 @@
       </div>
     </div>
     <div class="accordion-schedules">
-      <mat-accordion multi="true">
+      <mat-accordion multi="true" *ngIf="!isLoading">
         <drreview-schedule-subscription-item
           *ngFor="let scheduleSubscription of subscriptions"
           [checked]="!!checkedSubscriptions[scheduleSubscription.suid]"

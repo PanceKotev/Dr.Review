@@ -1,5 +1,5 @@
 <div class="doctor-details-root">
-  <mat-card *ngIf="doctor" class="doctor-details-wrapper">
+  <mat-card *ngIf="doctor && !isLoadingDoctor" class="doctor-details-wrapper">
     <div class="back" (click)="navigateToPrevious()">
       <h1>
         <button mat-icon-button>
@@ -67,7 +67,7 @@
   <div class="reviews" *ngIf="currentUserReview || doctorReviews?.length">
     <h2 class="review-title">Рецензии</h2>
     <drreview-review
-      *ngIf="currentUserReview"
+      *ngIf="currentUserReview && !isLoadingReviews"
       [createdBy]="currentUserReview.reviewerName"
       [text]="currentUserReview.comment ?? ''"
       [givenRating]="currentUserReview.score"

@@ -6,8 +6,8 @@ import {
   MSAL_GUARD_CONFIG
 } from '@azure/msal-angular';
 import { EventMessage, EventType, InteractionStatus, RedirectRequest } from '@azure/msal-browser';
-import { ApiService } from '@drreview/shared/data-access';
-import { filter, Subject, takeUntil, switchMap } from 'rxjs';
+import { ApiService, SharedFacade } from '@drreview/shared/data-access';
+import { filter, Subject, takeUntil, switchMap, tap } from 'rxjs';
 import { CurrentUser } from '../models/current-user.model';
 
 @Injectable({
@@ -21,13 +21,13 @@ export class AuthService implements OnDestroy {
     @Inject(MSAL_GUARD_CONFIG) private msalGuardConfig: MsalGuardConfiguration,
     private msalService: MsalService,
     private apiService: ApiService,
+    private sharedFacade: SharedFacade,
     private msalBroadcastService: MsalBroadcastService
   ) {
     this.isIframe = window !== window.parent && !window.opener;
   }
 
   public initializeAuth(): void {
-
     this.msalService.instance.handleRedirectPromise().then();
     this.msalService.instance.enableAccountStorageEvents();
     this.msalBroadcastService.msalSubject$
@@ -63,6 +63,7 @@ export class AuthService implements OnDestroy {
       this.msalBroadcastService.msalSubject$.pipe(
         filter(v => v.eventType === EventType.LOGIN_SUCCESS),
         switchMap(() => this.apiService.post("v1/users/create")),
+        tap(() => this.sharedFacade.getAndCacheCurrentUser()),
         takeUntil(this._destroying$)
       )
         .subscribe({

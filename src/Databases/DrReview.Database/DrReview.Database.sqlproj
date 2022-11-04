@@ -69,6 +69,7 @@
     <Folder Include="Votes" />
     <Folder Include="ScheduleSubscription" />
     <Folder Include="Functions" />
+    <Folder Include="UserSetting" />
   </ItemGroup>
   <ItemGroup>
     <None Include="DrReview.Database.publish.xml" />
@@ -85,6 +86,7 @@
     <Build Include="Votes\UpdateDownvotesUpvotes.sql" />
     <Build Include="ScheduleSubscription\ScheduleSubscriptions.sql" />
     <Build Include="Functions\DistanceKM.sql" />
+    <Build Include="UserSetting\UserSetting.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Scripts\Script.PostDeployment.sql" />

@@ -1,0 +1,27 @@
+{
+  "name": "review-notification-app-profile-feature",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/review-notification-app/profile/feature/src",
+  "prefix": "drreview",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/review-notification-app/profile/feature"],
+      "options": {
+        "jestConfig": "libs/review-notification-app/profile/feature/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/review-notification-app/profile/feature/**/*.ts",
+          "libs/review-notification-app/profile/feature/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}

@@ -6,6 +6,8 @@
     {
         public void AddOrUpdateUser(Entities.User user);
 
+        public void UpdateUser(Entities.User user);
+
         public Task<Entities.User?> GetUserByUidAsync(Guid uid);
 
         public void AddUser(Entities.User user);

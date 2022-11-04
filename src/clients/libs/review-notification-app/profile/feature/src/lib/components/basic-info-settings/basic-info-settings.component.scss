@@ -1,0 +1,29 @@
+.field-pair{
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  .label{
+    margin-right: 0.5em;
+    min-width: 150px;
+
+  }
+}
+
+.details {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.action-buttons{
+  margin-top: 2rem;
+  display: flex;
+  gap: 1rem;
+}
+
+:host::ng-deep .mat-form-field-infix {
+  border-top-width: 0 !important;
+}
+:host::ng-deep .mat-form-field-wrapper {
+  padding-bottom: 0 !important;
+}

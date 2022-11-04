@@ -45,6 +45,7 @@ export class ScheduleSubscriptionsRootComponent implements OnDestroy {
   public editMode = false;
   public totalCount = 0;
   public isDarkTheme = false;
+  public isLoading = true;
 
   public subscriptions: GetScheduleSubscriptionDto[] = [];
 
@@ -57,6 +58,7 @@ export class ScheduleSubscriptionsRootComponent implements OnDestroy {
   }
 
   private initializeSubscriptions(): void {
+    this.isLoading = true;
     combineLatest([this.refreshSubscriptions$, this.calendarFilterChanged$, this.pagingChanged$]).pipe(
       takeUntil(this.destroying$),
       switchMap(([,calendarFilter, pagingFilter]) =>
@@ -67,6 +69,7 @@ export class ScheduleSubscriptionsRootComponent implements OnDestroy {
             this.totalCount = value.totalCount;
             // this.checkedSubscriptions = {};
             this.setCheckboxState();
+            this.isLoading = false;
         }
       });
 

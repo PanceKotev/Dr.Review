@@ -1,9 +1,7 @@
 ﻿namespace DrReview.Modules.User.Infrastructure.User.Entities
 {
     using System;
-    using System.Collections.Generic;
     using DrReview.Common.Infrastructure.Entities;
-    using DrReview.Common.Mediator.Contracts;
 
     public partial class User : AggregateRoot
     {
@@ -15,12 +13,10 @@
             EmailAddress = emailAddress;
         }
 
-        public string FirstName { get; init; }
+        public string FirstName { get; private set; }
 
-        public string LastName { get; init; }
+        public string LastName { get; private set; }
 
         public string EmailAddress { get; init; }
-
-
     }
 }

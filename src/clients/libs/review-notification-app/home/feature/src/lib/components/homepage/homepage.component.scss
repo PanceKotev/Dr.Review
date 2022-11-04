@@ -4,6 +4,13 @@
   scroll-behavior: smooth;
 }
 
+.subscription-info {
+  display: flex;
+width: 100%;
+justify-content: center;
+margin-top: 3rem;
+}
+
 .header{
   min-height: 70vh;
   width: 100%;
@@ -13,9 +20,9 @@
   margin-bottom: 1em;
 
   &-image{
-    background-image: url("https://img.freepik.com/free-vector/doctor-character-background_1270-84.jpg?w=2000");
+    background-image: url("/assets/homepage-illustration.jpg");
     background-position: center;
-    background-size: contain;
+    background-size: cover;
     height:100%;
     clip-path: polygon(25% 0%, 100% 0%, 100% 100%, 0% 100%);
     border-radius: 0 6px 6px 0;

@@ -11,6 +11,8 @@ export class SharedQuery extends Query<SharedState> {
   public specializations$ = this.select(x => x.specializations);
   public isLoading$ = this.selectLoading();
   public homepageOptions$ = this.select(x => x.homepage);
+  public currentUser$ = this.select(x => x.currentUser);
+
 
   public constructor(protected override store: SharedStore) {
     super(store);

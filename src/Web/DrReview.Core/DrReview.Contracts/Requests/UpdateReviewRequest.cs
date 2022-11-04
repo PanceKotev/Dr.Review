@@ -8,5 +8,7 @@ namespace DrReview.Contracts.Requests
         public string Comment { get; set; }
 
         public decimal Score { get; set; }
+
+        public bool Anonymous { get; set; }
     }
 }

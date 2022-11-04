@@ -7,11 +7,6 @@ export const filterOptions: IOptionItemWithLink<FilterBy>[] = [
     link: '/doctors/filter/all/'
   },
   {
-    label: 'Близу мене',
-    value: FilterBy.CLOSE_BY,
-    link: '/doctors/filter/close_by/'
-  },
-  {
     label: 'Професии',
     value: FilterBy.SPECIALIZATION,
     link: '/doctors/filter/specialization/'

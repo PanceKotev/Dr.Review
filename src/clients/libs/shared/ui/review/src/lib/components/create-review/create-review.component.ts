@@ -13,11 +13,13 @@ export class CreateReviewComponent {
 
   public rating = 0;
 
+  public anonymous = true;
+
   @Output()
   public reviewCreate = new EventEmitter<ReviewChangedEvent>();
 
   public createReview() : void{
-    this.reviewCreate.emit({ comment: this.comment, rating: this.rating});
+    this.reviewCreate.emit({ comment: this.comment, rating: this.rating, anonymous: this.anonymous});
   }
 
 }

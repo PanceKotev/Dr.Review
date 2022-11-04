@@ -16,7 +16,8 @@
             string? comment,
             decimal score,
             long upvotes,
-            long downvotes)
+            long downvotes,
+            bool anonymous)
             : base(id, uid, new ShortGuid(uid), deletedOn, modifiedOn)
         {
             ReviewerFK = reviewerFK;
@@ -25,6 +26,7 @@
             Score = score;
             Upvotes = upvotes;
             Downvotes = downvotes;
+            Anonymous = anonymous;
         }
 
         public long ReviewerFK { get; init; }
@@ -42,5 +44,7 @@
         public long Upvotes { get; init; }
 
         public long Downvotes { get; init; }
+
+        public bool Anonymous { get; private set; }
     }
 }

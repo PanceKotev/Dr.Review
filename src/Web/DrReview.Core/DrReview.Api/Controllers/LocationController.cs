@@ -9,7 +9,6 @@
     using Microsoft.Identity.Web.Resource;
 
     [Route("api/[controller]")]
-    [RequiredScope("drreview.read")]
     public class LocationController : BaseController
     {
         private readonly IDrReviewMediatorService _mediatorService;
