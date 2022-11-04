@@ -1,0 +1,24 @@
+<mat-card class="subscription-card">
+  <div class="subscription-header">
+    <mat-card-header class="header-card">
+      <mat-checkbox
+        class="checkbox-subscription"
+        [checked]="isTicked"
+      ></mat-checkbox>
+    </mat-card-header>
+
+    <div class="titles">
+      <mat-card-title class="truncate-text">{{ cardTitle }}</mat-card-title>
+      <mat-card-subtitle class="truncate-text-clamp">
+        {{ cardSubtitle }}</mat-card-subtitle
+      >
+    </div>
+  </div>
+  <mat-card-actions class="subscription-actions">
+    <drreview-schedule-subscription-range-input
+      *ngIf="rangeSelectionValue"
+      [ngModel]="rangeSelectionValue"
+      (ngModelChange)="selectionChanged($event)"
+    ></drreview-schedule-subscription-range-input>
+  </mat-card-actions>
+</mat-card>

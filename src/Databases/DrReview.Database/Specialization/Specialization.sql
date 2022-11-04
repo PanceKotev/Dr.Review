@@ -3,7 +3,7 @@
      [ID]           BIGINT                      NOT NULL IDENTITY PRIMARY KEY,
      [Uid]          UNIQUEIDENTIFIER            NOT NULL UNIQUE,
      [Suid]         NVARCHAR(200)               NOT NULL UNIQUE,
-     [DeletedOn]    SMALLDATETIME               NULL,
+     [DeletedOn]    DATETIME2(7)                NULL,
      [ModifiedOn]   SMALLDATETIME               NOT NULL DEFAULT GETUTCDATE(),
      [Name]         NVARCHAR(MAX)               NOT NULL,
      CONSTRAINT [Specialization_Uid_DeletedOn] UNIQUE([Uid], [DeletedOn]),

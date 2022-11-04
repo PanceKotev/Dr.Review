@@ -1,0 +1,26 @@
+{
+  "name": "shared-ui-filters",
+  "projectType": "library",
+  "sourceRoot": "libs/shared/ui/filters/src",
+  "prefix": "drreview",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/shared/ui/filters"],
+      "options": {
+        "jestConfig": "libs/shared/ui/filters/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/shared/ui/filters/**/*.ts",
+          "libs/shared/ui/filters/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}

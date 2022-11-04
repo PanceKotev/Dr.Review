@@ -1,0 +1,10 @@
+<mat-form-field class="form-field">
+  <mat-label><ng-content> </ng-content></mat-label>
+  <input
+    [placeholder]="placeholder"
+    matInput
+    [ngModel]="value"
+    (ngModelChange)="onChange($event)"
+  />
+  <mat-icon matPrefix>search</mat-icon>
+</mat-form-field>

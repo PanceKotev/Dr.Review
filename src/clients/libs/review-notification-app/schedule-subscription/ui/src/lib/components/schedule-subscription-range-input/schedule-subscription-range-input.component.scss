@@ -1,0 +1,21 @@
+.subscription-option{
+  display:flex;
+}
+
+.subscription-option{
+  &--vertical{
+    flex-direction: column;
+  }
+  &--horizontal {
+    align-items: center;
+
+    & ::ng-deep .mat-slide-toggle{
+      margin-left: 1em;
+
+    }
+  }
+}
+
+.slide-notification-toggle{
+  width: fit-content;
+}

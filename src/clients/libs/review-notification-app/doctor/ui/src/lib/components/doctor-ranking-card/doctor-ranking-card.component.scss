@@ -1,0 +1,16 @@
+.ranking-card{
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  outline: var(--color-accent) 1px solid;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.doctor-header{
+  width: 100%;
+}

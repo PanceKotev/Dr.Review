@@ -1,0 +1,129 @@
+<div class="schedules-root">
+  <div class="schedules">
+    <div class="schedule-header">
+      <h1 class="schedules-title">Нотификациски претплати</h1>
+      <button mat-icon-button (click)="toggleAllExpanded()">
+        <mat-icon>
+          {{ allExpanded ? 'expand_less' : 'expand_more' }}
+        </mat-icon>
+      </button>
+    </div>
+    <div class="schedule-checkbox-options">
+      <mat-checkbox
+        [indeterminate]="someChecked"
+        [checked]="allChecked"
+        (change)="selectAllCheckboxClicked($event.checked)"
+        >Сите</mat-checkbox
+      >
+      <button
+        mat-flat-button
+        color="warn"
+        [disabled]="!someChecked && !allChecked"
+        (click)="unsubscribeMultiple()"
+      >
+        Избриши
+      </button>
+    </div>
+    <div class="schedule-action-buttons">
+      <button
+        mat-flat-button
+        color="accent"
+        (click)="handleCreateSubscription()"
+      >
+        Нови субскрипции
+      </button>
+      <button
+        mat-stroked-button
+        color="basic"
+        (click)="bulkUpdateSubscriptions()"
+        class="edit-button"
+        [disabled]="
+          (!someChecked && !allChecked) ||
+          !this.selectedRange.end ||
+          !this.editMode
+        "
+      >
+        Измени
+      </button>
+    </div>
+    <div class="hint-row">
+      <div
+        class="mat-hint mat-small mat-warn"
+        *ngIf="
+          (!someChecked && !allChecked) ||
+          !this.selectedRange.end ||
+          !this.editMode
+        "
+      >
+        За да може да едитирате, треба да бидете во мод на едитирање, да имате
+        селектирано субскрипција и опсег.
+      </div>
+    </div>
+    <div class="accordion-schedules">
+      <mat-accordion multi="true" *ngIf="!isLoading">
+        <drreview-schedule-subscription-item
+          *ngFor="let scheduleSubscription of subscriptions"
+          [checked]="!!checkedSubscriptions[scheduleSubscription.suid]"
+          [expanded]="!!expandedSubscriptions[scheduleSubscription.suid]"
+          [range]="scheduleSubscription.range"
+          [suid]="scheduleSubscription.suid"
+          [lastName]="scheduleSubscription.doctor.lastName"
+          [institution]="scheduleSubscription.doctor.institution"
+          [location]="scheduleSubscription.doctor.location"
+          [specialization]="scheduleSubscription.doctor.specialization"
+          [firstName]="scheduleSubscription.doctor.firstName"
+          [doctorSuid]="scheduleSubscription.doctor.suid"
+          (deleteClicked)="
+            unsubsribeFromSubscription([scheduleSubscription.suid])
+          "
+          (checkedChanged)="onCheckboxClick(scheduleSubscription.suid, $event)"
+          class="subscription-item"
+        ></drreview-schedule-subscription-item>
+      </mat-accordion>
+    </div>
+    <div class="schedule-pagination">
+      <mat-paginator
+        [length]="totalCount"
+        [pageSize]="10"
+        [pageSizeOptions]="[10, 15, 20, 25]"
+        [pageIndex]="0"
+        (page)="pageChanged($event)"
+        class="paginator"
+      ></mat-paginator>
+    </div>
+  </div>
+  <div class="calendar">
+    <div class="calendar-header">
+      <h1>Календар</h1>
+    </div>
+    <div class="mode-toggle">
+      <mat-slide-toggle
+        [(ngModel)]="editMode"
+        (ngModelChange)="editModeChange($event)"
+      >
+        {{ editMode ? 'Едитирање' : 'Филтрирање' }}
+      </mat-slide-toggle>
+      <button mat-flat-button color="warn" (click)="resetCalendarFilterState()">
+        Ресетирај
+      </button>
+    </div>
+    <div class="selected-date-header">
+      <h2
+        class="selected-date-text"
+        [ngClass]="{ accent: editMode, primary: !editMode }"
+        *ngIf="this.selectedRange?.end"
+      >
+        {{ this.selectedRange.start | date: 'dd.MM.YYYY' }} -
+        {{ this.selectedRange.end | date: 'dd.MM.YYYY' }}
+      </h2>
+    </div>
+    <drreview-schedule-subscription-calendar
+      [selectorColor]="
+        editMode ? 'var(--color-accent)' : 'var(--color-primary)'
+      "
+      [(ngModel)]="selectedRange"
+      (ngModelChange)="calendarFilterChanged($event)"
+      class="subscription-calendar"
+    ></drreview-schedule-subscription-calendar>
+  </div>
+</div>

@@ -1,0 +1,26 @@
+{
+  "name": "shared-utils-date",
+  "projectType": "library",
+  "sourceRoot": "libs/shared/utils/date/src",
+  "prefix": "drreview",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/shared/utils/date"],
+      "options": {
+        "jestConfig": "libs/shared/utils/date/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/shared/utils/date/**/*.ts",
+          "libs/shared/utils/date/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}

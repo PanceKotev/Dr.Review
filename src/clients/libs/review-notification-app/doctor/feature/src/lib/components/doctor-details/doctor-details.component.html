@@ -1,0 +1,99 @@
+<div class="doctor-details-root">
+  <mat-card *ngIf="doctor && !isLoadingDoctor" class="doctor-details-wrapper">
+    <div class="back" (click)="navigateToPrevious()">
+      <h1>
+        <button mat-icon-button>
+          <mat-icon class="back-arrow">arrow_back_ios_new</mat-icon>
+          Назад
+        </button>
+      </h1>
+    </div>
+    <mat-card-title
+      >Детали за {{ doctor.firstName }} {{ doctor.lastName }}</mat-card-title
+    >
+    <mat-card-content>
+      <div class="details-content">
+        <div class="doctor-summary">
+          <drreview-summary
+            *ngIf="doctorReviewSummary"
+            [summaryScore]="doctorReviewSummary.rating"
+            [starByCount]="doctorReviewSummary.reviewCountByStar"
+          ></drreview-summary>
+        </div>
+        <div class="doctor-details">
+          <div class="field">
+            <div>Локација</div>
+            <div>{{ doctor.location }}</div>
+          </div>
+          <div class="field">
+            <div>Специјализација</div>
+            <div>{{ doctor.specialization }}</div>
+          </div>
+          <div class="field">
+            <div>Институција</div>
+            <div>{{ doctor.institution }}</div>
+          </div>
+          <div class="schedule-notification">
+            <div>Нотификација за слободни термини?</div>
+            <div>
+              <drreview-schedule-subscription-range-input
+                class="range-input"
+                [(ngModel)]="range"
+                (ngModelChange)="rangeChanged()"
+                (selectionFinished)="handleRangeSelectionFinishing($event)"
+              ></drreview-schedule-subscription-range-input>
+              <button
+                mat-flat-button
+                [disabled]="!rangesDiffering || !rangeSelectionFinished"
+                (click)="updateSchedule()"
+              >
+                Измени
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-card-content>
+    <div class="new-comment-wrapper">
+      <drreview-create-review
+        *ngIf="!currentUserReview"
+        class="current-user-review"
+        (reviewCreate)="handleCreateReview($event)"
+      >
+      </drreview-create-review>
+    </div>
+  </mat-card>
+
+  <div class="reviews" *ngIf="currentUserReview || doctorReviews?.length">
+    <h2 class="review-title">Рецензии</h2>
+    <drreview-review
+      *ngIf="currentUserReview && !isLoadingReviews"
+      [createdBy]="currentUserReview.reviewerName"
+      [text]="currentUserReview.comment ?? ''"
+      [givenRating]="currentUserReview.score"
+      [numberOfLikes]="currentUserReview.upvotes"
+      [numberOfDislikes]="currentUserReview.downvotes"
+      [previousVote]="currentUserReview.previousUserVote"
+      (reviewVotedOn)="handleReviewVote(currentUserReview.suid, $event)"
+      (reviewChanged)="handleReviewChanged(currentUserReview.suid, $event)"
+      (deletedReview)="handleReviewDelete(currentUserReview.suid)"
+      [isEditable]="true"
+      class="review"
+    >
+    </drreview-review>
+    <drreview-review
+      *ngFor="let review of doctorReviews"
+      [createdBy]="review.reviewerName"
+      [text]="review.comment ?? ''"
+      [givenRating]="review.score"
+      [numberOfLikes]="review.upvotes"
+      [numberOfDislikes]="review.downvotes"
+      [previousVote]="review.previousUserVote"
+      (reviewVotedOn)="handleReviewVote(review.suid, $event)"
+      (reviewChanged)="handleReviewChanged(review.suid, $event)"
+      (deletedReview)="handleReviewDelete(review.suid)"
+      [isEditable]="false"
+      class="review"
+    ></drreview-review>
+  </div>
+</div>

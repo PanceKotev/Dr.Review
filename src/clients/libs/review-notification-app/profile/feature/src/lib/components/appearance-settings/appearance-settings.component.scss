@@ -1,0 +1,23 @@
+.field {
+  padding: 1em;
+  padding-left: 0;
+}
+.field-pair{
+  margin-bottom: 1rem;
+}
+.action-buttons{
+  margin-top: 2rem;
+  display: flex;
+  gap: 1rem;
+}
+
+:host::ng-deep .mat-form-field-infix {
+  border-top-width: 0 !important;
+}
+:host::ng-deep .mat-form-field-wrapper {
+  padding-bottom: 0 !important;
+}
+
+.selected-theme{
+  color: var(--color-accent);
+}

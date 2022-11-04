@@ -1,0 +1,28 @@
+<div>
+  <div *ngIf="items$ | async; let options">
+    <mat-form-field *ngIf="options.length" #formField appearance="fill">
+      <mat-label>Одбери опција</mat-label>
+      <input
+        type="text"
+        placeholder="Барај"
+        matInput
+        [value]="selectedOption"
+        [formControl]="autocompleteForm"
+        [matAutocomplete]="auto"
+      />
+      <mat-autocomplete
+        [class]="(themeService.isDarkTheme$ | async) ? 'dark-theme' : ''"
+        autoActiveFirstOption
+        (optionSelected)="filterSelected($event)"
+        #auto="matAutocomplete"
+      >
+        <mat-option
+          *ngFor="let option of filteredItems$ | async"
+          [value]="option.value"
+          [routerLink]="option.link || ''"
+          >{{ option.label }}</mat-option
+        >
+      </mat-autocomplete>
+    </mat-form-field>
+  </div>
+</div>

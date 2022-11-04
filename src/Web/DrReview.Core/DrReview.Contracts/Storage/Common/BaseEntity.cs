@@ -1,6 +1,7 @@
 ﻿namespace DrReview.Contracts.Storage.Common
 {
     using System;
+    using System.Text.Json.Serialization;
     using CSharpVitamins;
 
     public class BaseEntity
@@ -14,14 +15,15 @@
             ModifiedOn = modifiedOn;
         }
 
-        public long Id { get; init; }
+        [JsonPropertyName("ID")]
+        public long Id { get; set; }
 
-        public Guid Uid { get; init; }
+        public Guid Uid { get; set; }
 
-        public string Suid { get; init; }
+        public string Suid { get; set; }
 
-        public DateTime? DeletedOn { get; init; }
+        public DateTime? DeletedOn { get; set; }
 
-        public DateTime ModifiedOn { get; init; }
+        public DateTime ModifiedOn { get; protected set; }
     }
 }

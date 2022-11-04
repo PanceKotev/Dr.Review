@@ -1,0 +1,11 @@
+<div
+  class="map"
+  leaflet
+  [leafletOptions]="options"
+  (leafletMapReady)="mapFinishedLoading($event)"
+>
+  <div
+    *ngFor="let marker of markersMap | keyvalue"
+    [leafletLayer]="marker.value"
+  ></div>
+</div>

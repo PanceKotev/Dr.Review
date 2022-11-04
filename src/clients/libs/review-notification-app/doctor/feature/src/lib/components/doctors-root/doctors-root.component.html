@@ -1,0 +1,47 @@
+<div class="home">
+  <div class="header-actions">
+    <drreview-chip-filter
+      [filterOptions]="filterOptions"
+      [(ngModel)]="filterValue"
+      (valueChanged)="filterChanged($event)"
+    ></drreview-chip-filter>
+    <div>
+      <drreview-additional-select-filter
+        *ngIf="additionalFilterSelectConfig$ | async; let filterConfig"
+        [config]="filterConfig"
+        [selectedOption]="selectedFilter"
+        (selectionChanged)="
+          filterValueChanged($event); filterChanged(filterConfig.filterType)
+        "
+      ></drreview-additional-select-filter>
+    </div>
+  </div>
+  <div class="content-below">
+    <div class="doctors">
+      <div class="doctors" *ngIf="doctors$">
+        <div
+          class="doctor-wrapper"
+          *ngIf="doctors$ | async; let doctorsWrapper"
+        >
+          <div *ngFor="let doctor of doctorsWrapper.doctors">
+            <drreview-doctor-card
+              class="doctor-card"
+              [doctor]="doctor"
+            ></drreview-doctor-card>
+          </div>
+        </div>
+
+        <mat-paginator
+          *ngIf="doctors$ && pageCount !== undefined"
+          class="doctor-paginator"
+          [pageSize]="100"
+          [length]="pageCount"
+          [pageSizeOptions]="[25, 50, 75, 100, 150, 250]"
+          (page)="pageChanged($event)"
+          [showFirstLastButtons]="true"
+        >
+        </mat-paginator>
+      </div>
+    </div>
+  </div>
+</div>

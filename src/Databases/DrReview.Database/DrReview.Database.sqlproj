@@ -63,6 +63,13 @@
     <Folder Include="Location" />
     <Folder Include="Specialization" />
     <Folder Include="Institution" />
+    <Folder Include="StoredProcedures" />
+    <Folder Include="User" />
+    <Folder Include="Review" />
+    <Folder Include="Votes" />
+    <Folder Include="ScheduleSubscription" />
+    <Folder Include="Functions" />
+    <Folder Include="UserSetting" />
   </ItemGroup>
   <ItemGroup>
     <None Include="DrReview.Database.publish.xml" />
@@ -72,6 +79,14 @@
     <Build Include="Location\Location.sql" />
     <Build Include="Institution\Institution.sql" />
     <Build Include="Specialization\Specialization.sql" />
+    <Build Include="StoredProcedures\SearchDoctorsBySearchword.sql" />
+    <Build Include="User\User.sql" />
+    <Build Include="Review\Review.sql" />
+    <Build Include="Votes\Vote.sql" />
+    <Build Include="Votes\UpdateDownvotesUpvotes.sql" />
+    <Build Include="ScheduleSubscription\ScheduleSubscriptions.sql" />
+    <Build Include="Functions\DistanceKM.sql" />
+    <Build Include="UserSetting\UserSetting.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Scripts\Script.PostDeployment.sql" />

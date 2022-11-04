@@ -1,0 +1,26 @@
+{
+  "name": "review-notification-app-home-feature",
+  "projectType": "library",
+  "sourceRoot": "libs/review-notification-app/home/feature/src",
+  "prefix": "drreview",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/review-notification-app/home/feature"],
+      "options": {
+        "jestConfig": "libs/review-notification-app/home/feature/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/review-notification-app/home/feature/**/*.ts",
+          "libs/review-notification-app/home/feature/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}

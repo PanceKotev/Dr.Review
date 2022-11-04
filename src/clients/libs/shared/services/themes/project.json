@@ -1,0 +1,26 @@
+{
+  "name": "shared-services-themes",
+  "projectType": "library",
+  "sourceRoot": "libs/shared/services/themes/src",
+  "prefix": "drreview",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/shared/services/themes"],
+      "options": {
+        "jestConfig": "libs/shared/services/themes/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/shared/services/themes/**/*.ts",
+          "libs/shared/services/themes/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}

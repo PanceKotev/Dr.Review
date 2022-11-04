@@ -1,8 +1,8 @@
 {
+  "name": "review-notification-app",
   "projectType": "application",
-  "root": "apps/review-notification-app",
   "sourceRoot": "apps/review-notification-app/src",
-  "prefix": "rev",
+  "prefix": "clients",
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:browser",
@@ -14,11 +14,39 @@
         "polyfills": "apps/review-notification-app/src/polyfills.ts",
         "tsConfig": "apps/review-notification-app/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
+        "allowedCommonJsDependencies": [
+          "dayjs",
+          "leaflet",
+          "ngx-avatars",
+          "quill",
+          "ts-md5"
+        ],
         "assets": [
           "apps/review-notification-app/src/favicon.ico",
-          "apps/review-notification-app/src/assets"
+          "apps/review-notification-app/src/assets",
+          "apps/review-notification-app/src/assets/doctor-illustration.svg",
+          "apps/review-notification-app/src/assets/homepage-illustration.svg",
+          "apps/review-notification-app/src/assets/logo/dr_review_logo_dark.svg",
+          "apps/review-notification-app/src/assets/logo/dr_review_logo_light.svg",
+          "apps/review-notification-app/src/assets/map-markers/dr_review_logo_light.svg",
+          {
+            "glob": "**/*",
+            "input": "./node_modules/leaflet/dist/images",
+            "output": "leaflet/"
+          },
+          {
+            "glob": "**/*",
+            "input": "apps/review-notification-app/src/assets/map-markers",
+            "output": "map-markers/"
+          }
         ],
-        "styles": ["apps/review-notification-app/src/styles.scss"],
+        "styles": [
+          "apps/review-notification-app/src/styles.scss",
+          "./node_modules/leaflet/dist/leaflet.css"
+        ],
+        "stylePreprocessorOptions": {
+          "includePaths": ["apps/review-notification-app/src"]
+        },
         "scripts": []
       },
       "configurations": {
@@ -76,8 +104,8 @@
       "executor": "@nrwl/linter:eslint",
       "options": {
         "lintFilePatterns": [
-          "apps/review-notification-app/src/**/*.ts",
-          "apps/review-notification-app/src/**/*.html"
+          "apps/review-notification-app/**/*.ts",
+          "apps/review-notification-app/**/*.html"
         ]
       }
     },
@@ -85,7 +113,7 @@
       "executor": "@nrwl/jest:jest",
       "outputs": ["coverage/apps/review-notification-app"],
       "options": {
-        "jestConfig": "apps/review-notification-app/jest.config.js",
+        "jestConfig": "apps/review-notification-app/jest.config.ts",
         "passWithNoTests": true
       }
     }

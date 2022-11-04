@@ -1,0 +1,11 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav mode="over" #sidenav class="app-sidenav">
+    <drreview-side-navigation (sideNavClicked)="toggleSidenav()">
+    </drreview-side-navigation>
+  </mat-sidenav>
+  <drreview-topbar
+    class="mat-elevation-z24"
+    (sideNavButtonClicked)="toggleSidenav()"
+  ></drreview-topbar>
+  <ng-content></ng-content>
+</mat-sidenav-container>

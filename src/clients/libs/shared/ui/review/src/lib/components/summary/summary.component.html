@@ -1,0 +1,25 @@
+<div class="summary-container">
+  <div class="summary-header">
+    <h2 class="summary-rating">{{ summaryScore }}</h2>
+    <drreview-rating
+      [value]="summaryScore"
+      [readOnly]="true"
+      [useAppColors]="true"
+    ></drreview-rating>
+  </div>
+  <div class="summary-content">
+    <div
+      class="rating-line"
+      *ngFor="let item of starByCount | keyvalue: sortNumbers"
+    >
+      <div class="rating-stars">{{ item.key }} &#9733;</div>
+      <div class="rating-bar">
+        <mat-progress-bar
+          mode="determinate"
+          [value]="(item.value / totalReviews) * 100"
+        ></mat-progress-bar>
+      </div>
+      <div class="ratings-total">{{ item.value }}</div>
+    </div>
+  </div>
+</div>

@@ -14,7 +14,79 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@drreview/review-notification-app/common/configuration/auth-config": [
+        "libs/review-notification-app/common/configuration/auth-config/src/index.ts"
+      ],
+      "@drreview/review-notification-app/common/services/auth": [
+        "libs/review-notification-app/common/services/auth/src/index.ts"
+      ],
+      "@drreview/review-notification-app/common/ui/routing-pages": [
+        "libs/review-notification-app/common/ui/routing-pages/src/index.ts"
+      ],
+      "@drreview/review-notification-app/doctor/data-access": [
+        "libs/review-notification-app/doctor/data-access/src/index.ts"
+      ],
+      "@drreview/review-notification-app/doctor/feature": [
+        "libs/review-notification-app/doctor/feature/src/index.ts"
+      ],
+      "@drreview/review-notification-app/doctor/ui": [
+        "libs/review-notification-app/doctor/ui/src/index.ts"
+      ],
+      "@drreview/review-notification-app/home/feature": [
+        "libs/review-notification-app/home/feature/src/index.ts"
+      ],
+      "@drreview/review-notification-app/home/ui": [
+        "libs/review-notification-app/home/ui/src/index.ts"
+      ],
+      "@drreview/review-notification-app/navigation": [
+        "libs/review-notification-app/navigation/src/index.ts"
+      ],
+      "@drreview/review-notification-app/profile/feature": [
+        "libs/review-notification-app/profile/feature/src/index.ts"
+      ],
+      "@drreview/review-notification-app/schedule-subscription/data-access": [
+        "libs/review-notification-app/schedule-subscription/data-access/src/index.ts"
+      ],
+      "@drreview/review-notification-app/schedule-subscription/feature": [
+        "libs/review-notification-app/schedule-subscription/feature/src/index.ts"
+      ],
+      "@drreview/review-notification-app/schedule-subscription/ui": [
+        "libs/review-notification-app/schedule-subscription/ui/src/index.ts"
+      ],
+      "@drreview/review-notification-app/shell": [
+        "libs/review-notification-app/shell/src/index.ts"
+      ],
+      "@drreview/shared/data-access": ["libs/shared/data-access/src/index.ts"],
+      "@drreview/shared/services/snack-bar": [
+        "libs/shared/services/snack-bar/src/index.ts"
+      ],
+      "@drreview/shared/services/themes": [
+        "libs/shared/services/themes/src/index.ts"
+      ],
+      "@drreview/shared/ui/avatar": ["libs/shared/ui/avatar/src/index.ts"],
+      "@drreview/shared/ui/dialog": ["libs/shared/ui/dialog/src/index.ts"],
+      "@drreview/shared/ui/filters": ["libs/shared/ui/filters/src/index.ts"],
+      "@drreview/shared/ui/maps": ["libs/shared/ui/maps/src/index.ts"],
+      "@drreview/shared/ui/popovers": ["libs/shared/ui/popovers/src/index.ts"],
+      "@drreview/shared/ui/review": ["libs/shared/ui/review/src/index.ts"],
+      "@drreview/shared/ui/search": ["libs/shared/ui/search/src/index.ts"],
+      "@drreview/shared/ui/themes": ["libs/shared/ui/themes/src/index.ts"],
+      "@drreview/shared/utils/app-config": [
+        "libs/shared/utils/app-config/src/index.ts"
+      ],
+      "@drreview/shared/utils/date": ["libs/shared/utils/date/src/index.ts"],
+      "@drreview/shared/utils/form": ["libs/shared/utils/form/src/index.ts"],
+      "@drreview/shared/utils/icons": ["libs/shared/utils/icons/src/index.ts"],
+      "@drreview/shared/utils/pipes": ["libs/shared/utils/pipes/src/index.ts"],
+      "@drreview/shared/utils/pipes/rxjs": [
+        "libs/shared/utils/pipes/rxjs/src/index.ts"
+      ],
+      "@drreview/shared/utils/rxjs": ["libs/shared/utils/rxjs/src/index.ts"],
+      "@drreview/shared/utils/typescript-helpers": [
+        "libs/shared/utils/typescript-helpers/src/index.ts"
+      ]
+    }
   },
   "exclude": ["node_modules", "tmp", "*.spec.ts", "*.po.ts"]
 }

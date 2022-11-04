@@ -5,6 +5,13 @@
 
     public class Specialization : BaseEntity
     {
+#nullable disable
+        public Specialization()
+            : base(0, Guid.Empty, null, DateTime.UtcNow)
+        {
+        }
+#nullable enable
+
         public Specialization(long id, Guid uid, DateTime? deletedOn, DateTime modifiedOn, string name)
             : base(id, uid, deletedOn, modifiedOn)
         {

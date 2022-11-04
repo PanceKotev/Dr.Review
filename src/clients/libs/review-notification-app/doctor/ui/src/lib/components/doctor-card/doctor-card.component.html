@@ -1,0 +1,30 @@
+<mat-card class="doctor-card" (click)="goToDetails()">
+  <mat-card-header class="doctor-header">
+    <ngx-avatars
+      class="doctor-initials"
+      mat-card-avatar
+      [round]="true"
+      [size]="40"
+      [name]="doctor.firstName + ' ' + doctor.lastName"
+    ></ngx-avatars>
+    <mat-card-title class="card-title"
+      >{{ doctor.firstName }} {{ doctor.lastName }}</mat-card-title
+    >
+    <mat-card-subtitle class="doctor-specialization">{{
+      doctor.specialization
+    }}</mat-card-subtitle>
+  </mat-card-header>
+  <img
+    class="doctor-image"
+    mat-card-image
+    src="/assets/doctors.png"
+    alt="Photo of a doctor"
+  />
+
+  <mat-card-content class="doctor-institution">
+    <p>
+      {{ doctor.institution }}
+    </p>
+  </mat-card-content>
+  <mat-icon class="hover-icon">description</mat-icon>
+</mat-card>

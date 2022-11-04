@@ -1,0 +1,93 @@
+.schedules-root {
+  display: grid;
+  grid-template-columns: 0.4fr 0.6fr;
+  gap: 2rem;
+  padding-inline: 3rem;
+  padding-block: 2rem;
+  width: 100%;
+  border-radius: 6px;
+  min-height: 100vh;
+  background: var(--subscriptions-background-gradient);
+
+}
+.schedule-header {
+  display: flex;
+  line-height: 1em;
+}
+
+:host::ng-deep .schedule-header .mat-icon {
+  display: flex;
+}
+
+.schedules{
+  height: 100%;
+  display:flex;
+  width: 100%;
+  flex-direction: column;
+}
+
+.edit-button {
+  background-color: #15a7afbe;
+  color:white;
+}
+.schedule-pagination {
+  margin-top: auto;
+}
+
+.subscription-item {
+  display:block;
+  margin-bottom: 1.25rem;
+}
+
+.schedule-action-buttons {
+  display: flex;
+  width: 100%;
+  margin-block: 1rem;
+  justify-content: space-between;
+}
+:host ::ng-deep .paginator{
+  border-radius: 16px;
+  .mat-paginator-container{
+    border-radius: 16px;
+  }
+}
+.calendar {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 100%;
+  padding-inline: 1rem;
+  padding-top: 0;
+}
+
+.mode-toggle{
+  margin-block: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.schedule-checkbox-options{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.hint-row{
+  margin-bottom: 1rem;
+}
+
+.selected-date-text{
+  border-radius: 16px;
+  color: white;
+  width: fit-content;
+  padding: 0.25rem 1rem;
+  &.primary {
+    background-color: var(--color-primary);
+  }
+
+  &.accent {
+    background-color: var(--color-accent);
+
+  }
+}

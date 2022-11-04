@@ -95,8 +95,6 @@
 
                     await connection1.ExecuteAsync(insertInstitutionsQuery, institutions);
 
-
-
                     await connection1.CloseAsync();
                 }
 
@@ -117,8 +115,6 @@
                     await connection2.CloseAsync();
                 }
             }
-
-
         }
     }
 }

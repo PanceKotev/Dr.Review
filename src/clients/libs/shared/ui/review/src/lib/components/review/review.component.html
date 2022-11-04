@@ -1,0 +1,104 @@
+<div class="review-container">
+  <div class="avatar-container">
+    <ngx-avatars
+      [round]="true"
+      [size]="50"
+      [name]="createdBy.split('\(')[0]"
+    ></ngx-avatars>
+  </div>
+  <div class="comment-container">
+    <div class="row">
+      <div class="d-flex">
+        <div class="name">{{ createdBy }}</div>
+        <div class="date-updated">{{ updatedOn | dFormat: 'lll' }}</div>
+      </div>
+      <div class="stars">
+        <drreview-rating
+          [(ngModel)]="givenRating"
+          [readOnly]="!isInEditMode"
+        ></drreview-rating>
+      </div>
+    </div>
+    <div class="row">
+      <div class="comment">
+        <drreview-comment
+          [(ngModel)]="text"
+          [isEditable]="isInEditMode"
+        ></drreview-comment>
+      </div>
+    </div>
+    <div class="row actions">
+      <div class="likes">
+        <div class="ratings">
+          <div class="icon-wrapper">
+            <mat-icon
+              class="green-color clickable"
+              [class.voted-on]="previousVote === true"
+              (click)="voteOnReview(true)"
+              >thumb_up</mat-icon
+            >
+          </div>
+          <div class="vote-count">{{ numberOfLikes }}</div>
+        </div>
+        <div class="ratings">
+          <div class="icon-wrapper">
+            <mat-icon
+              color="warn"
+              (click)="voteOnReview(false)"
+              class="clickable"
+              [class.voted-on]="previousVote === false"
+              >thumb_down</mat-icon
+            >
+          </div>
+          <div class="vote-count">{{ numberOfDislikes }}</div>
+        </div>
+      </div>
+      <div class="anonymous-toggle" *ngIf="isInEditMode">
+        <mat-slide-toggle [(ngModel)]="anonymous">Анонимно</mat-slide-toggle>
+      </div>
+      <div class="buttons">
+        <div class="hover-buttons" *ngIf="isEditable">
+          <button
+            mat-icon-button
+            class="edit-btn"
+            *ngIf="!isInEditMode"
+            (click)="toggleEditMode()"
+          >
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button
+            mat-icon-button
+            class="delete-btn"
+            color="warn"
+            *ngIf="!isInEditMode"
+            (click)="deleteReview()"
+          >
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+        <div class="edit-mode-buttons" *ngIf="isInEditMode">
+          <button mat-icon-button (click)="resetChanges()" title="Ресетирај">
+            <mat-icon>replay</mat-icon>
+          </button>
+          <button
+            mat-icon-button
+            (click)="cancelChanges()"
+            color="warn"
+            title="Откажи"
+          >
+            <mat-icon>cancel</mat-icon>
+          </button>
+
+          <button
+            mat-icon-button
+            (click)="saveChanges()"
+            color="accent"
+            title="Зачувај"
+          >
+            <mat-icon>save</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

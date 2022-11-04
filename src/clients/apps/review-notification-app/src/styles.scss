@@ -1,1 +1,292 @@
-/* You can add global styles to this file, and also import other style files */
+
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@use '@angular/material' as mat;
+@use '@ng-matero/extensions' as mtx;
+@import '../../../node_modules/quill/dist/quill.snow.css';
+@import '_snackbars.scss';
+@import '_dialogs.scss';
+
+
+$color-negative-rating: #ffcc00 !default;
+$color-ok-rating: #ffcc00 !default;
+$color-positive-rating: #ffcc00 !default;
+$color-default-rating: #ffcc00 !default;
+
+@import '../../../node_modules/css-star-rating/scss/star-rating';
+
+@import url('https://fonts.googleapis.com/css2?family=Encode+Sans:wght@100;300;600&display=swap');
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat.core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+
+$light-primary-palette: (
+  50: #eee7fa,
+  100: #d3c5f3,
+  200: #b59fec,
+  300: #9677e5,
+  400: #7d58df,
+  500: #6339d8,
+  600: #5835d2,
+  700: #472dc9,
+  800: #3527c2,
+  900: #0119b7,
+  contrast: (
+    50: rgba(white, 0.87),
+    100: rgba(white, 0.87),
+    200: rgba(white, 0.87),
+    300: white,
+    400: white,
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white)
+);
+
+$light-secondary-palette: (
+  50: #dceffd,
+  100: #a8d6fb,
+  200: #70bbf5,
+  300: #2ca1eb,
+  400: #008ee7,
+  500: #007ce1,
+  600: #006fd4,
+  700: #005ec1,
+  800: #004daf,
+  900: #003190,
+  contrast: (
+    50: rgba(white, 0.87),
+    100: rgba(white, 0.87),
+    200: rgba(white, 0.87),
+    300: white,
+    400: white,
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white)
+);
+
+// #0a171e
+
+$dark-primary-palette: (
+  50: #e2f2ff,
+  100: #c4dded,
+  200: #a9c5d9,
+  300: #8bacc4,
+  400: #7399b3,
+  500: #5c86a3,
+  600: #4e7791,
+  700: #3f6379,
+  800: #314f63,
+  900: #1f3a4b,
+  contrast: (
+    50: white,
+    100: white,
+    200: white,
+    300: white,
+    400: white,
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white)
+);
+
+$dark-secondary-palette: (
+  50: #d6faf1,
+  100: #96f1d9,
+  200: #1fe7bf,
+  300: #00d9a5,
+  400: #00cb93,
+  500: #00bd81,
+  600: #00ae73,
+  700: #009d62,
+  800: #008c54,
+  900: #006d35,
+  contrast: (
+    50: white,
+    100: white,
+    200: white,
+    300: white,
+    400: white,
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white)
+);
+@function mat-set-background($theme, $backgroundColor) {
+  $palette-color : map-get($theme, color);
+  $background: map-get($palette-color, background);
+  $background: map_merge($background, (background: $backgroundColor));
+  $palette-color: map_merge($palette-color, (background: $background));
+  @return map_merge($theme, (color: $palette-color));
+}
+
+
+$review-notification-app-light-primary: mat.define-palette($light-primary-palette, 900);
+$review-notification-app-light-accent: mat.define-palette($light-secondary-palette, 200, 100, 400);
+
+// The warn palette is optional (defaults to red).
+$review-notification-app-light-warn: mat.define-palette(mat.$red-palette);
+
+
+$review-notification-app-dark-primary: mat.define-palette($dark-primary-palette, 800);
+$review-notification-app-dark-accent: mat.define-palette($dark-secondary-palette, 200, 100, 400);
+
+// The warn palette is optional (defaults to red).
+$review-notification-app-dark-warn: mat.define-palette(mat.$red-palette);
+
+$review-notification-app-typography: mat.define-typography-config(
+  $font-family:   ('Nunito Sans', sans-serif)
+);
+
+// Create the theme object. A theme consists of configurations for individual
+// theming systems such as "color" or "typography".
+$review-notification-app-light-theme: mat.define-light-theme((
+  color: (
+    primary: $review-notification-app-light-primary,
+    accent: $review-notification-app-light-accent,
+    warn: $review-notification-app-light-warn,
+  )
+));
+
+$review-notification-app-dark-theme: mat.define-dark-theme((
+  color: (
+    primary: $review-notification-app-dark-primary,
+    accent: $review-notification-app-dark-accent,
+    warn: $review-notification-app-dark-warn,
+  )
+));
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+
+$review-notification-app-light-theme: mat-set-background($review-notification-app-light-theme, #e1f4f9 );
+$review-notification-app-dark-theme: mat-set-background($review-notification-app-dark-theme, #0a171e );
+@include mat.all-component-typographies($review-notification-app-typography);
+@include mat.all-component-themes($review-notification-app-light-theme);
+@include mtx.all-component-themes($review-notification-app-light-theme);
+@include mtx.all-experimental-component-themes($review-notification-app-light-theme);
+
+@import '_popovers.scss';
+@import '_slider.scss';
+
+:root {
+  --background-main: #e1f4f9;
+
+  --color-primary: #{mat.get-color-from-palette($review-notification-app-light-primary, default)};
+  --color-accent: #{mat.get-color-from-palette($review-notification-app-light-accent, default)};
+  --color-warn: #{mat.get-color-from-palette($review-notification-app-light-warn, default)};
+  --text-grayed-out : grey;
+  --input-container-background-color: #ffffffd4;
+  --container-background-color-transparent: #ffffffd4;
+  --text-color: rgba(0, 0, 0, 0.87);
+  --subscriptions-background-gradient: linear-gradient(to top, transparent, #0119b761, #96d5e49c, #bce6f1, transparent);
+  --glasmorphism-background-color: rgba(255, 255, 255, 0.45);
+  --glasmorphism-border: rgba(255, 255, 255, 0.55);
+}
+
+.dark-theme {
+  $light-theme: false;
+
+  @include mat.all-component-colors($review-notification-app-dark-theme);
+  @include mtx.all-component-colors($review-notification-app-dark-theme);
+  @include mtx.all-experimental-component-colors($review-notification-app-dark-theme);
+  --background-main: #0a171e;
+
+
+  --color-primary: #{mat.get-color-from-palette($review-notification-app-dark-primary, default)};
+  --color-accent: #{mat.get-color-from-palette($review-notification-app-dark-accent, default)};
+  --color-warn: #{mat.get-color-from-palette($review-notification-app-dark-warn, default)};
+  --container-background-color-transparent: #000000db;
+  --glasmorphism-background-color: rgba(0, 0, 0, 0.25);
+  --glasmorphism-border: rgba(0, 0, 0, 0.35);
+
+  --input-container-background-color: #061421;
+  --text-grayed-out: #b6b5b5;
+  --text-color: white;
+  --subscriptions-background-gradient: linear-gradient(to top, transparent, #2c536487, #203A43, transparent);
+
+  .mat-button-toggle-group-appearance-standard .mat-button-toggle + .mat-button-toggle {
+    border-left: none;
+  }
+}
+.mat-button-toggle-appearance-standard .mat-button-toggle-label-content{
+  line-height: 34px;
+}
+.mat-calendar {
+  background-color:var(--input-container-background-color) !important;
+}
+
+.mat-menu-panel{
+  background-color: unset !important;
+}
+
+.mat-menu-content {
+  background-color: var(--input-container-background-color) !important;
+  color: var(--text-color) !important;
+}
+.mat-calendar-header, .mat-calendar-arrow {
+  color: var(--text-color) !important;
+}
+.mat-card {
+  background-color: var(--container-background-color-transparent) !important;
+}
+
+@import './_paginator.scss';
+@import './autocomplete.scss';
+
+button.mat-button-base.mat-mini-fab, button.mat-button-base.mat-fab, button.mat-button-base.mat-icon-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: 'Nunito Sans', sans-serif; }
+
+.d-flex {
+  display: flex;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.truncate-text {
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  &-clamp {
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}
+
+.mat-form-field-disabled{
+  cursor: not-allowed;
+
+  & * {
+    cursor: not-allowed;
+
+  }
+}
+
+.active-menu-item{
+  background-color: var(--color-accent) !important;
+}

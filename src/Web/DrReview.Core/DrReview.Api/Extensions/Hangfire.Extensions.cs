@@ -33,7 +33,6 @@ public static partial class Extensions
 
     public static IApplicationBuilder UseHangfireConfiguration(this IApplicationBuilder app)
     {
-
         DashboardOptions options = new DashboardOptions
         {
             Authorization = new[]

@@ -1,0 +1,12 @@
+.calendar {
+  width: 100%;
+  height: 100%;
+}
+
+.actual-calendar{
+  border-radius: 16px;
+}
+
+:host::ng-deep .actual-calendar  .mat-calendar-body-selected {
+  background-color: var(--selector-color) !important;
+}

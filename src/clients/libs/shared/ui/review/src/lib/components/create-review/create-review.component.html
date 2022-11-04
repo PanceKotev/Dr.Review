@@ -1,0 +1,30 @@
+<div class="curr-user-container">
+  <div class="curr-rating">
+    <div class="label">
+      <h2>Рејтинг</h2>
+    </div>
+    <drreview-rating [(ngModel)]="rating"></drreview-rating>
+  </div>
+  <div class="comment">
+    <div class="label"><h2>Опис</h2></div>
+    <drreview-comment
+      [(ngModel)]="comment"
+      [isEditable]="true"
+    ></drreview-comment>
+  </div>
+</div>
+<div class="action-buttons">
+  <mat-slide-toggle class="anon-toggle" [(ngModel)]="anonymous">
+    Анонимно?
+  </mat-slide-toggle>
+  <button
+    mat-raised-button
+    (click)="createReview()"
+    class="create-comment-button"
+    color="accent"
+    [title]="!rating ? 'Можеш само да оставиш рецензија ако имаш рејтинг' : ''"
+    [disabled]="!rating"
+  >
+    Остави рецензија
+  </button>
+</div>

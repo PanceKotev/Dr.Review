@@ -10,5 +10,7 @@
         List<DoctorResponse> GetDoctorsInInstitutions(Dictionary<long, long> instiutionLocationMap);
 
         Task<List<LocationResponse>> GetLocationsAsync();
+
+        Task<List<TimeslotDoctorResponse>> GetTimeslotsForDoctorsAsync(List<long> doctorIds);
     }
 }

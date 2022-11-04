@@ -27,11 +27,8 @@
       "rules": {}
     },
     {
-      "files": ["*.ts","*.tsx"],
-      "extends": [
-        "plugin:@nrwl/nx/typescript",
-        "plugin:@nrwl/nx/angular"
-      ],
+      "files": ["*.ts", "*.tsx"],
+      "extends": ["plugin:@nrwl/nx/typescript", "plugin:@nrwl/nx/angular"],
       "parserOptions": {
         "project": ["./tsconfig.base.json"]
       },
@@ -42,7 +39,7 @@
         "@typescript-eslint/member-ordering": [
           "error",
           {
-            "default":[
+            "default": [
               "private-static-field",
               "private-instance-field",
               "protected-static-field",
@@ -60,14 +57,16 @@
               "protected-instance-method",
               "public-static-method",
               "public-instance-method"
-          ]
+            ]
           }
         ],
+        "@typescript-eslint/no-non-null-assertion": "off",
         "@typescript-eslint/explicit-function-return-type": [
           "error",
           {
             "allowExpressions": true
-          }],
+          }
+        ],
         "@typescript-eslint/no-extra-non-null-assertion": "error",
         "@typescript-eslint/explicit-member-accessibility": [
           "error",
@@ -81,7 +80,7 @@
         "@typescript-eslint/no-unnecessary-type-assertion": "error",
         "@typescript-eslint/no-unused-vars": "error",
         "@typescript-eslint/unified-signatures": "error",
-        "@typescript-eslint/typedef":[
+        "@typescript-eslint/typedef": [
           "error",
           {
             "call-signature": true,
@@ -89,24 +88,16 @@
             "parameter": true
           }
         ],
-        "@typescript-eslint/no-empty-interface":"error",
+        "@typescript-eslint/no-empty-interface": "error",
         "@typescript-eslint/no-useless-constructor": "error",
-        "@typescript-eslint/semi": [
-          "error"
-        ],
+        "@typescript-eslint/semi": ["error"],
         "no-unused-vars": "off",
         "semi": "off",
-        "max-len": [
-          "error",
-          140
-        ],
-        "no-shadow":"off",
+        "max-len": ["error", 140],
+        "no-shadow": "off",
         "@typescript-eslint/no-shadow": "error",
-        "no-eval":"error",
-        "no-console": [
-          "error",
-          {"allow": ["log", "error", "warn"]}
-        ],
+        "no-eval": "error",
+        "no-console": ["error", { "allow": ["log", "error", "warn"] }],
         "no-invalid-regexp": "error",
         "@angular-eslint/no-conflicting-lifecycle": "error",
         "@angular-eslint/no-host-metadata-property": "error",
@@ -121,25 +112,19 @@
         "no-alert": "error",
         "no-else-return": "error",
         "no-param-reassign": "error",
-        "nonblock-statement-body-position": [
-          "error",
-          "below"
-        ],
-        "brace-style": [
-          "error",
-          "1tbs"
-        ],
-        "key-spacing":"off",
-        "one-var-declaration-per-line":"error",
+        "nonblock-statement-body-position": ["error", "below"],
+        "brace-style": ["error", "1tbs"],
+        "key-spacing": "off",
+        "one-var-declaration-per-line": "error",
         "no-new-wrappers": "error",
         "no-debugger": "error",
         "comma-dangle": "error",
         "id-blacklist": "off",
-        "no-fallthrough":"error",
+        "no-fallthrough": "error",
         "id-match": "off",
         "no-useless-constructor": "off",
-        "no-unused-expressions":"error",
-        "no-throw-literal":"error",
+        "no-unused-expressions": "error",
+        "no-throw-literal": "error",
         "newline-per-chained-call": "error",
         "no-duplicate-imports": "error",
         "no-multiple-empty-lines": "error",
@@ -156,23 +141,11 @@
         "prefer-template": "error",
         "eol-last": "error",
         "quote-props": "off",
-        "eqeqeq": [
-          "error",
-          "smart"
-        ],
-        "radix": [
-          "error",
-          "as-needed"
-        ],
+        "eqeqeq": ["error", "smart"],
+        "radix": ["error", "as-needed"],
         "prefer-const": "error",
-        "space-before-function-paren": [
-          "error",
-          "never"
-        ],
-        "space-in-parens": [
-          "error",
-          "never"
-        ],
+        "space-before-function-paren": ["error", "never"],
+        "space-in-parens": ["error", "never"],
         "no-empty-function": "off",
         "@typescript-eslint/no-empty-function": ["off"]
       }
@@ -180,17 +153,19 @@
     {
       "files": ["*.component.html"],
       "extends": "plugin:@angular-eslint/template/recommended",
-      "rules": {
-      }
+      "rules": {}
     },
     {
       "files": ["*.component.html"],
       "extends": "plugin:prettier/recommended",
       "rules": {
-        "prettier/prettier": ["error", {
-          "parser": "angular",
-          "endOfLine": "auto"
-          }]
+        "prettier/prettier": [
+          "error",
+          {
+            "parser": "angular",
+            "endOfLine": "auto"
+          }
+        ]
       }
     }
   ]

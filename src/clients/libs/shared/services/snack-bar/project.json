@@ -1,0 +1,26 @@
+{
+  "name": "shared-services-snack-bar",
+  "projectType": "library",
+  "sourceRoot": "libs/shared/services/snack-bar/src",
+  "prefix": "drreview",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/shared/services/snack-bar"],
+      "options": {
+        "jestConfig": "libs/shared/services/snack-bar/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/shared/services/snack-bar/**/*.ts",
+          "libs/shared/services/snack-bar/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}

@@ -1,0 +1,27 @@
+{
+  "name": "shared-ui-maps",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/shared/ui/maps/src",
+  "prefix": "drreview",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/shared/ui/maps"],
+      "options": {
+        "jestConfig": "libs/shared/ui/maps/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/shared/ui/maps/**/*.ts",
+          "libs/shared/ui/maps/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}

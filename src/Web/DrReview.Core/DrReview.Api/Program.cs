@@ -1,28 +1,39 @@
+using DateOnlyTimeOnly.AspNet;
 using DrReview.Api.Extensions;
-
 WebApplicationBuilder? builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddB2CAuthentication(builder.Configuration)
+                .AddControllers(options => options.UseDateOnlyTimeOnlyStringConverters())
+                .AddJsonOptions(options => options.UseDateOnlyTimeOnlyStringConverters());
 
-builder.Services.AddControllers();
-
-builder.Services.AddAuthorization()
+builder.Services.RegisterCors(builder.Configuration)
+                .AddSettings(builder.Configuration)
+                .AddAuthorization()
                 .AddHangfireConfiguration(builder.Configuration)
+                .AddEmailClient()
+                .AddDatabase(builder.Configuration)
+                .AddUnitOfWork()
+                .AddMediator()
                 .AddMojTerminHttpClient(builder.Configuration)
+                .AddCurrentUser()
                 .AddProjectServices(builder.Configuration)
                 .AddEndpointsApiExplorer()
-                .AddSwaggerGen();
+                .AddSwagger(builder.Configuration);
 
 WebApplication? app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerDashboard(app.Configuration);
 }
 
-// Test
+app.UseRouting();
+
+app.UseCors(builder.Configuration["CorsSettings:PolicyName"]);
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 

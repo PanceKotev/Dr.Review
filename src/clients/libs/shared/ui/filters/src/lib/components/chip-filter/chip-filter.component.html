@@ -1,0 +1,17 @@
+<mat-button-toggle-group
+  class="chips"
+  name="filter"
+  aria-label="filter"
+  [(ngModel)]="value"
+  (ngModelChange)="onChange($event)"
+>
+  <mat-button-toggle
+    *ngFor="let option of filterOptions"
+    mat-ripple
+    [routerLink]="[option.link] || ['']"
+    [matRippleRadius]="5"
+    class="chip"
+    [value]="option.value"
+    >{{ option.label || option.value }}</mat-button-toggle
+  >
+</mat-button-toggle-group>

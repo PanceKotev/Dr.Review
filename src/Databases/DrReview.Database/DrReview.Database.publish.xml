@@ -6,5 +6,8 @@
     <DeployScriptFileName>DrReview.Database.sql</DeployScriptFileName>
     <TargetConnectionString>Data Source=127.0.0.1,1440;Persist Security Info=True;User ID=sa;Pooling=False;MultipleActiveResultSets=False;Connect Timeout=60;Encrypt=False;TrustServerCertificate=False</TargetConnectionString>
     <ProfileVersionNumber>1</ProfileVersionNumber>
+    <BlockOnPossibleDataLoss>True</BlockOnPossibleDataLoss>
+    <IgnoreColumnOrder>True</IgnoreColumnOrder>
+    <GenerateSmartDefaults>True</GenerateSmartDefaults>
   </PropertyGroup>
 </Project>

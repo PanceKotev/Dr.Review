@@ -1,10 +1,11 @@
 {
-  "npmScope": "clients",
+  "$schema": "./node_modules/nx/schemas/nx-schema.json",
+  "npmScope": "drreview",
+  "defaultProject": "review-notification-app",
   "affected": {
     "defaultBase": "master"
   },
   "cli": {
-    "defaultCollection": "@nrwl/angular",
     "packageManager": "yarn"
   },
   "implicitDependencies": {
@@ -16,19 +17,11 @@
   },
   "tasksRunnerOptions": {
     "default": {
-      "runner": "@nrwl/workspace/tasks-runners/default",
+      "runner": "nx/tasks-runners/default",
       "options": {
         "cacheableOperations": ["build", "lint", "test", "e2e"]
       }
     }
-  },
-  "targetDependencies": {
-    "build": [
-      {
-        "target": "build",
-        "projects": "dependencies"
-      }
-    ]
   },
   "generators": {
     "@nrwl/angular:application": {
@@ -45,5 +38,9 @@
       "style": "scss"
     }
   },
-  "defaultProject": "review-notification-app"
+  "targetDefaults": {
+    "build": {
+      "dependsOn": ["^build"]
+    }
+  }
 }
